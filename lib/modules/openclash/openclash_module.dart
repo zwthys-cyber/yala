@@ -19,5 +19,6 @@ class OpenClashModule extends LuciModule {
   @override
   int get priority => 35;
   @override
-  Widget buildScreen(BuildContext context, {Map<String, dynamic>? params}) => const OpenClashScreen();
+  Widget buildScreen(BuildContext context, {Map<String, dynamic>? params}) =>
+      const OpenClashScreen();
 }
