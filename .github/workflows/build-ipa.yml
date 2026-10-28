@@ -1,124 +1,92 @@
 # Copyright (C) 2026 @nightcodex7
 # SPDX-License-Identifier: GPL-3.0-or-later
----
 name: Build iOS IPA
 
-'on':
+on:
   workflow_dispatch:
     inputs:
       build_name:
-        description: >-
-          Optional custom version name (e.g. 2.0.2 - leaves
-          pubspec.yaml default if blank)
+        description: Optional version name (for example 2.6.0)
         required: false
         type: string
       build_number:
-        description: >-
-          Optional custom build number (e.g. 224 - leaves
-          pubspec.yaml default if blank)
+        description: Optional numeric build number
         required: false
         type: string
+  push:
+    branches: [main, codex/ios-cloud-build]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
 
 concurrency:
-  group: build-ipa-${{ github.ref }}
+  group: ios-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  build-ipa:
-    name: Build Sideloadable IPA
-    runs-on: macos-14
-    permissions:
-      contents: read
+  validate:
+    uses: ./.github/workflows/ci.yml
 
+  build-ipa:
+    name: Build and verify unsigned iOS IPA
+    needs: validate
+    runs-on: macos-15
+    timeout-minutes: 45
+    env:
+      BUILD_NAME: ${{ inputs.build_name }}
+      BUILD_NUMBER: ${{ inputs.build_number }}
     steps:
-      - name: Checkout Repository
-        # actions/checkout v6
+      - name: Checkout
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
         with:
           persist-credentials: false
-
-      - name: Select Xcode Version
+      - name: Show Xcode and SDK versions
         run: |
-          echo "Available Xcode installations on runner:"
-          ls -d /Applications/Xcode* || true
-          if [ -d "/Applications/Xcode_16.2.app" ]; then
-            sudo xcode-select -s /Applications/Xcode_16.2.app
-          elif [ -d "/Applications/Xcode_16.1.app" ]; then
-            sudo xcode-select -s /Applications/Xcode_16.1.app
-          elif [ -d "/Applications/Xcode_15.4.app" ]; then
-            sudo xcode-select -s /Applications/Xcode_15.4.app
-          elif [ -d "/Applications/Xcode.app" ]; then
-            sudo xcode-select -s /Applications/Xcode.app
-          fi
           xcodebuild -version
-
-      - name: Set Up Flutter
-        # subosito/flutter-action v2
+          xcodebuild -showsdks
+      - name: Set up Flutter
         uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2
         with:
           flutter-version: '3.47.1'
-          channel: 'stable'
+          channel: stable
           cache: true
-
-      - name: Install Flutter Dependencies
+      - name: Install dependencies
         run: |
           flutter precache --ios
           flutter pub get
-
-      - name: Setup CocoaPods Dependencies
+      - name: Build unsigned app
+        shell: bash
         run: |
-          cd ios
-          pod install --repo-update
-
-      - name: Build iOS App (Unsigned for Sideloading)
-        run: |
-          EXTRA_ARGS=""
-          if [ -n "${{ inputs.build_name }}" ]; then
-            EXTRA_ARGS="$EXTRA_ARGS --build-name=${{ inputs.build_name }}"
+          set -euo pipefail
+          args=()
+          if [[ -n "$BUILD_NAME" ]]; then
+            [[ "$BUILD_NAME" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo 'Invalid build_name'; exit 1; }
+            args+=("--build-name=$BUILD_NAME")
           fi
-          if [ -n "${{ inputs.build_number }}" ]; then
-            EXTRA_ARGS="$EXTRA_ARGS --build-number=${{ inputs.build_number }}"
+          if [[ -n "$BUILD_NUMBER" ]]; then
+            [[ "$BUILD_NUMBER" =~ ^[1-9][0-9]*$ ]] || { echo 'Invalid build_number'; exit 1; }
+            args+=("--build-number=$BUILD_NUMBER")
           fi
-
           flutter build ios --release --no-codesign \
             --dart-define=FLAVOR=community \
-            --dart-define=OFFICIAL_BUILD=true \
             --dart-define=IPA_BUILD=true \
-            $EXTRA_ARGS
-
-      - name: Package Sideloadable IPA
-        run: |
-          ROOT_DIR="$PWD"
-          STAGING_DIR="$ROOT_DIR/build/ios/ipa_staging"
-          PAYLOAD_DIR="$STAGING_DIR/Payload"
-          OUTPUT_DIR="$ROOT_DIR/output"
-          IPA_NAME="Yet-Another-LuCI-App.ipa"
-
-          rm -rf "$STAGING_DIR" "$OUTPUT_DIR"
-          mkdir -p "$PAYLOAD_DIR" "$OUTPUT_DIR"
-
-          # Copy compiled Runner.app bundle into Payload structure
-          cp -R "$ROOT_DIR/build/ios/iphoneos/Runner.app" "$PAYLOAD_DIR/"
-
-          # Package into standard sideloadable zip archive (.ipa)
-          (
-            cd "$STAGING_DIR"
-            zip -r -9 "$OUTPUT_DIR/$IPA_NAME" Payload
-          )
-
-          # Generate SHA256 checksum for verification
-          cd "$OUTPUT_DIR"
-          shasum -a 256 "$IPA_NAME" > "$IPA_NAME.sha256"
-          echo "Generated IPA Checksum:"
-          cat "$IPA_NAME.sha256"
-
-      - name: Upload IPA Artifact
-        # actions/upload-artifact v4
+            "${args[@]}" 2>&1 | tee ios-build.log
+      - name: Verify and package IPA
+        run: python3 scripts/package_ios.py
+      - name: Upload IPA and verification report
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: Yet-Another-LuCI-App-iOS-IPA
-          path: |
-            output/Yet-Another-LuCI-App.ipa
-            output/Yet-Another-LuCI-App.ipa.sha256
+          name: YALA-iOS-unsigned-${{ github.run_number }}
+          path: output/
           if-no-files-found: error
+          retention-days: 30
+      - name: Upload build log
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: iOS-build-log-${{ github.run_number }}
+          path: ios-build.log
+          if-no-files-found: ignore
           retention-days: 14
