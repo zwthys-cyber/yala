@@ -14,7 +14,7 @@ void main() {
   testWidgets('fresh iOS installation reaches the router login screen', (
     tester,
   ) async {
-    await app.main();
+    app.main();
     final deadline = DateTime.now().add(const Duration(seconds: 45));
     while (find.byType(LoginScreen).evaluate().isEmpty &&
         DateTime.now().isBefore(deadline)) {
