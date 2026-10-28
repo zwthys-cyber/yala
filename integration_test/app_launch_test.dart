@@ -29,5 +29,7 @@ void main() {
     final screenshot = await binding.takeScreenshot('ios-login');
     final directory = await getApplicationDocumentsDirectory();
     await File('${directory.path}/ios-login.png').writeAsBytes(screenshot);
+
+    await tester.pumpWidget(const SizedBox.shrink());
   });
 }
