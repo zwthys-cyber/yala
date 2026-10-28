@@ -36,7 +36,7 @@ class OpenClashService {
 
   Future<String> _run(String script) async {
     final raw = await execute('/bin/sh', ['-c', script]);
-    final result = RpcResult.classifyExecResult<String>(raw, (data) => data['stdout']?.toString() ?? '');
+    final result = RpcResult.classifyExecResult<String>(raw, (data) => (data['code'] == null || data['code'] == 0) ? data['stdout']?.toString() ?? '' : '');
     if (!result.isSuccess) {
       throw OpenClashException(result.isPermissionDenied ? 'permission' : 'connection');
     }
@@ -94,7 +94,10 @@ curl --silent --connect-timeout 3 --max-time 8 --noproxy '*' \
     if (!{'rule', 'global', 'direct'}.contains(mode)) throw const OpenClashException('request');
     await request('PATCH', '/configs', {'mode': mode});
     // Match OpenClash's own mode switch persistence after controller acceptance.
-    await _run('uci set openclash.config.proxy_mode=${shellQuote(mode)} && uci commit openclash && printf OK');
+    await _run('uci set openclash.config.proxy_mode=${shellQuote(mode)} || exit 1; '
+        'if uci -q get openclash.@overwrite[0] >/dev/null; then '
+        'uci set openclash.@overwrite[0].proxy_mode=${shellQuote(mode)} || exit 1; fi; '
+        'uci commit openclash && printf OK');
   }
 
   Future<void> select(OpenClashGroup group, String node) async {
