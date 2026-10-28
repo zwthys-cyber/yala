@@ -19,8 +19,10 @@ Flutter 依赖、静态分析、自动测试和 Xcode 编译均由 GitHub 托管
 ## 自动验证范围
 
 推送至 main 或提交到 main 的 PR 会启动流程。首先检查 Dart 格式、
-静态分析和测试，全部成功后在 macOS 的 iPhone 模拟器上启动 App，验证能够进入
-路由器登录页并保存截图，再编译 arm64 iPhone release 应用。
+静态分析和测试，全部成功后分配两项独立的 macOS 任务：编译 arm64 iPhone release
+应用，以及在 iPhone 模拟器上启动 App、验证登录页并保存截图。两项任务并行执行，
+模拟器截图位于独立的 `YALA-iOS-simulator-运行编号` 产物中。
+IPA 产物生成不代表模拟器任务已经成功，请同时检查整次工作流的结果。
 打包检查平台、可执行文件架构、本地网络权限说明、Flutter 资源、IPA 目录和 ZIP 完整性。
 Actions 页面保留测试日志、构建日志和产物；下载后也可核对 SHA-256。
 

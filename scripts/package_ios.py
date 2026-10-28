@@ -62,6 +62,7 @@ def main():
         "signing": "unsigned; user must sign before installation",
         "checks": ["arm64 device executable", "local network purpose string",
                    "Flutter assets", "IPA Payload layout", "ZIP CRC"],
+        "native_simulator_test": "separate workflow job; check its status",
         "real_router_test": "not performed by cloud CI",
     }
     (output / "verification.json").write_text(json.dumps(report, indent=2) + "\n")

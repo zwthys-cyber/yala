@@ -33,10 +33,77 @@ jobs:
     name: Build and verify unsigned iOS IPA
     needs: validate
     runs-on: macos-26-intel
-    timeout-minutes: 45
+    timeout-minutes: 60
     env:
       BUILD_NAME: ${{ inputs.build_name }}
       BUILD_NUMBER: ${{ inputs.build_number }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Show Xcode and SDK versions
+        run: |
+          xcodebuild -version
+          xcodebuild -showsdks
+      - name: Set up Flutter
+        uses: subosito/flutter-action@1a449444c387b1966244ae4d4f8c696479add0b2
+        with:
+          flutter-version: '3.47.1'
+          channel: stable
+          cache: true
+      - name: Install dependencies
+        run: |
+          flutter precache --ios
+          flutter pub get
+      - name: Install and verify CocoaPods dependencies
+        run: |
+          cd ios
+          pod install --repo-update
+          cmp Podfile.lock Pods/Manifest.lock
+          xcodebuild -workspace Runner.xcworkspace -scheme Runner \
+            -configuration Release -sdk iphoneos -showBuildSettings \
+            | awk '/PODS_ROOT = .+/ { print; found=1 } END { exit !found }'
+      - name: Build unsigned app
+        shell: bash
+        run: |
+          set -euo pipefail
+          args=()
+          if [[ -n "$BUILD_NAME" ]]; then
+            [[ "$BUILD_NAME" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo 'Invalid build_name'; exit 1; }
+            args+=("--build-name=$BUILD_NAME")
+          fi
+          if [[ -n "$BUILD_NUMBER" ]]; then
+            [[ "$BUILD_NUMBER" =~ ^[1-9][0-9]*$ ]] || { echo 'Invalid build_number'; exit 1; }
+            args+=("--build-number=$BUILD_NUMBER")
+          fi
+          flutter build ios --verbose --release --no-codesign \
+            --dart-define=FLAVOR=community \
+            --dart-define=IPA_BUILD=true \
+            "${args[@]}" 2>&1 | tee ios-build.log
+      - name: Verify and package IPA
+        run: python3 scripts/package_ios.py
+      - name: Upload IPA and verification report
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: YALA-iOS-unsigned-${{ github.run_number }}
+          path: output/
+          if-no-files-found: error
+          retention-days: 30
+      - name: Upload build log
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: iOS-build-log-${{ github.run_number }}
+          path: ios-build.log
+          if-no-files-found: ignore
+          retention-days: 14
+
+  simulator:
+    name: Verify native iPhone startup
+    needs: validate
+    runs-on: macos-26-intel
+    timeout-minutes: 60
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -71,50 +138,24 @@ jobs:
           xcrun simctl boot "$SIMULATOR_ID" || true
           xcrun simctl bootstatus "$SIMULATOR_ID" -b
       - name: Verify native app startup on iPhone simulator
-        timeout-minutes: 15
+        timeout-minutes: 35
         shell: bash
         run: |
           set -euo pipefail
-          flutter test integration_test/app_launch_test.dart \
+          flutter test --verbose integration_test/app_launch_test.dart \
             -d "$SIMULATOR_ID" --dart-define=FLAVOR=community \
             --dart-define=IPA_BUILD=true 2>&1 | tee ios-simulator.log
           APP_DATA=$(xcrun simctl get_app_container "$SIMULATOR_ID" com.nightcode.luci data)
           mkdir -p output
           cp "$APP_DATA/Documents/ios-login.png" output/
-      - name: Build unsigned app
-        shell: bash
-        run: |
-          set -euo pipefail
-          args=()
-          if [[ -n "$BUILD_NAME" ]]; then
-            [[ "$BUILD_NAME" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo 'Invalid build_name'; exit 1; }
-            args+=("--build-name=$BUILD_NAME")
-          fi
-          if [[ -n "$BUILD_NUMBER" ]]; then
-            [[ "$BUILD_NUMBER" =~ ^[1-9][0-9]*$ ]] || { echo 'Invalid build_number'; exit 1; }
-            args+=("--build-number=$BUILD_NUMBER")
-          fi
-          flutter build ios --release --no-codesign \
-            --dart-define=FLAVOR=community \
-            --dart-define=IPA_BUILD=true \
-            "${args[@]}" 2>&1 | tee ios-build.log
-      - name: Verify and package IPA
-        run: python3 scripts/package_ios.py
-      - name: Upload IPA and verification report
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
-        with:
-          name: YALA-iOS-unsigned-${{ github.run_number }}
-          path: output/
-          if-no-files-found: error
-          retention-days: 30
-      - name: Upload build log
+      - name: Upload simulator screenshot
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
-          name: iOS-build-log-${{ github.run_number }}
-          path: ios-build.log
+          name: YALA-iOS-simulator-${{ github.run_number }}
+          path: output/
           if-no-files-found: ignore
-          retention-days: 14
+          retention-days: 30
       - name: Upload simulator log
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
