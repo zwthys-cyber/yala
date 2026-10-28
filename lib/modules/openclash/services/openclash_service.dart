@@ -91,8 +91,8 @@ case "$port" in ''|*[!0-9]*) printf '\n000'; exit 0;; esac
 command -v curl >/dev/null 2>&1 || { printf '\n000'; exit 0; }
 curl --silent --connect-timeout 3 --max-time 8 --noproxy '*' \
   -H "Authorization: Bearer $secret" -H 'Content-Type: application/json' \
-  -w '\n%{http_code}' ''' +
-          '-X $method$payload "http://127.0.0.1:\$port"${shellQuote(path)} 2>/dev/null',
+  -w '\n%{http_code}' '''
+      '-X $method$payload "http://127.0.0.1:\$port"${shellQuote(path)} 2>/dev/null',
     );
     final split = output.lastIndexOf('\n');
     if (split < 0) throw const OpenClashException('controller');
@@ -124,8 +124,9 @@ curl --silent --connect-timeout 3 --max-time 8 --noproxy '*' \
   }
 
   Future<void> setMode(String mode) async {
-    if (!{'rule', 'global', 'direct'}.contains(mode))
+    if (!{'rule', 'global', 'direct'}.contains(mode)) {
       throw const OpenClashException('request');
+    }
     await request('PATCH', '/configs', {'mode': mode});
     // Match OpenClash's own mode switch persistence after controller acceptance.
     await _run(
@@ -137,23 +138,26 @@ curl --silent --connect-timeout 3 --max-time 8 --noproxy '*' \
   }
 
   Future<void> select(OpenClashGroup group, String node) async {
-    if (!group.canSelect || !group.choices.contains(node))
+    if (!group.canSelect || !group.choices.contains(node)) {
       throw const OpenClashException('request');
+    }
     await request('PUT', '/proxies/${Uri.encodeComponent(group.name)}', {
       'name': node,
     });
   }
 
   Future<void> serviceAction(String action) async {
-    if (!{'start', 'stop', 'restart'}.contains(action))
+    if (!{'start', 'stop', 'restart'}.contains(action)) {
       throw const OpenClashException('request');
+    }
     // Long service actions must outlive the short RPC request. No router reboot.
     final output = await _run(
       'test -x /etc/init.d/openclash || exit 1; '
       'sh -c ${shellQuote('trap "" HUP; exec /etc/init.d/openclash $action')} '
       '> /dev/null 2>&1 < /dev/null & printf ACCEPTED',
     );
-    if (output.trim() != 'ACCEPTED')
+    if (output.trim() != 'ACCEPTED') {
       throw const OpenClashException('connection');
+    }
   }
 }

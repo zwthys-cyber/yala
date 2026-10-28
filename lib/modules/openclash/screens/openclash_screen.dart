@@ -33,8 +33,9 @@ class _OpenClashScreenState extends ConsumerState<OpenClashScreen> {
     super.initState();
     _routerId = ref.read(appStateProvider).selectedRouter?.id;
     _service = OpenClashService((command, args) async {
-      if (!_sameRouter || _routerId == null)
+      if (!_sameRouter || _routerId == null) {
         throw const OpenClashException('router');
+      }
       return ref.read(appStateProvider).callRpc('file', 'exec', {
         'command': command,
         'params': args,
@@ -99,10 +100,11 @@ class _OpenClashScreenState extends ConsumerState<OpenClashScreen> {
     } catch (error) {
       if (mounted) _error = _message(error);
     } finally {
-      if (mounted)
+      if (mounted) {
         setState(() {
           _busy = false;
         });
+      }
     }
   }
 
@@ -117,10 +119,11 @@ class _OpenClashScreenState extends ConsumerState<OpenClashScreen> {
     } catch (error) {
       if (mounted) _error = _message(error);
     } finally {
-      if (mounted)
+      if (mounted) {
         setState(() {
           _busy = false;
         });
+      }
     }
   }
 
@@ -328,10 +331,11 @@ class _OpenClashScreenState extends ConsumerState<OpenClashScreen> {
                                     onSelected: _busy
                                         ? null
                                         : (selected) {
-                                            if (selected)
+                                            if (selected) {
                                               _change(
                                                 () => _service.setMode(mode),
                                               );
+                                            }
                                           },
                                   ),
                               ],
