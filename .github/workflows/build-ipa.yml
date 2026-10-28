@@ -56,6 +56,14 @@ jobs:
         run: |
           flutter precache --ios
           flutter pub get
+      - name: Install and verify CocoaPods dependencies
+        run: |
+          cd ios
+          pod install --repo-update
+          cmp Podfile.lock Pods/Manifest.lock
+          xcodebuild -workspace Runner.xcworkspace -scheme Runner \
+            -configuration Debug -sdk iphonesimulator -showBuildSettings \
+            | awk '/PODS_ROOT = .+/ { print; found=1 } END { exit !found }'
       - name: Boot iPhone simulator
         run: |
           SIMULATOR_ID=$(xcrun simctl list devices available --json | python3 -c 'import json,sys; d=json.load(sys.stdin); print(next(v["udid"] for k,vs in d["devices"].items() if "iOS" in k for v in vs if v["name"].startswith("iPhone")))')
