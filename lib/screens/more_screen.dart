@@ -561,6 +561,7 @@ class _MoreScreenState extends ConsumerState<MoreScreen> {
                       'system_backup_upgrade',
                       'diagnostics',
                       'sqm',
+                      'openclash',
                     };
                     final isRestricted =
                         isRpcMissing && rpcDependentModules.contains(module.id);

@@ -44,7 +44,17 @@ jobs:
       - name: Verify Formatting
         run: |
           dart format .
+          git diff --binary -- '*.dart' > dart-format.patch
           git diff --exit-code -- '*.dart'
+
+      - name: Upload formatting patch
+        if: failure()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: dart-format-patch-${{ github.run_number }}
+          path: dart-format.patch
+          if-no-files-found: ignore
+          retention-days: 7
 
       - name: Analyze Project Source
         run: flutter analyze --fatal-infos

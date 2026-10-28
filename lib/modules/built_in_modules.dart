@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'openclash/openclash_module.dart';
 import 'package:flutter/material.dart';
 import 'core/luci_module.dart';
 import 'core/luci_module_registry.dart';
@@ -176,6 +177,7 @@ void registerBuiltInModules() {
     ParentalControlsModule(),
     DiagnosticsModule(),
     SqmModule(),
+    OpenClashModule(),
     BandwidthMonitorModule(),
     AdGuardHomeModule(),
     ClientsModule(),
