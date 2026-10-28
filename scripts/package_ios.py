@@ -42,7 +42,8 @@ def main():
             raise RuntimeError("IPA archive failed CRC verification")
         if "Payload/Runner.app/Info.plist" not in archive.namelist():
             raise RuntimeError("IPA Payload structure is invalid")
-    checksum = hashlib.file_digest(ipa.open("rb"), "sha256").hexdigest()
+    with ipa.open("rb") as source:
+        checksum = hashlib.file_digest(source, "sha256").hexdigest()
     (output / "YALA-unsigned.ipa.sha256").write_text(f"{checksum}  {ipa.name}\n")
     report = {
         "repository": os.environ.get("GITHUB_REPOSITORY"),

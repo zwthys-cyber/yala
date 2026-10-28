@@ -42,7 +42,9 @@ jobs:
         run: flutter pub get
 
       - name: Verify Formatting
-        run: dart format --output=none --set-exit-if-changed .
+        run: |
+          dart format .
+          git diff --exit-code -- '*.dart'
 
       - name: Analyze Project Source
         run: flutter analyze --fatal-infos

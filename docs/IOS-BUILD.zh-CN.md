@@ -18,8 +18,9 @@ Flutter 依赖、静态分析、自动测试和 Xcode 编译均由 GitHub 托管
 
 ## 自动验证范围
 
-推送至 main、构建分支或提交到 main 的 PR 会启动流程。首先检查 Dart 格式、
-静态分析和测试，全部成功后才在 macOS 上编译 arm64 iPhone release 应用。
+推送至 main 或提交到 main 的 PR 会启动流程。首先检查 Dart 格式、
+静态分析和测试，全部成功后在 macOS 的 iPhone 模拟器上启动 App，验证能够进入
+路由器登录页并保存截图，再编译 arm64 iPhone release 应用。
 打包检查平台、可执行文件架构、本地网络权限说明、Flutter 资源、IPA 目录和 ZIP 完整性。
 Actions 页面保留测试日志、构建日志和产物；下载后也可核对 SHA-256。
 
@@ -32,6 +33,12 @@ Actions 页面保留测试日志、构建日志和产物；下载后也可核对
 `r0+37778-bc808b8504`，管理地址曾设置为 `192.168.10.1`。
 这属于固件发布版本，不应当成 OpenWrt 官方 2.0.2 版本。
 YALA 使用 LuCI/ubus RPC，并支持 APK 包管理；是否具备全部 RPC 服务要以当前设备检查为准。
+
+用户提供的只读检查已确认 `/ubus` 路径以及 `session.login`、`luci`、`file.exec`
+（参数名为 `params`）、`iwinfo` 接口存在。未安装旧版 `luci-mod-rpc`，但 YALA
+优先使用 ubus 登录，无需仅为旧接口先安装该包。HTTP 登录后实际 ACL 权限仍需 App 验证。
+设备还运行 OpenClash；此构建保留现有功能，不新增 OpenClash 专用控制面板，
+也不修改设备的代理、DNS 或防火墙配置。
 
 该固件曾发生 ucode/LuCI/RPC ABI 配套问题。YALA 的“修复权限”功能会写入 ACL、
 安装软件包并重启 RPC 服务；请先确认依赖配套再执行，不能将它当成只读检测。
