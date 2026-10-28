@@ -5,6 +5,11 @@ name: Build iOS IPA
 on:
   workflow_dispatch:
     inputs:
+      run_simulator:
+        description: Run optional iPhone simulator startup test (slow)
+        required: false
+        default: false
+        type: boolean
       build_name:
         description: Optional version name (for example 2.6.0)
         required: false
@@ -97,6 +102,7 @@ jobs:
           retention-days: 14
 
   simulator:
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.run_simulator }}
     name: Verify native iPhone startup
     needs: validate
     runs-on: macos-26-intel
