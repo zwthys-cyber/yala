@@ -8,6 +8,7 @@ import '../../../services/ssh_service.dart';
 import '../../../widgets/luci_app_bar.dart';
 import '../services/openclash_service.dart';
 import '../services/openclash_ssh_transport.dart';
+import 'openclash_diagnostics_screen.dart';
 
 class OpenClashScreen extends ConsumerStatefulWidget {
   const OpenClashScreen({super.key});
@@ -276,6 +277,17 @@ class _OpenClashScreenState extends ConsumerState<OpenClashScreen> {
                 physics: const AlwaysScrollableScrollPhysics(),
                 children: [
                   if (_busy) const LinearProgressIndicator(),
+                  Card(
+                    child: ListTile(
+                      leading: Icon(Icons.monitor_heart_outlined, color: Theme.of(context).colorScheme.primary),
+                      title: Text(_text('资源与诊断日志', 'Resources and diagnostic logs')),
+                      subtitle: Text(_text('内存、交换空间与最近日志', 'Memory, swap and recent logs')),
+                      trailing: const Icon(Icons.chevron_right),
+                      onTap: _busy ? null : () => Navigator.of(context).push(
+                        MaterialPageRoute<void>(builder: (_) => OpenClashDiagnosticsScreen(service: _service)),
+                      ),
+                    ),
+                  ),
                   Card(
                     child: Padding(
                       padding: const EdgeInsets.all(16),

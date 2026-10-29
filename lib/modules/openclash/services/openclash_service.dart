@@ -3,6 +3,7 @@
 
 import 'dart:convert';
 import '../../../models/rpc_result.dart';
+import '../models/router_resources.dart';
 
 typedef OpenClashExec =
     Future<dynamic> Function(String command, List<String> args);
@@ -130,6 +131,42 @@ printf '{"installed":%s,"running":%s}' "$installed" "$running"
       installed: data['installed'] == true,
       running: data['running'] == true,
     );
+  }
+
+  Future<RouterResources> resources() async {
+    final output = await _run(r'''
+printf 'YALA_RESOURCE_V1\n'
+cat /proc/meminfo || exit 1
+printf '\nYALA_ZRAM_V1\n'
+cat /sys/block/zram0/mm_stat 2>/dev/null
+printf '\nYALA_LOAD_V1\n'
+cut -d ' ' -f 1-3 /proc/loadavg
+''');
+    return RouterResources.parse(output);
+  }
+
+  /// Bounded, user-requested reads; never stream or poll logs in the background.
+  Future<String> logs({required bool system}) async {
+    final command = system
+        ? "logread | grep -Ei 'out of memory|oom-kill|killed process|allocation failure|ath11k|hostapd|netifd' | tail -n 60"
+        : 'tail -c 32768 /tmp/openclash.log 2>/dev/null | tail -n 80';
+    final output = await _run("printf 'YALA_LOG_V1\\n'; $command");
+    const marker = 'YALA_LOG_V1\n';
+    if (!output.startsWith(marker)) {
+      throw const OpenClashException('connection');
+    }
+    return redactLogs(output.substring(marker.length));
+  }
+
+  static String redactLogs(String text) {
+    final sensitive = RegExp(
+      r'password|passwd|secret|token|authorization|uuid|订阅|://[^\s]*@',
+      caseSensitive: false,
+    );
+    return text.split('\n').map((line) {
+      if (sensitive.hasMatch(line)) return '[Sensitive data hidden]';
+      return line.replaceAll(RegExp(r'https?://\S+'), '[URL hidden]');
+    }).join('\n');
   }
 
   /// One router connection per refresh, instead of reconnecting for each field.
