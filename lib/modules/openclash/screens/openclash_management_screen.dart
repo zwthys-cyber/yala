@@ -180,6 +180,8 @@ class _OpenClashManagementScreenState extends State<OpenClashManagementScreen> {
                         maxLines: hidden ? 1 : 4,
                         autocorrect: false,
                         enableSuggestions: false,
+                        smartQuotesType: SmartQuotesType.disabled,
+                        smartDashesType: SmartDashesType.disabled,
                         decoration: InputDecoration(
                           labelText: _text('订阅地址', 'Subscription URL'),
                           suffixIcon: IconButton(
@@ -658,6 +660,8 @@ class _ConfigEditorState extends State<_ConfigEditor> {
               minLines: null,
               autocorrect: false,
               enableSuggestions: false,
+              smartQuotesType: SmartQuotesType.disabled,
+              smartDashesType: SmartDashesType.disabled,
               textAlignVertical: TextAlignVertical.top,
               style: Theme.of(context).textTheme.bodySmall,
               decoration: const InputDecoration(
