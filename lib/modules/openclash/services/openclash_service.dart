@@ -95,13 +95,28 @@ class OpenClashService {
     return result.data!;
   }
 
-  RpcResult<String> _classify(dynamic raw) =>
-      RpcResult.classifyExecResult<String>(
-        raw,
-        (data) => (data['code'] == null || data['code'] == 0)
-            ? data['stdout']?.toString() ?? ''
-            : '',
+  RpcResult<String> _classify(dynamic raw) {
+    // Controller responses and node names are data, not RPC permission errors.
+    // A command may have partly executed before failing: never retry that
+    // command through another transport based on its stdout or stderr.
+    final transport = RpcResult.fromUbusResponse<dynamic>(raw, (data) => data);
+    if (!transport.isSuccess) {
+      return RpcResult<String>(
+        status: transport.status,
+        errorMessage: transport.errorMessage,
+        errorCode: transport.errorCode,
       );
+    }
+    final data = transport.data;
+    if (data is! Map || (data['code'] != null && data['code'] != 0)) {
+      return RpcResult.failed('Router command failed');
+    }
+    final output = data['stdout']?.toString() ?? '';
+    if (output.trim().isEmpty) {
+      return RpcResult.failed('Router command returned no output');
+    }
+    return RpcResult.success(output);
+  }
 
   Future<OpenClashStatus> status() async {
     final output = await _run(r'''
@@ -188,6 +203,7 @@ printf '{%s,"version":%s,"mode":"%s","proxies":%s}' "$state" "$version" "$mode" 
     final output = await _run(
       r'''
 port=$(uci -q get openclash.config.cn_port)
+port=${port:-9090}
 secret=$(uci -q get openclash.config.dashboard_password)
 case "$port" in ''|*[!0-9]*) printf '\n000'; exit 0;; esac
 [ "$port" -ge 1 ] && [ "$port" -le 65535 ] || { printf '\n000'; exit 0; }
