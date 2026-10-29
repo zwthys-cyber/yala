@@ -204,11 +204,12 @@ class _OpenClashDiagnosticsScreenState
                         onSelected: _busy
                             ? null
                             : (selected) {
-                                if (selected)
+                                if (selected) {
                                   setState(() {
                                     _system = system;
                                     _logs = null;
                                   });
+                                }
                               },
                       ),
                   ],
