@@ -163,10 +163,13 @@ cut -d ' ' -f 1-3 /proc/loadavg
       r'password|passwd|secret|token|authorization|uuid|订阅|://[^\s]*@',
       caseSensitive: false,
     );
-    return text.split('\n').map((line) {
-      if (sensitive.hasMatch(line)) return '[Sensitive data hidden]';
-      return line.replaceAll(RegExp(r'https?://\S+'), '[URL hidden]');
-    }).join('\n');
+    return text
+        .split('\n')
+        .map((line) {
+          if (sensitive.hasMatch(line)) return '[Sensitive data hidden]';
+          return line.replaceAll(RegExp(r'https?://\S+'), '[URL hidden]');
+        })
+        .join('\n');
   }
 
   /// One router connection per refresh, instead of reconnecting for each field.

@@ -17,7 +17,8 @@ class OpenClashDiagnosticsScreen extends StatefulWidget {
       _OpenClashDiagnosticsScreenState();
 }
 
-class _OpenClashDiagnosticsScreenState extends State<OpenClashDiagnosticsScreen> {
+class _OpenClashDiagnosticsScreenState
+    extends State<OpenClashDiagnosticsScreen> {
   RouterResources? _resources;
   String? _logs;
   String? _error;
@@ -120,25 +121,64 @@ class _OpenClashDiagnosticsScreenState extends State<OpenClashDiagnosticsScreen>
                 : Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      _row(_text('物理内存总量', 'Physical memory'), _mib(resources.totalKiB)),
-                      _row(_text('可用内存', 'Available memory'), available == null ? '—' : _mib(available)),
+                      _row(
+                        _text('物理内存总量', 'Physical memory'),
+                        _mib(resources.totalKiB),
+                      ),
+                      _row(
+                        _text('可用内存', 'Available memory'),
+                        available == null ? '—' : _mib(available),
+                      ),
                       if (available != null)
                         LinearProgressIndicator(
-                          value: (available / resources.totalKiB).clamp(0.0, 1.0),
-                          semanticsLabel: _text('可用内存比例', 'Available memory ratio'),
-                          color: available < 8192 ? Theme.of(context).colorScheme.error : null,
+                          value: (available / resources.totalKiB).clamp(
+                            0.0,
+                            1.0,
+                          ),
+                          semanticsLabel: _text(
+                            '可用内存比例',
+                            'Available memory ratio',
+                          ),
+                          color: available < 8192
+                              ? Theme.of(context).colorScheme.error
+                              : null,
                         ),
                       if (available != null && available < 8192)
                         Padding(
                           padding: const EdgeInsets.only(top: LuciSpacing.sm),
-                          child: Text(_text('可用内存低于 8 MiB，请暂停测速并检查后台任务。', 'Available memory is below 8 MiB. Pause speed tests and check background tasks.')),
+                          child: Text(
+                            _text(
+                              '可用内存低于 8 MiB，请暂停测速并检查后台任务。',
+                              'Available memory is below 8 MiB. Pause speed tests and check background tasks.',
+                            ),
+                          ),
                         ),
-                      _row(_text('交换空间总量', 'Swap capacity'), _mib(resources.swapTotalKiB)),
-                      _row(_text('已用交换空间', 'Swap used'), _mib((resources.swapTotalKiB - resources.swapFreeKiB).clamp(0, resources.swapTotalKiB))),
+                      _row(
+                        _text('交换空间总量', 'Swap capacity'),
+                        _mib(resources.swapTotalKiB),
+                      ),
+                      _row(
+                        _text('已用交换空间', 'Swap used'),
+                        _mib(
+                          (resources.swapTotalKiB - resources.swapFreeKiB)
+                              .clamp(0, resources.swapTotalKiB),
+                        ),
+                      ),
                       if (resources.zramPhysicalBytes != null)
-                        _row(_text('zram 实际内存占用', 'zram physical memory'), '${(resources.zramPhysicalBytes! / 1048576).toStringAsFixed(1)} MiB'),
-                      _row(_text('系统负载（1 / 5 / 15 分钟）', 'Load (1 / 5 / 15 min)'), resources.load.isEmpty ? '—' : resources.load),
-                      Text(_text('交换空间不等于新增物理内存。状态仅在打开页面或手动刷新时读取。', 'Swap is not additional physical RAM. Status updates only when this page opens or you refresh.')),
+                        _row(
+                          _text('zram 实际内存占用', 'zram physical memory'),
+                          '${(resources.zramPhysicalBytes! / 1048576).toStringAsFixed(1)} MiB',
+                        ),
+                      _row(
+                        _text('系统负载（1 / 5 / 15 分钟）', 'Load (1 / 5 / 15 min)'),
+                        resources.load.isEmpty ? '—' : resources.load,
+                      ),
+                      Text(
+                        _text(
+                          '交换空间不等于新增物理内存。状态仅在打开页面或手动刷新时读取。',
+                          'Swap is not additional physical RAM. Status updates only when this page opens or you refresh.',
+                        ),
+                      ),
                     ],
                   ),
           ),
@@ -155,14 +195,21 @@ class _OpenClashDiagnosticsScreenState extends State<OpenClashDiagnosticsScreen>
                   children: [
                     for (final system in [false, true])
                       ChoiceChip(
-                        label: Text(system ? _text('系统与无线', 'System & Wi-Fi') : 'OpenClash'),
+                        label: Text(
+                          system
+                              ? _text('系统与无线', 'System & Wi-Fi')
+                              : 'OpenClash',
+                        ),
                         selected: _system == system,
-                        onSelected: _busy ? null : (selected) {
-                          if (selected) setState(() {
-                            _system = system;
-                            _logs = null;
-                          });
-                        },
+                        onSelected: _busy
+                            ? null
+                            : (selected) {
+                                if (selected)
+                                  setState(() {
+                                    _system = system;
+                                    _logs = null;
+                                  });
+                              },
                       ),
                   ],
                 ),
@@ -175,7 +222,10 @@ class _OpenClashDiagnosticsScreenState extends State<OpenClashDiagnosticsScreen>
                 const SizedBox(height: LuciSpacing.sm),
                 SelectableText(
                   _logs == null
-                      ? _text('点击读取，不在后台持续收集。', 'Tap to read. No background collection.')
+                      ? _text(
+                          '点击读取，不在后台持续收集。',
+                          'Tap to read. No background collection.',
+                        )
                       : _logs!.trim().isEmpty
                       ? _text('暂无匹配日志', 'No matching log entries')
                       : _logs!,
