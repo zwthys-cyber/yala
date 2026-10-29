@@ -60,6 +60,9 @@ class OpenClashService {
   static String shellQuote(String value) =>
       "'${value.replaceAll("'", "'\"'\"'")}'";
 
+  /// Shared authenticated transport for the module's validated management calls.
+  Future<String> runManagementScript(String script) => _run(script);
+
   Future<String> _run(String script) async {
     dynamic raw;
     if (_usingFallback) {
@@ -323,10 +326,14 @@ curl --silent --connect-timeout 3 --max-time 8 --noproxy '*' \
     if (!{'start', 'stop', 'restart'}.contains(action)) {
       throw const OpenClashException('request');
     }
+    return startManagedTask('/etc/init.d/openclash $action');
+  }
+
+  Future<String> startManagedTask(String command) async {
     final operation = 'yala-oc-${DateTime.now().microsecondsSinceEpoch}';
     final resultPath = '/tmp/$operation.result';
     final task =
-        'trap "" HUP; umask 077; /etc/init.d/openclash $action; '
+        'trap "" HUP; umask 077; $command; '
         r'rc=$?; printf "%s" "$rc" > '
         '${shellQuote(resultPath)}';
     final output = await _run(

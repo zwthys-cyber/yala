@@ -59,6 +59,9 @@ jobs:
       - name: Analyze Project Source
         run: flutter analyze --fatal-infos
 
+      - name: Build router management test interpreter
+        run: bash scripts/build_ucode_fixture.sh
+
       - name: Run Tests
         shell: bash
         run: |
