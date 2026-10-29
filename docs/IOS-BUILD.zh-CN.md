@@ -69,3 +69,11 @@ ubus -v list file
 ubus -v list iwinfo
 uci -q get uhttpd.main.ubus_prefix
 ```
+
+## 无线开关权限兼容
+
+构建号 234 起，SSID 和射频开关使用 LuCI 的 `uci.set → uci.apply` 流程，
+不再要求默认 LuCI ACL 未授予的 `uci.commit` 或额外的 shell 命令权限。
+写入、应用或核验失败时提示具体 RPC 阶段；清理失败不会覆盖原始错误，
+也不会声称已经回滚。此修改不会自动安装 RPC 包或放宽路由器 ACL。
+主动关闭当前连接的 SSID/射频仍会断开手机 Wi-Fi，请保留其他管理通道。

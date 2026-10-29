@@ -31,6 +31,18 @@ import 'package:yet_another_luci_app/services/interfaces/api_service_interface.d
 import '../utils/http_client_manager.dart';
 import '../utils/logger.dart';
 
+/// Identifies the failed stage without exposing SSIDs, passwords or RPC tokens.
+class WirelessUpdateException implements Exception {
+  final String stage;
+  final bool permissionDenied;
+  const WirelessUpdateException(this.stage, {this.permissionDenied = false});
+
+  @override
+  String toString() => permissionDenied
+      ? 'Wi-Fi update denied at $stage. Check router RPC write permissions.'
+      : 'Wi-Fi update was not confirmed at $stage. Refresh the wireless status before retrying.';
+}
+
 class LoginResult {
   final String? token;
   final bool actualUseHttps;
@@ -1712,6 +1724,79 @@ class RealApiService implements IApiService {
     return null;
   }
 
+  /// Match LuCI's normal ACLs: set + apply, rather than commit + file.exec.
+  /// rpcd apply commits session changes and schedules the network reload itself.
+  Future<bool> _setWirelessSectionEnabled(
+    String ipAddress,
+    String sysauth,
+    bool useHttps, {
+    required String section,
+    required bool enabled,
+    BuildContext? context,
+  }) async {
+    final mCtx = mountedContext(context);
+    var stage = 'uci.set';
+    var staged = false;
+    try {
+      final setRes = await uciSet(
+        ipAddress,
+        sysauth,
+        useHttps,
+        config: 'wireless',
+        section: section,
+        values: {'disabled': enabled ? '0' : '1'},
+        context: mCtx,
+      );
+      if (!_isUciSuccessful(setRes)) {
+        throw WirelessUpdateException(stage, permissionDenied: _wirelessPermissionDenied(setRes));
+      }
+      staged = true;
+      stage = 'uci.apply';
+      final applyRes = await callWithContext(
+        ipAddress,
+        sysauth,
+        useHttps,
+        object: 'uci',
+        method: 'apply',
+        // The user explicitly confirms turning an SSID/radio off. A rollback
+        // timer requiring confirmation over that same Wi-Fi would undo it.
+        params: {'rollback': false},
+        context: mCtx,
+      );
+      final noChanges = applyRes is List && applyRes.isNotEmpty && applyRes[0] == 5;
+      if (!_isUciSuccessful(applyRes) && !noChanges) {
+        throw WirelessUpdateException(stage, permissionDenied: _wirelessPermissionDenied(applyRes));
+      }
+      if (noChanges) {
+        stage = 'uci.get';
+        final verifyRes = await callWithContext(ipAddress, sysauth, useHttps,
+          object: 'uci', method: 'get', params: {'config': 'wireless', 'section': section}, context: mountedContext(context));
+        final data = verifyRes is List && verifyRes.length > 1 && verifyRes[0] == 0 ? verifyRes[1] : null;
+        final values = data is Map ? data['values'] : null;
+        if (values is! Map || (values['disabled']?.toString() ?? '0') != (enabled ? '0' : '1')) {
+          throw WirelessUpdateException(stage, permissionDenied: _wirelessPermissionDenied(verifyRes));
+        }
+      }
+      return true;
+    } catch (error) {
+      if (staged) {
+        // Revert is not granted by every LuCI ACL. Cleanup must never mask the
+        // original error or be described as a successful rollback.
+        try {
+          await uciRevert(ipAddress, sysauth, useHttps, config: 'wireless', context: mountedContext(context));
+        } catch (_) {}
+      }
+      if (error is WirelessUpdateException) rethrow;
+      throw WirelessUpdateException(stage, permissionDenied: _wirelessPermissionDenied(error));
+    }
+  }
+
+  bool _wirelessPermissionDenied(dynamic result) {
+    if (result is List && result.isNotEmpty && result[0] == 6) return true;
+    final message = result.toString().toLowerCase();
+    return message.contains('access denied') || message.contains('permission denied');
+  }
+
   @override
   Future<bool> setSsidEnabled(
     String ipAddress,
@@ -1720,73 +1805,7 @@ class RealApiService implements IApiService {
     required String ifaceSection,
     required bool enabled,
     BuildContext? context,
-  }) async {
-    try {
-      final mCtx = mountedContext(context);
-      final setRes = await uciSet(
-        ipAddress,
-        sysauth,
-        useHttps,
-        config: 'wireless',
-        section: ifaceSection,
-        values: {'disabled': enabled ? '0' : '1'},
-        context: mCtx,
-      );
-      if (setRes is List && setRes.isNotEmpty && setRes[0] != 0) {
-        await uciRevert(
-          ipAddress,
-          sysauth,
-          useHttps,
-          config: 'wireless',
-          context: mCtx,
-        );
-        return false;
-      }
-
-      final commitRes = await uciCommit(
-        ipAddress,
-        sysauth,
-        useHttps,
-        config: 'wireless',
-        context: mCtx,
-      );
-      if (commitRes is List && commitRes.isNotEmpty && commitRes[0] != 0) {
-        await uciRevert(
-          ipAddress,
-          sysauth,
-          useHttps,
-          config: 'wireless',
-          context: mCtx,
-        );
-        return false;
-      }
-
-      // Reload wifi configuration
-      final reloadRes = await callWithContext(
-        ipAddress,
-        sysauth,
-        useHttps,
-        object: 'file',
-        method: 'exec',
-        params: {
-          'command': '/sbin/wifi',
-          'params': ['reload'],
-        },
-        context: mCtx,
-      );
-      return _execSucceeded(reloadRes);
-    } catch (e, stack) {
-      Logger.exception('setSsidEnabled failed for $ifaceSection', e, stack);
-      await uciRevert(
-        ipAddress,
-        sysauth,
-        useHttps,
-        config: 'wireless',
-        context: mountedContext(context),
-      );
-      return false;
-    }
-  }
+  }) => _setWirelessSectionEnabled(ipAddress, sysauth, useHttps, section: ifaceSection, enabled: enabled, context: context);
 
   @override
   Future<bool> toggleWirelessRadio(
@@ -1796,109 +1815,7 @@ class RealApiService implements IApiService {
     required String radioName,
     required bool enabled,
     BuildContext? context,
-  }) async {
-    final mCtx = mountedContext(context);
-    try {
-      final setRes = await uciSet(
-        ipAddress,
-        sysauth,
-        useHttps,
-        config: 'wireless',
-        section: radioName,
-        values: {'disabled': enabled ? '0' : '1'},
-        context: mCtx,
-      );
-      if (setRes is List && setRes.isNotEmpty && setRes[0] != 0) {
-        await uciRevert(
-          ipAddress,
-          sysauth,
-          useHttps,
-          config: 'wireless',
-          context: mCtx,
-        );
-        return false;
-      }
-
-      final commitRes = await uciCommit(
-        ipAddress,
-        sysauth,
-        useHttps,
-        config: 'wireless',
-        context: mCtx,
-      );
-      if (commitRes is List && commitRes.isNotEmpty && commitRes[0] != 0) {
-        await uciRevert(
-          ipAddress,
-          sysauth,
-          useHttps,
-          config: 'wireless',
-          context: mCtx,
-        );
-        return false;
-      }
-
-      // Reload wifi subsystem
-      final reloadRes = await callWithContext(
-        ipAddress,
-        sysauth,
-        useHttps,
-        object: 'file',
-        method: 'exec',
-        params: {
-          'command': '/sbin/wifi',
-          'params': ['reload'],
-        },
-        context: mCtx,
-      );
-      final reloadOk = _execSucceeded(reloadRes);
-      if (!reloadOk) {
-        Logger.debug(
-          'toggleWirelessRadio: wifi reload returned non-zero code for $radioName',
-        );
-      }
-
-      // Authoritative verification query against router UCI
-      try {
-        final verifyRes = await callWithContext(
-          ipAddress,
-          sysauth,
-          useHttps,
-          object: 'uci',
-          method: 'get',
-          params: {'config': 'wireless', 'section': radioName},
-          context: mCtx,
-        );
-        if (verifyRes is Map) {
-          final values = verifyRes['values'] ?? verifyRes;
-          if (values is Map) {
-            final verifiedDisabled = values['disabled']?.toString();
-            final expectedDisabled = enabled ? '0' : '1';
-            if (verifiedDisabled != null &&
-                verifiedDisabled != expectedDisabled) {
-              Logger.warning(
-                'toggleWirelessRadio: validation mismatch for $radioName. Expected disabled=$expectedDisabled, got $verifiedDisabled',
-              );
-              return false;
-            }
-          }
-        }
-      } catch (e) {
-        Logger.debug('toggleWirelessRadio: verification query warning: $e');
-      }
-
-      return true;
-    } catch (e, stack) {
-      Logger.exception('toggleWirelessRadio failed for $radioName', e, stack);
-      await uciRevert(
-        ipAddress,
-        sysauth,
-        useHttps,
-        config: 'wireless',
-        context: mCtx,
-      );
-      return false;
-    }
-  }
+  }) => _setWirelessSectionEnabled(ipAddress, sysauth, useHttps, section: radioName, enabled: enabled, context: context);
 
   @override
   Future<bool> updateWirelessInterfaceConfig(
