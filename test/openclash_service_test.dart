@@ -164,7 +164,8 @@ void main() {
       expect(args.last, contains('/etc/init.d/openclash restart'));
       expect(args.last, contains('HUP'));
       expect(args.last, isNot(contains('network restart')));
-      return result('ACCEPTED');
+      final operation = RegExp(r'printf ACCEPTED:(yala-oc-[0-9]+)').firstMatch(args.last)!.group(1)!;
+      return result('ACCEPTED:$operation');
     });
     await service.serviceAction('restart');
   });
@@ -216,6 +217,60 @@ void main() {
     final service = OpenClashService((command, args) async => result('{"message":"Unauthorized"}\n401'), fallbackExecute: (command, args) async { sshCalls++; return result(''); });
     await expectLater(service.request('GET', '/version'), throwsA(isA<OpenClashException>().having((e) => e.reason, 'reason', 'auth')));
     expect(sshCalls, 0);
+  });
+
+  test('one snapshot carries status, version, mode and groups in one command', () async {
+    var calls = 0;
+    final service = OpenClashService((command, args) async {
+      calls++;
+      return result(jsonEncode({'installed': true, 'running': true, 'version': {'version': 'v1.19.33'}, 'mode': 'rule', 'proxies': {'proxies': {'Main': {'type': 'Selector', 'all': ['A'], 'now': 'A'}}}}));
+    });
+    final snapshot = await service.loadSnapshot();
+    expect(calls, 1);
+    expect(snapshot.status.running, isTrue);
+    expect(snapshot.version, 'v1.19.33');
+    expect(snapshot.mode, 'rule');
+    expect(snapshot.groups.single.selected, 'A');
+  });
+
+  test('controller error retains installed/running state for service recovery', () async {
+    final service = OpenClashService((command, args) async => result('{"installed":true,"running":true,"controllerError":"auth"}'));
+    final snapshot = await service.loadSnapshot();
+    expect(snapshot.status.running, isTrue);
+    expect(snapshot.controllerError, 'auth');
+    expect(snapshot.groups, isEmpty);
+  });
+
+  test('stopped plugin has no stale version, mode or groups', () async {
+    final service = OpenClashService((command, args) async => result('{"installed":true,"running":false}'));
+    final snapshot = await service.loadSnapshot();
+    expect(snapshot.status.running, isFalse);
+    expect(snapshot.version, isNull);
+    expect(snapshot.mode, isNull);
+    expect(snapshot.groups, isEmpty);
+  });
+
+  test('service completion distinguishes pending from completed action', () async {
+    var pending = true;
+    final service = OpenClashService((command, args) async {
+      final output = pending ? 'PENDING' : '0';
+      pending = false;
+      return result(output);
+    });
+    expect(await service.actionComplete('yala-oc-123'), isFalse);
+    expect(await service.actionComplete('yala-oc-123'), isTrue);
+  });
+
+  test('failed service command is never reported completed successfully', () async {
+    final service = OpenClashService((command, args) async => result('1'));
+    await expectLater(service.actionComplete('yala-oc-123'), throwsA(isA<OpenClashException>().having((e) => e.reason, 'reason', 'service')));
+  });
+
+  test('invalid service operation identifier cannot access arbitrary files', () async {
+    var calls = 0;
+    final service = OpenClashService((command, args) async { calls++; return result('0'); });
+    await expectLater(service.actionComplete('../../etc/shadow'), throwsA(isA<OpenClashException>()));
+    expect(calls, 0);
   });
 
 }

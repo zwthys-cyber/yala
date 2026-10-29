@@ -7,6 +7,7 @@ import '../../../main.dart';
 import '../../../services/ssh_service.dart';
 import '../../../widgets/luci_app_bar.dart';
 import '../services/openclash_service.dart';
+import '../services/openclash_ssh_transport.dart';
 
 class OpenClashScreen extends ConsumerStatefulWidget {
   const OpenClashScreen({super.key});
@@ -25,7 +26,7 @@ class _OpenClashScreenState extends ConsumerState<OpenClashScreen> {
   bool _busy = true;
 
   bool get _sameRouter =>
-      ref.read(appStateProvider).selectedRouter?.id == _routerId;
+      mounted && ref.read(appStateProvider).selectedRouter?.id == _routerId;
   bool get _zh => Localizations.localeOf(context).languageCode == 'zh';
   String _text(String zh, String en) => _zh ? zh : en;
 
@@ -46,17 +47,11 @@ class _OpenClashScreenState extends ConsumerState<OpenClashScreen> {
         if (!_sameRouter || _routerId == null) {
           throw const OpenClashException('router');
         }
-        final router = ref.read(appStateProvider).selectedRouter!;
-        if (router.password.isEmpty) throw const OpenClashException('ssh');
-        final uri = Uri.parse(router.ipAddress.contains('://') ? router.ipAddress : 'http://${router.ipAddress}');
-        final result = await RealSshService().executeCommand(
-          host: uri.host, username: router.username, password: router.password,
-          command: [command, ...args].map(OpenClashService.shellQuote).join(' '),
-          timeout: const Duration(seconds: 15),
-        );
-        if (!_sameRouter) throw const OpenClashException('router');
-        if (result.exitCode == -1) throw const OpenClashException('ssh');
-        return [0, {'code': result.exitCode, 'stdout': result.stdout, 'stderr': ''}];
+        final router = ref.read(appStateProvider).selectedRouter;
+        if (router == null) {
+          throw const OpenClashException('router');
+        }
+        return OpenClashSshTransport(router: router, ssh: RealSshService(), isCurrent: () => mounted && _sameRouter).execute(command, args);
       },
     );
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -72,6 +67,7 @@ class _OpenClashScreenState extends ConsumerState<OpenClashScreen> {
         'Router command permission denied. Check RPC permissions.',
       ),
       'ssh' => _text('RPC 命令权限受限，SSH 连接也未成功。请确认路由器 SSH（22 端口）已启用，并在 App 中重新保存正确的登录账户和密码。', 'RPC commands are restricted and SSH could not connect. Enable router SSH on port 22 and check the saved router credentials.'),
+      'service' => _text('OpenClash 服务命令执行失败，请查看路由器上的 OpenClash 日志。', 'The OpenClash service command failed. Check its router logs.'),
       'auth' => _text(
         '控制接口认证失败，请检查 OpenClash 控制密钥。',
         'Controller authentication failed. Check the OpenClash secret.',
@@ -92,18 +88,14 @@ class _OpenClashScreenState extends ConsumerState<OpenClashScreen> {
   }
 
   Future<void> _load() async {
-    _status = await _service.status();
-    _groups = [];
-    _version = null;
-    _mode = null;
-    if (_status!.installed && _status!.running) {
-      final version = await _service.request('GET', '/version');
-      final configs = await _service.request('GET', '/configs');
-      final groups = await _service.groups();
-      if (!mounted || !_sameRouter) return;
-      _version = version['version']?.toString();
-      _mode = configs['mode']?.toString().toLowerCase();
-      _groups = groups;
+    final snapshot = await _service.loadSnapshot();
+    if (!mounted || !_sameRouter) return;
+    _status = snapshot.status;
+    _groups = snapshot.groups;
+    _version = snapshot.version;
+    _mode = snapshot.mode;
+    if (snapshot.controllerError != null) {
+      throw OpenClashException(snapshot.controllerError!);
     }
   }
 
@@ -175,11 +167,14 @@ class _OpenClashScreenState extends ConsumerState<OpenClashScreen> {
     );
     if (confirmed != true || !mounted || !_sameRouter) return;
     await _change(() async {
-      await _service.serviceAction(action);
+      final operation = await _service.serviceAction(action);
+      var completed = false;
       // Startup may rebuild firewall/DNS. Keep controls disabled until verified.
       for (var attempt = 0; attempt < 30; attempt++) {
         await Future<void>.delayed(const Duration(seconds: 2));
         if (!mounted || !_sameRouter) throw const OpenClashException('router');
+        completed = completed || await _service.actionComplete(operation);
+        if (!completed) continue;
         final status = await _service.status();
         if (action == 'stop' && !status.running) return;
         if (action != 'stop' && status.running) {
@@ -285,7 +280,7 @@ class _OpenClashScreenState extends ConsumerState<OpenClashScreen> {
                             style: Theme.of(context).textTheme.titleLarge,
                           ),
                           if (_version != null) Text('Mihomo $_version'),
-                      if (_service.usingSshFallback) Text(_text('通过路由器 SSH 管理', 'Managing through router SSH')),
+                      if (_service.usingSshFallback) Text(_text('连接方式：SSH', 'Connection: SSH')),
                           if (_status?.installed == true)
                             Wrap(
                               spacing: 8,
