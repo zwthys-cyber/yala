@@ -278,13 +278,31 @@ class _OpenClashScreenState extends ConsumerState<OpenClashScreen> {
                 physics: const AlwaysScrollableScrollPhysics(),
                 children: [
                   if (_busy) const LinearProgressIndicator(),
-                  Card(child: ListTile(
-                    leading: Icon(Icons.folder_outlined, color: Theme.of(context).colorScheme.primary),
-                    title: Text(_text('订阅与配置', 'Subscriptions & configs')),
-                    subtitle: Text(_text('编辑订阅、更新与切换配置', 'Edit subscriptions, update and select configurations')),
-                    trailing: const Icon(Icons.chevron_right),
-                    onTap: _busy ? null : () => Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => OpenClashManagementScreen(service: _service))),
-                  )),
+                  Card(
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.folder_outlined,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      title: Text(_text('订阅与配置', 'Subscriptions & configs')),
+                      subtitle: Text(
+                        _text(
+                          '编辑订阅、更新与切换配置',
+                          'Edit subscriptions, update and select configurations',
+                        ),
+                      ),
+                      trailing: const Icon(Icons.chevron_right),
+                      onTap: _busy
+                          ? null
+                          : () => Navigator.of(context).push(
+                              MaterialPageRoute<void>(
+                                builder: (_) => OpenClashManagementScreen(
+                                  service: _service,
+                                ),
+                              ),
+                            ),
+                    ),
+                  ),
                   Card(
                     child: ListTile(
                       leading: Icon(
