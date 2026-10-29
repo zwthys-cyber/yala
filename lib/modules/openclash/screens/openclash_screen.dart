@@ -155,6 +155,15 @@ class _OpenClashScreenState extends ConsumerState<OpenClashScreen> {
     }
   }
 
+  Future<void> _openManagement() async {
+    await Navigator.of(context).push<void>(
+      MaterialPageRoute<void>(
+        builder: (_) => OpenClashManagementScreen(service: _service),
+      ),
+    );
+    if (_sameRouter) await _refresh();
+  }
+
   Future<void> _action(String action) async {
     final label = switch (action) {
       'start' => _text('启动', 'Start'),
@@ -292,15 +301,7 @@ class _OpenClashScreenState extends ConsumerState<OpenClashScreen> {
                         ),
                       ),
                       trailing: const Icon(Icons.chevron_right),
-                      onTap: _busy
-                          ? null
-                          : () => Navigator.of(context).push(
-                              MaterialPageRoute<void>(
-                                builder: (_) => OpenClashManagementScreen(
-                                  service: _service,
-                                ),
-                              ),
-                            ),
+                      onTap: _busy ? null : _openManagement,
                     ),
                   ),
                   Card(
