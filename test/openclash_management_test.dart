@@ -86,6 +86,11 @@ void main() {
       expect(OpenClashManagementService.validFile(name), isFalse);
     }
     expect(OpenClashManagementService.validFile('香港节点.yaml'), isTrue);
+    final alias = 'a' * 64;
+    expect(OpenClashManagementService.validName(alias), isTrue);
+    expect(OpenClashManagementService.validName('a$alias'), isFalse);
+    expect(OpenClashManagementService.validFile('$alias.yaml'), isTrue);
+    expect(OpenClashManagementService.validFile('a$alias.yaml'), isFalse);
   });
 
   test('YAML is validated before sending any router command', () async {

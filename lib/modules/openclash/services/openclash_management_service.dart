@@ -60,15 +60,15 @@ class OpenClashManagementService {
   OpenClashManagementService(this.service);
   static const maxConfigBytes = 65536;
 
-  static bool validName(String name) =>
+  static bool validName(String name, {int maxLength = 64}) =>
       name.isNotEmpty &&
-      name.length <= 64 &&
+      name.length <= maxLength &&
       name.trim() == name &&
       !name.startsWith('.') &&
       !RegExp(r'[/\\\x00-\x1f\x7f]').hasMatch(name) &&
       !RegExp(r'''['"`$;|&<>]''').hasMatch(name);
   static bool validFile(String name) =>
-      validName(name) &&
+      validName(name, maxLength: 69) &&
       RegExp(r'\.ya?ml$', caseSensitive: false).hasMatch(name);
   static bool validSection(String id) =>
       RegExp(r'^[a-zA-Z0-9_]+$').hasMatch(id);
