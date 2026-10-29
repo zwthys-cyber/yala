@@ -4,6 +4,7 @@ set -euo pipefail
 fixture_root="${RUNNER_TEMP:?}/yala-ucode"
 fixture_prefix="$fixture_root/install"
 mkdir -p "$fixture_root"
+export LD_LIBRARY_PATH="$fixture_prefix/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 sudo apt-get update -qq
 sudo apt-get install -y --no-install-recommends cmake libjson-c-dev libmd-dev
 build_source() {
