@@ -64,7 +64,8 @@ class OpenClashManagementService {
       name.length <= 64 &&
       name.trim() == name &&
       !name.startsWith('.') &&
-      !RegExp(r'[/\\\x00-\x1f\x7f]').hasMatch(name);
+      !RegExp(r'[/\\\x00-\x1f\x7f]').hasMatch(name) &&
+      !RegExp(r'''['"`$;|&<>]''').hasMatch(name);
   static bool validFile(String name) =>
       validName(name) &&
       RegExp(r'\.ya?ml$', caseSensitive: false).hasMatch(name);

@@ -58,6 +58,8 @@ void main() {
       r'a\b.yaml',
       '.hidden.yaml',
       'config.json',
+      "quoted'name.yaml",
+      r'command$(id).yaml',
     ]) {
       expect(OpenClashManagementService.validFile(name), isFalse);
     }
