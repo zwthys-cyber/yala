@@ -10,15 +10,46 @@ import 'package:yet_another_luci_app/modules/openclash/services/openclash_servic
 import 'package:yet_another_luci_app/modules/openclash/services/openclash_management_service.dart';
 
 void main() {
-  test('subscription update is refused before launching work on low memory', () async {
-    var calls = 0;
-    final manager = OpenClashManagementService(OpenClashService((command, args) async {
-      calls++;
-      return [0, {'code': 0, 'stdout': 'YALA_RESOURCE_V1\nMemTotal: 174812 kB\nMemAvailable: 1000 kB\n\nYALA_ZRAM_V1\n\nYALA_LOAD_V1\n0 0 0\n'}];
-    }));
-    await expectLater(manager.updateSubscription(const OpenClashSubscription(id: 'cfg123', name: 'Main', address: 'https://example.com/sub', userAgent: 'Clash', enabled: true, converted: false, revision: 'old')), throwsA(isA<OpenClashException>().having((e) => e.reason, 'reason', 'lowMemory')));
-    expect(calls, 1);
-  });
+  test(
+    'subscription update is refused before launching work on low memory',
+    () async {
+      var calls = 0;
+      final manager = OpenClashManagementService(
+        OpenClashService((command, args) async {
+          calls++;
+          return [
+            0,
+            {
+              'code': 0,
+              'stdout':
+                  'YALA_RESOURCE_V1\nMemTotal: 174812 kB\nMemAvailable: 1000 kB\n\nYALA_ZRAM_V1\n\nYALA_LOAD_V1\n0 0 0\n',
+            },
+          ];
+        }),
+      );
+      await expectLater(
+        manager.updateSubscription(
+          const OpenClashSubscription(
+            id: 'cfg123',
+            name: 'Main',
+            address: 'https://example.com/sub',
+            userAgent: 'Clash',
+            enabled: true,
+            converted: false,
+            revision: 'old',
+          ),
+        ),
+        throwsA(
+          isA<OpenClashException>().having(
+            (e) => e.reason,
+            'reason',
+            'lowMemory',
+          ),
+        ),
+      );
+      expect(calls, 1);
+    },
+  );
   test('configuration names reject paths and hidden files', () {
     for (final name in [
       '../config.yaml',
