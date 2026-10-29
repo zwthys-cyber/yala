@@ -40,7 +40,9 @@ class _OpenClashScreenState extends ConsumerState<OpenClashScreen> {
           throw const OpenClashException('router');
         }
         return ref.read(appStateProvider).callRpc('file', 'exec', {
-          'command': command, 'params': args, 'args': args,
+          'command': command,
+          'params': args,
+          'args': args,
         });
       },
       fallbackExecute: (command, args) async {
@@ -51,7 +53,11 @@ class _OpenClashScreenState extends ConsumerState<OpenClashScreen> {
         if (router == null) {
           throw const OpenClashException('router');
         }
-        return OpenClashSshTransport(router: router, ssh: RealSshService(), isCurrent: () => mounted && _sameRouter).execute(command, args);
+        return OpenClashSshTransport(
+          router: router,
+          ssh: RealSshService(),
+          isCurrent: () => mounted && _sameRouter,
+        ).execute(command, args);
       },
     );
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -66,8 +72,14 @@ class _OpenClashScreenState extends ConsumerState<OpenClashScreen> {
         '路由器未授予命令执行权限，请检查 RPC 权限。',
         'Router command permission denied. Check RPC permissions.',
       ),
-      'ssh' => _text('RPC 命令权限受限，SSH 连接也未成功。请确认路由器 SSH（22 端口）已启用，并在 App 中重新保存正确的登录账户和密码。', 'RPC commands are restricted and SSH could not connect. Enable router SSH on port 22 and check the saved router credentials.'),
-      'service' => _text('OpenClash 服务命令执行失败，请查看路由器上的 OpenClash 日志。', 'The OpenClash service command failed. Check its router logs.'),
+      'ssh' => _text(
+        'RPC 命令权限受限，SSH 连接也未成功。请确认路由器 SSH（22 端口）已启用，并在 App 中重新保存正确的登录账户和密码。',
+        'RPC commands are restricted and SSH could not connect. Enable router SSH on port 22 and check the saved router credentials.',
+      ),
+      'service' => _text(
+        'OpenClash 服务命令执行失败，请查看路由器上的 OpenClash 日志。',
+        'The OpenClash service command failed. Check its router logs.',
+      ),
       'auth' => _text(
         '控制接口认证失败，请检查 OpenClash 控制密钥。',
         'Controller authentication failed. Check the OpenClash secret.',
@@ -268,7 +280,9 @@ class _OpenClashScreenState extends ConsumerState<OpenClashScreen> {
                         children: [
                           Text(
                             _status == null
-                                ? (_busy ? _text('正在读取状态…', 'Loading status…') : _text('状态不可用', 'Status unavailable'))
+                                ? (_busy
+                                      ? _text('正在读取状态…', 'Loading status…')
+                                      : _text('状态不可用', 'Status unavailable'))
                                 : !_status!.installed
                                 ? _text(
                                     '未安装 OpenClash',
@@ -280,7 +294,8 @@ class _OpenClashScreenState extends ConsumerState<OpenClashScreen> {
                             style: Theme.of(context).textTheme.titleLarge,
                           ),
                           if (_version != null) Text('Mihomo $_version'),
-                      if (_service.usingSshFallback) Text(_text('连接方式：SSH', 'Connection: SSH')),
+                          if (_service.usingSshFallback)
+                            Text(_text('连接方式：SSH', 'Connection: SSH')),
                           if (_status?.installed == true)
                             Wrap(
                               spacing: 8,

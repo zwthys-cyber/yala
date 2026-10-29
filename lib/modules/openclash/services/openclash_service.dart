@@ -24,7 +24,13 @@ class OpenClashSnapshot {
   final String? mode;
   final List<OpenClashGroup> groups;
   final String? controllerError;
-  const OpenClashSnapshot({required this.status, this.version, this.mode, this.groups = const [], this.controllerError});
+  const OpenClashSnapshot({
+    required this.status,
+    this.version,
+    this.mode,
+    this.groups = const [],
+    this.controllerError,
+  });
 }
 
 class OpenClashGroup {
@@ -62,8 +68,10 @@ class OpenClashService {
         raw = await execute('/bin/sh', ['-c', script]);
       } catch (error) {
         final message = error.toString().toLowerCase();
-        final denied = error is OpenClashException && error.reason == 'permission' ||
-            message.contains('access denied') || message.contains('permission denied');
+        final denied =
+            error is OpenClashException && error.reason == 'permission' ||
+            message.contains('access denied') ||
+            message.contains('permission denied');
         if (!denied || fallbackExecute == null) {
           rethrow;
         }
@@ -72,7 +80,9 @@ class OpenClashService {
       }
     }
     var result = _classify(raw);
-    if (result.isPermissionDenied && !_usingFallback && fallbackExecute != null) {
+    if (result.isPermissionDenied &&
+        !_usingFallback &&
+        fallbackExecute != null) {
       _usingFallback = true;
       raw = await fallbackExecute!('/bin/sh', ['-c', script]);
       result = _classify(raw);
@@ -85,12 +95,13 @@ class OpenClashService {
     return result.data!;
   }
 
-  RpcResult<String> _classify(dynamic raw) => RpcResult.classifyExecResult<String>(
-    raw,
-    (data) => (data['code'] == null || data['code'] == 0)
-        ? data['stdout']?.toString() ?? ''
-        : '',
-  );
+  RpcResult<String> _classify(dynamic raw) =>
+      RpcResult.classifyExecResult<String>(
+        raw,
+        (data) => (data['code'] == null || data['code'] == 0)
+            ? data['stdout']?.toString() ?? ''
+            : '',
+      );
 
   Future<OpenClashStatus> status() async {
     final output = await _run(r'''
@@ -150,10 +161,15 @@ printf '{%s,"version":%s,"mode":"%s","proxies":%s}' "$state" "$version" "$mode" 
     final version = data['version'];
     final proxies = data['proxies'];
     return OpenClashSnapshot(
-      status: OpenClashStatus(installed: data['installed'] == true, running: data['running'] == true),
+      status: OpenClashStatus(
+        installed: data['installed'] == true,
+        running: data['running'] == true,
+      ),
       version: version is Map ? version['version']?.toString() : null,
       mode: data['mode']?.toString().toLowerCase(),
-      groups: proxies is Map && proxies['proxies'] is Map ? _parseGroups(proxies['proxies'] as Map) : [],
+      groups: proxies is Map && proxies['proxies'] is Map
+          ? _parseGroups(proxies['proxies'] as Map)
+          : [],
       controllerError: data['controllerError']?.toString(),
     );
   }
@@ -253,7 +269,8 @@ curl --silent --connect-timeout 3 --max-time 8 --noproxy '*' \
     }
     final operation = 'yala-oc-${DateTime.now().microsecondsSinceEpoch}';
     final resultPath = '/tmp/$operation.result';
-    final task = 'trap "" HUP; umask 077; /etc/init.d/openclash $action; '
+    final task =
+        'trap "" HUP; umask 077; /etc/init.d/openclash $action; '
         r'rc=$?; printf "%s" "$rc" > '
         '${shellQuote(resultPath)}';
     final output = await _run(
@@ -272,7 +289,9 @@ curl --silent --connect-timeout 3 --max-time 8 --noproxy '*' \
       throw const OpenClashException('request');
     }
     final path = shellQuote('/tmp/$operation.result');
-    final output = await _run('if [ -f $path ]; then cat $path; rm -f $path; else printf PENDING; fi');
+    final output = await _run(
+      'if [ -f $path ]; then cat $path; rm -f $path; else printf PENDING; fi',
+    );
     if (output.trim() == 'PENDING') {
       return false;
     }
