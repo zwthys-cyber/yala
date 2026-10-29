@@ -170,8 +170,8 @@ class _OpenClashManagementScreenState extends State<OpenClashManagementScreen> {
                             OpenClashManagementService.validName(value ?? '')
                             ? null
                             : _text(
-                                '名称不能包含路径或控制字符',
-                                'Use a name without path or control characters',
+                                '名称包含不支持的字符',
+                                'Name contains unsupported characters',
                               ),
                       ),
                       TextFormField(

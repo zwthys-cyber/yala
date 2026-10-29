@@ -222,7 +222,10 @@ config config_subscribe 'original'
             .replaceAll('/etc/openclash', '${fixture.path}/etc/openclash')
             .replaceAll('/etc/config/openclash', uciFile.path)
             .replaceAll('/etc/init.d/openclash', init.path)
-            .replaceAll('cursor(null,', 'cursor(${jsonEncode(configDir.path)},');
+            .replaceAll(
+              'cursor(null,',
+              'cursor(${jsonEncode(configDir.path)},',
+            );
         final result = await Process.run(command, ['-c', script]);
         outputs.add(result.stdout.toString());
         // Include interpreter errors in CI failures; fixture contains no real secrets.
