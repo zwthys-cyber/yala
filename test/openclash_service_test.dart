@@ -168,4 +168,54 @@ void main() {
     });
     await service.serviceAction('restart');
   });
+  test('denied RPC switches to SSH and avoids repeated denied calls', () async {
+    var rpcCalls = 0;
+    var sshCalls = 0;
+    final service = OpenClashService((command, args) async {
+      rpcCalls++;
+      return [6];
+    }, fallbackExecute: (command, args) async {
+      sshCalls++;
+      expect(command, '/bin/sh');
+      expect(args.first, '-c');
+      return result('{"installed":true,"running":true}');
+    });
+    expect((await service.status()).running, isTrue);
+    expect((await service.status()).installed, isTrue);
+    expect(rpcCalls, 1);
+    expect(sshCalls, 2);
+    expect(service.usingSshFallback, isTrue);
+  });
+
+  test('JSON-RPC access denied exception also permits SSH fallback', () async {
+    final service = OpenClashService((command, args) async {
+      throw Exception('RPC error: Access denied');
+    }, fallbackExecute: (command, args) async => result('{"installed":true,"running":false}'));
+    expect((await service.status()).running, isFalse);
+    expect(service.usingSshFallback, isTrue);
+  });
+
+  test('ambiguous network failure never retries a command through SSH', () async {
+    var sshCalls = 0;
+    final service = OpenClashService((command, args) async {
+      throw Exception('Connection timed out');
+    }, fallbackExecute: (command, args) async { sshCalls++; return result('ACCEPTED'); });
+    await expectLater(service.serviceAction('restart'), throwsException);
+    expect(sshCalls, 0);
+  });
+
+  test('SSH failure remains distinguishable from RPC permission failure', () async {
+    final service = OpenClashService((command, args) async => [6], fallbackExecute: (command, args) async {
+      throw const OpenClashException('ssh');
+    });
+    await expectLater(service.status(), throwsA(isA<OpenClashException>().having((e) => e.reason, 'reason', 'ssh')));
+  });
+
+  test('controller authentication error does not trigger SSH fallback', () async {
+    var sshCalls = 0;
+    final service = OpenClashService((command, args) async => result('{"message":"Unauthorized"}\n401'), fallbackExecute: (command, args) async { sshCalls++; return result(''); });
+    await expectLater(service.request('GET', '/version'), throwsA(isA<OpenClashException>().having((e) => e.reason, 'reason', 'auth')));
+    expect(sshCalls, 0);
+  });
+
 }

@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../main.dart';
+import '../../../services/ssh_service.dart';
 import '../../../widgets/luci_app_bar.dart';
 import '../services/openclash_service.dart';
 
@@ -32,16 +33,32 @@ class _OpenClashScreenState extends ConsumerState<OpenClashScreen> {
   void initState() {
     super.initState();
     _routerId = ref.read(appStateProvider).selectedRouter?.id;
-    _service = OpenClashService((command, args) async {
-      if (!_sameRouter || _routerId == null) {
-        throw const OpenClashException('router');
-      }
-      return ref.read(appStateProvider).callRpc('file', 'exec', {
-        'command': command,
-        'params': args,
-        'args': args,
-      });
-    });
+    _service = OpenClashService(
+      (command, args) async {
+        if (!_sameRouter || _routerId == null) {
+          throw const OpenClashException('router');
+        }
+        return ref.read(appStateProvider).callRpc('file', 'exec', {
+          'command': command, 'params': args, 'args': args,
+        });
+      },
+      fallbackExecute: (command, args) async {
+        if (!_sameRouter || _routerId == null) {
+          throw const OpenClashException('router');
+        }
+        final router = ref.read(appStateProvider).selectedRouter!;
+        if (router.password.isEmpty) throw const OpenClashException('ssh');
+        final uri = Uri.parse(router.ipAddress.contains('://') ? router.ipAddress : 'http://${router.ipAddress}');
+        final result = await RealSshService().executeCommand(
+          host: uri.host, username: router.username, password: router.password,
+          command: [command, ...args].map(OpenClashService.shellQuote).join(' '),
+          timeout: const Duration(seconds: 15),
+        );
+        if (!_sameRouter) throw const OpenClashException('router');
+        if (result.exitCode == -1) throw const OpenClashException('ssh');
+        return [0, {'code': result.exitCode, 'stdout': result.stdout, 'stderr': ''}];
+      },
+    );
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) _refresh();
     });
@@ -54,6 +71,7 @@ class _OpenClashScreenState extends ConsumerState<OpenClashScreen> {
         '路由器未授予命令执行权限，请检查 RPC 权限。',
         'Router command permission denied. Check RPC permissions.',
       ),
+      'ssh' => _text('RPC 命令权限受限，SSH 连接也未成功。请确认路由器 SSH（22 端口）已启用，并在 App 中重新保存正确的登录账户和密码。', 'RPC commands are restricted and SSH could not connect. Enable router SSH on port 22 and check the saved router credentials.'),
       'auth' => _text(
         '控制接口认证失败，请检查 OpenClash 控制密钥。',
         'Controller authentication failed. Check the OpenClash secret.',
@@ -255,7 +273,7 @@ class _OpenClashScreenState extends ConsumerState<OpenClashScreen> {
                         children: [
                           Text(
                             _status == null
-                                ? _text('正在读取状态…', 'Loading status…')
+                                ? (_busy ? _text('正在读取状态…', 'Loading status…') : _text('状态不可用', 'Status unavailable'))
                                 : !_status!.installed
                                 ? _text(
                                     '未安装 OpenClash',
@@ -267,6 +285,7 @@ class _OpenClashScreenState extends ConsumerState<OpenClashScreen> {
                             style: Theme.of(context).textTheme.titleLarge,
                           ),
                           if (_version != null) Text('Mihomo $_version'),
+                      if (_service.usingSshFallback) Text(_text('通过路由器 SSH 管理', 'Managing through router SSH')),
                           if (_status?.installed == true)
                             Wrap(
                               spacing: 8,

@@ -32,23 +32,40 @@ class OpenClashGroup {
   bool get canSelect => type == 'Selector';
 }
 
-/// Uses the authenticated router RPC session, never a publicly exposed controller.
+/// Uses authenticated RPC or router SSH, never a publicly exposed controller.
 /// Credentials remain on the router and are never included in RPC output.
 class OpenClashService {
   final OpenClashExec execute;
-  OpenClashService(this.execute);
+  final OpenClashExec? fallbackExecute;
+  bool _usingFallback = false;
+  bool get usingSshFallback => _usingFallback;
+  OpenClashService(this.execute, {this.fallbackExecute});
 
   static String shellQuote(String value) =>
       "'${value.replaceAll("'", "'\"'\"'")}'";
 
   Future<String> _run(String script) async {
-    final raw = await execute('/bin/sh', ['-c', script]);
-    final result = RpcResult.classifyExecResult<String>(
-      raw,
-      (data) => (data['code'] == null || data['code'] == 0)
-          ? data['stdout']?.toString() ?? ''
-          : '',
-    );
+    dynamic raw;
+    if (_usingFallback) {
+      raw = await fallbackExecute!('/bin/sh', ['-c', script]);
+    } else {
+      try {
+        raw = await execute('/bin/sh', ['-c', script]);
+      } catch (error) {
+        final message = error.toString().toLowerCase();
+        final denied = error is OpenClashException && error.reason == 'permission' ||
+            message.contains('access denied') || message.contains('permission denied');
+        if (!denied || fallbackExecute == null) rethrow;
+        _usingFallback = true;
+        raw = await fallbackExecute!('/bin/sh', ['-c', script]);
+      }
+    }
+    var result = _classify(raw);
+    if (result.isPermissionDenied && !_usingFallback && fallbackExecute != null) {
+      _usingFallback = true;
+      raw = await fallbackExecute!('/bin/sh', ['-c', script]);
+      result = _classify(raw);
+    }
     if (!result.isSuccess) {
       throw OpenClashException(
         result.isPermissionDenied ? 'permission' : 'connection',
@@ -56,6 +73,13 @@ class OpenClashService {
     }
     return result.data!;
   }
+
+  RpcResult<String> _classify(dynamic raw) => RpcResult.classifyExecResult<String>(
+    raw,
+    (data) => (data['code'] == null || data['code'] == 0)
+        ? data['stdout']?.toString() ?? ''
+        : '',
+  );
 
   Future<OpenClashStatus> status() async {
     final output = await _run(r'''
