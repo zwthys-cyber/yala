@@ -10,7 +10,6 @@ class _WirelessApi extends RealApiService {
   final payloads = <Map<String, dynamic>?>[];
   dynamic setResponse = [0];
   dynamic applyResponse = [0];
-  dynamic getResponse = [0, {'values': {'disabled': '0'}}];
   bool throwOnSet = false;
   bool throwOnApply = false;
 
@@ -28,8 +27,6 @@ class _WirelessApi extends RealApiService {
       case 'uci.apply':
         if (throwOnApply) throw Exception('RPC error: Access denied');
         return applyResponse;
-      case 'uci.get':
-        return getResponse;
       case 'uci.revert':
         throw Exception('RPC error: Access denied');
       default:
@@ -76,14 +73,14 @@ void main() {
     await expectLater(api.setSsidEnabled('router', 'token', false, ifaceSection: 'default_radio0', enabled: true), throwsA(isA<WirelessUpdateException>().having((e) => e.stage, 'stage', 'uci.apply')));
   });
 
-  test('rpcd no-data reply allows an already-current toggle', () async {
+  test('nonzero apply reply cannot be treated as successful application', () async {
     final api = _WirelessApi()..applyResponse = [5];
-    expect(await api.setSsidEnabled('router', 'token', false, ifaceSection: 'default_radio0', enabled: true), isTrue);
-    expect(api.calls, ['uci.set', 'uci.apply', 'uci.get']);
+    await expectLater(api.setSsidEnabled('router', 'token', false, ifaceSection: 'default_radio0', enabled: true), throwsA(isA<WirelessUpdateException>().having((e) => e.stage, 'stage', 'uci.apply')));
   });
 
-  test('no-data reply with mismatched saved value is not success', () async {
-    final api = _WirelessApi()..applyResponse = [5]..getResponse = [0, {'values': {'disabled': '1'}}];
-    await expectLater(api.setSsidEnabled('router', 'token', false, ifaceSection: 'default_radio0', enabled: true), throwsA(isA<WirelessUpdateException>().having((e) => e.stage, 'stage', 'uci.get')));
+  test('empty set reply prevents any application request', () async {
+    final api = _WirelessApi()..setResponse = null;
+    await expectLater(api.setSsidEnabled('router', 'token', false, ifaceSection: 'default_radio0', enabled: true), throwsA(isA<WirelessUpdateException>().having((e) => e.stage, 'stage', 'uci.set')));
+    expect(api.calls, ['uci.set']);
   });
 }

@@ -1763,19 +1763,8 @@ class RealApiService implements IApiService {
         params: {'rollback': false},
         context: mCtx,
       );
-      final noChanges = applyRes is List && applyRes.isNotEmpty && applyRes[0] == 5;
-      if (!_isUciSuccessful(applyRes) && !noChanges) {
+      if (!_isUciSuccessful(applyRes)) {
         throw WirelessUpdateException(stage, permissionDenied: _wirelessPermissionDenied(applyRes));
-      }
-      if (noChanges) {
-        stage = 'uci.get';
-        final verifyRes = await callWithContext(ipAddress, sysauth, useHttps,
-          object: 'uci', method: 'get', params: {'config': 'wireless', 'section': section}, context: mountedContext(context));
-        final data = verifyRes is List && verifyRes.length > 1 && verifyRes[0] == 0 ? verifyRes[1] : null;
-        final values = data is Map ? data['values'] : null;
-        if (values is! Map || (values['disabled']?.toString() ?? '0') != (enabled ? '0' : '1')) {
-          throw WirelessUpdateException(stage, permissionDenied: _wirelessPermissionDenied(verifyRes));
-        }
       }
       return true;
     } catch (error) {
