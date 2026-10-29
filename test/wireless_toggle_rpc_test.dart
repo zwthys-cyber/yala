@@ -14,9 +14,15 @@ class _WirelessApi extends RealApiService {
   bool throwOnApply = false;
 
   @override
-  Future<dynamic> callWithContext(String ipAddress, String sysauth, bool useHttps, {
-    required String object, required String method, Map<String, dynamic>? params,
-    BuildContext? context, bool isRetry = false,
+  Future<dynamic> callWithContext(
+    String ipAddress,
+    String sysauth,
+    bool useHttps, {
+    required String object,
+    required String method,
+    Map<String, dynamic>? params,
+    BuildContext? context,
+    bool isRetry = false,
   }) async {
     calls.add('$object.$method');
     payloads.add(params);
@@ -36,51 +42,175 @@ class _WirelessApi extends RealApiService {
 }
 
 void main() {
-  test('SSID toggle works with default LuCI set/apply permissions only', () async {
-    final api = _WirelessApi();
-    expect(await api.setSsidEnabled('router', 'token', false, ifaceSection: 'default_radio0', enabled: false), isTrue);
-    expect(api.calls, ['uci.set', 'uci.apply']);
-    expect(api.payloads.first, {'config': 'wireless', 'section': 'default_radio0', 'values': {'disabled': '1'}});
-    expect(api.payloads.last, {'rollback': false});
-  });
+  test(
+    'SSID toggle works with default LuCI set/apply permissions only',
+    () async {
+      final api = _WirelessApi();
+      expect(
+        await api.setSsidEnabled(
+          'router',
+          'token',
+          false,
+          ifaceSection: 'default_radio0',
+          enabled: false,
+        ),
+        isTrue,
+      );
+      expect(api.calls, ['uci.set', 'uci.apply']);
+      expect(api.payloads.first, {
+        'config': 'wireless',
+        'section': 'default_radio0',
+        'values': {'disabled': '1'},
+      });
+      expect(api.payloads.last, {'rollback': false});
+    },
+  );
 
-  test('radio toggle also avoids commit, shell and extra reload permissions', () async {
-    final api = _WirelessApi();
-    expect(await api.toggleWirelessRadio('router', 'token', false, radioName: 'radio1', enabled: true), isTrue);
-    expect(api.calls, ['uci.set', 'uci.apply']);
-    expect(api.payloads.first?['values'], {'disabled': '0'});
-  });
+  test(
+    'radio toggle also avoids commit, shell and extra reload permissions',
+    () async {
+      final api = _WirelessApi();
+      expect(
+        await api.toggleWirelessRadio(
+          'router',
+          'token',
+          false,
+          radioName: 'radio1',
+          enabled: true,
+        ),
+        isTrue,
+      );
+      expect(api.calls, ['uci.set', 'uci.apply']);
+      expect(api.payloads.first?['values'], {'disabled': '0'});
+    },
+  );
 
-  test('denied set does not apply, commit or revert other pending edits', () async {
-    final api = _WirelessApi()..setResponse = [6];
-    await expectLater(api.setSsidEnabled('router', 'token', false, ifaceSection: 'default_radio0', enabled: true), throwsA(isA<WirelessUpdateException>().having((e) => e.stage, 'stage', 'uci.set').having((e) => e.permissionDenied, 'permission', true)));
-    expect(api.calls, ['uci.set']);
-  });
+  test(
+    'denied set does not apply, commit or revert other pending edits',
+    () async {
+      final api = _WirelessApi()..setResponse = [6];
+      await expectLater(
+        api.setSsidEnabled(
+          'router',
+          'token',
+          false,
+          ifaceSection: 'default_radio0',
+          enabled: true,
+        ),
+        throwsA(
+          isA<WirelessUpdateException>()
+              .having((e) => e.stage, 'stage', 'uci.set')
+              .having((e) => e.permissionDenied, 'permission', true),
+        ),
+      );
+      expect(api.calls, ['uci.set']);
+    },
+  );
 
-  test('JSON-RPC access denied errors preserve the failing set stage', () async {
-    final api = _WirelessApi()..throwOnSet = true;
-    await expectLater(api.setSsidEnabled('router', 'token', false, ifaceSection: 'default_radio0', enabled: true), throwsA(isA<WirelessUpdateException>().having((e) => e.stage, 'stage', 'uci.set').having((e) => e.permissionDenied, 'permission', true)));
-  });
+  test(
+    'JSON-RPC access denied errors preserve the failing set stage',
+    () async {
+      final api = _WirelessApi()..throwOnSet = true;
+      await expectLater(
+        api.setSsidEnabled(
+          'router',
+          'token',
+          false,
+          ifaceSection: 'default_radio0',
+          enabled: true,
+        ),
+        throwsA(
+          isA<WirelessUpdateException>()
+              .having((e) => e.stage, 'stage', 'uci.set')
+              .having((e) => e.permissionDenied, 'permission', true),
+        ),
+      );
+    },
+  );
 
   test('denied apply stays visible even when cleanup is also denied', () async {
     final api = _WirelessApi()..throwOnApply = true;
-    await expectLater(api.toggleWirelessRadio('router', 'token', false, radioName: 'radio0', enabled: false), throwsA(isA<WirelessUpdateException>().having((e) => e.stage, 'stage', 'uci.apply').having((e) => e.permissionDenied, 'permission', true)));
+    await expectLater(
+      api.toggleWirelessRadio(
+        'router',
+        'token',
+        false,
+        radioName: 'radio0',
+        enabled: false,
+      ),
+      throwsA(
+        isA<WirelessUpdateException>()
+            .having((e) => e.stage, 'stage', 'uci.apply')
+            .having((e) => e.permissionDenied, 'permission', true),
+      ),
+    );
     expect(api.calls, ['uci.set', 'uci.apply', 'uci.revert']);
   });
 
-  test('transport failure cannot be reported as an applied configuration', () async {
-    final api = _WirelessApi()..applyResponse = null;
-    await expectLater(api.setSsidEnabled('router', 'token', false, ifaceSection: 'default_radio0', enabled: true), throwsA(isA<WirelessUpdateException>().having((e) => e.stage, 'stage', 'uci.apply')));
-  });
+  test(
+    'transport failure cannot be reported as an applied configuration',
+    () async {
+      final api = _WirelessApi()..applyResponse = null;
+      await expectLater(
+        api.setSsidEnabled(
+          'router',
+          'token',
+          false,
+          ifaceSection: 'default_radio0',
+          enabled: true,
+        ),
+        throwsA(
+          isA<WirelessUpdateException>().having(
+            (e) => e.stage,
+            'stage',
+            'uci.apply',
+          ),
+        ),
+      );
+    },
+  );
 
-  test('nonzero apply reply cannot be treated as successful application', () async {
-    final api = _WirelessApi()..applyResponse = [5];
-    await expectLater(api.setSsidEnabled('router', 'token', false, ifaceSection: 'default_radio0', enabled: true), throwsA(isA<WirelessUpdateException>().having((e) => e.stage, 'stage', 'uci.apply')));
-  });
+  test(
+    'nonzero apply reply cannot be treated as successful application',
+    () async {
+      final api = _WirelessApi()..applyResponse = [5];
+      await expectLater(
+        api.setSsidEnabled(
+          'router',
+          'token',
+          false,
+          ifaceSection: 'default_radio0',
+          enabled: true,
+        ),
+        throwsA(
+          isA<WirelessUpdateException>().having(
+            (e) => e.stage,
+            'stage',
+            'uci.apply',
+          ),
+        ),
+      );
+    },
+  );
 
   test('empty set reply prevents any application request', () async {
     final api = _WirelessApi()..setResponse = null;
-    await expectLater(api.setSsidEnabled('router', 'token', false, ifaceSection: 'default_radio0', enabled: true), throwsA(isA<WirelessUpdateException>().having((e) => e.stage, 'stage', 'uci.set')));
+    await expectLater(
+      api.setSsidEnabled(
+        'router',
+        'token',
+        false,
+        ifaceSection: 'default_radio0',
+        enabled: true,
+      ),
+      throwsA(
+        isA<WirelessUpdateException>().having(
+          (e) => e.stage,
+          'stage',
+          'uci.set',
+        ),
+      ),
+    );
     expect(api.calls, ['uci.set']);
   });
 }

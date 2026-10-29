@@ -1748,7 +1748,10 @@ class RealApiService implements IApiService {
         context: mCtx,
       );
       if (!_isUciSuccessful(setRes)) {
-        throw WirelessUpdateException(stage, permissionDenied: _wirelessPermissionDenied(setRes));
+        throw WirelessUpdateException(
+          stage,
+          permissionDenied: _wirelessPermissionDenied(setRes),
+        );
       }
       staged = true;
       stage = 'uci.apply';
@@ -1764,7 +1767,10 @@ class RealApiService implements IApiService {
         context: mCtx,
       );
       if (!_isUciSuccessful(applyRes)) {
-        throw WirelessUpdateException(stage, permissionDenied: _wirelessPermissionDenied(applyRes));
+        throw WirelessUpdateException(
+          stage,
+          permissionDenied: _wirelessPermissionDenied(applyRes),
+        );
       }
       return true;
     } catch (error) {
@@ -1772,18 +1778,28 @@ class RealApiService implements IApiService {
         // Revert is not granted by every LuCI ACL. Cleanup must never mask the
         // original error or be described as a successful rollback.
         try {
-          await uciRevert(ipAddress, sysauth, useHttps, config: 'wireless', context: mountedContext(context));
+          await uciRevert(
+            ipAddress,
+            sysauth,
+            useHttps,
+            config: 'wireless',
+            context: mountedContext(context),
+          );
         } catch (_) {}
       }
       if (error is WirelessUpdateException) rethrow;
-      throw WirelessUpdateException(stage, permissionDenied: _wirelessPermissionDenied(error));
+      throw WirelessUpdateException(
+        stage,
+        permissionDenied: _wirelessPermissionDenied(error),
+      );
     }
   }
 
   bool _wirelessPermissionDenied(dynamic result) {
     if (result is List && result.isNotEmpty && result[0] == 6) return true;
     final message = result.toString().toLowerCase();
-    return message.contains('access denied') || message.contains('permission denied');
+    return message.contains('access denied') ||
+        message.contains('permission denied');
   }
 
   @override
@@ -1794,7 +1810,14 @@ class RealApiService implements IApiService {
     required String ifaceSection,
     required bool enabled,
     BuildContext? context,
-  }) => _setWirelessSectionEnabled(ipAddress, sysauth, useHttps, section: ifaceSection, enabled: enabled, context: context);
+  }) => _setWirelessSectionEnabled(
+    ipAddress,
+    sysauth,
+    useHttps,
+    section: ifaceSection,
+    enabled: enabled,
+    context: context,
+  );
 
   @override
   Future<bool> toggleWirelessRadio(
@@ -1804,7 +1827,14 @@ class RealApiService implements IApiService {
     required String radioName,
     required bool enabled,
     BuildContext? context,
-  }) => _setWirelessSectionEnabled(ipAddress, sysauth, useHttps, section: radioName, enabled: enabled, context: context);
+  }) => _setWirelessSectionEnabled(
+    ipAddress,
+    sysauth,
+    useHttps,
+    section: radioName,
+    enabled: enabled,
+    context: context,
+  );
 
   @override
   Future<bool> updateWirelessInterfaceConfig(
