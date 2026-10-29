@@ -262,31 +262,34 @@ void main() {
     },
   );
 
-  test('node names containing permission errors remain ordinary data', () async {
-    var sshCalls = 0;
-    final service = OpenClashService(
-      (command, args) async => result(
-        '${jsonEncode({
-          'proxies': {
-            'Main': {
-              'type': 'Selector',
-              'now': 'Access denied',
-              'all': ['Access denied', 'Permission denied'],
+  test(
+    'node names containing permission errors remain ordinary data',
+    () async {
+      var sshCalls = 0;
+      final service = OpenClashService(
+        (command, args) async => result(
+          '${jsonEncode({
+            'proxies': {
+              'Main': {
+                'type': 'Selector',
+                'now': 'Access denied',
+                'all': ['Access denied', 'Permission denied'],
+              },
             },
-          },
-        })}\n200',
-      ),
-      fallbackExecute: (command, args) async {
-        sshCalls++;
-        return result('');
-      },
-    );
-    final groups = await service.groups();
-    expect(groups.single.selected, 'Access denied');
-    expect(groups.single.choices, ['Access denied', 'Permission denied']);
-    expect(sshCalls, 0);
-    expect(service.usingSshFallback, isFalse);
-  });
+          })}\n200',
+        ),
+        fallbackExecute: (command, args) async {
+          sshCalls++;
+          return result('');
+        },
+      );
+      final groups = await service.groups();
+      expect(groups.single.selected, 'Access denied');
+      expect(groups.single.choices, ['Access denied', 'Permission denied']);
+      expect(sshCalls, 0);
+      expect(service.usingSshFallback, isFalse);
+    },
+  );
 
   test('controller access denied text does not retry through SSH', () async {
     var sshCalls = 0;
