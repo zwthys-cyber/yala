@@ -581,18 +581,21 @@ class _ConfigEditorState extends State<_ConfigEditor> {
 
   Future<void> _import() async {
     try {
-      final result = await FilePicker.platform.pickFiles(
+      final file = await FilePicker.pickFile(
         type: FileType.custom,
         allowedExtensions: ['yaml', 'yml'],
-        withData: true,
       );
-      if (result == null || !mounted) return;
-      final file = result.files.single;
+      if (file == null || !mounted) return;
       if (file.size > OpenClashManagementService.maxConfigBytes ||
-          file.bytes == null) {
+          !OpenClashManagementService.validFile(file.name)) {
         throw const FormatException();
       }
-      final content = utf8.decode(file.bytes!);
+      final bytes = await file.readAsBytes();
+      if (!mounted) return;
+      if (bytes.length > OpenClashManagementService.maxConfigBytes) {
+        throw const FormatException();
+      }
+      final content = utf8.decode(bytes);
       OpenClashManagementService.validateYaml(content);
       setState(() {
         if (widget.initialName == null) _name.text = file.name;
