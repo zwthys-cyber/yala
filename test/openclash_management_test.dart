@@ -10,6 +10,25 @@ import 'package:yet_another_luci_app/modules/openclash/services/openclash_servic
 import 'package:yet_another_luci_app/modules/openclash/services/openclash_management_service.dart';
 
 void main() {
+  test('configuration imports stop at the editor byte limit', () async {
+    var reachedEnd = false;
+    Stream<List<int>> oversized() async* {
+      yield List.filled(65536, 97);
+      yield [97];
+      reachedEnd = true;
+    }
+    await expectLater(
+      OpenClashManagementService.readConfigStream(oversized()),
+      throwsA(isA<OpenClashException>().having((e) => e.reason, 'reason', 'size')),
+    );
+    expect(reachedEnd, isFalse);
+    expect(
+      await OpenClashManagementService.readConfigStream(
+        Stream.value(utf8.encode('proxies: []\n')),
+      ),
+      'proxies: []\n',
+    );
+  });
   test(
     'subscription update is refused before launching work on low memory',
     () async {

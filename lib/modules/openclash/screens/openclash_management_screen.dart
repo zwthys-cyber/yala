@@ -1,7 +1,6 @@
 // Copyright (C) 2026 @nightcodex7
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-import 'dart:convert';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import '../../../design/luci_design_system.dart';
@@ -586,17 +585,13 @@ class _ConfigEditorState extends State<_ConfigEditor> {
         allowedExtensions: ['yaml', 'yml'],
       );
       if (file == null || !mounted) return;
-      if (file.size > OpenClashManagementService.maxConfigBytes ||
-          !OpenClashManagementService.validFile(file.name)) {
+      if (!OpenClashManagementService.validFile(file.name)) {
         throw const FormatException();
       }
-      final bytes = await file.readAsBytes();
+      final content = await OpenClashManagementService.readConfigStream(
+        file.readAsByteStream(),
+      );
       if (!mounted) return;
-      if (bytes.length > OpenClashManagementService.maxConfigBytes) {
-        throw const FormatException();
-      }
-      final content = utf8.decode(bytes);
-      OpenClashManagementService.validateYaml(content);
       setState(() {
         if (widget.initialName == null) _name.text = file.name;
         _content.text = content;

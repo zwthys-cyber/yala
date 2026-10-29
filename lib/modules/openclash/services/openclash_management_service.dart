@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 import 'dart:convert';
+import 'dart:typed_data';
 import 'package:yaml/yaml.dart';
 import 'openclash_service.dart';
 
@@ -81,6 +82,19 @@ class OpenClashManagementService {
     } catch (_) {
       throw const OpenClashException('yaml');
     }
+  }
+
+  static Future<String> readConfigStream(Stream<List<int>> stream) async {
+    final bytes = BytesBuilder(copy: false);
+    await for (final chunk in stream) {
+      if (bytes.length + chunk.length > maxConfigBytes) {
+        throw const OpenClashException('size');
+      }
+      bytes.add(chunk);
+    }
+    final content = utf8.decode(bytes.takeBytes());
+    validateYaml(content);
+    return content;
   }
 
   static void validateSubscription(
