@@ -142,7 +142,7 @@ case "$port" in *[!0-9]*) fail_snapshot 42;; esac
 command -v curl >/dev/null 2>&1 || fail_snapshot 42
 fetch() {
   response=$(curl --silent --connect-timeout 3 --max-time 5 --max-filesize 200000 --noproxy '*' \
-    -H "Authorization: Bearer $secret" -w '\n%{http_code}' "http://127.0.0.1:$port$1" 2>/dev/null)
+    -H "Authorization: Bearer $secret" -w '\n%{http_code}' "http://127.0.0.1:$port$1" 2>/dev/null) || return 42
   code=$(printf '%s' "$response" | tail -n 1)
   case "$code" in
     2??) printf '%s' "$response" | sed '$d';;

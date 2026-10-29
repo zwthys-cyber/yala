@@ -100,6 +100,10 @@ class _OpenClashScreenState extends ConsumerState<OpenClashScreen> {
   }
 
   Future<void> _load() async {
+    _status = null;
+    _groups = [];
+    _version = null;
+    _mode = null;
     final snapshot = await _service.loadSnapshot();
     if (!mounted || !_sameRouter) return;
     _status = snapshot.status;

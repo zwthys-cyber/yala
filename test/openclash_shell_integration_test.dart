@@ -32,7 +32,7 @@ esac
 ''');
       await executable('jsonfilter', 'cat >/dev/null\nprintf rule');
       await executable('curl', r'''
-for arg do last="$arg"; done
+for arg in "$@"; do last="$arg"; done
 case "$last" in
   */version) printf '%s\n200\n' '{"version":"v1.19.33"}';;
   */configs) printf '%s\n200\n' '{"mode":"rule","secret":"not-for-client"}';;
