@@ -3,7 +3,9 @@
 
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:yet_another_luci_app/modules/openclash/screens/openclash_management_screen.dart';
 import 'package:yet_another_luci_app/modules/openclash/services/openclash_service.dart';
 import 'package:yet_another_luci_app/modules/openclash/services/openclash_management_service.dart';
 
@@ -40,11 +42,35 @@ void main() {
     expect((await manager.inventory()).subscriptions, isEmpty);
   });
 
+  testWidgets('management follows the app cards and cancels edits without writes', (tester) async {
+    var calls = 0;
+    final service = OpenClashService((command,args) async {
+      calls++;
+      return [0,{'code':0,'stdout':'{"subscriptions":[],"files":[],"active":null}'}];
+    });
+    await tester.pumpWidget(MaterialApp(home:OpenClashManagementScreen(service:service)));
+    await tester.pumpAndSettle();
+    expect(find.text('Subscriptions'),findsOneWidget);
+    expect(find.text('Configuration files'),findsOneWidget);
+    expect(calls,1);
+    await tester.tap(find.text('Add subscription'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Cancel'));
+    await tester.pumpAndSettle();
+    expect(calls,1);
+    expect(tester.takeException(),isNull);
+    await tester.pump(const Duration(minutes:2));
+    expect(calls,1);
+  });
+
   test('actual router interpreter preserves options and safely manages configuration files', () async {
     final fixture = await Directory.systemTemp.createTemp('yala-management-');
     addTearDown(() => fixture.delete(recursive:true));
     final configDir = Directory('${fixture.path}/etc/config')..createSync(recursive:true);
     final filesDir = Directory('${fixture.path}/etc/openclash/config')..createSync(recursive:true);
+    final init = File('${fixture.path}/openclash');
+    await init.writeAsString('#!/bin/sh\nexit 0\n');
+    expect((await Process.run('chmod',['700',init.path])).exitCode,0);
     final uciFile = File('${configDir.path}/openclash');
     await uciFile.writeAsString('''config openclash 'config'
  option config_path '${filesDir.path}/active.yaml'
@@ -64,6 +90,7 @@ config config_subscribe 'original'
       final script = args.last
         .replaceAll('/etc/openclash', '${fixture.path}/etc/openclash')
         .replaceAll('/etc/config/openclash', uciFile.path)
+        .replaceAll('/etc/init.d/openclash', init.path)
         .replaceAll('cursor(null,', "cursor('${configDir.path}',");
       final result = await Process.run(command,['-c',script]);
       outputs.add(result.stdout.toString());
@@ -95,6 +122,15 @@ config config_subscribe 'original'
     await manager.deleteConfig('new.yaml');
     expect(await File('${filesDir.path}/new.yaml').exists(),isFalse);
     expect(await File('${fixture.path}/etc/openclash/.yala-backups/new.yaml.bak').exists(),isTrue);
+    await manager.saveConfig('switch.yaml','proxies: []\n');
+    final operation = await manager.activateConfig('switch.yaml');
+    var complete = false;
+    for (var i=0;i<10 && !complete;i++) {
+      await Future<void>.delayed(const Duration(milliseconds:50));
+      complete = await service.actionComplete(operation);
+    }
+    expect(complete,isTrue);
+    expect(await uciFile.readAsString(),contains('${filesDir.path}/switch.yaml'));
     expect(jsonDecode(outputs.first)['subscriptions'],hasLength(1));
   },skip:Platform.environment['YALA_UCODE_INTEGRATION'] != '1');
 }
