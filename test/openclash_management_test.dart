@@ -17,9 +17,12 @@ void main() {
       yield [97];
       reachedEnd = true;
     }
+
     await expectLater(
       OpenClashManagementService.readConfigStream(oversized()),
-      throwsA(isA<OpenClashException>().having((e) => e.reason, 'reason', 'size')),
+      throwsA(
+        isA<OpenClashException>().having((e) => e.reason, 'reason', 'size'),
+      ),
     );
     expect(reachedEnd, isFalse);
     expect(
