@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -1996,7 +1997,7 @@ class _SystemBackupUpgradeScreenState
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              LocalizedUiText(
                                 isVerified
                                     ? (l10n?.sysUpgradeImgVerified ??
                                           'Image Verification Passed')
@@ -2009,7 +2010,7 @@ class _SystemBackupUpgradeScreenState
                                       : Colors.orange.shade900,
                                 ),
                               ),
-                              Text(
+                              LocalizedUiText(
                                 isVerified
                                     ? (l10n?.sysUpgradeImgVerifiedDesc(
                                             _romFlavor,
@@ -2026,18 +2027,18 @@ class _SystemBackupUpgradeScreenState
                     ),
                   ),
                   const SizedBox(height: 12),
-                  Text(
+                  LocalizedUiText(
                     'File: $fileName',
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 13,
                     ),
                   ),
-                  Text(
+                  LocalizedUiText(
                     'Size: $fileSizeMbStr MB',
                     style: const TextStyle(fontSize: 12, color: Colors.grey),
                   ),
-                  Text(
+                  LocalizedUiText(
                     'Target ROM: $_romFlavor',
                     style: const TextStyle(fontSize: 12, color: Colors.grey),
                   ),
@@ -2922,7 +2923,7 @@ class _SystemBackupUpgradeScreenState
                     else
                       const CircularProgressIndicator(),
                     const SizedBox(height: 20),
-                    Text(
+                    LocalizedUiText(
                       isOnline
                           ? (l10n?.sysUpgradeRebootOnline ??
                                 'Router is back online!')
@@ -2934,7 +2935,7 @@ class _SystemBackupUpgradeScreenState
                       ),
                     ),
                     const SizedBox(height: 10),
-                    Text(
+                    LocalizedUiText(
                       isOnline
                           ? (l10n?.sysUpgradeRebootOnlineDesc ??
                                 'The router has rebooted successfully into the new firmware. You can return to the dashboard now.')
@@ -2964,7 +2965,7 @@ class _SystemBackupUpgradeScreenState
                                 .fetchDashboardData(force: true);
                           }
                         },
-                        child: Text(
+                        child: LocalizedUiText(
                           isOnline
                               ? (l10n?.sysUpgradeReturnDashboard ??
                                     'Return to Dashboard')
@@ -3263,7 +3264,7 @@ class _SystemBackupUpgradeScreenState
                 const Icon(Icons.router, color: LuciColors.primary, size: 24),
                 const SizedBox(width: 10),
                 Expanded(
-                  child: Text(
+                  child: LocalizedUiText(
                     _routerModel == 'Detecting hardware...'
                         ? (l10n?.detectingHardware ?? 'Detecting hardware…')
                         : _routerModel,
@@ -3336,7 +3337,7 @@ class _SystemBackupUpgradeScreenState
                       color: Colors.purple.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(6),
                     ),
-                    child: Text(
+                    child: LocalizedUiText(
                       'Pkg: ${_packageManagerLabel(l10n, _upgradeScan!.packageManager)}',
                       style: const TextStyle(
                         fontSize: 11,
@@ -4103,7 +4104,7 @@ class _SystemBackupUpgradeScreenState
               Icon(icon, color: color, size: 20),
               const SizedBox(width: 8),
               Expanded(
-                child: Text(
+                child: LocalizedUiText(
                   avail.status == UpgradeAvailabilityStatus.upgradeAvailable &&
                           avail.latestVersion != null
                       ? '${l10n?.upgradeAvailStatusUpdateAvailable ?? "Update Available"}: OpenWrt ${avail.latestVersion}'
@@ -4175,7 +4176,7 @@ class _SystemBackupUpgradeScreenState
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        const LocalizedUiText(
                           'SHA-256: ',
                           style: TextStyle(
                             fontSize: 11,
@@ -4240,7 +4241,7 @@ class _SystemBackupUpgradeScreenState
                         ? null
                         : () => _handleInstallUpgrade(avail),
                     icon: const Icon(Icons.system_update_rounded, size: 16),
-                    label: Text(
+                    label: LocalizedUiText(
                       avail.latestVersion != null
                           ? (l10n?.sysUpgradeInstallAction(
                                   avail.latestVersion!,
@@ -4890,7 +4891,7 @@ class _SystemBackupUpgradeScreenState
                   : Icons.expand_more_rounded,
               size: 18,
             ),
-            label: Text(
+            label: LocalizedUiText(
               _isPreservedFilesExpanded
                   ? (l10n?.preservationHideFiles ?? 'Hide Preserved Files')
                   : (l10n?.preservationViewAllFiles(inv.preserved.length) ??

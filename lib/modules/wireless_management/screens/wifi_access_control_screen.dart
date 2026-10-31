@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -468,7 +469,7 @@ class _WifiAccessControlScreenState
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            LocalizedUiText(
               '1. Select Target Device',
               style: theme.textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.bold,
@@ -509,7 +510,7 @@ class _WifiAccessControlScreenState
                 const Expanded(child: Divider()),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Text(
+                  child: LocalizedUiText(
                     'OR Manual Entry',
                     style: TextStyle(
                       fontSize: 12,
@@ -544,7 +545,7 @@ class _WifiAccessControlScreenState
                     (_selectedMac.isNotEmpty && !_isValidMac(_selectedMac))
                     ? 'Enter valid MAC address format (e.g. AA:BB:CC:11:22:33)'
                     : null,
-              ),
+              ).localized(context),
             ),
           ],
         ),
@@ -596,7 +597,7 @@ class _WifiAccessControlScreenState
                   children: [
                     Row(
                       children: [
-                        const Text(
+                        const LocalizedUiText(
                           'Static Lease Active',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -627,7 +628,7 @@ class _WifiAccessControlScreenState
                       ],
                     ),
                     const SizedBox(height: 2),
-                    Text(
+                    LocalizedUiText(
                       'Custom DHCP Lease Name: ${existingMapping.hostname}',
                       style: TextStyle(
                         fontSize: 11,
@@ -646,7 +647,7 @@ class _WifiAccessControlScreenState
                   existingMapping: existingMapping,
                 ),
                 icon: const Icon(Icons.edit_rounded, size: 14),
-                label: const Text(
+                label: const LocalizedUiText(
                   'Edit Lease',
                   style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
                 ),
@@ -690,7 +691,7 @@ class _WifiAccessControlScreenState
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  LocalizedUiText(
                     'No Static DHCP Reservation',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -698,7 +699,7 @@ class _WifiAccessControlScreenState
                       color: theme.colorScheme.onTertiaryContainer,
                     ),
                   ),
-                  Text(
+                  LocalizedUiText(
                     'Optionally assign a custom DHCP lease name & fixed IP for $normMac.',
                     style: TextStyle(
                       fontSize: 11,
@@ -715,7 +716,7 @@ class _WifiAccessControlScreenState
               onPressed: () =>
                   _showAddStaticLeaseDialog(context, normMac, appState),
               icon: const Icon(Icons.add, size: 14),
-              label: const Text(
+              label: const LocalizedUiText(
                 'Add Static Lease',
                 style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
               ),
@@ -771,14 +772,14 @@ class _WifiAccessControlScreenState
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            LocalizedUiText(
               '2. Wi-Fi Allow Mode Rules for $_selectedMac',
               style: theme.textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 4),
-            Text(
+            LocalizedUiText(
               'Check SSIDs where this device should be explicitly allowed to connect.',
               style: theme.textTheme.bodySmall?.copyWith(
                 color: theme.colorScheme.onSurfaceVariant,
@@ -801,7 +802,7 @@ class _WifiAccessControlScreenState
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text(
-                      '${radio.name.toUpperCase()} (${radio.bandLabel})',
+                      '${localizeRadioName(context, radio.name)} (${radio.bandLabel})',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: theme.colorScheme.onPrimaryContainer,
@@ -860,7 +861,7 @@ class _WifiAccessControlScreenState
                           ),
                           borderRadius: BorderRadius.circular(6),
                         ),
-                        child: const Text(
+                        child: const LocalizedUiText(
                           'Current: Allowed',
                           style: TextStyle(
                             color: LuciStatusColors.connected,
@@ -879,7 +880,7 @@ class _WifiAccessControlScreenState
                           color: Colors.red.withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(6),
                         ),
-                        child: const Text(
+                        child: const LocalizedUiText(
                           'Current: Blocked',
                           style: TextStyle(
                             color: Colors.red,
@@ -898,7 +899,7 @@ class _WifiAccessControlScreenState
                           color: Colors.orange.withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(6),
                         ),
-                        child: const Text(
+                        child: const LocalizedUiText(
                           'Current: Restricted (Not in allow list)',
                           style: TextStyle(
                             color: Colors.orange,
@@ -917,7 +918,7 @@ class _WifiAccessControlScreenState
                           color: Colors.blue.withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(6),
                         ),
-                        child: const Text(
+                        child: const LocalizedUiText(
                           'Current: Permitted (Not in deny list)',
                           style: TextStyle(
                             color: Colors.blue,
@@ -938,7 +939,7 @@ class _WifiAccessControlScreenState
                           ),
                           borderRadius: BorderRadius.circular(6),
                         ),
-                        child: Text(
+                        child: LocalizedUiText(
                           'Current: Open (Filter disabled)',
                           style: TextStyle(
                             color: theme.colorScheme.onSurfaceVariant,
@@ -970,7 +971,7 @@ class _WifiAccessControlScreenState
                             width: 1,
                           ),
                         ),
-                        child: Text(
+                        child: LocalizedUiText(
                           isStagedAllowed
                               ? 'STAGED: Will Allow'
                               : 'STAGED: Will Remove',
@@ -1009,7 +1010,7 @@ class _WifiAccessControlScreenState
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const SizedBox(height: 2),
-                          Text(
+                          LocalizedUiText(
                             'Interface: ${iface.ifName} ($secName)',
                             style: TextStyle(
                               fontSize: 11,
@@ -1188,7 +1189,7 @@ class _WifiAccessControlScreenState
             size: 40,
           ),
           title: Text(l10n?.wifiAclLockoutWarning ?? 'Device Lockout Warning'),
-          content: Text(
+          content: LocalizedUiText(
             'You have not added this device (${_phoneMac ?? "current phone"}) to the allow-list for affected SSIDs. Enabling this filter may disconnect you from this network.',
           ),
           actionsOverflowButtonSpacing: 8,
@@ -1234,7 +1235,7 @@ class _WifiAccessControlScreenState
           l10n?.wifiAclConfirmRulesTitle ?? 'Confirm Wi-Fi Access Rules',
         ),
         content: SingleChildScrollView(
-          child: Text(
+          child: LocalizedUiText(
             'Updating Wi-Fi Access Control for $targetMac on SSIDs:\n\n'
             '${affectedSsids.isNotEmpty ? affectedSsids.join('\n') : "All (Disabled)"}\n\n'
             'Note: This affects $targetMac specifically.',

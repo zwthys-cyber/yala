@@ -1,6 +1,7 @@
 // Copyright (C) 2026 @nightcodex7
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:yet_another_luci_app/l10n/app_localizations.dart';
@@ -270,7 +271,7 @@ class _AdGuardTopListsBottomSheetState extends State<AdGuardTopListsBottomSheet>
                 color: colorScheme.onSurfaceVariant.withValues(alpha: 0.4),
               ),
               const SizedBox(height: 8),
-              Text(
+              LocalizedUiText(
                 _searchQuery.isNotEmpty
                     ? (l10n?.aghNoData ?? 'No matching results')
                     : emptyMessage,
@@ -307,7 +308,7 @@ class _AdGuardTopListsBottomSheetState extends State<AdGuardTopListsBottomSheet>
             Clipboard.setData(ClipboardData(text: item.name));
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text('Copied "${item.name}" to clipboard'),
+                content: LocalizedUiText('Copied "${item.name}" to clipboard'),
                 duration: const Duration(seconds: 1),
               ),
             );

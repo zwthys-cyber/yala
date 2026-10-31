@@ -1,6 +1,7 @@
 // Copyright (C) 2026 @nightcodex7
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yet_another_luci_app/design/luci_design_system.dart';
@@ -333,7 +334,7 @@ class _SqmStatusCardState extends ConsumerState<SqmStatusCard> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                LocalizedUiText(
                   isEnabled
                       ? (l10n?.modSqmBootEnabled ??
                             'Starts automatically at boot')

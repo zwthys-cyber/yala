@@ -1,6 +1,7 @@
 // Copyright (C) 2026 @nightcodex7
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../main.dart';
@@ -173,7 +174,7 @@ class _OpenClashScreenState extends ConsumerState<OpenClashScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('$label OpenClash?'),
+        title: LocalizedUiText('$label OpenClash?'),
         content: Text(
           _text(
             '此操作可能暂时中断代理和网络访问。',
@@ -334,7 +335,7 @@ class _OpenClashScreenState extends ConsumerState<OpenClashScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          LocalizedUiText(
                             _status == null
                                 ? (_busy
                                       ? _text('正在读取状态…', 'Loading status…')
@@ -349,7 +350,7 @@ class _OpenClashScreenState extends ConsumerState<OpenClashScreen> {
                                 : _text('已停止', 'Stopped'),
                             style: Theme.of(context).textTheme.titleLarge,
                           ),
-                          if (_version != null) Text('Mihomo $_version'),
+                          if (_version != null) LocalizedUiText('Mihomo $_version'),
                           if (_service.usingSshFallback)
                             Text(_text('连接方式：SSH', 'Connection: SSH')),
                           if (_status?.installed == true)
@@ -361,7 +362,7 @@ class _OpenClashScreenState extends ConsumerState<OpenClashScreen> {
                                       ? null
                                       : () =>
                                             _action(running ? 'stop' : 'start'),
-                                  child: Text(
+                                  child: LocalizedUiText(
                                     running
                                         ? _text('停止', 'Stop')
                                         : _text('启动', 'Start'),

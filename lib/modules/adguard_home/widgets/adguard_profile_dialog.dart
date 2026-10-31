@@ -1,6 +1,7 @@
 // Copyright (C) 2026 @nightcodex7
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:yet_another_luci_app/l10n/app_localizations.dart';
 import '../controllers/adguard_controller.dart';
@@ -285,7 +286,7 @@ class _AdGuardProfileDialogState extends State<AdGuardProfileDialog> {
         });
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text('Failed to save profile: $e')));
+        ).showSnackBar(SnackBar(content: LocalizedUiText('Failed to save profile: $e')));
       }
     }
   }
@@ -303,7 +304,7 @@ class _AdGuardProfileDialogState extends State<AdGuardProfileDialog> {
           Icon(Icons.dns_rounded, color: colorScheme.primary, size: 24),
           const SizedBox(width: 10),
           Expanded(
-            child: Text(
+            child: LocalizedUiText(
               isEditing ? 'Edit AdGuard Profile' : 'Add External AdGuard Home',
               style: theme.textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.bold,
@@ -325,18 +326,18 @@ class _AdGuardProfileDialogState extends State<AdGuardProfileDialog> {
                 TextFormField(
                   key: const Key('agh_profile_name_field'),
                   controller: _nameController,
-                  decoration: const InputDecoration(
+                  decoration: (const InputDecoration(
                     labelText: 'Instance Name *',
                     hintText: 'e.g. Raspberry Pi, Mini-PC',
                     prefixIcon: Icon(Icons.label_outline),
                     border: OutlineInputBorder(),
-                  ),
-                  validator: (value) {
+                  )).localized(context),
+                  validator: localizeUiValidator(context, (value) {
                     if (value == null || value.trim().isEmpty) {
                       return 'Please enter a name';
                     }
                     return null;
-                  },
+                  }),
                 ),
                 const SizedBox(height: 12),
 
@@ -349,13 +350,13 @@ class _AdGuardProfileDialogState extends State<AdGuardProfileDialog> {
                       child: TextFormField(
                         key: const Key('agh_profile_host_field'),
                         controller: _hostController,
-                        decoration: const InputDecoration(
+                        decoration: (const InputDecoration(
                           labelText: 'Host / IP *',
                           hintText: '192.168.1.129',
                           prefixIcon: Icon(Icons.computer_outlined),
                           border: OutlineInputBorder(),
-                        ),
-                        validator: (value) {
+                        )).localized(context),
+                        validator: localizeUiValidator(context, (value) {
                           if (value == null || value.trim().isEmpty) {
                             return 'Host is required';
                           }
@@ -364,7 +365,7 @@ class _AdGuardProfileDialogState extends State<AdGuardProfileDialog> {
                             return 'Enter a valid IP address or hostname';
                           }
                           return null;
-                        },
+                        }),
                       ),
                     ),
                     const SizedBox(width: 8),
@@ -374,18 +375,18 @@ class _AdGuardProfileDialogState extends State<AdGuardProfileDialog> {
                         key: const Key('agh_profile_port_field'),
                         controller: _portController,
                         keyboardType: TextInputType.number,
-                        decoration: const InputDecoration(
+                        decoration: (const InputDecoration(
                           labelText: 'Port *',
                           hintText: '3000',
                           border: OutlineInputBorder(),
-                        ),
-                        validator: (value) {
+                        )).localized(context),
+                        validator: localizeUiValidator(context, (value) {
                           final port = int.tryParse(value?.trim() ?? '');
                           if (port == null || port < 1 || port > 65535) {
                             return '1-65535';
                           }
                           return null;
-                        },
+                        }),
                       ),
                     ),
                   ],
@@ -396,7 +397,7 @@ class _AdGuardProfileDialogState extends State<AdGuardProfileDialog> {
                 SwitchListTile(
                   key: const Key('agh_profile_https_switch'),
                   contentPadding: EdgeInsets.zero,
-                  title: const Text('Use HTTPS'),
+                  title: const LocalizedUiText('Use HTTPS'),
                   value: _useHttps,
                   onChanged: (val) {
                     setState(() {
@@ -406,7 +407,7 @@ class _AdGuardProfileDialogState extends State<AdGuardProfileDialog> {
                 ),
                 const Divider(height: 20),
 
-                Text(
+                LocalizedUiText(
                   'Authentication (Optional)',
                   style: theme.textTheme.labelMedium?.copyWith(
                     color: colorScheme.onSurfaceVariant,
@@ -419,11 +420,11 @@ class _AdGuardProfileDialogState extends State<AdGuardProfileDialog> {
                 TextFormField(
                   key: const Key('agh_profile_username_field'),
                   controller: _usernameController,
-                  decoration: const InputDecoration(
+                  decoration: (const InputDecoration(
                     labelText: 'Username',
                     prefixIcon: Icon(Icons.person_outline),
                     border: OutlineInputBorder(),
-                  ),
+                  )).localized(context),
                 ),
                 const SizedBox(height: 12),
 
@@ -448,7 +449,7 @@ class _AdGuardProfileDialogState extends State<AdGuardProfileDialog> {
                         });
                       },
                     ),
-                  ),
+                  ).localized(context),
                 ),
                 const SizedBox(height: 16),
 
@@ -463,7 +464,7 @@ class _AdGuardProfileDialogState extends State<AdGuardProfileDialog> {
                           child: CircularProgressIndicator(strokeWidth: 2),
                         )
                       : const Icon(Icons.electrical_services_rounded),
-                  label: Text(
+                  label: LocalizedUiText(
                     _isTesting ? 'Testing Connection...' : 'Test Connection',
                   ),
                 ),

@@ -41,14 +41,20 @@ jobs:
       - name: Install Dependencies
         run: flutter pub get
 
+      - name: Verify generated UI-copy adapters
+        run: python3 scripts/generate_ui_copy.py --check
+
       - name: Verify Formatting
+        id: formatting
+        continue-on-error: true
         run: |
+          dart fix --apply --code=prefer_const_constructors,prefer_const_literals_to_create_immutables,unnecessary_const
           dart format .
           git diff --binary -- '*.dart' > dart-format.patch
           git diff --exit-code -- '*.dart'
 
       - name: Upload formatting patch
-        if: failure()
+        if: steps.formatting.outcome == 'failure'
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: dart-format-patch-${{ github.run_number }}
@@ -75,3 +81,9 @@ jobs:
           path: flutter-tests.log
           if-no-files-found: ignore
           retention-days: 14
+
+      - name: Require committed formatting
+        if: always() && steps.formatting.outcome == 'failure'
+        run: |
+          echo 'Commit the formatting patch produced by this run.'
+          exit 1

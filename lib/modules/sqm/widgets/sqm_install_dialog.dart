@@ -1,6 +1,7 @@
 // Copyright (C) 2026 @nightcodex7
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yet_another_luci_app/design/luci_design_system.dart';
@@ -124,7 +125,7 @@ class _SqmInstallDialogState extends ConsumerState<SqmInstallDialog> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Text(
+                LocalizedUiText(
                   _pkgMgr == PackageManagerEngine.apk
                       ? 'Package Engine: APK'
                       : _pkgMgr == PackageManagerEngine.opkg
@@ -179,7 +180,7 @@ class _SqmInstallDialogState extends ConsumerState<SqmInstallDialog> {
                   ),
                   const SizedBox(width: 8),
                   Expanded(
-                    child: Text(
+                    child: LocalizedUiText(
                       _isLoadingStorage
                           ? 'Checking storage in $_targetMountPath...'
                           : (_availableBytes != null
@@ -214,7 +215,7 @@ class _SqmInstallDialogState extends ConsumerState<SqmInstallDialog> {
                     ),
                     const SizedBox(width: 8),
                     Expanded(
-                      child: Text(
+                      child: LocalizedUiText(
                         'Package installation is restricted because router RPC permissions are missing.',
                         style: TextStyle(
                           fontSize: 12,
@@ -279,7 +280,7 @@ class _SqmInstallDialogState extends ConsumerState<SqmInstallDialog> {
                     ),
                     const SizedBox(width: 8),
                     Expanded(
-                      child: Text(
+                      child: LocalizedUiText(
                         'Storage is limited (${_formatBytes(_availableBytes!)} free). Package installation requires sufficient flash space for scripts and kernel dependencies.',
                         style: TextStyle(
                           fontSize: 12,
@@ -294,7 +295,7 @@ class _SqmInstallDialogState extends ConsumerState<SqmInstallDialog> {
               const SizedBox(height: LuciSpacing.sm),
             ],
 
-            Text(
+            LocalizedUiText(
               'Package to Install:',
               style: theme.textTheme.labelLarge?.copyWith(
                 fontWeight: FontWeight.bold,
@@ -321,7 +322,7 @@ class _SqmInstallDialogState extends ConsumerState<SqmInstallDialog> {
                         size: 20,
                       ),
                       const SizedBox(width: 10),
-                      Text(
+                      LocalizedUiText(
                         'sqm-scripts',
                         style: theme.textTheme.titleSmall?.copyWith(
                           fontWeight: FontWeight.bold,
@@ -410,7 +411,7 @@ class _SqmInstallDialogState extends ConsumerState<SqmInstallDialog> {
               );
             },
             icon: const Icon(Icons.build_circle_outlined, size: 18),
-            label: const Text('Fix Permissions'),
+            label: const LocalizedUiText('Fix Permissions'),
             style: FilledButton.styleFrom(
               backgroundColor: Colors.amber.shade800,
             ),

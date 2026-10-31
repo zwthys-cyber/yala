@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -65,13 +66,13 @@ class _MoreScreenState extends ConsumerState<MoreScreen> {
         return AlertDialog(
           actionsOverflowButtonSpacing: 8,
           actionsOverflowDirection: VerticalDirection.down,
-          title: Text(
+          title: LocalizedUiText(
             isReviewer
                 ? 'Exit Reviewer Mode?'
                 : (l10n?.dialogLogoutTitle ?? 'Logout?'),
           ),
           content: SingleChildScrollView(
-            child: Text(
+            child: LocalizedUiText(
               isReviewer
                   ? 'Are you sure you want to exit Reviewer Mode and return to the login screen?'
                   : (l10n?.dialogLogoutMessage ??
@@ -86,7 +87,7 @@ class _MoreScreenState extends ConsumerState<MoreScreen> {
               },
             ),
             TextButton(
-              child: Text(isReviewer ? 'Exit' : (l10n?.tileLogout ?? 'Logout')),
+              child: LocalizedUiText(isReviewer ? 'Exit' : (l10n?.tileLogout ?? 'Logout')),
               onPressed: () async {
                 await appState.logout();
                 // Clear all accepted certificates on logout
@@ -208,7 +209,7 @@ class _MoreScreenState extends ConsumerState<MoreScreen> {
                 ThemeRouterLogo(width: 28, height: 28, showShadow: false),
                 SizedBox(width: 12),
                 Expanded(
-                  child: Text(
+                  child: LocalizedUiText(
                     'Yet Another LuCI App',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                   ),
@@ -255,7 +256,7 @@ class _MoreScreenState extends ConsumerState<MoreScreen> {
                           ),
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        child: Text(
+                        child: LocalizedUiText(
                           'GPL-3.0-or-later',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -369,7 +370,7 @@ class _MoreScreenState extends ConsumerState<MoreScreen> {
             Icon(Icons.policy_outlined, color: theme.colorScheme.primary),
             const SizedBox(width: 10),
             const Expanded(
-              child: Text(
+              child: LocalizedUiText(
                 'License & Copyleft (GPLv3)',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
@@ -404,7 +405,7 @@ class _MoreScreenState extends ConsumerState<MoreScreen> {
                       ),
                     ),
                     const SizedBox(height: 4),
-                    Text(
+                    LocalizedUiText(
                       'SPDX-License-Identifier: ${AppConfig.licenseSpdx}',
                       style: LuciTypography.monoStyle(
                         fontSize: 12,
@@ -415,14 +416,14 @@ class _MoreScreenState extends ConsumerState<MoreScreen> {
                 ),
               ),
               const SizedBox(height: 12),
-              Text(
+              LocalizedUiText(
                 'Credits & Copyright:',
                 style: theme.textTheme.labelLarge?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 4),
-              Text(
+              LocalizedUiText(
                 '• Original Work: Copyright (C) 2025–2026 cogwheel0 (luci-mobile)\n'
                 '• Modifications: Copyright (C) 2026 @nightcodex7',
                 style: theme.textTheme.bodyMedium?.copyWith(
@@ -430,7 +431,7 @@ class _MoreScreenState extends ConsumerState<MoreScreen> {
                 ),
               ),
               const SizedBox(height: 12),
-              Text(
+              LocalizedUiText(
                 'Copyleft & Freedom Notice:',
                 style: theme.textTheme.labelLarge?.copyWith(
                   fontWeight: FontWeight.bold,

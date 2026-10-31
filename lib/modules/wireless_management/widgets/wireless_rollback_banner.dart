@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yet_another_luci_app/main.dart';
@@ -65,7 +66,7 @@ class WirelessRollbackBanner extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    LocalizedUiText(
                       'Staged Changes Pending ($pendingSection)',
                       style: const TextStyle(
                         color: Colors.white,
@@ -74,7 +75,7 @@ class WirelessRollbackBanner extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(height: 2),
-                    const Text(
+                    const LocalizedUiText(
                       'Confirm to save permanently, or revert to undo changes.',
                       style: TextStyle(color: Colors.white70, fontSize: 11),
                     ),
@@ -99,7 +100,7 @@ class WirelessRollbackBanner extends ConsumerWidget {
                 ),
                 onPressed: () => _handleRevert(context, ref, appState),
                 icon: const Icon(Icons.undo_rounded, size: 16),
-                label: const Text(
+                label: const LocalizedUiText(
                   'Revert Changes Now',
                   style: TextStyle(fontSize: 12),
                 ),
@@ -133,7 +134,7 @@ class WirelessRollbackBanner extends ConsumerWidget {
                       }
                     : null,
                 icon: const Icon(Icons.check_circle_outline_rounded, size: 16),
-                label: const Text(
+                label: const LocalizedUiText(
                   'Confirm & Keep',
                   style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                 ),

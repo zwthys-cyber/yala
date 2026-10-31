@@ -1,6 +1,7 @@
 // Copyright (C) 2026 @nightcodex7
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:yet_another_luci_app/l10n/app_localizations.dart';
 import '../models/adguard_models.dart';
@@ -52,7 +53,7 @@ class AdGuardStatusCard extends StatelessWidget {
                 Icon(Icons.info_outline, size: 20, color: colorScheme.primary),
                 const SizedBox(width: 8),
                 Expanded(
-                  child: Text(
+                  child: LocalizedUiText(
                     'AdGuard Home',
                     style: theme.textTheme.titleSmall?.copyWith(
                       fontWeight: FontWeight.bold,
@@ -86,7 +87,7 @@ class AdGuardStatusCard extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 5),
-                      Text(
+                      LocalizedUiText(
                         isRunning
                             ? (l10n?.aghStatusRunning ?? 'Running')
                             : (l10n?.aghStatusStopped ?? 'Stopped'),

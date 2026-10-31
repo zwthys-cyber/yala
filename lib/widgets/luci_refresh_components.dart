@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -211,7 +212,7 @@ class LuciListPullToRefresh extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: LuciSpacing.sm),
-                  Text(
+                  LocalizedUiText(
                     'Pull down to refresh',
                     style: LuciTextStyles.cardSubtitle(
                       context,

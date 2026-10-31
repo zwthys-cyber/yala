@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -111,7 +112,7 @@ class LocalizationBetaBadge extends StatelessWidget {
           width: 0.75,
         ),
       ),
-      child: Text(
+      child: LocalizedUiText(
         'BETA',
         style: TextStyle(
           fontSize: fontSize,
@@ -192,7 +193,7 @@ Future<void> showLanguagePickerDialog(
                 horizontal: 20,
                 vertical: 2,
               ),
-              title: Text(
+              title: LocalizedUiText(
                 opt.locale == null
                     ? (l10n?.languageSystemDefault ?? 'System Default')
                     : opt.nativeLabel,

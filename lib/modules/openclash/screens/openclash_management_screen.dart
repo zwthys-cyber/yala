@@ -1,6 +1,7 @@
 // Copyright (C) 2026 @nightcodex7
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import '../../../design/luci_design_system.dart';
@@ -146,7 +147,7 @@ class _OpenClashManagementScreenState extends State<OpenClashManagementScreen> {
         context: context,
         builder: (context) => StatefulBuilder(
           builder: (context, update) => AlertDialog(
-            title: Text(
+            title: LocalizedUiText(
               _text(
                 original == null ? '新增订阅' : '编辑订阅',
                 original == null ? 'Add subscription' : 'Edit subscription',
@@ -166,13 +167,13 @@ class _OpenClashManagementScreenState extends State<OpenClashManagementScreen> {
                         decoration: InputDecoration(
                           labelText: _text('配置名称', 'Configuration name'),
                         ),
-                        validator: (value) =>
+                        validator: localizeUiValidator(context, (value) =>
                             OpenClashManagementService.validName(value ?? '')
                             ? null
                             : _text(
                                 '名称包含不支持的字符',
                                 'Name contains unsupported characters',
-                              ),
+                              )),
                       ),
                       TextFormField(
                         controller: address,
@@ -194,7 +195,7 @@ class _OpenClashManagementScreenState extends State<OpenClashManagementScreen> {
                             ),
                           ),
                         ),
-                        validator: (value) {
+                        validator: localizeUiValidator(context, (value) {
                           try {
                             OpenClashManagementService.validateSubscription(
                               name.text,
@@ -206,14 +207,14 @@ class _OpenClashManagementScreenState extends State<OpenClashManagementScreen> {
                           } catch (error) {
                             return _message(error);
                           }
-                        },
+                        }),
                       ),
                       TextFormField(
                         controller: ua,
                         maxLength: 256,
-                        decoration: const InputDecoration(
+                        decoration: (const InputDecoration(
                           labelText: 'User-Agent',
-                        ),
+                        )).localized(context),
                       ),
                       SwitchListTile(
                         contentPadding: EdgeInsets.zero,
@@ -485,7 +486,7 @@ class _OpenClashManagementScreenState extends State<OpenClashManagementScreen> {
                       color: Theme.of(context).colorScheme.primary,
                     ),
                     title: Text(file.name),
-                    subtitle: Text(
+                    subtitle: LocalizedUiText(
                       '${(file.bytes / 1024).toStringAsFixed(1)} KiB${file.name == inventory?.active ? ' · ${_text('当前选中', 'Selected')}' : ''}',
                     ),
                     onTap: _busy ? null : () => _editConfig(file),
@@ -664,11 +665,11 @@ class _ConfigEditorState extends State<_ConfigEditor> {
               smartDashesType: SmartDashesType.disabled,
               textAlignVertical: TextAlignVertical.top,
               style: Theme.of(context).textTheme.bodySmall,
-              decoration: const InputDecoration(
+              decoration: (const InputDecoration(
                 border: OutlineInputBorder(),
                 alignLabelWithHint: true,
                 labelText: 'YAML',
-              ),
+              )).localized(context),
             ),
           ),
         ],

@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
@@ -323,8 +324,10 @@ class LuciToastManager {
     if (messenger == null) return;
 
     final sanitized = _sanitizeToastText(title, subtitle);
-    final cleanTitle = sanitized.title;
-    final cleanSubtitle = sanitized.subtitle;
+    final cleanTitle = localizeUiCopy(context, sanitized.title);
+    final cleanSubtitle = sanitized.subtitle == null
+        ? null
+        : localizeUiCopy(context, sanitized.subtitle!);
 
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
@@ -457,8 +460,13 @@ class LuciToastManager {
     Alignment alignment = Alignment.topCenter,
   }) {
     final sanitized = _sanitizeToastText(title, subtitle);
-    title = sanitized.title;
-    subtitle = sanitized.subtitle;
+    title = localizeUiCopy(context, sanitized.title);
+    subtitle = sanitized.subtitle == null
+        ? null
+        : localizeUiCopy(context, sanitized.subtitle!);
+    actionLabel = actionLabel == null
+        ? null
+        : localizeUiCopy(context, actionLabel);
     final normalizedActionKey = actionKey?.toLowerCase();
 
     // Replace and dismiss any active keyed loading toast for this action key
@@ -1259,7 +1267,7 @@ class _LuciToastWidgetState extends State<_LuciToastWidget>
                                             minHeight: 24,
                                           ),
                                           onPressed: _dismissToast,
-                                          tooltip: 'Dismiss',
+                                          tooltip: localizeUiCopy(context, 'Dismiss'),
                                         ),
                                       ],
                                     ),

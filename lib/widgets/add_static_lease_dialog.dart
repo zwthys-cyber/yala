@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -1172,7 +1173,7 @@ class _AddStaticLeaseDialogState extends State<AddStaticLeaseDialog> {
             ),
             const SizedBox(width: 12),
             Expanded(
-              child: Text(
+              child: LocalizedUiText(
                 _isEditing
                     ? (l10n?.editStaticLeaseTitle ?? 'Edit Static Lease')
                     : (l10n?.addStaticLeaseTitle ?? 'Add Static Lease'),
@@ -1326,7 +1327,7 @@ class _AddStaticLeaseDialogState extends State<AddStaticLeaseDialog> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
-                    ),
+                    ).localized(context),
                   ),
                 ],
                 const SizedBox(height: 16),
@@ -1449,7 +1450,7 @@ class _AddStaticLeaseDialogState extends State<AddStaticLeaseDialog> {
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
-                  ),
+                  ).localized(context),
                 ),
                 if (currentSubnet != null) ...[
                   const SizedBox(height: 4),
@@ -1462,7 +1463,7 @@ class _AddStaticLeaseDialogState extends State<AddStaticLeaseDialog> {
                       ),
                       const SizedBox(width: 4),
                       Expanded(
-                        child: Text(
+                        child: LocalizedUiText(
                           'Matches Subnet: ${currentSubnet.gatewayIp}/${currentSubnet.netmask} (${currentSubnet.interfaceName})',
                           style: const TextStyle(
                             fontSize: 11,
@@ -1484,7 +1485,7 @@ class _AddStaticLeaseDialogState extends State<AddStaticLeaseDialog> {
                       ),
                       const SizedBox(width: 4),
                       Expanded(
-                        child: Text(
+                        child: LocalizedUiText(
                           'Valid Private IPv4 Address (${currentIp.split('.').sublist(0, 3).join('.')}.x)',
                           style: const TextStyle(
                             fontSize: 11,
@@ -1560,7 +1561,7 @@ class _AddStaticLeaseDialogState extends State<AddStaticLeaseDialog> {
                                       : colorScheme.onSurface,
                                 ),
                               ),
-                              Text(
+                              LocalizedUiText(
                                 _showIp6Section
                                     ? (l10n?.hintConfigureIpv6DuidExpanded ??
                                           'Optional — tap to collapse and clear')
@@ -1624,7 +1625,7 @@ class _AddStaticLeaseDialogState extends State<AddStaticLeaseDialog> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
-                    ),
+                    ).localized(context),
                   ),
                   const SizedBox(height: 12),
                   // DUID Field
@@ -1656,7 +1657,7 @@ class _AddStaticLeaseDialogState extends State<AddStaticLeaseDialog> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
-                    ),
+                    ).localized(context),
                   ),
                 ],
                 const SizedBox(height: 16),
@@ -1749,12 +1750,12 @@ class _AddStaticLeaseDialogState extends State<AddStaticLeaseDialog> {
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
-                          ),
+                          ).localized(context),
                         ),
                       ),
                       const SizedBox(width: 8),
                       IconButton.filledTonal(
-                        tooltip: 'Pick Date & Time',
+                        tooltip: localizeUiCopy(context, 'Pick Date & Time'),
                         icon: const Icon(Icons.calendar_month_rounded),
                         onPressed: () => _pickLeaseExpiryDateTime(),
                       ),
@@ -1792,7 +1793,7 @@ class _AddStaticLeaseDialogState extends State<AddStaticLeaseDialog> {
               ElevatedButton.icon(
                 onPressed: canSave ? _submit : null,
                 icon: const Icon(Icons.check, size: 18),
-                label: Text(
+                label: LocalizedUiText(
                   _isEditing
                       ? (l10n?.btnUpdateReservation ?? 'Update Reservation')
                       : (l10n?.btnSaveReservation ?? 'Save Reservation'),

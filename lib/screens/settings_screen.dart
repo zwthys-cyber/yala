@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -299,7 +300,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                             size: 8,
                           ),
                           const SizedBox(width: 4),
-                          Text(
+                          LocalizedUiText(
                             appState.hasActiveSession
                                 ? (AppLocalizations.of(context)?.statusActive ??
                                       'Active')
@@ -648,7 +649,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               const LocalizationBetaBadge(),
             ],
           ),
-          subtitle: Text(
+          subtitle: LocalizedUiText(
             currentOption.locale == null
                 ? (l10n?.languageSystemDefault ?? 'System Default')
                 : '${currentOption.nativeLabel} (${currentOption.label})',
@@ -657,7 +658,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
+              LocalizedUiText(
                 currentOption.locale == null
                     ? (l10n?.languageSystemDefault ?? 'System Default')
                     : currentOption.nativeLabel,
@@ -958,7 +959,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         ),
                         const SizedBox(width: 8),
                         Expanded(
-                          child: Text(
+                          child: LocalizedUiText(
                             caps.isRpcComplete
                                 ? (l10n?.rpcPermissionsVerified ??
                                       'RPC permissions & execution modules verified')
@@ -976,7 +977,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                           ),
                         ),
                         const SizedBox(width: 6),
-                        Text(
+                        LocalizedUiText(
                           caps.isRpcComplete
                               ? (l10n?.actionManage ?? 'Manage')
                               : (l10n?.actionAutoFix ?? 'Auto-Fix'),
@@ -1061,7 +1062,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                         ),
                       ),
                       const SizedBox(height: 2),
-                      Text(
+                      LocalizedUiText(
                         isSupported
                             ? (l10n?.changePasswordSubtitle ??
                                   'Update root/admin password on active router')
@@ -1209,7 +1210,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               size: 24,
             ),
           ),
-          title: Text(
+          title: LocalizedUiText(
             isOfficial
                 ? (l10n?.buildOfficialTitle ??
                       'Official Build & Privacy Guarantee')
@@ -1219,7 +1220,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           ),
           subtitle: Padding(
             padding: const EdgeInsets.only(top: 2.0),
-            child: Text(
+            child: LocalizedUiText(
               isOfficial
                   ? (l10n?.buildOfficialSubtitle ??
                         'Flavor: ${AppConfig.flavorName} • Zero Analytics & Telemetry')
@@ -1258,7 +1259,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     ),
                     const SizedBox(width: 8),
                     Expanded(
-                      child: Text(
+                      child: LocalizedUiText(
                         isOfficial
                             ? (l10n?.buildVerificationTitle ??
                                   'Build Verification')
@@ -1273,7 +1274,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      LocalizedUiText(
                         l10n != null
                             ? 'Build Channel: ${AppConfig.flavorName} Edition ${isOfficial ? (l10n.settingsBuildOfficial) : (l10n.settingsBuildUnofficial)}'
                             : 'Build Channel: ${AppConfig.flavorName} Edition ${isOfficial ? "(Official)" : "(Unofficial / Local)"}',
@@ -1495,7 +1496,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             Icon(Icons.policy_outlined, color: theme.colorScheme.primary),
             const SizedBox(width: 10),
             const Expanded(
-              child: Text(
+              child: LocalizedUiText(
                 'License & Copyleft (GPLv3)',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
               ),
@@ -1530,7 +1531,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                       ),
                     ),
                     const SizedBox(height: 4),
-                    Text(
+                    LocalizedUiText(
                       'SPDX-License-Identifier: ${AppConfig.licenseSpdx}',
                       style: LuciTypography.monoStyle(
                         fontSize: 12,
@@ -1541,14 +1542,14 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 ),
               ),
               const SizedBox(height: 12),
-              Text(
+              LocalizedUiText(
                 'Credits & Copyright:',
                 style: theme.textTheme.labelLarge?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 4),
-              Text(
+              LocalizedUiText(
                 '• Original Work: Copyright (C) 2025–2026 cogwheel0 (luci-mobile)\n'
                 '• Modifications: Copyright (C) 2026 @nightcodex7',
                 style: theme.textTheme.bodyMedium?.copyWith(
@@ -1556,7 +1557,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                 ),
               ),
               const SizedBox(height: 12),
-              Text(
+              LocalizedUiText(
                 'Copyleft & Freedom Notice:',
                 style: theme.textTheme.labelLarge?.copyWith(
                   fontWeight: FontWeight.bold,

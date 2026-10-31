@@ -1,6 +1,7 @@
 // Copyright (C) 2026 @nightcodex7
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yet_another_luci_app/design/luci_design_system.dart';
@@ -165,7 +166,7 @@ class SqmInstallCard extends ConsumerWidget {
                     ),
                     const SizedBox(width: 10),
                     Expanded(
-                      child: Text(
+                      child: LocalizedUiText(
                         'Router RPC permissions missing. Installing packages requires RPC execution permissions.',
                         style: TextStyle(
                           fontSize: 12,
@@ -211,7 +212,7 @@ class SqmInstallCard extends ConsumerWidget {
                             ? Icons.lock_outline_rounded
                             : Icons.download_rounded,
                       ),
-                label: Text(
+                label: LocalizedUiText(
                   isInstalling
                       ? (l10n?.modSqmInstallingButton ?? 'Installing...')
                       : (appState.isMissingRpcPackages

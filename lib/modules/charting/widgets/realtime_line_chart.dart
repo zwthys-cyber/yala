@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'dart:math' as math;
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -89,7 +90,7 @@ class RealtimeLineChart extends StatelessWidget {
       return SizedBox(
         height: height,
         child: Center(
-          child: Text(
+          child: LocalizedUiText(
             'Collecting metric samples...',
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
               color: Theme.of(

@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yet_another_luci_app/main.dart';
@@ -73,7 +74,7 @@ class _ManageRoutersScreenState extends ConsumerState<ManageRoutersScreen> {
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            LocalizedUiText(
                               'Update locally saved credentials and settings for this profile.',
                               style: Theme.of(ctx).textTheme.bodySmall
                                   ?.copyWith(
@@ -123,8 +124,8 @@ class _ManageRoutersScreenState extends ConsumerState<ManageRoutersScreen> {
                                 prefixIcon: const Icon(Icons.router_outlined),
                                 helperText:
                                     'e.g. 192.168.1.1, router.local:8080, https://192.168.1.1',
-                              ),
-                              validator: (value) {
+                              ).localized(context),
+                              validator: localizeUiValidator(context, (value) {
                                 if (value == null || value.trim().isEmpty) {
                                   return 'Please enter the router address';
                                 }
@@ -134,7 +135,7 @@ class _ManageRoutersScreenState extends ConsumerState<ManageRoutersScreen> {
                                       'Invalid address format';
                                 }
                                 return null;
-                              },
+                              }),
                               autofillHints: const [AutofillHints.url],
                             ),
                             const SizedBox(height: 16),
@@ -145,10 +146,10 @@ class _ManageRoutersScreenState extends ConsumerState<ManageRoutersScreen> {
                                 border: const OutlineInputBorder(),
                                 prefixIcon: const Icon(Icons.person_outline),
                                 helperText: 'Default is usually root',
-                              ),
-                              validator: (v) => v == null || v.trim().isEmpty
+                              ).localized(context),
+                              validator: localizeUiValidator(context, (v) => v == null || v.trim().isEmpty
                                   ? 'Required'
-                                  : null,
+                                  : null),
                               autofillHints: const [AutofillHints.username],
                             ),
                             const SizedBox(height: 16),
@@ -172,7 +173,7 @@ class _ManageRoutersScreenState extends ConsumerState<ManageRoutersScreen> {
                                       ? 'Hide password'
                                       : 'Show password',
                                 ),
-                              ),
+                              ).localized(context),
                               obscureText: obscureText,
                               autofillHints: const [AutofillHints.password],
                             ),
@@ -487,13 +488,13 @@ class _ManageRoutersScreenState extends ConsumerState<ManageRoutersScreen> {
                             children: [
                               TextFormField(
                                 controller: nameController,
-                                decoration: const InputDecoration(
+                                decoration: (const InputDecoration(
                                   labelText: 'Profile Name (Optional)',
                                   border: OutlineInputBorder(),
                                   prefixIcon: Icon(Icons.label_outline_rounded),
                                   helperText:
                                       'e.g. Home Lab, Living Room, Travel Router',
-                                ),
+                                )).localized(context),
                               ),
                               const SizedBox(height: 16),
                               TextFormField(
@@ -506,8 +507,8 @@ class _ManageRoutersScreenState extends ConsumerState<ManageRoutersScreen> {
                                   prefixIcon: const Icon(Icons.router_outlined),
                                   helperText:
                                       'e.g. 192.168.1.1, router.local:8080, https://192.168.1.1',
-                                ),
-                                validator: (value) {
+                                ).localized(context),
+                                validator: localizeUiValidator(context, (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Please enter the router address';
                                   }
@@ -517,7 +518,7 @@ class _ManageRoutersScreenState extends ConsumerState<ManageRoutersScreen> {
                                         'Invalid address format';
                                   }
                                   return null;
-                                },
+                                }),
                                 autofillHints: const [AutofillHints.url],
                               ),
                               const SizedBox(height: 20),
@@ -528,9 +529,9 @@ class _ManageRoutersScreenState extends ConsumerState<ManageRoutersScreen> {
                                   border: const OutlineInputBorder(),
                                   prefixIcon: const Icon(Icons.person_outline),
                                   helperText: 'Default is usually root',
-                                ),
-                                validator: (v) =>
-                                    v == null || v.isEmpty ? 'Required' : null,
+                                ).localized(context),
+                                validator: localizeUiValidator(context, (v) =>
+                                    v == null || v.isEmpty ? 'Required' : null),
                                 autofillHints: const [AutofillHints.username],
                               ),
                               const SizedBox(height: 20),
@@ -554,7 +555,7 @@ class _ManageRoutersScreenState extends ConsumerState<ManageRoutersScreen> {
                                         ? 'Hide password'
                                         : 'Show password',
                                   ),
-                                ),
+                                ).localized(context),
                                 obscureText: obscureText,
                                 autofillHints: const [AutofillHints.password],
                               ),
@@ -848,7 +849,7 @@ class _ManageRoutersScreenState extends ConsumerState<ManageRoutersScreen> {
                   ),
                   const SizedBox(width: 12),
                   Expanded(
-                    child: Text(
+                    child: LocalizedUiText(
                       'Reviewer Mode Active: Profiles displayed here are in demo mode. Any added or modified profiles will not be saved permanently or exported.',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: Theme.of(
@@ -1081,7 +1082,7 @@ class _ManageRoutersScreenState extends ConsumerState<ManageRoutersScreen> {
                                           'Remove Router',
                                     ),
                                     content: SingleChildScrollView(
-                                      child: Text(
+                                      child: LocalizedUiText(
                                         'Are you sure you want to remove $routerLabel?',
                                       ),
                                     ),
@@ -1344,7 +1345,7 @@ class _UnifiedRouterCard extends StatelessWidget {
               if (onDelete != null)
                 IconButton(
                   icon: const Icon(Icons.delete_outline),
-                  tooltip: 'Remove',
+                  tooltip: localizeUiCopy(context, 'Remove'),
                   onPressed: onDelete,
                 ),
             ],

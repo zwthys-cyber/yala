@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -506,7 +507,7 @@ class _WirelessManagementScreenState
                   fit: BoxFit.scaleDown,
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    radio.name.toUpperCase(),
+                    localizeRadioName(context, radio.name),
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 14.5,
@@ -523,7 +524,7 @@ class _WirelessManagementScreenState
                       : Colors.red.withValues(alpha: 0.15),
                   borderRadius: BorderRadius.circular(6),
                 ),
-                child: Text(
+                child: LocalizedUiText(
                   isRadioActive
                       ? (l10n?.statusActive ?? 'ACTIVE')
                       : (l10n?.statusDisabled ?? 'DISABLED'),
@@ -838,7 +839,7 @@ class _WirelessManagementScreenState
         builder: (ctx) => AlertDialog(
           actionsOverflowButtonSpacing: 8,
           actionsOverflowDirection: VerticalDirection.down,
-          title: Text(
+          title: LocalizedUiText(
             enable
                 ? (l10n?.confirmEnableSsidTitle ?? 'Enable SSID?')
                 : (l10n?.confirmDisableSsidTitle ?? 'Disable SSID?'),
@@ -860,7 +861,7 @@ class _WirelessManagementScreenState
             ),
             FilledButton(
               onPressed: () => Navigator.pop(ctx, true),
-              child: Text(
+              child: LocalizedUiText(
                 enable
                     ? (l10n?.btnEnable ?? 'Enable')
                     : (l10n?.btnDisable ?? 'Disable'),
@@ -1083,7 +1084,7 @@ class _WirelessManagementScreenState
                       ),
                     ),
                     if (st.rxRate != null)
-                      Text(
+                      LocalizedUiText(
                         'Rx: ${_formatBandwidthRate(st.rxRate)}',
                         style: TextStyle(
                           fontSize: 10,
@@ -1092,7 +1093,7 @@ class _WirelessManagementScreenState
                         ),
                       ),
                     if (st.txRate != null)
-                      Text(
+                      LocalizedUiText(
                         'Tx: ${_formatBandwidthRate(st.txRate)}',
                         style: TextStyle(
                           fontSize: 10,
@@ -1142,7 +1143,7 @@ class _WirelessManagementScreenState
                               size: 18,
                             ),
                             const SizedBox(width: 8),
-                            Text(
+                            LocalizedUiText(
                               isPaused
                                   ? (l10n?.parentalProfileResumeInternet ??
                                         'Resume Internet')

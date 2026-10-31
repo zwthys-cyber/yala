@@ -1,6 +1,7 @@
 // Copyright (C) 2026 @nightcodex7
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:yet_another_luci_app/l10n/app_localizations.dart';
 import '../controllers/adguard_controller.dart';
@@ -243,7 +244,7 @@ class _AdGuardCustomRulesDialogState extends State<AdGuardCustomRulesDialog> {
                       fontSize: 12,
                       color: colorScheme.outline.withValues(alpha: 0.6),
                     ),
-                  ),
+                  ).localized(context),
                 ),
               ),
             ],

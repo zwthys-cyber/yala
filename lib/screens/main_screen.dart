@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:yet_another_luci_app/screens/dashboard_screen.dart';
@@ -910,14 +911,14 @@ class _MainScreenState extends ConsumerState<MainScreen>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  LocalizedUiText(
                     'Reviewer Mode Active',
                     style: theme.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w800,
                       color: colorScheme.onSurface,
                     ),
                   ),
-                  Text(
+                  LocalizedUiText(
                     'Simulated Router Session',
                     style: theme.textTheme.bodySmall?.copyWith(
                       color: colorScheme.primary,
@@ -934,7 +935,7 @@ class _MainScreenState extends ConsumerState<MainScreen>
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              LocalizedUiText(
                 'You are exploring Yet Another LuCI App in Reviewer Mode.',
                 style: theme.textTheme.bodyMedium?.copyWith(
                   fontWeight: FontWeight.w700,
@@ -942,7 +943,7 @@ class _MainScreenState extends ConsumerState<MainScreen>
                 ),
               ),
               const SizedBox(height: 10),
-              Text(
+              LocalizedUiText(
                 'This session provides pre-loaded mock datasets, simulating live OpenWrt router interfaces, connected clients, and performance metrics without needing an active router connection.',
                 style: theme.textTheme.bodyMedium?.copyWith(
                   color: colorScheme.onSurfaceVariant,
@@ -970,7 +971,7 @@ class _MainScreenState extends ConsumerState<MainScreen>
                     ),
                     const SizedBox(width: 10),
                     Expanded(
-                      child: Text(
+                      child: LocalizedUiText(
                         'To manage a physical OpenWrt router, toggle off Reviewer Mode in More > Connection Settings.',
                         style: theme.textTheme.bodySmall?.copyWith(
                           color: colorScheme.onSurfaceVariant,
@@ -997,7 +998,7 @@ class _MainScreenState extends ConsumerState<MainScreen>
                   borderRadius: BorderRadius.circular(14),
                 ),
               ),
-              child: const Text(
+              child: const LocalizedUiText(
                 'GOT IT',
                 style: TextStyle(
                   fontWeight: FontWeight.w800,
@@ -1151,7 +1152,7 @@ class _MainScreenState extends ConsumerState<MainScreen>
                                 color: textColor,
                               ),
                               const SizedBox(width: 4),
-                              Text(
+                              LocalizedUiText(
                                 'Retry',
                                 style: TextStyle(
                                   color: textColor,

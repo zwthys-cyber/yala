@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -280,7 +281,7 @@ class DhcpDnsScreen extends ConsumerWidget {
               lease.hostname,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
-            subtitle: Text('IP: ${lease.ipAddress} • MAC: ${lease.macAddress}'),
+            subtitle: LocalizedUiText('IP: ${lease.ipAddress} • MAC: ${lease.macAddress}'),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -384,7 +385,7 @@ class DhcpDnsScreen extends ConsumerWidget {
               mapping.hostname,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
-            subtitle: Text(
+            subtitle: LocalizedUiText(
               'Reserved IP: ${mapping.ipAddress} • MAC: ${mapping.macAddress}',
             ),
             trailing: Row(
@@ -399,7 +400,7 @@ class DhcpDnsScreen extends ConsumerWidget {
                     color: Colors.teal.withValues(alpha: 0.15),
                     borderRadius: BorderRadius.circular(6),
                   ),
-                  child: const Text(
+                  child: const LocalizedUiText(
                     'STATIC',
                     style: TextStyle(
                       color: Colors.teal,
@@ -493,7 +494,7 @@ class DhcpDnsScreen extends ConsumerWidget {
           ],
         ),
         content: SingleChildScrollView(
-          child: Text(
+          child: LocalizedUiText(
             'Are you sure you want to remove the static IP reservation for "${mapping.hostname}" (${mapping.macAddress})?',
           ),
         ),

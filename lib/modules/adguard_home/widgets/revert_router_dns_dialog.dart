@@ -1,6 +1,7 @@
 // Copyright (C) 2026 @nightcodex7
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:yet_another_luci_app/l10n/app_localizations.dart';
 import '../controllers/adguard_controller.dart';
@@ -243,7 +244,7 @@ class _RevertRouterDnsDialogState extends State<RevertRouterDnsDialog> {
                       color: colorScheme.errorContainer,
                       borderRadius: BorderRadius.circular(6),
                     ),
-                    child: Text(
+                    child: LocalizedUiText(
                       'dnsmasq server',
                       style: theme.textTheme.bodySmall?.copyWith(
                         fontSize: 10,
@@ -290,7 +291,7 @@ class _RevertRouterDnsDialogState extends State<RevertRouterDnsDialog> {
                 ),
               ),
               const SizedBox(height: 6),
-              Text(
+              LocalizedUiText(
                 p.remainingServers.isNotEmpty
                     ? p.remainingServers.join(', ')
                     : 'None (ISP/WAN Default)',
@@ -516,7 +517,7 @@ class _RevertRouterDnsDialogState extends State<RevertRouterDnsDialog> {
           TextButton(
             key: const Key('agh_revert_dns_retry_btn'),
             onPressed: _loadPreflight,
-            child: const Text('Retry'),
+            child: const LocalizedUiText('Retry'),
           ),
         FilledButton(
           key: const Key('agh_revert_dns_done_btn'),

@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yet_another_luci_app/main.dart';
@@ -68,9 +69,9 @@ class _WirelessInterfaceCardState extends ConsumerState<WirelessInterfaceCard> {
             l10n?.deleteVirtualInterfacePrompt(
                   widget.interface.ssid,
                   widget.interface.sectionName,
-                  widget.radio.name.toUpperCase(),
+                  localizeRadioName(context, widget.radio.name),
                 ) ??
-                'Are you sure you want to remove interface "${widget.interface.ssid}" (${widget.interface.sectionName}) from ${widget.radio.name.toUpperCase()}?\n\nThis will remove the wireless configuration section from UCI.',
+                'Are you sure you want to remove interface "${widget.interface.ssid}" (${widget.interface.sectionName}) from ${localizeRadioName(context, widget.radio.name)}?\n\nThis will remove the wireless configuration section from UCI.',
           ),
         ),
         actions: [
@@ -306,7 +307,7 @@ class _WirelessInterfaceCardState extends ConsumerState<WirelessInterfaceCard> {
                 const SizedBox(height: 2),
 
                 // Subtitle Info Line
-                Text(
+                LocalizedUiText(
                   'Section: ${iface.sectionName} (${iface.ifName})',
                   style: TextStyle(
                     fontSize: 11,
@@ -433,7 +434,7 @@ class _WirelessInterfaceCardState extends ConsumerState<WirelessInterfaceCard> {
                               ),
                             ),
                             child: Text(
-                              iface.mode,
+                              localizeUiCopy(context, iface.mode),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
@@ -507,7 +508,7 @@ class _WirelessInterfaceCardState extends ConsumerState<WirelessInterfaceCard> {
                         // Quick QR Code Button
                         IconButton(
                           icon: const Icon(Icons.qr_code_rounded, size: 17),
-                          tooltip: 'Show Wi-Fi QR Code',
+                          tooltip: localizeUiCopy(context, 'Show Wi-Fi QR Code'),
                           visualDensity: VisualDensity.compact,
                           padding: const EdgeInsets.all(3),
                           constraints: const BoxConstraints(),
@@ -561,7 +562,7 @@ class _WirelessInterfaceCardState extends ConsumerState<WirelessInterfaceCard> {
                                       ? theme.colorScheme.primary
                                       : null),
                           ),
-                          tooltip: 'More Options',
+                          tooltip: localizeUiCopy(context, 'More Options'),
                           padding: const EdgeInsets.all(3),
                           constraints: const BoxConstraints(),
                           onSelected: (val) {
@@ -596,7 +597,7 @@ class _WirelessInterfaceCardState extends ConsumerState<WirelessInterfaceCard> {
                                       color: Colors.blueAccent,
                                     ),
                                     SizedBox(width: 8),
-                                    Text(
+                                    LocalizedUiText(
                                       'Move to Primary Networks',
                                       style: TextStyle(fontSize: 12),
                                     ),
@@ -614,7 +615,7 @@ class _WirelessInterfaceCardState extends ConsumerState<WirelessInterfaceCard> {
                                       color: Colors.amber.shade800,
                                     ),
                                     const SizedBox(width: 8),
-                                    const Text(
+                                    const LocalizedUiText(
                                       'Move to Guest Networks',
                                       style: TextStyle(fontSize: 12),
                                     ),
@@ -628,7 +629,7 @@ class _WirelessInterfaceCardState extends ConsumerState<WirelessInterfaceCard> {
                                   children: [
                                     Icon(Icons.restart_alt_rounded, size: 16),
                                     SizedBox(width: 8),
-                                    Text(
+                                    LocalizedUiText(
                                       'Reset to Auto-Detection',
                                       style: TextStyle(fontSize: 12),
                                     ),
@@ -712,7 +713,7 @@ class _WirelessInterfaceCardState extends ConsumerState<WirelessInterfaceCard> {
               child: _buildDetailChip(
                 context,
                 l10n?.wifiDetailMode ?? 'Mode',
-                iface.mode,
+                localizeUiCopy(context, iface.mode),
                 Icons.router_rounded,
               ),
             ),
@@ -721,7 +722,7 @@ class _WirelessInterfaceCardState extends ConsumerState<WirelessInterfaceCard> {
               child: _buildDetailChip(
                 context,
                 'PMF 802.11w',
-                iface.pmfState.displayName,
+                localizeUiCopy(context, iface.pmfState.displayName),
                 Icons.security_rounded,
               ),
             ),
@@ -734,7 +735,7 @@ class _WirelessInterfaceCardState extends ConsumerState<WirelessInterfaceCard> {
               child: _buildDetailChip(
                 context,
                 l10n?.wifiDetailEncryption ?? 'Encryption',
-                iface.securityMode.displayName,
+                localizeUiCopy(context, iface.securityMode.displayName),
                 Icons.lock_rounded,
               ),
             ),

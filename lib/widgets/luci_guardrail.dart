@@ -4,6 +4,7 @@
 
 import 'dart:async' show unawaited;
 import 'package:flutter/material.dart';
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:yet_another_luci_app/state/app_state.dart';
 import 'package:yet_another_luci_app/widgets/luci_toast.dart';
 import 'package:yet_another_luci_app/utils/os_platform_integration.dart';
@@ -43,18 +44,18 @@ class LuciGuardrail {
           color: Colors.amber,
           size: 36,
         ),
-        title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
-        content: SingleChildScrollView(child: Text(message)),
+        title: LocalizedUiText(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+        content: SingleChildScrollView(child: LocalizedUiText(message)),
         actionsOverflowButtonSpacing: 8,
         actionsOverflowDirection: VerticalDirection.down,
         actions: [
           OutlinedButton(
             onPressed: () => Navigator.pop(ctx, 'revert'),
-            child: Text(revertLabel),
+            child: LocalizedUiText(revertLabel),
           ),
           FilledButton(
             onPressed: () => Navigator.pop(ctx, 'confirm'),
-            child: Text(confirmLabel),
+            child: LocalizedUiText(confirmLabel),
           ),
         ],
       ),
@@ -101,7 +102,7 @@ class LuciGuardrail {
       barrierDismissible: barrierDismissible,
       builder: (ctx) => AlertDialog(
         icon: Icon(icon, color: effectiveIconColor, size: 32),
-        title: Text(
+        title: LocalizedUiText(
           title,
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
         ),
@@ -109,7 +110,7 @@ class LuciGuardrail {
             ? SingleChildScrollView(child: customContent)
             : (subtitle != null
                   ? SingleChildScrollView(
-                      child: Text(
+                      child: LocalizedUiText(
                         subtitle,
                         style: const TextStyle(fontSize: 13.5),
                       ),
@@ -120,7 +121,7 @@ class LuciGuardrail {
         actions: [
           OutlinedButton(
             onPressed: () => Navigator.pop(ctx, false),
-            child: Text(cancelLabel),
+            child: LocalizedUiText(cancelLabel),
           ),
           FilledButton(
             style: isDestructive
@@ -130,7 +131,7 @@ class LuciGuardrail {
                   )
                 : null,
             onPressed: () => Navigator.pop(ctx, true),
-            child: Text(confirmLabel),
+            child: LocalizedUiText(confirmLabel),
           ),
         ],
       ),
@@ -241,30 +242,30 @@ class LuciGuardrail {
           color: theme.colorScheme.primary,
           size: 32,
         ),
-        title: Text(
+        title: LocalizedUiText(
           title,
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
         ),
         content: SingleChildScrollView(
-          child: Text(message, style: const TextStyle(fontSize: 13.5)),
+          child: LocalizedUiText(message, style: const TextStyle(fontSize: 13.5)),
         ),
         actionsOverflowButtonSpacing: 8,
         actionsOverflowDirection: VerticalDirection.down,
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(ctx, null),
-            child: Text(l10n?.actionCancel ?? 'Cancel'),
+            child: LocalizedUiText(l10n?.actionCancel ?? 'Cancel'),
           ),
           OutlinedButton(
             style: OutlinedButton.styleFrom(
               foregroundColor: theme.colorScheme.error,
             ),
             onPressed: () => Navigator.pop(ctx, 'discard'),
-            child: Text(l10n?.guardrailDiscardLeave ?? 'Discard & Leave'),
+            child: LocalizedUiText(l10n?.guardrailDiscardLeave ?? 'Discard & Leave'),
           ),
           FilledButton(
             onPressed: () => Navigator.pop(ctx, 'save'),
-            child: Text(l10n?.guardrailSaveExit ?? 'Save & Exit'),
+            child: LocalizedUiText(l10n?.guardrailSaveExit ?? 'Save & Exit'),
           ),
         ],
       ),
@@ -308,7 +309,7 @@ class LuciGuardrail {
       builder: (ctx) => StatefulBuilder(
         builder: (ctx, setState) => AlertDialog(
           icon: Icon(icon, color: effectiveIconColor, size: 36),
-          title: Text(
+          title: LocalizedUiText(
             title,
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
@@ -317,7 +318,7 @@ class LuciGuardrail {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(description, style: const TextStyle(fontSize: 13.5)),
+                LocalizedUiText(description, style: const TextStyle(fontSize: 13.5)),
                 if (hazardDetails != null && hazardDetails.isNotEmpty) ...[
                   const SizedBox(height: 12),
                   ...hazardDetails.map(
@@ -326,7 +327,7 @@ class LuciGuardrail {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          LocalizedUiText(
                             '• ',
                             style: TextStyle(
                               color: effectiveIconColor,
@@ -334,7 +335,7 @@ class LuciGuardrail {
                             ),
                           ),
                           Expanded(
-                            child: Text(
+                            child: LocalizedUiText(
                               detail,
                               style: const TextStyle(fontSize: 13.0),
                             ),
@@ -367,7 +368,7 @@ class LuciGuardrail {
                           ),
                           const SizedBox(width: 8),
                           Expanded(
-                            child: Text(
+                            child: LocalizedUiText(
                               acknowledgementLabel,
                               style: const TextStyle(fontSize: 12.5),
                             ),
@@ -385,7 +386,7 @@ class LuciGuardrail {
           actions: [
             OutlinedButton(
               onPressed: () => Navigator.pop(ctx, false),
-              child: Text(cancelLabel),
+              child: LocalizedUiText(cancelLabel),
             ),
             FilledButton(
               style: isDestructive
@@ -395,7 +396,7 @@ class LuciGuardrail {
                     )
                   : null,
               onPressed: acknowledged ? () => Navigator.pop(ctx, true) : null,
-              child: Text(confirmLabel),
+              child: LocalizedUiText(confirmLabel),
             ),
           ],
         ),

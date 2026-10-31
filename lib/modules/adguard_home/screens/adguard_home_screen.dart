@@ -1,6 +1,7 @@
 // Copyright (C) 2026 @nightcodex7
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yet_another_luci_app/l10n/app_localizations.dart';
@@ -151,7 +152,7 @@ class _AdGuardHomeScreenState extends ConsumerState<AdGuardHomeScreen> {
           // Profile Selector Popup Menu
           PopupMenuButton<String>(
             key: const Key('agh_profile_selector_button'),
-            tooltip: 'Instance Profiles',
+            tooltip: localizeUiCopy(context, 'Instance Profiles'),
             icon: const Icon(Icons.dns_outlined),
             onSelected: (value) async {
               if (value == 'add_external') {
@@ -180,7 +181,7 @@ class _AdGuardHomeScreenState extends ConsumerState<AdGuardHomeScreen> {
                     title: Text(
                       l10n?.aghDeleteProfileTitle ?? 'Delete Instance Profile?',
                     ),
-                    content: Text(
+                    content: LocalizedUiText(
                       'Are you sure you want to delete profile "${profileToDelete.name}"? Stored credentials for this instance will be permanently removed.',
                     ),
                     actions: [
@@ -208,7 +209,7 @@ class _AdGuardHomeScreenState extends ConsumerState<AdGuardHomeScreen> {
                     if (context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text('Failed to delete profile: $e'),
+                          content: LocalizedUiText('Failed to delete profile: $e'),
                           backgroundColor: Theme.of(context).colorScheme.error,
                         ),
                       );
@@ -310,7 +311,7 @@ class _AdGuardHomeScreenState extends ConsumerState<AdGuardHomeScreen> {
                         ),
                         const SizedBox(width: 8),
                         Expanded(
-                          child: Text(
+                          child: LocalizedUiText(
                             'Delete Current Profile',
                             style: TextStyle(color: colorScheme.error),
                           ),
@@ -577,7 +578,7 @@ class _AdGuardHomeScreenState extends ConsumerState<AdGuardHomeScreen> {
           ),
           const SizedBox(width: 8),
           Expanded(
-            child: Text(
+            child: LocalizedUiText(
               'External AdGuard Home instance: Router DNS forwarding is unverified. Ensure your router or network clients point to this instance for filtering.',
               style: theme.textTheme.bodySmall?.copyWith(
                 color: theme.colorScheme.onSurfaceVariant,

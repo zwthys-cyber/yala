@@ -1,6 +1,7 @@
 // Copyright (C) 2026 @nightcodex7
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yet_another_luci_app/main.dart';
@@ -74,7 +75,7 @@ Future<bool> showFlowOffloadingWarningDialog(
         if (ref != null)
           FilledButton.tonal(
             onPressed: () => Navigator.of(ctx).pop('disable'),
-            child: const Text('Disable in Firewall'),
+            child: const LocalizedUiText('Disable in Firewall'),
           ),
         FilledButton(
           style: FilledButton.styleFrom(

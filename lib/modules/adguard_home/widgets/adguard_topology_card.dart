@@ -1,6 +1,7 @@
 // Copyright (C) 2026 @nightcodex7
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:yet_another_luci_app/l10n/app_localizations.dart';
 import '../controllers/adguard_controller.dart';
@@ -273,7 +274,7 @@ class AdGuardTopologyCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                LocalizedUiText(
                   'IPv6 Handling',
                   style: theme.textTheme.bodyMedium?.copyWith(
                     color: colorScheme.onSurfaceVariant,
@@ -393,7 +394,7 @@ class AdGuardTopologyCard extends StatelessWidget {
                     size: 18,
                     color: colorScheme.primary,
                   ),
-                  label: Text(
+                  label: LocalizedUiText(
                     isForwarded
                         ? (l10n?.aghReconfigureRouterDns ??
                               'Reconfigure Router DNS')

@@ -1,6 +1,7 @@
 // Copyright (C) 2026 @nightcodex7
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import '../../../design/luci_design_system.dart';
 import '../../../widgets/luci_app_bar.dart';
@@ -195,7 +196,7 @@ class _OpenClashDiagnosticsScreenState
                   children: [
                     for (final system in [false, true])
                       ChoiceChip(
-                        label: Text(
+                        label: LocalizedUiText(
                           system
                               ? _text('系统与无线', 'System & Wi-Fi')
                               : 'OpenClash',

@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -324,7 +325,7 @@ class _FirewallSecurityScreenState
                 titlePrefix,
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
-              Text(
+              LocalizedUiText(
                 backend == FirewallBackend.fw4
                     ? 'fw4 / nftables'
                     : 'fw3 / iptables',
@@ -474,7 +475,7 @@ class _FirewallSecurityScreenState
               color: theme.colorScheme.onSurfaceVariant,
             ),
             const SizedBox(height: 12),
-            Text(
+            LocalizedUiText(
               'Firewall Configuration Unavailable',
               style: theme.textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.bold,
@@ -954,7 +955,7 @@ class _FirewallSecurityScreenState
         borderRadius: BorderRadius.circular(4),
         border: Border.all(color: Colors.amber.shade700, width: 0.8),
       ),
-      child: Text(
+      child: LocalizedUiText(
         'STAGED',
         style: TextStyle(
           color: Colors.amber.shade900,
@@ -992,7 +993,7 @@ class _FirewallSecurityScreenState
                       ),
                       const SizedBox(width: 8),
                       Flexible(
-                        child: Text(
+                        child: LocalizedUiText(
                           'Zone: ${zone.name.toUpperCase()}',
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
@@ -1015,7 +1016,7 @@ class _FirewallSecurityScreenState
                       color: Colors.blue.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(6),
                     ),
-                    child: const Text(
+                    child: const LocalizedUiText(
                       'MASQUERADE (NAT)',
                       style: TextStyle(
                         color: Colors.blue,
@@ -1138,7 +1139,7 @@ class _FirewallSecurityScreenState
               width: double.infinity,
               child: OutlinedButton.icon(
                 icon: const Icon(Icons.add),
-                label: const Text('Add Port Forward'),
+                label: const LocalizedUiText('Add Port Forward'),
                 onPressed: () =>
                     AdvancedPortForwardDialog.show(context, overview: overview),
               ),
@@ -1196,7 +1197,7 @@ class _FirewallSecurityScreenState
                         children: [
                           IconButton(
                             icon: const Icon(Icons.edit_outlined, size: 20),
-                            tooltip: 'Edit port forward',
+                            tooltip: localizeUiCopy(context, 'Edit port forward'),
                             onPressed: () => AdvancedPortForwardDialog.show(
                               context,
                               initialPortForward: pf,
@@ -1205,7 +1206,7 @@ class _FirewallSecurityScreenState
                           ),
                           IconButton(
                             icon: const Icon(Icons.delete_outline, size: 20),
-                            tooltip: 'Delete port forward',
+                            tooltip: localizeUiCopy(context, 'Delete port forward'),
                             onPressed: () => _confirmDeletePortForward(pf),
                           ),
                         ],
@@ -1229,19 +1230,19 @@ class _FirewallSecurityScreenState
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('Delete Port Forward?'),
-        content: Text('Are you sure you want to delete "${pf.name}"?'),
+        title: const LocalizedUiText('Delete Port Forward?'),
+        content: LocalizedUiText('Are you sure you want to delete "${pf.name}"?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(false),
-            child: const Text('Cancel'),
+            child: const LocalizedUiText('Cancel'),
           ),
           FilledButton(
             style: FilledButton.styleFrom(
               backgroundColor: Theme.of(ctx).colorScheme.error,
             ),
             onPressed: () => Navigator.of(ctx).pop(true),
-            child: const Text('Delete'),
+            child: const LocalizedUiText('Delete'),
           ),
         ],
       ),
@@ -1279,7 +1280,7 @@ class _FirewallSecurityScreenState
               width: double.infinity,
               child: OutlinedButton.icon(
                 icon: const Icon(Icons.add_moderator_outlined),
-                label: const Text('Add Security Rule'),
+                label: const LocalizedUiText('Add Security Rule'),
                 onPressed: () =>
                     AdvancedCustomRuleDialog.show(context, overview: overview),
               ),
@@ -1290,7 +1291,7 @@ class _FirewallSecurityScreenState
           const Card(
             child: Padding(
               padding: EdgeInsets.all(16.0),
-              child: Text(
+              child: LocalizedUiText(
                 'No custom security rules defined (default zone policies active).',
               ),
             ),
@@ -1550,7 +1551,7 @@ class _FirewallSecurityScreenState
                         children: [
                           enableSwitch,
                           const SizedBox(width: 4),
-                          Text(
+                          LocalizedUiText(
                             currentEnabled
                                 ? (l10n?.firewallRuleStatusEnabled ?? 'Enabled')
                                 : (l10n?.firewallRuleStatusDisabled ??
@@ -1643,7 +1644,7 @@ class _FirewallSecurityScreenState
                             children: [
                               enableSwitch,
                               const SizedBox(width: 4),
-                              Text(
+                              LocalizedUiText(
                                 currentEnabled
                                     ? (l10n?.firewallRuleStatusEnabled ??
                                           'Enabled')
@@ -1736,19 +1737,19 @@ class _FirewallSecurityScreenState
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text('Delete Security Rule?'),
-        content: Text('Are you sure you want to delete "${r.name}"?'),
+        title: const LocalizedUiText('Delete Security Rule?'),
+        content: LocalizedUiText('Are you sure you want to delete "${r.name}"?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(false),
-            child: const Text('Cancel'),
+            child: const LocalizedUiText('Cancel'),
           ),
           FilledButton(
             style: FilledButton.styleFrom(
               backgroundColor: Theme.of(ctx).colorScheme.error,
             ),
             onPressed: () => Navigator.of(ctx).pop(true),
-            child: const Text('Delete'),
+            child: const LocalizedUiText('Delete'),
           ),
         ],
       ),

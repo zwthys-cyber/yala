@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -334,7 +335,7 @@ class _AddEditProfileDialogState extends ConsumerState<AddEditProfileDialog> {
                     ),
                     const SizedBox(width: 10),
                     Expanded(
-                      child: Text(
+                      child: LocalizedUiText(
                         _isEditing
                             ? (l10n?.parentalEditProfileTitle ?? 'Edit Profile')
                             : (l10n?.parentalAddProfileTitle ?? 'New Profile'),
@@ -390,7 +391,7 @@ class _AddEditProfileDialogState extends ConsumerState<AddEditProfileDialog> {
                               onChanged: (val) =>
                                   setState(() => _isEnabled = val),
                               activeThumbColor: theme.colorScheme.primary,
-                              title: Text(
+                              title: LocalizedUiText(
                                 _isEnabled
                                     ? (l10n?.parentalGuardrailsActive ??
                                           'Profile Guardrails Active')
@@ -404,7 +405,7 @@ class _AddEditProfileDialogState extends ConsumerState<AddEditProfileDialog> {
                                       : theme.colorScheme.error,
                                 ),
                               ),
-                              subtitle: Text(
+                              subtitle: LocalizedUiText(
                                 _isEnabled
                                     ? (l10n?.parentalGuardrailsActiveDesc ??
                                           'Schedule, DNS filters, and time limits are enforced.')
@@ -441,10 +442,10 @@ class _AddEditProfileDialogState extends ConsumerState<AddEditProfileDialog> {
                             border: const OutlineInputBorder(),
                           ),
                           onChanged: (_) => setState(() {}),
-                          validator: (v) => v == null || v.trim().isEmpty
+                          validator: localizeUiValidator(context, (v) => v == null || v.trim().isEmpty
                               ? (l10n?.parentalProfileNameRequired ??
                                     'Name is required')
-                              : null,
+                              : null),
                         ),
                         const SizedBox(height: 16),
 
@@ -627,7 +628,7 @@ class _AddEditProfileDialogState extends ConsumerState<AddEditProfileDialog> {
                                   ),
                                   border: const OutlineInputBorder(),
                                   isDense: true,
-                                ),
+                                ).localized(context),
                                 textCapitalization:
                                     TextCapitalization.characters,
                                 onFieldSubmitted: (_) => _addMac(),
@@ -707,7 +708,7 @@ class _AddEditProfileDialogState extends ConsumerState<AddEditProfileDialog> {
                             l10n?.parentalProfileBedtimeLabel ??
                                 'Block Schedule',
                           ),
-                          subtitle: Text(
+                          subtitle: LocalizedUiText(
                             _hasSchedule && _schedule != null
                                 ? 'Block ${_schedule!.blockTimeFormatted} → Resume ${_schedule!.resumeTimeFormatted} · ${_schedule!.activeDaysLabel}'
                                 : (l10n?.parentalScheduleSubtitle ??
@@ -738,7 +739,7 @@ class _AddEditProfileDialogState extends ConsumerState<AddEditProfileDialog> {
                           title: Text(
                             l10n?.parentalDailyTimeLimit ?? 'Daily Time Limit',
                           ),
-                          subtitle: Text(
+                          subtitle: LocalizedUiText(
                             _hasTimeLimit && _dailyLimitMinutes != null
                                 ? (l10n?.parentalDailyTimeLimitMinutes(
                                         _dailyLimitMinutes!,
@@ -877,7 +878,7 @@ class _AddEditProfileDialogState extends ConsumerState<AddEditProfileDialog> {
                       child: FilledButton.icon(
                         onPressed: _canSave ? _save : null,
                         icon: const Icon(Icons.check_rounded, size: 18),
-                        label: Text(
+                        label: LocalizedUiText(
                           _isEditing
                               ? (l10n?.parentalProfileBtnSave ?? 'Save Changes')
                               : (l10n?.parentalBtnCreateProfile ??

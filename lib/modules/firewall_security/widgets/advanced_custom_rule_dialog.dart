@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yet_another_luci_app/l10n/app_localizations.dart';
@@ -296,7 +297,7 @@ class _AdvancedCustomRuleDialogState
           ),
           const SizedBox(width: 8),
           Expanded(
-            child: Text(
+            child: LocalizedUiText(
               _isEditing
                   ? (l10n?.firewallEditRuleTitle ?? 'Edit Security Rule')
                   : (l10n?.firewallAddRuleTitle ?? 'Add Security Rule'),
@@ -363,13 +364,13 @@ class _AdvancedCustomRuleDialogState
                           prefixIcon: const Icon(Icons.label_outline),
                           border: const OutlineInputBorder(),
                         ),
-                        validator: (v) {
+                        validator: localizeUiValidator(context, (v) {
                           if (v == null || v.trim().isEmpty) {
                             return l10n?.firewallRuleNameRequired ??
                                 'Please enter rule name.';
                           }
                           return null;
-                        },
+                        }),
                       ),
                     ),
                     const SizedBox(width: 8),
@@ -386,7 +387,7 @@ class _AdvancedCustomRuleDialogState
                         items: const [
                           DropdownMenuItem(
                             value: 'ACCEPT',
-                            child: Text(
+                            child: LocalizedUiText(
                               'ACCEPT',
                               style: TextStyle(
                                 color: Colors.green,
@@ -396,7 +397,7 @@ class _AdvancedCustomRuleDialogState
                           ),
                           DropdownMenuItem(
                             value: 'REJECT',
-                            child: Text(
+                            child: LocalizedUiText(
                               'REJECT',
                               style: TextStyle(
                                 color: Colors.amber,
@@ -406,7 +407,7 @@ class _AdvancedCustomRuleDialogState
                           ),
                           DropdownMenuItem(
                             value: 'DROP',
-                            child: Text(
+                            child: LocalizedUiText(
                               'DROP',
                               style: TextStyle(
                                 color: Colors.red,
@@ -439,7 +440,7 @@ class _AdvancedCustomRuleDialogState
                         items: zoneOptions.map((z) {
                           return DropdownMenuItem(
                             value: z,
-                            child: Text(
+                            child: LocalizedUiText(
                               z == '*'
                                   ? (l10n?.firewallZoneAny ?? 'Any (*)')
                                   : z.toUpperCase(),
@@ -464,7 +465,7 @@ class _AdvancedCustomRuleDialogState
                         items: zoneOptions.map((z) {
                           return DropdownMenuItem(
                             value: z,
-                            child: Text(
+                            child: LocalizedUiText(
                               z == '*'
                                   ? (l10n?.firewallZoneAny ?? 'Any (*)')
                                   : z.toUpperCase(),
@@ -495,14 +496,14 @@ class _AdvancedCustomRuleDialogState
                               'e.g. 192.168.1.50 or /24',
                           border: const OutlineInputBorder(),
                         ),
-                        validator: (v) {
+                        validator: localizeUiValidator(context, (v) {
                           if (v != null &&
                               v.trim().isNotEmpty &&
                               !FirewallValidator.isValidIpOrCidr(v)) {
                             return 'Invalid IP or CIDR.';
                           }
                           return null;
-                        },
+                        }),
                       ),
                     ),
                     const SizedBox(width: 8),
@@ -514,8 +515,8 @@ class _AdvancedCustomRuleDialogState
                               l10n?.firewallSourceMacLabel ?? 'Source MAC',
                           hintText: 'e.g. AA:BB:CC:DD:EE:FF',
                           border: const OutlineInputBorder(),
-                        ),
-                        validator: (v) {
+                        ).localized(context),
+                        validator: localizeUiValidator(context, (v) {
                           if (v != null && v.trim().isNotEmpty) {
                             final macs = _parseMacList(v);
                             for (final m in macs) {
@@ -525,7 +526,7 @@ class _AdvancedCustomRuleDialogState
                             }
                           }
                           return null;
-                        },
+                        }),
                       ),
                     ),
                   ],
@@ -545,15 +546,15 @@ class _AdvancedCustomRuleDialogState
                               'Destination IP / CIDR',
                           hintText: 'e.g. 10.0.0.1 or /24',
                           border: const OutlineInputBorder(),
-                        ),
-                        validator: (v) {
+                        ).localized(context),
+                        validator: localizeUiValidator(context, (v) {
                           if (v != null &&
                               v.trim().isNotEmpty &&
                               !FirewallValidator.isValidIpOrCidr(v)) {
                             return 'Invalid IP or CIDR.';
                           }
                           return null;
-                        },
+                        }),
                       ),
                     ),
                     const SizedBox(width: 8),
@@ -566,14 +567,14 @@ class _AdvancedCustomRuleDialogState
                           hintText: 'e.g. 80, 443, 8000-8080',
                           border: const OutlineInputBorder(),
                         ),
-                        validator: (v) {
+                        validator: localizeUiValidator(context, (v) {
                           if (v != null &&
                               v.trim().isNotEmpty &&
                               !_isValidPortSpec(v)) {
                             return 'Invalid port format.';
                           }
                           return null;
-                        },
+                        }),
                       ),
                     ),
                   ],
@@ -592,14 +593,14 @@ class _AdvancedCustomRuleDialogState
                           border: const OutlineInputBorder(),
                         ),
                         items: const [
-                          DropdownMenuItem(value: 'any', child: Text('Any')),
-                          DropdownMenuItem(value: 'tcp', child: Text('TCP')),
-                          DropdownMenuItem(value: 'udp', child: Text('UDP')),
+                          DropdownMenuItem(value: 'any', child: LocalizedUiText('Any')),
+                          DropdownMenuItem(value: 'tcp', child: LocalizedUiText('TCP')),
+                          DropdownMenuItem(value: 'udp', child: LocalizedUiText('UDP')),
                           DropdownMenuItem(
                             value: 'tcp udp',
-                            child: Text('TCP + UDP'),
+                            child: LocalizedUiText('TCP + UDP'),
                           ),
-                          DropdownMenuItem(value: 'icmp', child: Text('ICMP')),
+                          DropdownMenuItem(value: 'icmp', child: LocalizedUiText('ICMP')),
                         ],
                         onChanged: (val) {
                           if (val != null) setState(() => _proto = val);
@@ -681,7 +682,7 @@ class _AdvancedCustomRuleDialogState
                   child: CircularProgressIndicator(strokeWidth: 2),
                 )
               : Icon(_isEditing ? Icons.save : Icons.add_moderator),
-          label: Text(
+          label: LocalizedUiText(
             _isEditing
                 ? (l10n?.firewallBtnSaveChanges ?? 'Save Changes')
                 : (l10n?.firewallBtnCreateRule ?? 'Create Rule'),

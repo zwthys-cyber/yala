@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -1201,7 +1202,7 @@ class _InterfacesScreenState extends ConsumerState<InterfacesScreen> {
               IconButton(
                 onPressed: onRetry,
                 icon: const Icon(Icons.refresh_rounded, size: 18),
-                tooltip: 'Retry',
+                tooltip: localizeUiCopy(context, 'Retry'),
                 visualDensity: VisualDensity.compact,
                 padding: const EdgeInsets.all(4),
                 constraints: const BoxConstraints(),
@@ -1638,7 +1639,7 @@ class _InterfacesScreenState extends ConsumerState<InterfacesScreen> {
                 ),
                 const SizedBox(width: 8),
                 Expanded(
-                  child: Text(
+                  child: LocalizedUiText(
                     'Unrecognized proto (${interface.protocol}) — showing raw fields',
                     style: const TextStyle(
                       fontSize: 12,
@@ -2734,7 +2735,7 @@ class _UnifiedNetworkCardState extends State<UnifiedNetworkCard>
                               ),
                             )
                           else
-                            Text(
+                            LocalizedUiText(
                               widget.isStaged
                                   ? '${widget.subtitle} • Original: ${widget.isUp ? "UP" : "DOWN"}'
                                   : widget.subtitle,

@@ -1,6 +1,7 @@
 // Copyright (C) 2026 @nightcodex7
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:yet_another_luci_app/l10n/app_localizations.dart';
 import '../controllers/adguard_controller.dart';
@@ -240,7 +241,7 @@ class _ConfigureRouterDnsDialogState extends State<ConfigureRouterDnsDialog> {
                           : colorScheme.tertiaryContainer,
                       borderRadius: BorderRadius.circular(6),
                     ),
-                    child: Text(
+                    child: LocalizedUiText(
                       p.isExternal ? 'External Host' : 'Local Router',
                       style: theme.textTheme.bodySmall?.copyWith(
                         fontSize: 10,
@@ -415,7 +416,7 @@ class _ConfigureRouterDnsDialogState extends State<ConfigureRouterDnsDialog> {
         ],
 
         if (p.canProceed) ...[
-          Text(
+          LocalizedUiText(
             'Forwarding Strategy:',
             style: theme.textTheme.bodyMedium?.copyWith(
               fontWeight: FontWeight.bold,
@@ -660,7 +661,7 @@ class _ConfigureRouterDnsDialogState extends State<ConfigureRouterDnsDialog> {
     if (_result != null) {
       return [
         if (!_result!.isSuccess)
-          TextButton(onPressed: _loadPreflight, child: const Text('Retry')),
+          TextButton(onPressed: _loadPreflight, child: const LocalizedUiText('Retry')),
         FilledButton(
           key: const Key('agh_dns_config_done_btn'),
           onPressed: () => Navigator.of(context).pop(_result!.isSuccess),

@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yet_another_luci_app/l10n/app_localizations.dart';
@@ -70,14 +71,14 @@ class _BandwidthMonitorScreenState extends ConsumerState<BandwidthMonitorScreen>
           ),
           PopupMenuButton<int>(
             icon: const Icon(Icons.timer_outlined),
-            tooltip: 'Polling Interval',
+            tooltip: localizeUiCopy(context, 'Polling Interval'),
             initialValue: state.pollingIntervalSeconds,
             onSelected: (val) => controller.setPollingInterval(val),
             itemBuilder: (ctx) => [
-              const PopupMenuItem(value: 1, child: Text('1s Interval')),
-              const PopupMenuItem(value: 2, child: Text('2s Interval')),
-              const PopupMenuItem(value: 3, child: Text('3s Interval')),
-              const PopupMenuItem(value: 5, child: Text('5s Interval')),
+              const PopupMenuItem(value: 1, child: LocalizedUiText('1s Interval')),
+              const PopupMenuItem(value: 2, child: LocalizedUiText('2s Interval')),
+              const PopupMenuItem(value: 3, child: LocalizedUiText('3s Interval')),
+              const PopupMenuItem(value: 5, child: LocalizedUiText('5s Interval')),
             ],
           ),
         ],
@@ -180,7 +181,7 @@ class _BandwidthMonitorScreenState extends ConsumerState<BandwidthMonitorScreen>
                       ),
                     ),
                     const SizedBox(width: 8),
-                    Text(
+                    LocalizedUiText(
                       isStreaming ? 'STREAMING LIVE' : 'STREAM PAUSED',
                       style: TextStyle(
                         fontSize: 11,
@@ -191,7 +192,7 @@ class _BandwidthMonitorScreenState extends ConsumerState<BandwidthMonitorScreen>
                     ),
                   ],
                 ),
-                Text(
+                LocalizedUiText(
                   '${state.pollingIntervalSeconds}s interval • ${summary.connectedDevicesCount} devices',
                   style: TextStyle(
                     fontSize: 11,
@@ -267,7 +268,7 @@ class _BandwidthMonitorScreenState extends ConsumerState<BandwidthMonitorScreen>
           ),
         ),
         const SizedBox(height: 2),
-        Text(
+        LocalizedUiText(
           'Peak: $peakValue',
           style: const TextStyle(fontSize: 10, color: Colors.grey),
         ),
@@ -341,7 +342,7 @@ class _BandwidthMonitorScreenState extends ConsumerState<BandwidthMonitorScreen>
             const SizedBox(width: 8),
             PopupMenuButton<BandwidthSortMode>(
               icon: Icon(Icons.sort_rounded, color: colorScheme.primary),
-              tooltip: 'Sort by',
+              tooltip: localizeUiCopy(context, 'Sort by'),
               initialValue: state.sortMode,
               onSelected: (mode) => controller.setSortMode(mode),
               itemBuilder: (ctx) => [
@@ -660,12 +661,12 @@ class _BandwidthMonitorScreenState extends ConsumerState<BandwidthMonitorScreen>
                 Row(
                   children: [
                     Expanded(
-                      child: _buildDetailRow('MAC Address', item.macAddress),
+                      child: _buildDetailRow(localizeUiCopy(context, 'MAC Address'), item.macAddress),
                     ),
                     if (item.formattedPhyRate != null)
                       Expanded(
                         child: _buildDetailRow(
-                          'Link Rate (PHY)',
+                          localizeUiCopy(context, 'Link Rate (PHY)'),
                           item.formattedPhyRate!,
                         ),
                       ),
@@ -676,13 +677,13 @@ class _BandwidthMonitorScreenState extends ConsumerState<BandwidthMonitorScreen>
                   children: [
                     Expanded(
                       child: _buildDetailRow(
-                        'Session Transfer',
+                        localizeUiCopy(context, 'Session Transfer'),
                         '↓ ${item.formattedTotalDownloaded}  ↑ ${item.formattedTotalUploaded}',
                       ),
                     ),
                     Expanded(
                       child: _buildDetailRow(
-                        'Peak Speed',
+                        localizeUiCopy(context, 'Peak Speed'),
                         '↓ ${item.formattedPeakDownload(speedUnit)}  ↑ ${item.formattedPeakUpload(speedUnit)}',
                       ),
                     ),
@@ -694,7 +695,7 @@ class _BandwidthMonitorScreenState extends ConsumerState<BandwidthMonitorScreen>
                     children: [
                       Expanded(
                         child: _buildDetailRow(
-                          'Connection Duration',
+                          localizeUiCopy(context, 'Connection Duration'),
                           item.formattedConnectedTime!,
                         ),
                       ),
@@ -709,14 +710,14 @@ class _BandwidthMonitorScreenState extends ConsumerState<BandwidthMonitorScreen>
                       if (item.signalDbm != null)
                         Expanded(
                           child: _buildDetailRow(
-                            'Signal',
+                            localizeUiCopy(context, 'Signal'),
                             '${item.signalDbm} dBm (${item.signalQuality ?? ""})',
                           ),
                         ),
                       if (item.activeConnections != null)
                         Expanded(
                           child: _buildDetailRow(
-                            'Active Connections',
+                            localizeUiCopy(context, 'Active Connections'),
                             '${item.activeConnections} conns',
                           ),
                         ),
@@ -726,7 +727,7 @@ class _BandwidthMonitorScreenState extends ConsumerState<BandwidthMonitorScreen>
                 if (item.topProtocol != null) ...[
                   const SizedBox(height: 4),
                   _buildDetailRow(
-                    'Primary Layer 7 Protocol',
+                    localizeUiCopy(context, 'Primary Layer 7 Protocol'),
                     item.topProtocol!,
                   ),
                 ],
@@ -850,7 +851,7 @@ class _BandwidthMonitorScreenState extends ConsumerState<BandwidthMonitorScreen>
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        const LocalizedUiText(
                           'Session Bandwidth Usage',
                           style: TextStyle(
                             fontSize: 12.5,
@@ -908,7 +909,7 @@ class _BandwidthMonitorScreenState extends ConsumerState<BandwidthMonitorScreen>
                 children: [
                   const Icon(Icons.calendar_month_outlined, size: 20),
                   const SizedBox(width: 8),
-                  const Text(
+                  const LocalizedUiText(
                     'Period: ',
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
@@ -917,11 +918,11 @@ class _BandwidthMonitorScreenState extends ConsumerState<BandwidthMonitorScreen>
                     value: periodVal,
                     isDense: true,
                     underline: const SizedBox.shrink(),
-                    hint: const Text('Current Period'),
+                    hint: const LocalizedUiText('Current Period'),
                     items: [
                       const DropdownMenuItem<String?>(
                         value: null,
-                        child: Text('Current Period'),
+                        child: LocalizedUiText('Current Period'),
                       ),
                       ...state.nlbwmonPeriods.map(
                         (p) => DropdownMenuItem(value: p, child: Text(p)),
@@ -941,7 +942,7 @@ class _BandwidthMonitorScreenState extends ConsumerState<BandwidthMonitorScreen>
           child: Row(
             children: [
               ChoiceChip(
-                label: Text('All ($totalCount)'),
+                label: LocalizedUiText('All ($totalCount)'),
                 selected: _usageFilter == 'all',
                 onSelected: (sel) {
                   if (sel) setState(() => _usageFilter = 'all');
@@ -950,7 +951,7 @@ class _BandwidthMonitorScreenState extends ConsumerState<BandwidthMonitorScreen>
               const SizedBox(width: 8),
               ChoiceChip(
                 avatar: const Icon(Icons.circle, size: 9, color: Colors.green),
-                label: Text('Connected ($connectedCount)'),
+                label: LocalizedUiText('Connected ($connectedCount)'),
                 selected: _usageFilter == 'connected',
                 onSelected: (sel) {
                   if (sel) setState(() => _usageFilter = 'connected');
@@ -963,7 +964,7 @@ class _BandwidthMonitorScreenState extends ConsumerState<BandwidthMonitorScreen>
                   size: 9,
                   color: Colors.grey,
                 ),
-                label: Text('Not Connected ($offlineCount)'),
+                label: LocalizedUiText('Not Connected ($offlineCount)'),
                 selected: _usageFilter == 'offline',
                 onSelected: (sel) {
                   if (sel) setState(() => _usageFilter = 'offline');
@@ -988,7 +989,7 @@ class _BandwidthMonitorScreenState extends ConsumerState<BandwidthMonitorScreen>
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    LocalizedUiText(
                       state.isNlbwmonInstalled
                           ? (l10n?.bandwidthNlbwmonTitle ??
                                 'Persistent Bandwidth Accounting (nlbwmon)')
@@ -998,7 +999,7 @@ class _BandwidthMonitorScreenState extends ConsumerState<BandwidthMonitorScreen>
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(
+                    LocalizedUiText(
                       '${filteredItems.length} devices',
                       style: TextStyle(
                         fontSize: 11,
@@ -1012,7 +1013,7 @@ class _BandwidthMonitorScreenState extends ConsumerState<BandwidthMonitorScreen>
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20),
                     child: Center(
-                      child: Text(
+                      child: LocalizedUiText(
                         _usageFilter == 'offline'
                             ? 'No disconnected/offline devices found with recorded usage.'
                             : (_usageFilter == 'connected'
@@ -1095,7 +1096,7 @@ class _BandwidthMonitorScreenState extends ConsumerState<BandwidthMonitorScreen>
                           ),
                           if (item.conns > 0 || item.layer7 != null) ...[
                             const SizedBox(width: 4),
-                            Text(
+                            LocalizedUiText(
                               item.layer7 != null
                                   ? '${item.conns}c • ${item.layer7}'
                                   : '${item.conns} conns',

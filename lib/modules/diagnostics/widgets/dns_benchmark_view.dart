@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -79,7 +80,7 @@ class _DnsBenchmarkViewState extends ConsumerState<DnsBenchmarkView> {
             FilledButton.icon(
               onPressed: () => controller.startBenchmark(),
               icon: const Icon(Icons.timer_outlined),
-              label: Text(
+              label: LocalizedUiText(
                 isTested
                     ? (l10n?.dnsBenchBtnRerun ?? 'Run DNS Benchmark Again')
                     : (l10n?.dnsBenchBtnRun ?? 'Run DNS Benchmark'),
@@ -124,7 +125,7 @@ class _DnsBenchmarkViewState extends ConsumerState<DnsBenchmarkView> {
                   color: colorScheme.surfaceContainerHighest,
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Text(
+                child: LocalizedUiText(
                   isTested
                       ? (l10n?.dnsBenchSortLowestLatency ?? 'Lowest latency')
                       : (l10n?.dnsBenchSortAlphabetical ?? 'A-Z'),
@@ -304,7 +305,7 @@ class _DnsBenchmarkViewState extends ConsumerState<DnsBenchmarkView> {
                 Icon(Icons.info_outline, size: 14, color: colorScheme.primary),
                 const SizedBox(width: 6),
                 Expanded(
-                  child: Text(
+                  child: LocalizedUiText(
                     state.vantagePoint == DnsVantagePoint.clientDevice
                         ? (l10n?.dnsBenchVantageDeviceDesc ??
                               'Measures end-to-end response time experienced by your phone.')
@@ -504,7 +505,7 @@ class _DnsBenchmarkViewState extends ConsumerState<DnsBenchmarkView> {
                 ],
               ),
               if (hasLatency)
-                Text(
+                LocalizedUiText(
                   '${rResult.medianLatencyMs!.toStringAsFixed(1)} ms',
                   style: TextStyle(
                     fontSize: 18,
@@ -645,7 +646,7 @@ class _DnsBenchmarkViewState extends ConsumerState<DnsBenchmarkView> {
                               color: colorScheme.primaryContainer,
                               borderRadius: BorderRadius.circular(4),
                             ),
-                            child: Text(
+                            child: LocalizedUiText(
                               'CUSTOM',
                               style: TextStyle(
                                 color: colorScheme.onPrimaryContainer,
@@ -697,7 +698,7 @@ class _DnsBenchmarkViewState extends ConsumerState<DnsBenchmarkView> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text(
+                    LocalizedUiText(
                       '${item.medianLatencyMs!.toStringAsFixed(1)} ms',
                       style: TextStyle(
                         fontSize: 16,
@@ -707,7 +708,7 @@ class _DnsBenchmarkViewState extends ConsumerState<DnsBenchmarkView> {
                             : colorScheme.onSurface,
                       ),
                     ),
-                    Text(
+                    LocalizedUiText(
                       '${item.successfulQueries}/${item.totalQueries} ok',
                       style: TextStyle(
                         fontSize: 10,

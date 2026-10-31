@@ -1,6 +1,7 @@
 // Copyright (C) 2026 @nightcodex7
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -150,24 +151,24 @@ class _SqmQueueCardState extends ConsumerState<SqmQueueCard> {
               ),
               SizedBox(width: 8),
               Expanded(
-                child: Text(
+                child: LocalizedUiText(
                   'Zero Bandwidth Configured',
                   style: TextStyle(fontSize: 16),
                 ),
               ),
             ],
           ),
-          content: const Text(
+          content: const LocalizedUiText(
             'Both download and upload speeds are set to 0 Mbps. With zero bandwidth, SQM will not perform any traffic shaping or bufferbloat mitigation.\n\nDo you want to save anyway?',
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(ctx).pop(false),
-              child: const Text('Cancel'),
+              child: const LocalizedUiText('Cancel'),
             ),
             FilledButton(
               onPressed: () => Navigator.of(ctx).pop(true),
-              child: const Text('Save Anyway'),
+              child: const LocalizedUiText('Save Anyway'),
             ),
           ],
         ),
@@ -410,7 +411,7 @@ class _SqmQueueCardState extends ConsumerState<SqmQueueCard> {
                                 color: theme.colorScheme.primaryContainer,
                                 borderRadius: BorderRadius.circular(6),
                               ),
-                              child: Text(
+                              child: LocalizedUiText(
                                 'Router Template',
                                 style: TextStyle(
                                   fontSize: 10,
@@ -422,7 +423,7 @@ class _SqmQueueCardState extends ConsumerState<SqmQueueCard> {
                           ],
                         ],
                       ),
-                      Text(
+                      LocalizedUiText(
                         _enabled
                             ? (l10n?.modSqmQueueEnabled ??
                                   'Active & Shaping Traffic')
@@ -474,7 +475,7 @@ class _SqmQueueCardState extends ConsumerState<SqmQueueCard> {
                   color: theme.colorScheme.primary,
                 ),
                 const SizedBox(width: 6),
-                Text(
+                LocalizedUiText(
                   'Connection Profile & Template',
                   style: theme.textTheme.labelMedium?.copyWith(
                     fontWeight: FontWeight.bold,
@@ -484,7 +485,7 @@ class _SqmQueueCardState extends ConsumerState<SqmQueueCard> {
               ],
             ),
             const SizedBox(height: 4),
-            Text(
+            LocalizedUiText(
               'Select an OpenWrt template optimized for your internet connection type:',
               style: theme.textTheme.bodySmall?.copyWith(
                 color: theme.colorScheme.onSurfaceVariant,
@@ -775,7 +776,7 @@ class _SqmQueueCardState extends ConsumerState<SqmQueueCard> {
               runSpacing: 4,
               crossAxisAlignment: WrapCrossAlignment.center,
               children: [
-                Text(
+                LocalizedUiText(
                   'Quick Sweet-Spot:',
                   style: theme.textTheme.bodySmall?.copyWith(
                     fontSize: 11,
@@ -785,7 +786,7 @@ class _SqmQueueCardState extends ConsumerState<SqmQueueCard> {
                 ),
                 ActionChip(
                   visualDensity: VisualDensity.compact,
-                  label: const Text(
+                  label: const LocalizedUiText(
                     '90% (Sweet Spot)',
                     style: TextStyle(fontSize: 11),
                   ),
@@ -946,13 +947,13 @@ class _SqmQueueCardState extends ConsumerState<SqmQueueCard> {
                     items: const [
                       DropdownMenuItem(
                         value: 'none',
-                        child: Text('None (Fiber/LAN)'),
+                        child: LocalizedUiText('None (Fiber/LAN)'),
                       ),
                       DropdownMenuItem(
                         value: 'ethernet',
-                        child: Text('Ethernet'),
+                        child: LocalizedUiText('Ethernet'),
                       ),
-                      DropdownMenuItem(value: 'atm', child: Text('ATM (ADSL)')),
+                      DropdownMenuItem(value: 'atm', child: LocalizedUiText('ATM (ADSL)')),
                     ],
                     onChanged: (val) {
                       if (val != null) setState(() => _selectedLinklayer = val);
@@ -992,7 +993,7 @@ class _SqmQueueCardState extends ConsumerState<SqmQueueCard> {
               child: Row(
                 children: [
                   ActionChip(
-                    label: const Text(
+                    label: const LocalizedUiText(
                       'VDSL PPPoE (44B)',
                       style: TextStyle(fontSize: 11),
                     ),
@@ -1001,7 +1002,7 @@ class _SqmQueueCardState extends ConsumerState<SqmQueueCard> {
                   ),
                   const SizedBox(width: 6),
                   ActionChip(
-                    label: const Text(
+                    label: const LocalizedUiText(
                       'Cable DOCSIS (34B)',
                       style: TextStyle(fontSize: 11),
                     ),
@@ -1010,7 +1011,7 @@ class _SqmQueueCardState extends ConsumerState<SqmQueueCard> {
                   ),
                   const SizedBox(width: 6),
                   ActionChip(
-                    label: const Text(
+                    label: const LocalizedUiText(
                       'ADSL ATM (40B)',
                       style: TextStyle(fontSize: 11),
                     ),
@@ -1019,7 +1020,7 @@ class _SqmQueueCardState extends ConsumerState<SqmQueueCard> {
                   ),
                   const SizedBox(width: 6),
                   ActionChip(
-                    label: const Text(
+                    label: const LocalizedUiText(
                       'None (0B)',
                       style: TextStyle(fontSize: 11),
                     ),
@@ -1110,10 +1111,10 @@ class _SqmQueueCardState extends ConsumerState<SqmQueueCard> {
                           isDense: true,
                         ),
                         items: const [
-                          DropdownMenuItem(value: 'ECN', child: Text('ECN')),
+                          DropdownMenuItem(value: 'ECN', child: LocalizedUiText('ECN')),
                           DropdownMenuItem(
                             value: 'NOECN',
-                            child: Text('NOECN'),
+                            child: LocalizedUiText('NOECN'),
                           ),
                         ],
                         onChanged: (val) {
@@ -1136,9 +1137,9 @@ class _SqmQueueCardState extends ConsumerState<SqmQueueCard> {
                         items: const [
                           DropdownMenuItem(
                             value: 'NOECN',
-                            child: Text('NOECN'),
+                            child: LocalizedUiText('NOECN'),
                           ),
-                          DropdownMenuItem(value: 'ECN', child: Text('ECN')),
+                          DropdownMenuItem(value: 'ECN', child: LocalizedUiText('ECN')),
                         ],
                         onChanged: (val) {
                           if (val != null) setState(() => _egressEcn = val);
@@ -1171,7 +1172,7 @@ class _SqmQueueCardState extends ConsumerState<SqmQueueCard> {
                       vertical: 8,
                     ),
                     isDense: true,
-                  ),
+                  ).localized(context),
                   items: List.generate(11, (i) {
                     final label = i == 0
                         ? '0 (Silent)'
@@ -1209,7 +1210,7 @@ class _SqmQueueCardState extends ConsumerState<SqmQueueCard> {
                         ),
                       )
                     : const Icon(Icons.check_circle_outline_rounded, size: 20),
-                label: Text(
+                label: LocalizedUiText(
                   _isSaving
                       ? 'Saving...'
                       : (l10n?.actionSave ?? 'Save & Apply'),
@@ -1363,7 +1364,7 @@ class _SqmQueueCardState extends ConsumerState<SqmQueueCard> {
                 ),
                 const SizedBox(width: 8),
                 Expanded(
-                  child: Text(
+                  child: LocalizedUiText(
                     _enabled
                         ? (l10n?.modSqmTelemetryWaitingForData(iface) ??
                               'Waiting for queue traffic on $iface...')
@@ -1549,7 +1550,7 @@ class _SqmQueueCardState extends ConsumerState<SqmQueueCard> {
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          Text(
+                          LocalizedUiText(
                             '${tin.sentPackets ?? 0} pkts | ${tin.droppedPackets} drop | ${tin.backlogPackets} backlog',
                             style: theme.textTheme.bodySmall?.copyWith(
                               color: theme.colorScheme.onSurfaceVariant,

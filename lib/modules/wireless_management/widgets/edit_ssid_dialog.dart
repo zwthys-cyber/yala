@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -920,7 +921,7 @@ class _EditSsidDialogState extends ConsumerState<EditSsidDialog> {
                               prefixIcon: const Icon(Icons.wifi, size: 20),
                               border: const OutlineInputBorder(),
                             ),
-                            validator: (val) {
+                            validator: localizeUiValidator(context, (val) {
                               if (val == null || val.trim().isEmpty) {
                                 return l10n?.ssidErrorEmpty ??
                                     'SSID cannot be empty or whitespace only';
@@ -933,7 +934,7 @@ class _EditSsidDialogState extends ConsumerState<EditSsidDialog> {
                                     'SSID exceeds maximum 32 bytes (${bytes.length} bytes)';
                               }
                               return null;
-                            },
+                            }),
                           ),
                           const SizedBox(height: 14),
 
@@ -1000,7 +1001,7 @@ class _EditSsidDialogState extends ConsumerState<EditSsidDialog> {
                                 ),
                                 border: const OutlineInputBorder(),
                               ),
-                              validator: (val) {
+                              validator: localizeUiValidator(context, (val) {
                                 if (val == null || val.isEmpty) {
                                   return null; // allow empty to retain existing
                                 }
@@ -1009,7 +1010,7 @@ class _EditSsidDialogState extends ConsumerState<EditSsidDialog> {
                                       'Passphrase must be between 8 and 64 characters';
                                 }
                                 return null;
-                              },
+                              }),
                             ),
                             PasswordStrengthMeter(
                               password: _passphraseController.text,
@@ -1249,7 +1250,7 @@ class _EditSsidDialogState extends ConsumerState<EditSsidDialog> {
                                       border: const OutlineInputBorder(),
                                       helperText:
                                           'One MAC per line or separated by space/comma',
-                                    ),
+                                    ).localized(context),
                                   ),
                                 ],
                                 const SizedBox(height: 16),
@@ -1508,11 +1509,11 @@ class _EditSsidDialogState extends ConsumerState<EditSsidDialog> {
                                       child: TextFormField(
                                         controller: _dtimPeriodController,
                                         onChanged: (_) => setState(() {}),
-                                        decoration: const InputDecoration(
+                                        decoration: (const InputDecoration(
                                           labelText: 'DTIM Period',
                                           border: OutlineInputBorder(),
                                           helperText: '1-255 beacons',
-                                        ),
+                                        )).localized(context),
                                         keyboardType: TextInputType.number,
                                       ),
                                     ),
@@ -1521,11 +1522,11 @@ class _EditSsidDialogState extends ConsumerState<EditSsidDialog> {
                                       child: TextFormField(
                                         controller: _gtkRekeyController,
                                         onChanged: (_) => setState(() {}),
-                                        decoration: const InputDecoration(
+                                        decoration: (const InputDecoration(
                                           labelText: 'GTK Rekey (s)',
                                           border: OutlineInputBorder(),
                                           helperText: 'Rekey interval',
-                                        ),
+                                        )).localized(context),
                                         keyboardType: TextInputType.number,
                                       ),
                                     ),
@@ -1538,11 +1539,11 @@ class _EditSsidDialogState extends ConsumerState<EditSsidDialog> {
                                       child: TextFormField(
                                         controller: _inactivityLimitController,
                                         onChanged: (_) => setState(() {}),
-                                        decoration: const InputDecoration(
+                                        decoration: (const InputDecoration(
                                           labelText: 'Inactivity Limit (s)',
                                           border: OutlineInputBorder(),
                                           helperText: 'Idle disconnect',
-                                        ),
+                                        )).localized(context),
                                         keyboardType: TextInputType.number,
                                       ),
                                     ),
@@ -1552,11 +1553,11 @@ class _EditSsidDialogState extends ConsumerState<EditSsidDialog> {
                                         controller:
                                             _maxListenIntervalController,
                                         onChanged: (_) => setState(() {}),
-                                        decoration: const InputDecoration(
+                                        decoration: (const InputDecoration(
                                           labelText: 'Max Listen Int.',
                                           border: OutlineInputBorder(),
                                           helperText: 'Power-save limit',
-                                        ),
+                                        )).localized(context),
                                         keyboardType: TextInputType.number,
                                       ),
                                     ),
@@ -1629,7 +1630,7 @@ class _EditSsidDialogState extends ConsumerState<EditSsidDialog> {
                                               'DHCP Lease Duration',
                                           border: const OutlineInputBorder(),
                                           helperText: 'e.g. 12h or 86400',
-                                        ),
+                                        ).localized(context),
                                       ),
                                     ),
                                     const SizedBox(width: 10),
@@ -1662,15 +1663,15 @@ class _EditSsidDialogState extends ConsumerState<EditSsidDialog> {
                                         items: const [
                                           DropdownMenuItem(
                                             value: 'server',
-                                            child: Text('Server'),
+                                            child: LocalizedUiText('Server'),
                                           ),
                                           DropdownMenuItem(
                                             value: 'relay',
-                                            child: Text('Relay'),
+                                            child: LocalizedUiText('Relay'),
                                           ),
                                           DropdownMenuItem(
                                             value: 'disabled',
-                                            child: Text('Disabled'),
+                                            child: LocalizedUiText('Disabled'),
                                           ),
                                         ],
                                         onChanged: (v) {
@@ -1692,15 +1693,15 @@ class _EditSsidDialogState extends ConsumerState<EditSsidDialog> {
                                         items: const [
                                           DropdownMenuItem(
                                             value: 'server',
-                                            child: Text('Server'),
+                                            child: LocalizedUiText('Server'),
                                           ),
                                           DropdownMenuItem(
                                             value: 'relay',
-                                            child: Text('Relay'),
+                                            child: LocalizedUiText('Relay'),
                                           ),
                                           DropdownMenuItem(
                                             value: 'disabled',
-                                            child: Text('Disabled'),
+                                            child: LocalizedUiText('Disabled'),
                                           ),
                                         ],
                                         onChanged: (v) {
@@ -1752,7 +1753,7 @@ class _EditSsidDialogState extends ConsumerState<EditSsidDialog> {
                                   ),
                                 )
                               : const Icon(Icons.save_rounded, size: 18),
-                          label: Text(
+                          label: LocalizedUiText(
                             hasWriteAccess
                                 ? (l10n?.btnSaveAndApply ?? 'Save & Apply')
                                 : (l10n?.btnAttemptSaveNonRoot ??

@@ -1,6 +1,7 @@
 // Copyright (C) 2026 @nightcodex7
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:yet_another_luci_app/l10n/app_localizations.dart';
 import '../models/adguard_models.dart';
@@ -158,7 +159,7 @@ class AdGuardFilteringCard extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 5),
-                      Text(
+                      LocalizedUiText(
                         isEnabled
                             ? (l10n?.aghFilteringActive ?? 'Filtering Active')
                             : (l10n?.aghFilteringDisabled ??

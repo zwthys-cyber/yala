@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yet_another_luci_app/main.dart';
@@ -54,7 +55,7 @@ class VpnConnectivityCard extends ConsumerWidget {
                   ),
                 ),
                 const SizedBox(width: 8),
-                Text(
+                LocalizedUiText(
                   '${overview.activeServicesCount}/${overview.totalConfiguredServices} Active',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: Theme.of(
@@ -181,7 +182,7 @@ class VpnConnectivityCard extends ConsumerWidget {
           ),
           const SizedBox(width: 8),
           Flexible(
-            child: Text(
+            child: LocalizedUiText(
               'No Active Connections',
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: Theme.of(

@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -321,7 +322,7 @@ class _ProvisionGuestNetworkDialogState
                         ),
                         const SizedBox(width: 8),
                         Expanded(
-                          child: Text(
+                          child: LocalizedUiText(
                             'Logged in as non-root / read-only session (\'${appState.sessionUsername}\'). UCI write privileges required.',
                             style: TextStyle(
                               fontSize: 11,
@@ -339,16 +340,16 @@ class _ProvisionGuestNetworkDialogState
                 DropdownButtonFormField<WirelessRadio>(
                   initialValue: _selectedRadio,
                   isExpanded: true,
-                  decoration: const InputDecoration(
+                  decoration: (const InputDecoration(
                     labelText: 'Target Physical Radio',
                     prefixIcon: Icon(Icons.cell_tower_rounded, size: 20),
                     border: OutlineInputBorder(),
-                  ),
+                  )).localized(context),
                   items: widget.radios.map((r) {
                     return DropdownMenuItem(
                       value: r,
                       child: Text(
-                        '${r.name.toUpperCase()} (${r.bandLabel})',
+                        '${localizeRadioName(context, r.name)} (${r.bandLabel})',
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                       ),
@@ -379,8 +380,8 @@ class _ProvisionGuestNetworkDialogState
                       ),
                       const SizedBox(width: 8),
                       Expanded(
-                        child: Text(
-                          'Radio settings (Channel ${_selectedRadio.channel}, Band ${_selectedRadio.bandLabel}) are inherited from physical radio ${_selectedRadio.name.toUpperCase()}.',
+                        child: LocalizedUiText(
+                          'Radio settings (Channel ${_selectedRadio.channel}, Band ${_selectedRadio.bandLabel}) are inherited from physical radio ${localizeRadioName(context, _selectedRadio.name)}.',
                           style: TextStyle(
                             fontSize: 11,
                             color: theme.colorScheme.onSurfaceVariant,
@@ -401,9 +402,9 @@ class _ProvisionGuestNetworkDialogState
                     helperText: 'UTF-8 Bytes: $_ssidByteLength / 32 max',
                     prefixIcon: const Icon(Icons.wifi_rounded, size: 20),
                     border: const OutlineInputBorder(),
-                  ),
+                  ).localized(context),
                   onChanged: (_) => setState(() {}),
-                  validator: (val) {
+                  validator: localizeUiValidator(context, (val) {
                     if (val == null || val.trim().isEmpty) {
                       return 'Guest SSID name cannot be empty';
                     }
@@ -412,7 +413,7 @@ class _ProvisionGuestNetworkDialogState
                       return 'SSID length exceeds 32 UTF-8 bytes ($bytes bytes)';
                     }
                     return null;
-                  },
+                  }),
                 ),
                 const SizedBox(height: 14),
 
@@ -420,12 +421,12 @@ class _ProvisionGuestNetworkDialogState
                 DropdownButtonFormField<String>(
                   initialValue: _selectedNetwork,
                   isExpanded: true,
-                  decoration: const InputDecoration(
+                  decoration: (const InputDecoration(
                     labelText: 'Network Attachment',
                     prefixIcon: Icon(Icons.router_rounded, size: 20),
                     border: OutlineInputBorder(),
                     helperText: 'Logical network bridge interface',
-                  ),
+                  )).localized(context),
                   items: _availableNetworks.map((network) {
                     return DropdownMenuItem(
                       value: network,
@@ -445,13 +446,13 @@ class _ProvisionGuestNetworkDialogState
                 if (_selectedNetwork == 'guest') ...[
                   TextFormField(
                     controller: _guestIpController,
-                    decoration: const InputDecoration(
+                    decoration: (const InputDecoration(
                       labelText: 'Guest Gateway IP Address',
                       hintText: '192.168.2.1',
                       prefixIcon: Icon(Icons.router_outlined, size: 20),
                       border: OutlineInputBorder(),
-                    ),
-                    validator: (val) {
+                    )).localized(context),
+                    validator: localizeUiValidator(context, (val) {
                       if (_selectedNetwork != 'guest') return null;
                       if (val == null || val.trim().isEmpty) {
                         return 'Guest IP address is required';
@@ -467,7 +468,7 @@ class _ProvisionGuestNetworkDialogState
                         }
                       }
                       return null;
-                    },
+                    }),
                   ),
                   const SizedBox(height: 14),
                 ],
@@ -476,11 +477,11 @@ class _ProvisionGuestNetworkDialogState
                 DropdownButtonFormField<String>(
                   initialValue: _selectedEncryption,
                   isExpanded: true,
-                  decoration: const InputDecoration(
+                  decoration: (const InputDecoration(
                     labelText: 'Security Protocol',
                     prefixIcon: Icon(Icons.security_rounded, size: 20),
                     border: OutlineInputBorder(),
-                  ),
+                  )).localized(context),
                   items: [
                     DropdownMenuItem(
                       value: 'sae-mixed',
@@ -547,9 +548,9 @@ class _ProvisionGuestNetworkDialogState
                         onPressed: () =>
                             setState(() => _showPassphrase = !_showPassphrase),
                       ),
-                    ),
+                    ).localized(context),
                     onChanged: (_) => setState(() {}),
-                    validator: (val) {
+                    validator: localizeUiValidator(context, (val) {
                       if (!needsPass) return null;
                       if (val == null || val.trim().isEmpty) {
                         return 'Passphrase is required for encrypted networks';
@@ -561,7 +562,7 @@ class _ProvisionGuestNetworkDialogState
                         return 'Passphrase cannot exceed 63 characters';
                       }
                       return null;
-                    },
+                    }),
                   ),
                   PasswordStrengthMeter(password: _passphraseController.text),
                   const SizedBox(height: 14),
@@ -570,11 +571,11 @@ class _ProvisionGuestNetworkDialogState
                 // Client Isolation Switch
                 SwitchListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: const Text(
+                  title: const LocalizedUiText(
                     'Client Isolation',
                     style: TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
                   ),
-                  subtitle: const Text(
+                  subtitle: const LocalizedUiText(
                     'Prevents connected guest devices from talking to each other',
                     style: TextStyle(fontSize: 11),
                   ),
@@ -597,7 +598,7 @@ class _ProvisionGuestNetworkDialogState
                         ),
                         const SizedBox(width: 8),
                         Expanded(
-                          child: Text(
+                          child: LocalizedUiText(
                             'Advanced Options',
                             style: theme.textTheme.titleSmall?.copyWith(
                               fontWeight: FontWeight.w600,
@@ -617,7 +618,7 @@ class _ProvisionGuestNetworkDialogState
                         DropdownButtonFormField<String>(
                           initialValue: _selectedPmf,
                           isExpanded: true,
-                          decoration: const InputDecoration(
+                          decoration: (const InputDecoration(
                             labelText:
                                 'Protected Management Frames (PMF / 802.11w)',
                             prefixIcon: Icon(
@@ -625,7 +626,7 @@ class _ProvisionGuestNetworkDialogState
                               size: 20,
                             ),
                             border: OutlineInputBorder(),
-                          ),
+                          )).localized(context),
                           items: [
                             DropdownMenuItem(
                               value: '0',
@@ -665,14 +666,14 @@ class _ProvisionGuestNetworkDialogState
                       // Hidden SSID
                       SwitchListTile(
                         contentPadding: EdgeInsets.zero,
-                        title: const Text(
+                        title: const LocalizedUiText(
                           'Hidden SSID',
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 13,
                           ),
                         ),
-                        subtitle: const Text(
+                        subtitle: const LocalizedUiText(
                           'Do not broadcast SSID in beacon frames',
                           style: TextStyle(fontSize: 11),
                         ),
@@ -690,7 +691,7 @@ class _ProvisionGuestNetworkDialogState
                             color: theme.colorScheme.primary,
                           ),
                           const SizedBox(width: 6),
-                          const Text(
+                          const LocalizedUiText(
                             'Fast Roaming (802.11r/k/v)',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -702,14 +703,14 @@ class _ProvisionGuestNetworkDialogState
                       const SizedBox(height: 4),
                       CheckboxListTile(
                         contentPadding: EdgeInsets.zero,
-                        title: const Text(
+                        title: const LocalizedUiText(
                           'Enable 802.11r Fast BSS Transition',
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 13,
                           ),
                         ),
-                        subtitle: const Text(
+                        subtitle: const LocalizedUiText(
                           'Seamless roaming between access points',
                           style: TextStyle(fontSize: 11),
                         ),
@@ -721,14 +722,14 @@ class _ProvisionGuestNetworkDialogState
                       if (_ieee80211r) ...[
                         CheckboxListTile(
                           contentPadding: EdgeInsets.zero,
-                          title: const Text(
+                          title: const LocalizedUiText(
                             'FT over DS',
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 13,
                             ),
                           ),
-                          subtitle: const Text(
+                          subtitle: const LocalizedUiText(
                             'Fast transition over Distribution System',
                             style: TextStyle(fontSize: 11),
                           ),
@@ -739,14 +740,14 @@ class _ProvisionGuestNetworkDialogState
                         ),
                         CheckboxListTile(
                           contentPadding: EdgeInsets.zero,
-                          title: const Text(
+                          title: const LocalizedUiText(
                             'FT PSK Generate Local',
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 13,
                             ),
                           ),
-                          subtitle: const Text(
+                          subtitle: const LocalizedUiText(
                             'Generate PSK locally per AP',
                             style: TextStyle(fontSize: 11),
                           ),
@@ -758,7 +759,7 @@ class _ProvisionGuestNetworkDialogState
                         ),
                         TextFormField(
                           controller: _mobilityDomainController,
-                          decoration: const InputDecoration(
+                          decoration: (const InputDecoration(
                             labelText: 'Mobility Domain',
                             hintText: '4 hex chars (e.g., a1b2)',
                             prefixIcon: Icon(
@@ -766,7 +767,7 @@ class _ProvisionGuestNetworkDialogState
                               size: 20,
                             ),
                             border: OutlineInputBorder(),
-                          ),
+                          )).localized(context),
                           maxLength: 4,
                         ),
                         const SizedBox(height: 12),
@@ -782,7 +783,7 @@ class _ProvisionGuestNetworkDialogState
                             color: theme.colorScheme.primary,
                           ),
                           const SizedBox(width: 6),
-                          const Text(
+                          const LocalizedUiText(
                             'QoS & Wireless Controls',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -793,14 +794,14 @@ class _ProvisionGuestNetworkDialogState
                       ),
                       CheckboxListTile(
                         contentPadding: EdgeInsets.zero,
-                        title: const Text(
+                        title: const LocalizedUiText(
                           'WMM / QoS',
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 13,
                           ),
                         ),
-                        subtitle: const Text(
+                        subtitle: const LocalizedUiText(
                           'Enable Wi-Fi Multimedia quality-of-service',
                           style: TextStyle(fontSize: 11),
                         ),
@@ -810,14 +811,14 @@ class _ProvisionGuestNetworkDialogState
                       ),
                       CheckboxListTile(
                         contentPadding: EdgeInsets.zero,
-                        title: const Text(
+                        title: const LocalizedUiText(
                           'Disassociate Low-ACK Clients',
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 13,
                           ),
                         ),
-                        subtitle: const Text(
+                        subtitle: const LocalizedUiText(
                           'Kick weak clients with excessive packet loss',
                           style: TextStyle(fontSize: 11),
                         ),
@@ -828,14 +829,14 @@ class _ProvisionGuestNetworkDialogState
                       ),
                       CheckboxListTile(
                         contentPadding: EdgeInsets.zero,
-                        title: const Text(
+                        title: const LocalizedUiText(
                           'Multicast to Unicast Conversion',
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 13,
                           ),
                         ),
-                        subtitle: const Text(
+                        subtitle: const LocalizedUiText(
                           'Improves multicast video/audio streaming reliability',
                           style: TextStyle(fontSize: 11),
                         ),
@@ -846,14 +847,14 @@ class _ProvisionGuestNetworkDialogState
                       ),
                       CheckboxListTile(
                         contentPadding: EdgeInsets.zero,
-                        title: const Text(
+                        title: const LocalizedUiText(
                           'WDS (Wireless Distribution System)',
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 13,
                           ),
                         ),
-                        subtitle: const Text(
+                        subtitle: const LocalizedUiText(
                           'Transparent bridge mode for multi-AP meshing',
                           style: TextStyle(fontSize: 11),
                         ),
@@ -872,7 +873,7 @@ class _ProvisionGuestNetworkDialogState
                             color: theme.colorScheme.primary,
                           ),
                           const SizedBox(width: 6),
-                          const Text(
+                          const LocalizedUiText(
                             'MAC Address Access Control',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -885,11 +886,11 @@ class _ProvisionGuestNetworkDialogState
                       DropdownButtonFormField<String>(
                         initialValue: _macfilter,
                         isExpanded: true,
-                        decoration: const InputDecoration(
+                        decoration: (const InputDecoration(
                           labelText: 'MAC Filter Mode',
                           prefixIcon: Icon(Icons.shield_outlined, size: 20),
                           border: OutlineInputBorder(),
-                        ),
+                        )).localized(context),
                         items: [
                           DropdownMenuItem(
                             value: 'disable',
@@ -922,13 +923,13 @@ class _ProvisionGuestNetworkDialogState
                         TextFormField(
                           controller: _maclistController,
                           maxLines: 3,
-                          decoration: const InputDecoration(
+                          decoration: (const InputDecoration(
                             labelText: 'MAC Addresses List',
                             hintText: '00:11:22:33:44:55\nAA:BB:CC:DD:EE:FF',
                             border: OutlineInputBorder(),
                             helperText:
                                 'One MAC address per line or separated by spaces/commas',
-                          ),
+                          )).localized(context),
                         ),
                       ],
                       const SizedBox(height: 12),
@@ -962,7 +963,7 @@ class _ProvisionGuestNetworkDialogState
                     ),
                   )
                 : const Icon(Icons.add_moderator_rounded, size: 18),
-            label: Text(
+            label: LocalizedUiText(
               _isSubmitting
                   ? 'Creating…'
                   : (l10n?.btnCreateNewGuestWifi ?? 'Create New Guest Wi-Fi'),

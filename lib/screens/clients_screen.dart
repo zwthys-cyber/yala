@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -1919,7 +1920,7 @@ class _UnifiedClientCardState extends State<_UnifiedClientCard> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    LocalizedUiText(
                       widget.isIpv6Expanded
                           ? (l10n?.collapseIpv6Addresses ??
                                 'Collapse IPv6 addresses')

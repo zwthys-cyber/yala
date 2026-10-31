@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import '../models/network_topology.dart';
 import '../models/router_capabilities.dart';
@@ -215,7 +216,7 @@ class NetworkTopologyCard extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 2),
-                    Text(
+                    LocalizedUiText(
                       l10n?.flatNetworkMessage(
                             topology!.modelType == NetworkModel.dsa
                                 ? "DSA bridge"
@@ -265,7 +266,7 @@ class NetworkTopologyCard extends StatelessWidget {
                       ),
                       const SizedBox(width: 8),
                       Expanded(
-                        child: Text(
+                        child: LocalizedUiText(
                           isDsa
                               ? (l10n?.dsaSwitchTopology ??
                                     'DSA Switch Topology')
@@ -290,7 +291,7 @@ class NetworkTopologyCard extends StatelessWidget {
                     color: colorScheme.primaryContainer.withValues(alpha: 0.4),
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: Text(
+                  child: LocalizedUiText(
                     isDsa ? 'DSA Engine' : 'swconfig Engine',
                     style: theme.textTheme.labelSmall?.copyWith(
                       color: colorScheme.onPrimaryContainer,
@@ -458,7 +459,7 @@ class NetworkTopologyCard extends StatelessWidget {
             ],
             if (!isUp) ...[
               const SizedBox(width: 4),
-              Text(
+              LocalizedUiText(
                 '(Down)',
                 style: theme.textTheme.labelSmall?.copyWith(
                   fontSize: 10,

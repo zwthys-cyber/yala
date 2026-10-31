@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yet_another_luci_app/l10n/app_localizations.dart';
@@ -496,7 +497,7 @@ class _EditRadioDialogState extends ConsumerState<EditRadioDialog> {
                         ),
                         const SizedBox(width: 8),
                         Expanded(
-                          child: Text(
+                          child: LocalizedUiText(
                             'Logged in as non-root user \'${appState.sessionUsername}\'. Saving requires root/UCI write privileges.',
                             style: TextStyle(
                               fontSize: 11,
@@ -579,7 +580,7 @@ class _EditRadioDialogState extends ConsumerState<EditRadioDialog> {
                   items: channels.map((ch) {
                     return DropdownMenuItem(
                       value: ch,
-                      child: Text(
+                      child: LocalizedUiText(
                         ch == 'auto'
                             ? (l10n?.channelAutoAcs ?? 'Auto (ACS)')
                             : (l10n?.channelItem(ch) ?? 'Channel $ch'),
@@ -680,7 +681,7 @@ class _EditRadioDialogState extends ConsumerState<EditRadioDialog> {
                     return DropdownMenuItem<String>(
                       value: item['code']!,
                       child: Text(
-                        item['label']!,
+                        localizeUiCopy(context, item['label']!),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                       ),
@@ -714,7 +715,7 @@ class _EditRadioDialogState extends ConsumerState<EditRadioDialog> {
                     child: CircularProgressIndicator(strokeWidth: 2),
                   )
                 : const Icon(Icons.verified_user_rounded, size: 18),
-            label: Text(
+            label: LocalizedUiText(
               hasUciWrite
                   ? (l10n?.btnSaveAndApply ?? 'Save & Apply')
                   : (l10n?.btnAttemptSaveNonRoot ?? 'Attempt Save (Non-Root)'),
