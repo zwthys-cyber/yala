@@ -24,6 +24,15 @@ def main():
         raise RuntimeError("Refusing to package a simulator app as a device IPA")
     if not info.get("NSLocalNetworkUsageDescription"):
         raise RuntimeError("Missing iOS local network permission description")
+    chinese_strings = app / "zh-Hans.lproj/InfoPlist.strings"
+    if not chinese_strings.is_file():
+        raise RuntimeError("Simplified Chinese iOS permission resource is missing")
+    localized_info = json.loads(subprocess.check_output(
+        ["plutil", "-convert", "json", "-o", "-", str(chinese_strings)], text=True
+    ))
+    expected_permission = "YALA 需要访问本地网络，以发现、连接和管理您的 OpenWrt 路由器。"
+    if localized_info.get("NSLocalNetworkUsageDescription") != expected_permission:
+        raise RuntimeError("Simplified Chinese iOS permission copy does not match")
     if not (app / "Frameworks/App.framework/flutter_assets").is_dir():
         raise RuntimeError("Flutter assets missing from compiled app")
 
@@ -61,6 +70,7 @@ def main():
         "ipa_bytes": ipa.stat().st_size,
         "signing": "unsigned; user must sign before installation",
         "checks": ["arm64 device executable", "local network purpose string",
+                   "Simplified Chinese iOS permission copy",
                    "Flutter assets", "IPA Payload layout", "ZIP CRC"],
         "native_simulator_test": "separate workflow job; check its status",
         "real_router_test": "not performed by cloud CI",

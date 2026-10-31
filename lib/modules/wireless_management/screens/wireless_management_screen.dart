@@ -1103,7 +1103,7 @@ class _WirelessManagementScreenState
                       ),
                     if (st.rxRate == null && st.txRate == null)
                       Text(
-                        st.signalQualityLabel,
+                        localizeUiCopy(context, st.signalQualityLabel),
                         style: const TextStyle(
                           fontSize: 10,
                           color: Colors.grey,

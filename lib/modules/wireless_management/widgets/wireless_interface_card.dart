@@ -487,9 +487,12 @@ class _WirelessInterfaceCardState extends ConsumerState<WirelessInterfaceCard> {
                                     alpha: 0.4,
                                   ),
                           ),
-                          tooltip: localizeUiCopy(context, hasWriteAccess
-                              ? 'Edit Security & Parameters'
-                              : 'Edit Restricted (Read-Only)'),
+                          tooltip: localizeUiCopy(
+                            context,
+                            hasWriteAccess
+                                ? 'Edit Security & Parameters'
+                                : 'Edit Restricted (Read-Only)',
+                          ),
                           visualDensity: VisualDensity.compact,
                           padding: const EdgeInsets.all(3),
                           constraints: const BoxConstraints(),
@@ -533,9 +536,12 @@ class _WirelessInterfaceCardState extends ConsumerState<WirelessInterfaceCard> {
                                 ? Colors.redAccent
                                 : Colors.grey,
                           ),
-                          tooltip: localizeUiCopy(context, hasWriteAccess
-                              ? 'Delete Virtual Interface'
-                              : 'Delete Restricted (Read-Only)'),
+                          tooltip: localizeUiCopy(
+                            context,
+                            hasWriteAccess
+                                ? 'Delete Virtual Interface'
+                                : 'Delete Restricted (Read-Only)',
+                          ),
                           visualDensity: VisualDensity.compact,
                           padding: const EdgeInsets.all(3),
                           constraints: const BoxConstraints(),
@@ -653,9 +659,10 @@ class _WirelessInterfaceCardState extends ConsumerState<WirelessInterfaceCard> {
                                 : Icons.keyboard_arrow_down_rounded,
                             size: 19,
                           ),
-                          tooltip: localizeUiCopy(context, _isExpanded
-                              ? 'Collapse Details'
-                              : 'Expand Details'),
+                          tooltip: localizeUiCopy(
+                            context,
+                            _isExpanded ? 'Collapse Details' : 'Expand Details',
+                          ),
                           visualDensity: VisualDensity.compact,
                           padding: const EdgeInsets.all(3),
                           constraints: const BoxConstraints(),

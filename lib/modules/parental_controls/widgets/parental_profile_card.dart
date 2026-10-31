@@ -175,9 +175,12 @@ class ParentalProfileCard extends StatelessWidget {
                       icon: Icons.schedule_rounded,
                       label: profile.schedule!.blockTimeFormatted,
                       color: hasFileExec ? Colors.blue : Colors.grey,
-                      tooltip: localizeUiCopy(context, hasFileExec
-                          ? 'Schedule: block at ${profile.schedule!.blockTimeFormatted}'
-                          : 'Schedule requires file.exec access'),
+                      tooltip: localizeUiCopy(
+                        context,
+                        hasFileExec
+                            ? 'Schedule: block at ${profile.schedule!.blockTimeFormatted}'
+                            : 'Schedule requires file.exec access',
+                      ),
                     ),
                   if (profile.hasTimeLimit)
                     _FeatureChip(
@@ -225,13 +228,16 @@ class ParentalProfileCard extends StatelessWidget {
                     child: _PauseButton(
                       enabled:
                           hasFirewall && profile.hasMacs && profile.isEnabled,
-                      tooltip: localizeUiCopy(context, !hasFirewall
-                          ? 'Requires firewall write access'
-                          : !profile.hasMacs
-                          ? 'Add devices to this profile first'
-                          : !profile.isEnabled
-                          ? 'Profile is in Bypass mode (Unrestricted)'
-                          : null),
+                      tooltip: localizeOptionalUiCopy(
+                        context,
+                        !hasFirewall
+                            ? 'Requires firewall write access'
+                            : !profile.hasMacs
+                            ? 'Add devices to this profile first'
+                            : !profile.isEnabled
+                            ? 'Profile is in Bypass mode (Unrestricted)'
+                            : null,
+                      ),
                       onPause: onPause,
                     ),
                   ),

@@ -24,6 +24,9 @@ String localizeUiCopy(BuildContext context, String text) {
 
 final _catalogs = <String, _UiCopyCatalog>{};
 
+String? localizeOptionalUiCopy(BuildContext context, String? text) =>
+    text == null ? null : localizeUiCopy(context, text);
+
 String _localizeUiKeyword(AppLocalizations l10n, String keyword) =>
     _catalogs[l10n.localeName]?.translate(keyword) ?? keyword;
 

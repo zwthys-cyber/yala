@@ -335,7 +335,10 @@ class VpnConnectivityScreen extends ConsumerWidget {
                         wg.isUp ? Icons.power_settings_new : Icons.play_arrow,
                         size: 20,
                       ),
-                      tooltip: localizeUiCopy(context, wg.isUp ? 'Bring Down' : 'Bring Up'),
+                      tooltip: localizeUiCopy(
+                        context,
+                        wg.isUp ? 'Bring Down' : 'Bring Up',
+                      ),
                       onPressed: () => _confirmToggleProvider(
                         context,
                         ref,

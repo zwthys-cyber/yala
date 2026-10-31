@@ -64,9 +64,12 @@ class _BandwidthMonitorScreenState extends ConsumerState<BandwidthMonitorScreen>
                   : Icons.play_circle_outline_rounded,
               color: state.isStreaming ? colorScheme.primary : Colors.grey,
             ),
-            tooltip: localizeUiCopy(context, state.isStreaming
-                ? (l10n?.bandwidthPauseStream ?? 'Pause Live Stream')
-                : (l10n?.bandwidthResumeStream ?? 'Resume Live Stream')),
+            tooltip: localizeUiCopy(
+              context,
+              state.isStreaming
+                  ? (l10n?.bandwidthPauseStream ?? 'Pause Live Stream')
+                  : (l10n?.bandwidthResumeStream ?? 'Resume Live Stream'),
+            ),
             onPressed: () => controller.toggleStreaming(),
           ),
           PopupMenuButton<int>(

@@ -1740,7 +1740,10 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                                     ),
                                   ),
                                   Text(
-                                    st.signalQualityLabel,
+                                    localizeUiCopy(
+                                      context,
+                                      st.signalQualityLabel,
+                                    ),
                                     style: const TextStyle(
                                       fontSize: 10,
                                       color: Colors.grey,
@@ -2787,9 +2790,12 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                     size: 18,
                     color: Theme.of(context).colorScheme.primary,
                   ),
-                  tooltip: localizeUiCopy(context, prefs.maskPublicIp
-                      ? 'Show public WAN IP address'
-                      : 'Mask public WAN IP address for privacy'),
+                  tooltip: localizeUiCopy(
+                    context,
+                    prefs.maskPublicIp
+                        ? 'Show public WAN IP address'
+                        : 'Mask public WAN IP address for privacy',
+                  ),
                   visualDensity: VisualDensity.compact,
                   padding: EdgeInsets.zero,
                   constraints: const BoxConstraints(),

@@ -636,7 +636,7 @@ class GuestWifiManagementScreen extends ConsumerWidget {
                               ),
                               const SizedBox(height: 2),
                               LocalizedUiText(
-                                'Signal: ${st.formattedSignal} (${st.signalQualityLabel})  •  Noise: ${st.noiseDbm != null ? "${st.noiseDbm} dBm" : "N/A"}',
+                                'Signal: ${st.formattedSignal} (${localizeUiCopy(context, st.signalQualityLabel)})  •  Noise: ${st.noiseDbm != null ? "${st.noiseDbm} dBm" : "N/A"}',
                                 style: TextStyle(
                                   fontSize: 11,
                                   color: theme.colorScheme.onSurfaceVariant,

@@ -272,11 +272,14 @@ class _WifiQrDialogState extends ConsumerState<WifiQrDialog> {
                                 onPressed: () => setState(
                                   () => _showPassword = !_showPassword,
                                 ),
-                                tooltip: localizeUiCopy(context, _showPassword
-                                    ? (l10n?.btnHidePassphrase ??
-                                          'Hide Passphrase')
-                                    : (l10n?.btnShowPassphrase ??
-                                          'Show Passphrase')),
+                                tooltip: localizeUiCopy(
+                                  context,
+                                  _showPassword
+                                      ? (l10n?.btnHidePassphrase ??
+                                            'Hide Passphrase')
+                                      : (l10n?.btnShowPassphrase ??
+                                            'Show Passphrase'),
+                                ),
                               ),
                             ],
                           ),

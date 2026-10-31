@@ -172,9 +172,12 @@ class _ManageRoutersScreenState extends ConsumerState<ManageRoutersScreen> {
                                   onPressed: () => setDialogState(
                                     () => obscureText = !obscureText,
                                   ),
-                                  tooltip: localizeUiCopy(context, obscureText
-                                      ? 'Hide password'
-                                      : 'Show password'),
+                                  tooltip: localizeUiCopy(
+                                    context,
+                                    obscureText
+                                        ? 'Hide password'
+                                        : 'Show password',
+                                  ),
                                 ),
                               ).localized(context),
                               obscureText: obscureText,
@@ -560,9 +563,12 @@ class _ManageRoutersScreenState extends ConsumerState<ManageRoutersScreen> {
                                     onPressed: () => setState(
                                       () => obscureText = !obscureText,
                                     ),
-                                    tooltip: localizeUiCopy(context, obscureText
-                                        ? 'Hide password'
-                                        : 'Show password'),
+                                    tooltip: localizeUiCopy(
+                                      context,
+                                      obscureText
+                                          ? 'Hide password'
+                                          : 'Show password',
+                                    ),
                                   ),
                                 ).localized(context),
                                 obscureText: obscureText,

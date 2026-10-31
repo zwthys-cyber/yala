@@ -1383,11 +1383,14 @@ class _PackageManagerScreenState extends ConsumerState<PackageManagerScreen>
                           ),
                           const SizedBox(width: 8),
                           IconButton.outlined(
-                            tooltip: localizeUiCopy(context, isRpcMissing
-                                ? (l10n?.rpcdPermissionDenied ??
-                                      'Permissions Required')
-                                : (l10n?.pkgBtnInstallCustom ??
-                                      'Install custom package')),
+                            tooltip: localizeUiCopy(
+                              context,
+                              isRpcMissing
+                                  ? (l10n?.rpcdPermissionDenied ??
+                                        'Permissions Required')
+                                  : (l10n?.pkgBtnInstallCustom ??
+                                        'Install custom package'),
+                            ),
                             style: IconButton.styleFrom(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),

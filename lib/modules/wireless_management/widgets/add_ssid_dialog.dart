@@ -713,9 +713,12 @@ class _AddSsidDialogState extends ConsumerState<AddSsidDialog> {
                           onPressed: () => setState(
                             () => _showPassphrase = !_showPassphrase,
                           ),
-                          tooltip: localizeUiCopy(context, _showPassphrase
-                              ? 'Hide passphrase'
-                              : 'Show passphrase'),
+                          tooltip: localizeUiCopy(
+                            context,
+                            _showPassphrase
+                                ? 'Hide passphrase'
+                                : 'Show passphrase',
+                          ),
                         ),
                       ).localized(context),
                       onChanged: (_) => setState(() {}),
