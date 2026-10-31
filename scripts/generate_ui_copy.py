@@ -17,7 +17,8 @@ def dart_string(value):
 def generate():
     data = json.loads((ROOT / 'lib/l10n/app_en.arb').read_text())
     exact, patterns, seen = [], [], set()
-    for key, value in data.items():
+    items = sorted(data.items(), key=lambda item: 0 if item[0].startswith('uiLegacy') else 1)
+    for key, value in items:
         if key.startswith('@') or not isinstance(value, str) or value in seen:
             continue
         placeholders = list(dict.fromkeys(re.findall(r'\{(\w+)\}', value)))
@@ -58,7 +59,9 @@ def generate():
             for name, arg in zip(ordered_names, ordered_args)
         ]
         line = f'      return l10n.{key}({", ".join(ordered_args)});'
-        patterns += [f'    _UiCopyRule({dart_string(value)}, (args) {{', *prelude, line, '    }),']
+        priority = 2 if keywords else 1 if key.startswith('uiLegacy') else 0
+        end = f'    }}, priority: {priority}),' if priority else '    }),'
+        patterns += [f'    _UiCopyRule({dart_string(value)}, (args) {{', *prelude, line, end]
         seen.add(value)
     return '\n'.join([
         '// Copyright (C) 2026 @nightcodex7',

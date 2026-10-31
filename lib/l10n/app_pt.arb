@@ -6490,5 +6490,14 @@
   "uiLegacyOpenNone": "Open (None)",
   "uiLegacyCustomUnknown": "Custom/Unknown",
   "uiLegacyOpen6e1095": "OPEN",
-  "uiLegacyUnknown": "UNKNOWN"
+  "uiLegacyUnknown": "UNKNOWN",
+  "uiWorldRegulatoryDomain": "00 — World / Global (Universal)",
+  "uiProxyGroupSelector": "Selector",
+  "uiProxyGroupUrlTest": "URLTest",
+  "uiProxyGroupFallback": "Fallback",
+  "uiProxyGroupLoadBalance": "LoadBalance",
+  "uiSignalExcellent": "Excellent",
+  "uiSignalGood": "Good",
+  "uiSignalFair": "Fair",
+  "uiSignalWeak": "Weak"
 }

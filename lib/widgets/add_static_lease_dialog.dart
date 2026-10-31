@@ -921,7 +921,7 @@ class _AddStaticLeaseDialogState extends State<AddStaticLeaseDialog> {
       initialDate: now.add(const Duration(days: 1)),
       firstDate: now.add(const Duration(minutes: 5)),
       lastDate: now.add(const Duration(days: 3650)),
-      helpText: 'Select Static Lease Expiration Date',
+      helpText: localizeUiCopy(context, 'Select Static Lease Expiration Date'),
     );
 
     if (pickedDate == null || !mounted) return;
@@ -929,7 +929,7 @@ class _AddStaticLeaseDialogState extends State<AddStaticLeaseDialog> {
     final pickedTime = await showTimePicker(
       context: context,
       initialTime: TimeOfDay.fromDateTime(now.add(const Duration(hours: 1))),
-      helpText: 'Select Static Lease Expiration Time',
+      helpText: localizeUiCopy(context, 'Select Static Lease Expiration Time'),
     );
 
     if (pickedTime == null || !mounted) return;

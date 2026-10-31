@@ -12,6 +12,7 @@ part 'ui_copy_catalog.g.dart';
 /// SSIDs, interface identifiers, YAML, commands and diagnostic logs are data
 /// and must be rendered without this adapter.
 String localizeUiCopy(BuildContext context, String text) {
+  if (!context.mounted) return text;
   final l10n = AppLocalizations.of(context);
   if (l10n == null || l10n.localeName.startsWith('en')) return text;
   final catalog = _catalogs.putIfAbsent(
@@ -42,6 +43,12 @@ class _UiCopyCatalog {
   final Map<String, List<_UiCopyRule>> _rules = {};
 
   _UiCopyCatalog(this.exact, List<_UiCopyRule> rules) {
+    // A generic "Failed to {message}" must not hide a more specific message
+    // whose translated word order and argument roles are known.
+    rules.sort((a, b) {
+      final specificity = b.literalLength.compareTo(a.literalLength);
+      return specificity != 0 ? specificity : b.priority.compareTo(a.priority);
+    });
     for (final rule in rules) {
       final word = _firstWord(rule.template);
       (_rules[word] ??= []).add(rule);
@@ -72,9 +79,11 @@ class _UiCopyCatalog {
 class _UiCopyRule {
   final String template;
   final String? Function(List<String>) resolve;
+  final int priority;
   RegExp? _pattern;
+  late final int literalLength = template.replaceAll(RegExp(r'\{\w+\}'), '').length;
 
-  _UiCopyRule(this.template, this.resolve);
+  _UiCopyRule(this.template, this.resolve, {this.priority = 0});
 
   String? translate(String text) {
     _pattern ??= RegExp(

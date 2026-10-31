@@ -143,7 +143,7 @@ class _BanWirelessClientDialogState extends State<BanWirelessClientDialog> {
       initialDate: initialDate,
       firstDate: now,
       lastDate: now.add(const Duration(days: 365)),
-      helpText: 'Select Ban End Date',
+      helpText: localizeUiCopy(context, 'Select Ban End Date'),
     );
 
     if (pickedDate == null || !mounted) return;
@@ -152,7 +152,7 @@ class _BanWirelessClientDialogState extends State<BanWirelessClientDialog> {
     final pickedTime = await showTimePicker(
       context: context,
       initialTime: initialTime,
-      helpText: 'Select Ban End Time',
+      helpText: localizeUiCopy(context, 'Select Ban End Time'),
     );
 
     if (pickedTime == null || !mounted) return;

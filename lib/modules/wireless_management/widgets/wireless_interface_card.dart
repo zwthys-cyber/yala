@@ -408,7 +408,7 @@ class _WirelessInterfaceCardState extends ConsumerState<WirelessInterfaceCard> {
                               ),
                             ),
                             child: Text(
-                              iface.securityMode.shortBadgeLabel,
+                              localizeUiCopy(context, iface.securityMode.shortBadgeLabel),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(

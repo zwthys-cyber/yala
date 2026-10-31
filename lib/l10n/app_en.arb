@@ -13855,5 +13855,41 @@
   "uiLegacyUnknown": "UNKNOWN",
   "@uiLegacyUnknown": {
     "description": "Application-owned legacy UI copy. Never use to translate router data."
+  },
+  "uiWorldRegulatoryDomain": "00 — World / Global (Universal)",
+  "@uiWorldRegulatoryDomain": {
+    "description": "Localized presentation label; the underlying router identifier is unchanged."
+  },
+  "uiProxyGroupSelector": "Selector",
+  "@uiProxyGroupSelector": {
+    "description": "Localized presentation label; the underlying router identifier is unchanged."
+  },
+  "uiProxyGroupUrlTest": "URLTest",
+  "@uiProxyGroupUrlTest": {
+    "description": "Localized presentation label; the underlying router identifier is unchanged."
+  },
+  "uiProxyGroupFallback": "Fallback",
+  "@uiProxyGroupFallback": {
+    "description": "Localized presentation label; the underlying router identifier is unchanged."
+  },
+  "uiProxyGroupLoadBalance": "LoadBalance",
+  "@uiProxyGroupLoadBalance": {
+    "description": "Localized presentation label; the underlying router identifier is unchanged."
+  },
+  "uiSignalExcellent": "Excellent",
+  "@uiSignalExcellent": {
+    "description": "Localized presentation label; the underlying router identifier is unchanged."
+  },
+  "uiSignalGood": "Good",
+  "@uiSignalGood": {
+    "description": "Localized presentation label; the underlying router identifier is unchanged."
+  },
+  "uiSignalFair": "Fair",
+  "@uiSignalFair": {
+    "description": "Localized presentation label; the underlying router identifier is unchanged."
+  },
+  "uiSignalWeak": "Weak",
+  "@uiSignalWeak": {
+    "description": "Localized presentation label; the underlying router identifier is unchanged."
   }
 }

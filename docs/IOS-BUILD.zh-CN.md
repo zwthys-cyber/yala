@@ -17,6 +17,28 @@ Flutter 依赖、静态分析、自动测试和 Xcode 编译均由 GitHub 托管
 `run_simulator` 默认为关闭，只有需要检查模拟器启动或登录页截图时才勾选。
 此构建保留原作者署名，不设置上游的 `OFFICIAL_BUILD=true` 标记。
 
+## 2.6.1（237）：补齐中文界面
+
+本次补齐无线配置、访客网络、VPN、系统服务、表单提示、确认对话框和通知中
+直接显示的英文文案。物理射频、工作模式、国家选项及代理组类型使用中文显示，
+SSID、节点名称、接口标识、配置内容及命令仍保留原值。
+
+旧控件通过 `lib/l10n/ui_copy.dart` 使用现有 ARB 翻译；新增界面优先直接使用
+`AppLocalizations`。修改 ARB 后运行 `python3 scripts/generate_ui_copy.py`，
+更新提交中的类型化适配表。CI 检查适配表是否与资源一致；该适配器只用于应用文案，
+不得用于翻译用户数据、协议参数或原始诊断日志。
+
+截至 2026-10-31，此版本的代码和回归测试已提交，云端验证与 IPA 构建尚未执行。
+GitHub 拒绝构建请求，返回 `Actions has been disabled for this repository`；
+仓库 Actions 设置仍为启用、工作流状态为 active。
+这可能属于 GitHub 单独控制的停用状态，需要查看 Actions 页面提示并联系
+[GitHub 支持审核](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository)。
+当前没有已验证的 237 版 IPA；此前 236 版的成功结果不代表本次改动通过验证。
+
+恢复后，在 **Actions → Build iOS IPA → Run workflow** 中选择
+`codex/ios-cloud-build` 分支，保持 `run_simulator` 关闭。
+先处理流程输出的格式补丁并重新验证，全部通过后才使用新的 IPA。
+
 ## 自动验证范围
 
 推送至 main 或提交到 main 的 PR 会启动流程。首先检查 Dart 格式、

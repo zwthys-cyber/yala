@@ -5,6 +5,684 @@ part of 'ui_copy.dart';
 
 _UiCopyCatalog _buildUiCopyCatalog(AppLocalizations l10n) => _UiCopyCatalog(
   {
+    "Got it": l10n.uiLegacyGotIt,
+    "Network Access Blocked": l10n.uiLegacyNetworkAccessBlocked,
+    "Network Access Restored": l10n.uiLegacyNetworkAccessRestored,
+    "Failed to update network access policy": l10n.uiLegacyFailedToUpdateNetworkAccessPolicy,
+    "Invalid Expiry Time": l10n.uiLegacyInvalidExpiryTime,
+    "Please choose a future date and time.": l10n.uiLegacyPleaseChooseAFutureDateAndTime,
+    "Block Internet Access": l10n.uiLegacyBlockInternetAccess,
+    "Block IPv4 Internet": l10n.uiLegacyBlockIpvInternet,
+    "Block IPv6 Internet": l10n.uiLegacyBlockIpvInternet601099,
+    "Restore Full Access": l10n.uiLegacyRestoreFullAccess,
+    "Follow system settings": l10n.uiLegacyFollowSystemSettings,
+    "Staged Changes Pending": l10n.uiLegacyStagedChangesPending,
+    "Revert Changes": l10n.uiLegacyRevertChanges,
+    "This action": l10n.uiLegacyThisAction,
+    "Access Restricted": l10n.uiLegacyAccessRestricted,
+    "Access Denied": l10n.uiLegacyAccessDenied,
+    "Self-Device Safety Warning": l10n.uiLegacySelfDeviceSafetyWarning,
+    "Proceed with Caution": l10n.uiLegacyProceedWithCaution,
+    "Unsaved Changes": l10n.uiLegacyUnsavedChanges,
+    "Refresh Failed": l10n.uiLegacyRefreshFailed,
+    "Unable to refresh router data. Please check connection.": l10n.uiLegacyUnableToRefreshRouterDataPleaseCheck,
+    "No items to display": l10n.uiLegacyNoItemsToDisplay,
+    "Pull down to refresh": l10n.uiLegacyPullDownToRefresh,
+    "Error saving hostname from dialog": l10n.uiLegacyErrorSavingHostnameFromDialog,
+    "Invalid duration": l10n.uiLegacyInvalidDuration,
+    "Select Ban End Date": l10n.uiLegacySelectBanEndDate,
+    "Select Ban End Time": l10n.uiLegacySelectBanEndTime,
+    "Ban end time must be at least 30 seconds in the future.": l10n.uiLegacyBanEndTimeMustBeAtLeast,
+    "Anonymous Device": l10n.uiLegacyAnonymousDevice,
+    "Anonymous IPv6 Host": l10n.uiLegacyAnonymousIpvHost,
+    "Clipboard does not contain a valid MAC address.": l10n.uiLegacyClipboardDoesNotContainAValidMac,
+    "Unable to read clipboard.": l10n.uiLegacyUnableToReadClipboard,
+    "Provide a MAC address or DUID identifier": l10n.uiLegacyProvideAMacAddressOrDuidIdentifier,
+    "DUID:": l10n.uiLegacyDuid,
+    "Enter a valid MAC address (e.g. AA:BB:CC:DD:EE:FF)": l10n.uiLegacyEnterAValidMacAddressEG,
+    "Enter a valid DUID hex string": l10n.uiLegacyEnterAValidDuidHexString,
+    "Provide at least an IPv4 or IPv6 address reservation": l10n.uiLegacyProvideAtLeastAnIpvOrIpv,
+    "Enter a valid IPv4 address (e.g. 192.168.1.150)": l10n.uiLegacyEnterAValidIpvAddressEG,
+    "Enter a valid IPv6 address or Host ID (e.g. 2405:201::100 or ::100)": l10n.uiLegacyEnterAValidIpvAddressOrHost,
+    "Specify custom lease duration (e.g. 2h, 30m, 3d)": l10n.uiLegacySpecifyCustomLeaseDurationEGH,
+    "Save in progress. Please wait a moment...": l10n.uiLegacySaveInProgressPleaseWaitAMoment,
+    "Please fix highlighted form errors.": l10n.uiLegacyPleaseFixHighlightedFormErrors,
+    "Please check your router connection and try again.": l10n.uiLegacyPleaseCheckYourRouterConnectionAndTry,
+    "Client deauthenticated. Toggle Wi-Fi on the device if it does not acquire its new IP in 10s.": l10n.uiLegacyClientDeauthenticatedToggleWiFiOnThe,
+    "Select Static Lease Expiration Date": l10n.uiLegacySelectStaticLeaseExpirationDate,
+    "Select Static Lease Expiration Time": l10n.uiLegacySelectStaticLeaseExpirationTime,
+    "Lease expiry must be at least 2 minutes in the future.": l10n.uiLegacyLeaseExpiryMustBeAtLeastMinutes,
+    "e.g. 2405:201::100 or ::100 (Host ID)": l10n.uiLegacyEGOrHostId,
+    "Pick Date & Time": l10n.uiLegacyPickDateTime,
+    "DSA bridge": l10n.uiLegacyDsaBridge,
+    "DSA Engine": l10n.uiLegacyDsaEngine,
+    "swconfig Engine": l10n.uiLegacySwconfigEngine,
+    "Internal CPU / SoC Interconnect": l10n.uiLegacyInternalCpuSocInterconnect,
+    "Switch Port": l10n.uiLegacySwitchPort,
+    "Terminates active sessions across all devices": l10n.uiLegacyTerminatesActiveSessionsAcrossAllDevices,
+    "Cannot be undone without physical access if forgotten": l10n.uiLegacyCannotBeUndoneWithoutPhysicalAccessIf,
+    "Proceed with Change": l10n.uiLegacyProceedWithChange,
+    "Saving to secure storage failed again. Please note your password.": l10n.uiLegacySavingToSecureStorageFailedAgainPlease,
+    "Processing password change...": l10n.uiLegacyProcessingPasswordChange,
+    "• To protect your access, your saved credentials have NOT been altered.\n• Do NOT repeatedly retry changing the password.\n• Please verify your router connection via the LuCI web interface or SSH before attempting again.": l10n.uiLegacyToProtectYourAccessYourSavedCredentials,
+    "Change Password": l10n.uiLegacyChangePassword,
+    "System Notice": l10n.uiLegacySystemNotice,
+    "operation not permitted": l10n.uiLegacyOperationNotPermitted,
+    "Local network permission required. Please allow access in iOS Settings > Yet Another LuCI App.": l10n.uiLegacyLocalNetworkPermissionRequiredPleaseAllowAccess,
+    "connection refused": l10n.uiLegacyConnectionRefused,
+    "timed out": l10n.uiLegacyTimedOut,
+    "host lookup": l10n.uiLegacyHostLookup,
+    "Unable to complete request. Please verify network connection and try again.": l10n.uiLegacyUnableToCompleteRequestPleaseVerifyNetwork,
+    "Unable to process selected file. Please verify file format and storage permissions.": l10n.uiLegacyUnableToProcessSelectedFilePleaseVerify,
+    "An unexpected error occurred. Please try again.": l10n.uiLegacyAnUnexpectedErrorOccurredPleaseTryAgain,
+    "Operation Timed Out": l10n.uiLegacyOperationTimedOut,
+    "The request took too long to complete. Please check network connection.": l10n.uiLegacyTheRequestTookTooLongToComplete,
+    "Action Cooldown Active": l10n.uiLegacyActionCooldownActive,
+    "Local Network Access permission is required to connect to your router.": l10n.uiLegacyLocalNetworkAccessPermissionIsRequiredTo,
+    "Unable to load dashboard data. Please check your connection.": l10n.uiLegacyUnableToLoadDashboardDataPleaseCheck,
+    "Dashboard section": l10n.uiLegacyDashboardSection,
+    "Client icon": l10n.uiLegacyClientIcon,
+    "Collapse details": l10n.uiLegacyCollapseDetails,
+    "Expand details": l10n.uiLegacyExpandDetails,
+    "Manage Access": l10n.uiLegacyManageAccess,
+    "Removal in progress. Please wait a moment...": l10n.uiLegacyRemovalInProgressPleaseWaitAMoment,
+    "Unnamed Host": l10n.uiLegacyUnnamedHost,
+    "Requires router RPC permissions": l10n.uiLegacyRequiresRouterRpcPermissions,
+    "Update locally saved credentials and settings for this profile.": l10n.uiLegacyUpdateLocallySavedCredentialsAndSettingsFor,
+    "Please enter the router address": l10n.uiLegacyPleaseEnterTheRouterAddress,
+    "A profile with this address and username already exists.": l10n.uiLegacyAProfileWithThisAddressAndUsername,
+    "Locally saved profile credentials updated.": l10n.uiLegacyLocallySavedProfileCredentialsUpdated,
+    "Export is disabled in Reviewer Mode.": l10n.uiLegacyExportIsDisabledInReviewerMode,
+    "Import is disabled in Reviewer Mode.": l10n.uiLegacyImportIsDisabledInReviewerMode,
+    "No file selected.": l10n.uiLegacyNoFileSelected,
+    "Profiles processed successfully": l10n.uiLegacyProfilesProcessedSuccessfully,
+    "Unexpected error during profile import": l10n.uiLegacyUnexpectedErrorDuringProfileImport,
+    "Router already exists.": l10n.uiLegacyRouterAlreadyExists,
+    "Reviewer Mode Active: Profiles displayed here are in demo mode. Any added or modified profiles will not be saved permanently or exported.": l10n.uiLegacyReviewerModeActiveProfilesDisplayedHereAre,
+    "Restarting Interface": l10n.uiLegacyRestartingInterface,
+    "Interface Restarted": l10n.uiLegacyInterfaceRestarted,
+    "Restart Failed": l10n.uiLegacyRestartFailed,
+    "Restarting Wireless": l10n.uiLegacyRestartingWireless,
+    "Wireless Restarted": l10n.uiLegacyWirelessRestarted,
+    "Apply Failed": l10n.uiLegacyApplyFailed,
+    "Changes Applied": l10n.uiLegacyChangesApplied,
+    "Conservative fallback active — network model could not be verified automatically.": l10n.uiLegacyConservativeFallbackActiveNetworkModelCouldNot,
+    "No IPv4": l10n.uiLegacyNoIpv,
+    "No IPv6": l10n.uiLegacyNoIpva6785b,
+    "Interface icon": l10n.uiLegacyInterfaceIcon,
+    "Reboot Timeout": l10n.uiLegacyRebootTimeout,
+    "Router did not respond in time. Please check your connection.": l10n.uiLegacyRouterDidNotRespondInTimePlease,
+    "Simulated Router Session": l10n.uiLegacySimulatedRouterSession,
+    "You are exploring Yet Another LuCI App in Reviewer Mode.": l10n.uiLegacyYouAreExploringYetAnotherLuciApp,
+    "This session provides pre-loaded mock datasets, simulating live OpenWrt router interfaces, connected clients, and performance metrics without needing an active router connection.": l10n.uiLegacyThisSessionProvidesPreLoadedMockDatasets,
+    "To manage a physical OpenWrt router, toggle off Reviewer Mode in More > Connection Settings.": l10n.uiLegacyToManageAPhysicalOpenwrtRouterToggle,
+    "GOT IT": l10n.uiLegacyGotItadceab,
+    "Reconnecting to router...": l10n.uiLegacyReconnectingToRouter,
+    "Router disconnected": l10n.uiLegacyRouterDisconnected,
+    "RPC Status": l10n.uiLegacyRpcStatus,
+    "SETUP REQUIRED": l10n.uiLegacySetupRequired,
+    "Copyleft & Freedom Notice:": l10n.uiLegacyCopyleftFreedomNotice,
+    "Bypasses live router connection and populates mock metrics for testing and review.": l10n.uiLegacyBypassesLiveRouterConnectionAndPopulatesMock,
+    "Are you sure you want to exit Reviewer Mode and return to the login screen?": l10n.uiLegacyAreYouSureYouWantToExit,
+    "Yet Another LuCI App Support Request": l10n.uiLegacyYetAnotherLuciAppSupportRequest,
+    "Permissions Required": l10n.uiLegacyPermissionsRequired,
+    "End demo session and return to login": l10n.uiLegacyEndDemoSessionAndReturnToLogin,
+    "Router Connected": l10n.uiLegacyRouterConnected,
+    "Reconnecting to Router...": l10n.uiLegacyReconnectingToRouter0ffbd0,
+    "Router Disconnected": l10n.uiLegacyRouterDisconnected1344ba,
+    "Switching router...": l10n.uiLegacySwitchingRouter,
+    "Collecting throughput data...": l10n.uiLegacyCollectingThroughputData,
+    "Temp Script Missing": l10n.uiLegacyTempScriptMissing,
+    "Permanently dismiss temperature prompt": l10n.uiLegacyPermanentlyDismissTemperaturePrompt,
+    "No network interfaces active": l10n.uiLegacyNoNetworkInterfacesActive,
+    "REVIEWER MODE ACTIVE": l10n.uiLegacyReviewerModeActive,
+    "Using simulated router environment with full mock data": l10n.uiLegacyUsingSimulatedRouterEnvironmentWithFullMock,
+    "Exit Mode": l10n.uiLegacyExitMode,
+    "This will disable reviewer mode and redirect to the login screen so you can connect to a live router.": l10n.uiLegacyThisWillDisableReviewerModeAndRedirect,
+    "Unable to connect to the router. Please check your network connection and router settings.": l10n.uiLegacyUnableToConnectToTheRouterPlease,
+    "Retry Connection": l10n.uiLegacyRetryConnection,
+    "Unable to fetch dashboard data. Pull down to refresh or tap the button below.": l10n.uiLegacyUnableToFetchDashboardDataPullDown,
+    "Show public WAN IP address": l10n.uiLegacyShowPublicWanIpAddress,
+    "Mask public WAN IP address for privacy": l10n.uiLegacyMaskPublicWanIpAddressForPrivacy,
+    "Flushing DNS cache...": l10n.uiLegacyFlushingDnsCache,
+    "Refreshing Dashboard...": l10n.uiLegacyRefreshingDashboard,
+    "Dashboard Updated": l10n.uiLegacyDashboardUpdated,
+    "LuCI RPC Package Required": l10n.uiLegacyLuciRpcPackageRequired,
+    "Your router is missing `luci-mod-rpc` or backend execution permissions. Some real-time wireless, package, and system control features require RPC support.": l10n.uiLegacyYourRouterIsMissingLuciModRpc,
+    "Installing RPC packages...": l10n.uiLegacyInstallingRpcPackages,
+    "RPC Installed": l10n.uiLegacyRpcInstalled,
+    "RPC packages and permissions installed successfully!": l10n.uiLegacyRpcPackagesAndPermissionsInstalledSuccessfully,
+    "Auto-Install Failed": l10n.uiLegacyAutoInstallFailed,
+    "Connect to your router via SSH and run the following command to enable full RPC functionality:\n": l10n.uiLegacyConnectToYourRouterViaSshAnd,
+    "permission denied": l10n.uiLegacyPermissionDenied,
+    "read-only file system": l10n.uiLegacyReadOnlyFileSystem,
+    "The router's root filesystem is mounted read-only because there is no space left in the flash overlay partition (/overlay).\n\nTo resolve this:\n• Free up flash space or remove unused packages\n• Run \"firstboot\" via SSH to reset the overlay\n• Use Extroot (USB drive) for expanded storage": l10n.uiLegacyTheRouterSRootFilesystemIsMounted,
+    "No output returned.": l10n.uiLegacyNoOutputReturned,
+    "Uninstall Failed": l10n.uiLegacyUninstallFailed,
+    "Upgrade Failed": l10n.uiLegacyUpgradeFailed,
+    "Package updates, installations, and removals are restricted until RPC permissions are granted.": l10n.uiLegacyPackageUpdatesInstallationsAndRemovalsAreRestricted,
+    "Capabilities Probe": l10n.uiLegacyCapabilitiesProbe,
+    "No repository packages available. Tap \"Update lists...\" to refresh feeds.": l10n.uiLegacyNoRepositoryPackagesAvailableTapUpdateLists,
+    "All packages are up to date.": l10n.uiLegacyAllPackagesAreUpToDate,
+    "Ready • 0 devices assigned": l10n.uiLegacyReadyDevicesAssigned,
+    "Bypass Restrictions": l10n.uiLegacyBypassRestrictions,
+    "Enable Guardrails": l10n.uiLegacyEnableGuardrails,
+    "Schedule requires file.exec access": l10n.uiLegacyScheduleRequiresFileExecAccess,
+    "Requires firewall write access": l10n.uiLegacyRequiresFirewallWriteAccess,
+    "Add devices to this profile first": l10n.uiLegacyAddDevicesToThisProfileFirst,
+    "Profile is in Bypass mode (Unrestricted)": l10n.uiLegacyProfileIsInBypassModeUnrestricted,
+    "Pause internet for how long?": l10n.uiLegacyPauseInternetForHowLong,
+    "Please select or enter a valid IPv4 address.": l10n.uiLegacyPleaseSelectOrEnterAValidIpv,
+    "Failed to apply port forwarding rule.": l10n.uiLegacyFailedToApplyPortForwardingRule,
+    "Please enter a service name": l10n.uiLegacyPleaseEnterAServiceName,
+    "Enter port": l10n.uiLegacyEnterPort,
+    "Invalid port": l10n.uiLegacyInvalidPort,
+    "Same as external": l10n.uiLegacySameAsExternal,
+    "No connected devices with active IPv4 addresses found. Please enter IP manually.": l10n.uiLegacyNoConnectedDevicesWithActiveIpvAddresses,
+    "Please enter IP address": l10n.uiLegacyPleaseEnterIpAddress,
+    "Invalid IPv4 address": l10n.uiLegacyInvalidIpvAddress,
+    "Telnet (Insecure Shell)": l10n.uiLegacyTelnetInsecureShell,
+    "SMB / Windows Sharing": l10n.uiLegacySmbWindowsSharing,
+    "RDP (Remote Desktop)": l10n.uiLegacyRdpRemoteDesktop,
+    "Please enter a valid IP address or CIDR.": l10n.uiLegacyPleaseEnterAValidIpAddressOr,
+    "Block Incoming Connection": l10n.uiLegacyBlockIncomingConnection,
+    "Please enter a port or port range.": l10n.uiLegacyPleaseEnterAPortOrPortRange,
+    "Failed to create firewall block rule.": l10n.uiLegacyFailedToCreateFirewallBlockRule,
+    "Please enter an external IP or CIDR": l10n.uiLegacyPleaseEnterAnExternalIpOrCidr,
+    "Invalid IP address or CIDR range": l10n.uiLegacyInvalidIpAddressOrCidrRange,
+    "SYN Flood": l10n.uiLegacySynFlood,
+    "Select Connected Client": l10n.uiLegacySelectConnectedClient,
+    "Failed to save port forwarding configuration.": l10n.uiLegacyFailedToSavePortForwardingConfiguration,
+    "Edit Port Forward": l10n.uiLegacyEditPortForward,
+    "Add Port Forward": l10n.uiLegacyAddPortForward,
+    "e.g. Web Server, Plex": l10n.uiLegacyEGWebServerPlex,
+    "Please enter a rule name.": l10n.uiLegacyPleaseEnterARuleName,
+    "External Port *": l10n.uiLegacyExternalPort,
+    "Enter port or range.": l10n.uiLegacyEnterPortOrRange,
+    "Invalid port format.": l10n.uiLegacyInvalidPortFormat,
+    "Dest Zone": l10n.uiLegacyDestZone,
+    "Defaults to external port": l10n.uiLegacyDefaultsToExternalPort,
+    "Internal Destination IP *": l10n.uiLegacyInternalDestinationIp,
+    "Please enter destination IP.": l10n.uiLegacyPleaseEnterDestinationIp,
+    "Please enter a valid IPv4 or IPv6 address.": l10n.uiLegacyPleaseEnterAValidIpvOrIpv,
+    "Destination IP must be IPv4 for IPv4 family.": l10n.uiLegacyDestinationIpMustBeIpvForIpv,
+    "Destination IP must be IPv6 for IPv6 family.": l10n.uiLegacyDestinationIpMustBeIpvForIpv63d2ab,
+    "Select connected client": l10n.uiLegacySelectConnectedClientc6ff6e,
+    "Source IP Filter (Optional)": l10n.uiLegacySourceIpFilterOptional,
+    "Leave empty to allow from any external IP.": l10n.uiLegacyLeaveEmptyToAllowFromAnyExternal,
+    "Must be a valid IP or CIDR.": l10n.uiLegacyMustBeAValidIpOrCidr,
+    "NAT Loopback / Reflection": l10n.uiLegacyNatLoopbackReflection,
+    "Allows LAN devices to connect using the external WAN address.": l10n.uiLegacyAllowsLanDevicesToConnectUsingThe,
+    "Activate this port forward rule immediately": l10n.uiLegacyActivateThisPortForwardRuleImmediately,
+    "Safety guard blocked rule: This DROP/REJECT rule affects the managing device or router management path and would cause network lockout.": l10n.uiLegacySafetyGuardBlockedRuleThisDropReject,
+    "Failed to save security rule configuration.": l10n.uiLegacyFailedToSaveSecurityRuleConfiguration,
+    "Invalid IP or CIDR.": l10n.uiLegacyInvalidIpOrCidr,
+    "e.g. AA:BB:CC:DD:EE:FF": l10n.uiLegacyEGAaBbCcDdEe,
+    "Changes Discarded": l10n.uiLegacyChangesDiscarded,
+    "firewall setting(s)": l10n.uiLegacyFirewallSettingS,
+    "Saving Changes": l10n.uiLegacySavingChanges,
+    "Saving firewall changes and reloading service...": l10n.uiLegacySavingFirewallChangesAndReloadingService,
+    "Firewall Save Error": l10n.uiLegacyFirewallSaveError,
+    "Firewall Saved": l10n.uiLegacyFirewallSaved,
+    "Firewall settings and rules saved successfully.": l10n.uiLegacyFirewallSettingsAndRulesSavedSuccessfully,
+    "Failed to update Flow Offloading settings.": l10n.uiLegacyFailedToUpdateFlowOffloadingSettings,
+    "firewall setting/rule change(s)": l10n.uiLegacyFirewallSettingRuleChangeS,
+    "Firewall Configuration Unavailable": l10n.uiLegacyFirewallConfigurationUnavailable,
+    "Edit port forward": l10n.uiLegacyEditPortForwardec8d86,
+    "Delete port forward": l10n.uiLegacyDeletePortForward,
+    "Delete Port Forward?": l10n.uiLegacyDeletePortForward497bba,
+    "No custom security rules defined (default zone policies active).": l10n.uiLegacyNoCustomSecurityRulesDefinedDefaultZone,
+    "Please save or discard unsaved changes before reordering rules.": l10n.uiLegacyPleaseSaveOrDiscardUnsavedChangesBefore,
+    "Reordering Rules": l10n.uiLegacyReorderingRules,
+    "Updating firewall rule priority...": l10n.uiLegacyUpdatingFirewallRulePriority,
+    "Rules Reordered": l10n.uiLegacyRulesReordered,
+    "Firewall rule order updated successfully.": l10n.uiLegacyFirewallRuleOrderUpdatedSuccessfully,
+    "Reorder Failed": l10n.uiLegacyReorderFailed,
+    "Unable to update rule order in firewall configuration.": l10n.uiLegacyUnableToUpdateRuleOrderInFirewall,
+    "Delete Security Rule?": l10n.uiLegacyDeleteSecurityRule,
+    "Username cannot be empty": l10n.uiLegacyUsernameCannotBeEmpty,
+    "Authentication failed. Invalid username or password.": l10n.uiLegacyAuthenticationFailedInvalidUsernameOrPassword,
+    "External Host": l10n.uiLegacyExternalHost,
+    "Local Router": l10n.uiLegacyLocalRouter,
+    "Forwarding Strategy:": l10n.uiLegacyForwardingStrategy,
+    "AdGuard DNS Port": l10n.uiLegacyAdguardDnsPort,
+    "Router Dnsmasq Port": l10n.uiLegacyRouterDnsmasqPort,
+    "Dnsmasq Port": l10n.uiLegacyDnsmasqPort,
+    "Configured Forwarders": l10n.uiLegacyConfiguredForwarders,
+    "Firewall Redirect": l10n.uiLegacyFirewallRedirect,
+    "AdGuard DNS filter": l10n.uiLegacyAdguardDnsFilter,
+    "Connection successful!": l10n.uiLegacyConnectionSuccessful,
+    "Authentication required. Enter username & password.": l10n.uiLegacyAuthenticationRequiredEnterUsernamePassword,
+    "Unreachable. Check host, port, and network.": l10n.uiLegacyUnreachableCheckHostPortAndNetwork,
+    "Endpoint responded, but is not AdGuard Home.": l10n.uiLegacyEndpointRespondedButIsNotAdguardHome,
+    "Connection test failed.": l10n.uiLegacyConnectionTestFailed,
+    "Edit AdGuard Profile": l10n.uiLegacyEditAdguardProfile,
+    "Add External AdGuard Home": l10n.uiLegacyAddExternalAdguardHome,
+    "Instance Name *": l10n.uiLegacyInstanceName,
+    "e.g. Raspberry Pi, Mini-PC": l10n.uiLegacyEGRaspberryPiMiniPc,
+    "Please enter a name": l10n.uiLegacyPleaseEnterAName,
+    "Host is required": l10n.uiLegacyHostIsRequired,
+    "Enter a valid IP address or hostname": l10n.uiLegacyEnterAValidIpAddressOrHostname,
+    "Testing Connection...": l10n.uiLegacyTestingConnection,
+    "Test Connection": l10n.uiLegacyTestConnection,
+    "dnsmasq server": l10n.uiLegacyDnsmasqServer,
+    "None (ISP/WAN Default)": l10n.uiLegacyNoneIspWanDefault,
+    "Instance Profiles": l10n.uiLegacyInstanceProfiles,
+    "Delete Current Profile": l10n.uiLegacyDeleteCurrentProfile,
+    "External AdGuard Home instance: Router DNS forwarding is unverified. Ensure your router or network clients point to this instance for filtering.": l10n.uiLegacyExternalAdguardHomeInstanceRouterDnsForwarding,
+    "Network connection failure": l10n.uiLegacyNetworkConnectionFailure,
+    "failure communicating": l10n.uiLegacyFailureCommunicating,
+    "Error saving init scripts": l10n.uiLegacyErrorSavingInitScripts,
+    "Are you sure you want to delete this scheduled cron job?\n\n": l10n.uiLegacyAreYouSureYouWantToDeleteab7c9f,
+    "No system cron jobs scheduled": l10n.uiLegacyNoSystemCronJobsScheduled,
+    "Add scheduled background maintenance tasks or system scripts.": l10n.uiLegacyAddScheduledBackgroundMaintenanceTasksOrSystem,
+    "No Dynamic DNS configurations found": l10n.uiLegacyNoDynamicDnsConfigurationsFound,
+    "Add a DDNS provider to keep your domain pointing to your router automatically.": l10n.uiLegacyAddADdnsProviderToKeepYour,
+    "This will install the official OpenWrt ddns-scripts core package and dynamic DNS provider scripts.\n\nDo you want to proceed?": l10n.uiLegacyThisWillInstallTheOfficialOpenwrtDdns,
+    "Installing ddns-scripts package...": l10n.uiLegacyInstallingDdnsScriptsPackage,
+    "ddns-scripts package installed successfully!": l10n.uiLegacyDdnsScriptsPackageInstalledSuccessfully,
+    "Insufficient storage space on router (No space left on device).": l10n.uiLegacyInsufficientStorageSpaceOnRouterNoSpace,
+    "Failed to install ddns-scripts package.": l10n.uiLegacyFailedToInstallDdnsScriptsPackage,
+    "Validation Test Passed": l10n.uiLegacyValidationTestPassed,
+    "Validation Test Failed": l10n.uiLegacyValidationTestFailed,
+    "Cron expression cannot be empty": l10n.uiLegacyCronExpressionCannotBeEmpty,
+    "Must contain 5 fields: minute hour day-of-month month day-of-week": l10n.uiLegacyMustContainFieldsMinuteHourDayOf,
+    "Day of Month": l10n.uiLegacyDayOfMonth,
+    "Day of Week": l10n.uiLegacyDayOfWeek,
+    "Command cannot be empty": l10n.uiLegacyCommandCannotBeEmpty,
+    "Command cannot contain newlines": l10n.uiLegacyCommandCannotContainNewlines,
+    "Command is too long (max 500 characters)": l10n.uiLegacyCommandIsTooLongMaxCharacters,
+    "CAUTION: This command contains potentially destructive removal operations!": l10n.uiLegacyCautionThisCommandContainsPotentiallyDestructiveRemoval,
+    "CAUTION: Direct raw disk writes detected!": l10n.uiLegacyCautionDirectRawDiskWritesDetected,
+    "min hour dom month dow (e.g. 0 4 * * *)": l10n.uiLegacyMinHourDomMonthDowEG,
+    "Instance Section Name": l10n.uiLegacyInstanceSectionName,
+    "Enter section name": l10n.uiLegacyEnterSectionName,
+    "Lookup Hostname": l10n.uiLegacyLookupHostname,
+    "Enter lookup hostname": l10n.uiLegacyEnterLookupHostname,
+    "Registered Domain": l10n.uiLegacyRegisteredDomain,
+    "Username / Auth ID": l10n.uiLegacyUsernameAuthId,
+    "Password / API Token": l10n.uiLegacyPasswordApiToken,
+    "Custom Update URL": l10n.uiLegacyCustomUpdateUrl,
+    "IP address source": l10n.uiLegacyIpAddressSource,
+    "Performing DNS resolution test on router...": l10n.uiLegacyPerformingDnsResolutionTestOnRouter,
+    "Test Passed": l10n.uiLegacyTestPassed,
+    "Test Failed": l10n.uiLegacyTestFailed,
+    "Save Instance": l10n.uiLegacySaveInstance,
+    "Add Instance": l10n.uiLegacyAddInstance,
+    "Collecting metric samples...": l10n.uiLegacyCollectingMetricSamples,
+    "Package Engine: APK": l10n.uiLegacyPackageEngineApk,
+    "Package Engine: OPKG": l10n.uiLegacyPackageEngineOpkg,
+    "Bufferbloat Mitigation": l10n.uiLegacyBufferbloatMitigation,
+    "Package installation is restricted because router RPC permissions are missing.": l10n.uiLegacyPackageInstallationIsRestrictedBecauseRouterRpc,
+    "Package to Install:": l10n.uiLegacyPackageToInstall,
+    "SQM Installation": l10n.uiLegacySqmInstallation,
+    "Fix Permissions": l10n.uiLegacyFixPermissions,
+    "Router RPC permissions missing. Installing packages requires RPC execution permissions.": l10n.uiLegacyRouterRpcPermissionsMissingInstallingPackagesRequires,
+    "Fix Permissions to Install": l10n.uiLegacyFixPermissionsToInstall,
+    "Disable in Firewall": l10n.uiLegacyDisableInFirewall,
+    "Disabling Flow Offloading": l10n.uiLegacyDisablingFlowOffloading,
+    "Disabling firewall flow offloading and reloading...": l10n.uiLegacyDisablingFirewallFlowOffloadingAndReloading,
+    "Flow Offloading Disabled": l10n.uiLegacyFlowOffloadingDisabled,
+    "Firewall flow offloading disabled. SQM shaping active.": l10n.uiLegacyFirewallFlowOffloadingDisabledSqmShapingActive,
+    "Failed to Disable Offloading": l10n.uiLegacyFailedToDisableOffloading,
+    "Please check your firewall settings.": l10n.uiLegacyPleaseCheckYourFirewallSettings,
+    "Zero Bandwidth Configured": l10n.uiLegacyZeroBandwidthConfigured,
+    "Both download and upload speeds are set to 0 Mbps. With zero bandwidth, SQM will not perform any traffic shaping or bufferbloat mitigation.\n\nDo you want to save anyway?": l10n.uiLegacyBothDownloadAndUploadSpeedsAreSet,
+    "Save Anyway": l10n.uiLegacySaveAnyway,
+    "Router Template": l10n.uiLegacyRouterTemplate,
+    "Connection Profile & Template": l10n.uiLegacyConnectionProfileTemplate,
+    "Select an OpenWrt template optimized for your internet connection type:": l10n.uiLegacySelectAnOpenwrtTemplateOptimizedForYour,
+    "Quick Sweet-Spot:": l10n.uiLegacyQuickSweetSpot,
+    "90% (Sweet Spot)": l10n.uiLegacySweetSpot,
+    "VDSL PPPoE (44B)": l10n.uiLegacyVdslPppoeB,
+    "Cable DOCSIS (34B)": l10n.uiLegacyCableDocsisB,
+    "ADSL ATM (40B)": l10n.uiLegacyAdslAtmB,
+    "Verbosity Level (0-10)": l10n.uiLegacyVerbosityLevel,
+    "Saving...": l10n.uiLegacySaving,
+    "Cumulative total": l10n.uiLegacyCumulativeTotal,
+    "Filesystem is Read-Only": l10n.uiLegacyFilesystemIsReadOnly,
+    "Insufficient Storage Space": l10n.uiLegacyInsufficientStorageSpace,
+    "Memory Exhaustion (OOM)": l10n.uiLegacyMemoryExhaustionOom,
+    "The router ran out of RAM while resolving package dependencies and terminated the package manager.\n\nTo resolve this:\n• Enable zram-swap or configure external swap space\n• Stop memory-intensive background services temporarily\n• Install packages individually or use an image with pre-baked packages": l10n.uiLegacyTheRouterRanOutOfRamWhile,
+    "The router does not have enough storage space on the flash partition to install this package.\n\nTo resolve this:\n• Free up flash space or remove unused packages\n• Use Extroot (USB drive) for expanded storage": l10n.uiLegacyTheRouterDoesNotHaveEnoughStorage,
+    "Existing Template Present": l10n.uiLegacyExistingTemplatePresent,
+    "Create New Anyway": l10n.uiLegacyCreateNewAnyway,
+    "Use Existing Template": l10n.uiLegacyUseExistingTemplate,
+    "completed successfully": l10n.uiLegacyCompletedSuccessfully,
+    "cancelled by user": l10n.uiLegacyCancelledByUser,
+    "All probes passed": l10n.uiLegacyAllProbesPassed,
+    "Gateway ICMP unprompted": l10n.uiLegacyGatewayIcmpUnprompted,
+    "WAN OK": l10n.uiLegacyWanOk,
+    "DNS operational": l10n.uiLegacyDnsOperational,
+    "ICMP ping blocked": l10n.uiLegacyIcmpPingBlocked,
+    "DNS resolution failed": l10n.uiLegacyDnsResolutionFailed,
+    "Check router DNS settings": l10n.uiLegacyCheckRouterDnsSettings,
+    "Local Gateway reachable": l10n.uiLegacyLocalGatewayReachable,
+    "No active WAN gateway": l10n.uiLegacyNoActiveWanGateway,
+    "Security Downgrade Warning": l10n.uiLegacySecurityDowngradeWarning,
+    "Proceed with Downgrade": l10n.uiLegacyProceedWithDowngrade,
+    "Self-Disconnection Warning": l10n.uiLegacySelfDisconnectionWarning,
+    "SSID updated, but subnet DHCP configuration could not be applied.": l10n.uiLegacySsidUpdatedButSubnetDhcpConfigurationCould,
+    "You can review or reapply DHCP settings via Edit SSID or Network settings.": l10n.uiLegacyYouCanReviewOrReapplyDhcpSettings,
+    "Failed to update wireless SSID": l10n.uiLegacyFailedToUpdateWirelessSsid,
+    "Home Network (lan)": l10n.uiLegacyHomeNetworkLan,
+    "Guest Network (guest)": l10n.uiLegacyGuestNetworkGuest,
+    "One MAC per line or separated by space/comma": l10n.uiLegacyOneMacPerLineOrSeparatedBy,
+    "GTK Rekey (s)": l10n.uiLegacyGtkRekeyS,
+    "Rekey interval": l10n.uiLegacyRekeyInterval,
+    "Inactivity Limit (s)": l10n.uiLegacyInactivityLimitS,
+    "Idle disconnect": l10n.uiLegacyIdleDisconnect,
+    "Max Listen Int.": l10n.uiLegacyMaxListenInt,
+    "Power-save limit": l10n.uiLegacyPowerSaveLimit,
+    "e.g. 12h or 86400": l10n.uiLegacyEGHOr,
+    "US — United States": l10n.uiLegacyUsUnitedStates,
+    "DE — Germany": l10n.uiLegacyDeGermany,
+    "GB — United Kingdom": l10n.uiLegacyGbUnitedKingdom,
+    "IN — India": l10n.uiLegacyInIndia,
+    "JP — Japan": l10n.uiLegacyJpJapan,
+    "CA — Canada": l10n.uiLegacyCaCanada,
+    "AU — Australia": l10n.uiLegacyAuAustralia,
+    "BR — Brazil": l10n.uiLegacyBrBrazil,
+    "CN — China": l10n.uiLegacyCnChina,
+    "FR — France": l10n.uiLegacyFrFrance,
+    "IT — Italy": l10n.uiLegacyItItaly,
+    "ES — Spain": l10n.uiLegacyEsSpain,
+    "KR — South Korea": l10n.uiLegacyKrSouthKorea,
+    "NL — Netherlands": l10n.uiLegacyNlNetherlands,
+    "PL — Poland": l10n.uiLegacyPlPoland,
+    "SE — Sweden": l10n.uiLegacySeSweden,
+    "TW — Taiwan": l10n.uiLegacyTwTaiwan,
+    "NZ — New Zealand": l10n.uiLegacyNzNewZealand,
+    "SG — Singapore": l10n.uiLegacySgSingapore,
+    "HK — Hong Kong": l10n.uiLegacyHkHongKong,
+    "MX — Mexico": l10n.uiLegacyMxMexico,
+    "AR — Argentina": l10n.uiLegacyArArgentina,
+    "CL — Chile": l10n.uiLegacyClChile,
+    "ZA — South Africa": l10n.uiLegacyZaSouthAfrica,
+    "TH — Thailand": l10n.uiLegacyThThailand,
+    "VN — Vietnam": l10n.uiLegacyVnVietnam,
+    "ID — Indonesia": l10n.uiLegacyIdIndonesia,
+    "MY — Malaysia": l10n.uiLegacyMyMalaysia,
+    "PH — Philippines": l10n.uiLegacyPhPhilippines,
+    "AE — United Arab Emirates": l10n.uiLegacyAeUnitedArabEmirates,
+    "SA — Saudi Arabia": l10n.uiLegacySaSaudiArabia,
+    "IL — Israel": l10n.uiLegacyIlIsrael,
+    "TR — Turkey": l10n.uiLegacyTrTurkey,
+    "CH — Switzerland": l10n.uiLegacyChSwitzerland,
+    "AT — Austria": l10n.uiLegacyAtAustria,
+    "BE — Belgium": l10n.uiLegacyBeBelgium,
+    "DK — Denmark": l10n.uiLegacyDkDenmark,
+    "FI — Finland": l10n.uiLegacyFiFinland,
+    "NO — Norway": l10n.uiLegacyNoNorway,
+    "IE — Ireland": l10n.uiLegacyIeIreland,
+    "PT — Portugal": l10n.uiLegacyPtPortugal,
+    "CZ — Czech Republic": l10n.uiLegacyCzCzechRepublic,
+    "HU — Hungary": l10n.uiLegacyHuHungary,
+    "RO — Romania": l10n.uiLegacyRoRomania,
+    "GR — Greece": l10n.uiLegacyGrGreece,
+    "Channel Regulatory Warning": l10n.uiLegacyChannelRegulatoryWarning,
+    "Passphrase is required": l10n.uiLegacyPassphraseIsRequired,
+    "Passphrase must be at least 8 characters": l10n.uiLegacyPassphraseMustBeAtLeastCharacters,
+    "Passphrase must not exceed 63 characters": l10n.uiLegacyPassphraseMustNotExceedCharacters,
+    "Failed to create wireless interface on router": l10n.uiLegacyFailedToCreateWirelessInterfaceOnRouter,
+    "Failed to create wireless interface": l10n.uiLegacyFailedToCreateWirelessInterface,
+    "New wireless network will be committed directly to router configuration.": l10n.uiLegacyNewWirelessNetworkWillBeCommittedDirectly,
+    "Target Physical Radio": l10n.uiLegacyTargetPhysicalRadio,
+    "e.g. MyHome_WiFi or Guest_Network": l10n.uiLegacyEGMyhomeWifiOrGuestNetwork,
+    "Loading hardware capabilities…": l10n.uiLegacyLoadingHardwareCapabilities,
+    "Showing hardware-verified options": l10n.uiLegacyShowingHardwareVerifiedOptions,
+    "Standard compatibility defaults": l10n.uiLegacyStandardCompatibilityDefaults,
+    "Hide passphrase": l10n.uiLegacyHidePassphrase,
+    "Show passphrase": l10n.uiLegacyShowPassphrase,
+    "Enhanced Open (OWE) encrypts wireless frames without a shared password. Supported client devices connect securely automatically.": l10n.uiLegacyEnhancedOpenOweEncryptsWirelessFramesWithout,
+    "Confirm to save permanently, or revert to undo changes.": l10n.uiLegacyConfirmToSavePermanentlyOrRevertTo,
+    "Revert Changes Now": l10n.uiLegacyRevertChangesNow,
+    "Wireless changes confirmed & saved permanently.": l10n.uiLegacyWirelessChangesConfirmedSavedPermanently,
+    "Failed to send confirmation to router.": l10n.uiLegacyFailedToSendConfirmationToRouter,
+    "Reverting staged wireless changes...": l10n.uiLegacyRevertingStagedWirelessChanges,
+    "Wireless changes reverted & verified on router.": l10n.uiLegacyWirelessChangesRevertedVerifiedOnRouter,
+    "Revert signal sent. Verifying router UCI status...": l10n.uiLegacyRevertSignalSentVerifyingRouterUciStatus,
+    "Edit Security & Parameters": l10n.uiLegacyEditSecurityParameters,
+    "Edit Restricted (Read-Only)": l10n.uiLegacyEditRestrictedReadOnly,
+    "Show Wi-Fi QR Code": l10n.uiLegacyShowWiFiQrCode,
+    "Delete Restricted (Read-Only)": l10n.uiLegacyDeleteRestrictedReadOnly,
+    "More Options": l10n.uiLegacyMoreOptions,
+    "Move to Primary Networks": l10n.uiLegacyMoveToPrimaryNetworks,
+    "Move to Guest Networks": l10n.uiLegacyMoveToGuestNetworks,
+    "Reset to Auto-Detection": l10n.uiLegacyResetToAutoDetection,
+    "Collapse Details": l10n.uiLegacyCollapseDetails227901,
+    "Expand Details": l10n.uiLegacyExpandDetails918a9e,
+    "Read-only session: UCI write permission required to create Guest Wi-Fi.": l10n.uiLegacyReadOnlySessionUciWritePermissionRequired,
+    "Failed to provision guest network on router.": l10n.uiLegacyFailedToProvisionGuestNetworkOnRouter,
+    "Failed to provision guest network": l10n.uiLegacyFailedToProvisionGuestNetwork,
+    "Guest SSID Name": l10n.uiLegacyGuestSsidName,
+    "Guest SSID name cannot be empty": l10n.uiLegacyGuestSsidNameCannotBeEmpty,
+    "Network Attachment": l10n.uiLegacyNetworkAttachment,
+    "Logical network bridge interface": l10n.uiLegacyLogicalNetworkBridgeInterface,
+    "Guest Gateway IP Address": l10n.uiLegacyGuestGatewayIpAddress,
+    "Guest IP address is required": l10n.uiLegacyGuestIpAddressIsRequired,
+    "Enter a valid IPv4 address (e.g. 192.168.2.1)": l10n.uiLegacyEnterAValidIpvAddressEGf872a1,
+    "Wi-Fi Passphrase": l10n.uiLegacyWiFiPassphrase,
+    "Passphrase is required for encrypted networks": l10n.uiLegacyPassphraseIsRequiredForEncryptedNetworks,
+    "Passphrase cannot exceed 63 characters": l10n.uiLegacyPassphraseCannotExceedCharacters,
+    "Prevents connected guest devices from talking to each other": l10n.uiLegacyPreventsConnectedGuestDevicesFromTalkingTo,
+    "Advanced Options": l10n.uiLegacyAdvancedOptions,
+    "Protected Management Frames (PMF / 802.11w)": l10n.uiLegacyProtectedManagementFramesPmfW,
+    "Hidden SSID": l10n.uiLegacyHiddenSsid,
+    "Do not broadcast SSID in beacon frames": l10n.uiLegacyDoNotBroadcastSsidInBeaconFrames,
+    "Fast Roaming (802.11r/k/v)": l10n.uiLegacyFastRoamingRKV,
+    "Enable 802.11r Fast BSS Transition": l10n.uiLegacyEnableRFastBssTransition,
+    "Seamless roaming between access points": l10n.uiLegacySeamlessRoamingBetweenAccessPoints,
+    "FT over DS": l10n.uiLegacyFtOverDs,
+    "Fast transition over Distribution System": l10n.uiLegacyFastTransitionOverDistributionSystem,
+    "FT PSK Generate Local": l10n.uiLegacyFtPskGenerateLocal,
+    "Generate PSK locally per AP": l10n.uiLegacyGeneratePskLocallyPerAp,
+    "4 hex chars (e.g., a1b2)": l10n.uiLegacyHexCharsEGAB,
+    "QoS & Wireless Controls": l10n.uiLegacyQosWirelessControls,
+    "Enable Wi-Fi Multimedia quality-of-service": l10n.uiLegacyEnableWiFiMultimediaQualityOfService,
+    "Kick weak clients with excessive packet loss": l10n.uiLegacyKickWeakClientsWithExcessivePacketLoss,
+    "Multicast to Unicast Conversion": l10n.uiLegacyMulticastToUnicastConversion,
+    "Improves multicast video/audio streaming reliability": l10n.uiLegacyImprovesMulticastVideoAudioStreamingReliability,
+    "Transparent bridge mode for multi-AP meshing": l10n.uiLegacyTransparentBridgeModeForMultiApMeshing,
+    "MAC Address Access Control": l10n.uiLegacyMacAddressAccessControl,
+    "MAC Filter Mode": l10n.uiLegacyMacFilterMode,
+    "MAC Addresses List": l10n.uiLegacyMacAddressesList,
+    "One MAC address per line or separated by spaces/commas": l10n.uiLegacyOneMacAddressPerLineOrSeparated,
+    "1. Select Target Device": l10n.uiLegacySelectTargetDevice,
+    "OR Manual Entry": l10n.uiLegacyOrManualEntry,
+    "MAC Address (XX:XX:XX:XX:XX:XX)": l10n.uiLegacyMacAddressXxXxXxXxXx,
+    "Enter valid MAC address format (e.g. AA:BB:CC:11:22:33)": l10n.uiLegacyEnterValidMacAddressFormatEG,
+    "Static Lease Active": l10n.uiLegacyStaticLeaseActive,
+    "Edit Lease": l10n.uiLegacyEditLease,
+    "No Static DHCP Reservation": l10n.uiLegacyNoStaticDhcpReservation,
+    "Check SSIDs where this device should be explicitly allowed to connect.": l10n.uiLegacyCheckSsidsWhereThisDeviceShouldBe,
+    "Current: Allowed": l10n.uiLegacyCurrentAllowed,
+    "Current: Blocked": l10n.uiLegacyCurrentBlocked,
+    "Current: Restricted (Not in allow list)": l10n.uiLegacyCurrentRestrictedNotInAllowList,
+    "Current: Permitted (Not in deny list)": l10n.uiLegacyCurrentPermittedNotInDenyList,
+    "Current: Open (Filter disabled)": l10n.uiLegacyCurrentOpenFilterDisabled,
+    "STAGED: Will Allow": l10n.uiLegacyStagedWillAllow,
+    "STAGED: Will Remove": l10n.uiLegacyStagedWillRemove,
+    "Select SSIDs to Add Access Rules": l10n.uiLegacySelectSsidsToAddAccessRules,
+    "Apply Access Control Rules": l10n.uiLegacyApplyAccessControlRules,
+    "Applying Wi-Fi Access Control changes...": l10n.uiLegacyApplyingWiFiAccessControlChanges,
+    "Access Control applied.": l10n.uiLegacyAccessControlApplied,
+    "Failed to apply Wi-Fi Access Control rules.": l10n.uiLegacyFailedToApplyWiFiAccessControl,
+    "Failed to enable guest networks": l10n.uiLegacyFailedToEnableGuestNetworks,
+    "Failed to disable guest networks": l10n.uiLegacyFailedToDisableGuestNetworks,
+    "ISP Default": l10n.uiLegacyIspDefault,
+    "isp default": l10n.uiLegacyIspDefault881a83,
+    "dynamic dns": l10n.uiLegacyDynamicDns,
+    "Rebind Protection": l10n.uiLegacyRebindProtection,
+    "Domain Needed (Strict Order)": l10n.uiLegacyDomainNeededStrictOrder,
+    "Authoritative Mode": l10n.uiLegacyAuthoritativeMode,
+    "1s Interval": l10n.uiLegacySInterval,
+    "2s Interval": l10n.uiLegacySIntervalcdeddc,
+    "3s Interval": l10n.uiLegacySInterval5fdae1,
+    "5s Interval": l10n.uiLegacySInterval18ac97,
+    "STREAMING LIVE": l10n.uiLegacyStreamingLive,
+    "STREAM PAUSED": l10n.uiLegacyStreamPaused,
+    "Sort by": l10n.uiLegacySortBy,
+    "No active client devices are currently reporting traffic.": l10n.uiLegacyNoActiveClientDevicesAreCurrentlyReporting,
+    "Try searching with a different device name, IP, or MAC.": l10n.uiLegacyTrySearchingWithADifferentDeviceName,
+    "Peak Speed": l10n.uiLegacyPeakSpeed,
+    "Connection Duration": l10n.uiLegacyConnectionDuration,
+    "Active Connections": l10n.uiLegacyActiveConnections,
+    "Primary Layer 7 Protocol": l10n.uiLegacyPrimaryLayerProtocol,
+    "Session Bandwidth Usage": l10n.uiLegacySessionBandwidthUsage,
+    "Period: ": l10n.uiLegacyPeriod,
+    "Current Period": l10n.uiLegacyCurrentPeriod,
+    "Device Bandwidth Usage": l10n.uiLegacyDeviceBandwidthUsage,
+    "No disconnected/offline devices found with recorded usage.": l10n.uiLegacyNoDisconnectedOfflineDevicesFoundWithRecorded,
+    "No connected devices currently found.": l10n.uiLegacyNoConnectedDevicesCurrentlyFound,
+    "No usage records found for this period.": l10n.uiLegacyNoUsageRecordsFoundForThisPeriod,
+    "Demo Router (Reviewer Mode)": l10n.uiLegacyDemoRouterReviewerMode,
+    "Unknown IP": l10n.uiLegacyUnknownIp,
+    "Skipped: ": l10n.uiLegacySkipped,
+    "is down": l10n.uiLegacyIsDown,
+    "PPPoE point-to-point link": l10n.uiLegacyPppoePointToPointLink,
+    "No upstream gateway IP could be verified": l10n.uiLegacyNoUpstreamGatewayIpCouldBeVerified,
+    "No gateway IP was identified": l10n.uiLegacyNoGatewayIpWasIdentified,
+    "IPv4-only network": l10n.uiLegacyIpvOnlyNetwork,
+    "IPv6 is not configured": l10n.uiLegacyIpvIsNotConfigured,
+    "You have unsaved edits to /etc/sysupgrade.conf. Are you sure you want to exit without saving?": l10n.uiLegacyYouHaveUnsavedEditsToEtcSysupgrade,
+    "Refreshed preserved backup files from router.": l10n.uiLegacyRefreshedPreservedBackupFilesFromRouter,
+    "Failed to refresh backup file list.": l10n.uiLegacyFailedToRefreshBackupFileList,
+    "## Keep custom files across sysupgrade updates": l10n.uiLegacyKeepCustomFilesAcrossSysupgradeUpdates,
+    "Saved /etc/sysupgrade.conf to router!": l10n.uiLegacySavedEtcSysupgradeConfToRouter,
+    "Failed to save /etc/sysupgrade.conf to router.": l10n.uiLegacyFailedToSaveEtcSysupgradeConfTo,
+    "Error saving configuration": l10n.uiLegacyErrorSavingConfiguration,
+    "File path must start with \"/\" (e.g. /etc/cloudflared/config.yml)": l10n.uiLegacyFilePathMustStartWithEG,
+    "Path is already included in /etc/sysupgrade.conf": l10n.uiLegacyPathIsAlreadyIncludedInEtcSysupgrade,
+    "Added path to list. Remember to tap \"Save to Router\".": l10n.uiLegacyAddedPathToListRememberToTap,
+    "Search preserved files...": l10n.uiLegacySearchPreservedFiles,
+    "No preserved backup files returned from router.": l10n.uiLegacyNoPreservedBackupFilesReturnedFromRouter,
+    "Copy Path": l10n.uiLegacyCopyPath,
+    "Add path (e.g. /etc/cloudflared/config.yml)": l10n.uiLegacyAddPathEGEtcCloudflaredConfig,
+    "Switch to List": l10n.uiLegacySwitchToList,
+    "Switch to Code Editor": l10n.uiLegacySwitchToCodeEditor,
+    "# Add files or directories to preserve across sysupgrade\n/etc/config/custom_app\n/etc/ssl/certs": l10n.uiLegacyAddFilesOrDirectoriesToPreserveAcross,
+    "No custom entries in /etc/sysupgrade.conf": l10n.uiLegacyNoCustomEntriesInEtcSysupgradeConf,
+    "Add file/directory paths above to preserve them across updates.": l10n.uiLegacyAddFileDirectoryPathsAboveToPreserve,
+    "Saving & Applying to Router...": l10n.uiLegacySavingApplyingToRouter,
+    "No Unsaved Changes (Saved)": l10n.uiLegacyNoUnsavedChangesSaved,
+    "Detecting hardware...": l10n.uiLegacyDetectingHardware,
+    "Generic Architecture": l10n.uiLegacyGenericArchitecture,
+    "OpenWrt / Compatible Router": l10n.uiLegacyOpenwrtCompatibleRouter,
+    "Router scan is still in progress. Please wait and try again.": l10n.uiLegacyRouterScanIsStillInProgressPlease,
+    "Failed to read generated backup file from router using all available strategies.": l10n.uiLegacyFailedToReadGeneratedBackupFileFrom,
+    "Could not read chosen archive file.": l10n.uiLegacyCouldNotReadChosenArchiveFile,
+    "Rebooting router...": l10n.uiLegacyRebootingRouter,
+    "Could not read chosen firmware image file.": l10n.uiLegacyCouldNotReadChosenFirmwareImageFile,
+    "Router connection unavailable": l10n.uiLegacyRouterConnectionUnavailable,
+    "Downloaded firmware image is empty.": l10n.uiLegacyDownloadedFirmwareImageIsEmpty,
+    "Target Model": l10n.uiLegacyTargetModel,
+    "Sysupgrade File": l10n.uiLegacySysupgradeFile,
+    "Image Size": l10n.uiLegacyImageSize,
+    "No Active Connections": l10n.uiLegacyNoActiveConnections,
+    "NextDNS Resolver": l10n.uiLegacyNextdnsResolver,
+    "No NextDNS profile ID or resolver configuration found on this router.": l10n.uiLegacyNoNextdnsProfileIdOrResolverConfiguration,
+    "Cloudflare Tunnel (cloudflared)": l10n.uiLegacyCloudflareTunnelCloudflared,
+    "No Cloudflare Tunnel ID or token configuration found on this router.": l10n.uiLegacyNoCloudflareTunnelIdOrTokenConfiguration,
+    "Bring Down": l10n.uiLegacyBringDown,
+    "Bring Up": l10n.uiLegacyBringUp,
+    "Public Key": l10n.uiLegacyPublicKey,
+    "Listen Port": l10n.uiLegacyListenPort,
+    "No active peers configured or connected.": l10n.uiLegacyNoActivePeersConfiguredOrConnected,
+    "Allowed IPs": l10n.uiLegacyAllowedIps,
+    "Traffic Transferred": l10n.uiLegacyTrafficTransferred,
+    "Tailscale IP": l10n.uiLegacyTailscaleIp,
+    "Tailnet Account": l10n.uiLegacyTailnetAccount,
+    "MagicDNS Domain": l10n.uiLegacyMagicdnsDomain,
+    "Mesh Peers": l10n.uiLegacyMeshPeers,
+    "Exit Node Capability": l10n.uiLegacyExitNodeCapability,
+    "ENABLED (Offers Exit Node)": l10n.uiLegacyEnabledOffersExitNode,
+    "Backend Daemon State": l10n.uiLegacyBackendDaemonState,
+    "Restarting Tailscale will temporarily drop active mesh connections.": l10n.uiLegacyRestartingTailscaleWillTemporarilyDropActiveMesh,
+    "Encrypted DNS Profile ID": l10n.uiLegacyEncryptedDnsProfileId,
+    "NextDNS Daemon Status": l10n.uiLegacyNextdnsDaemonStatus,
+    "Report Client Info": l10n.uiLegacyReportClientInfo,
+    "Restarting NextDNS will reload DNS filtering configurations.": l10n.uiLegacyRestartingNextdnsWillReloadDnsFilteringConfigurations,
+    "Cloudflare Tunnel": l10n.uiLegacyCloudflareTunnel,
+    "Tunnel ID": l10n.uiLegacyTunnelId,
+    "Edge Connections": l10n.uiLegacyEdgeConnections,
+    "Tunnel Status": l10n.uiLegacyTunnelStatus,
+    "CONNECTED TO CLOUDFLARE EDGE": l10n.uiLegacyConnectedToCloudflareEdge,
+    "Restarting Cloudflared will re-establish edge connection tunnels to Cloudflare Zero Trust.": l10n.uiLegacyRestartingCloudflaredWillReEstablishEdgeConnection,
+    "Applying configuration change...": l10n.uiLegacyApplyingConfigurationChange,
+    "Configuration Update Failed": l10n.uiLegacyConfigurationUpdateFailed,
+    "The router was unable to apply the VPN configuration change.": l10n.uiLegacyTheRouterWasUnableToApplyThe,
+    "Tunnel Configuration Updated": l10n.uiLegacyTunnelConfigurationUpdated,
+    "NOT CONFIGURED": l10n.uiLegacyNotConfigured,
+    "MASTER": l10n.uiLegacyMaster,
+    "Master": l10n.uiLegacyMastera2bb34,
+    "AP": l10n.uiLegacyAp,
+    "Managed": l10n.uiLegacyManaged,
+    "managed": l10n.uiLegacyManaged7fdfda,
+    "STA": l10n.uiLegacySta,
+    "Mesh": l10n.uiLegacyMesh,
+    "MESH": l10n.uiLegacyMesh3debcd,
+    "Monitor": l10n.uiLegacyMonitor,
+    "Ad-Hoc": l10n.uiLegacyAdHoc,
+    "Required": l10n.uiLegacyRequired,
+    "Optional": l10n.uiLegacyOptional,
+    "ACCEPT": l10n.uiLegacyAccept,
+    "DROP": l10n.uiLegacyDrop,
+    "REJECT": l10n.uiLegacyReject,
+    "Any": l10n.uiLegacyAny,
+    "BETA": l10n.uiLegacyBeta,
+    "Both": l10n.uiLegacyBoth,
+    "Bypassed": l10n.uiLegacyBypassed,
+    "CORE": l10n.uiLegacyCore,
+    "CUSTOM": l10n.uiLegacyCustom,
+    "Description": l10n.uiLegacyDescription,
+    "Ethernet": l10n.uiLegacyEthernet,
+    "IPv6 Handling": l10n.uiLegacyIpvHandling,
+    "Ready": l10n.uiLegacyReady,
+    "Relay": l10n.uiLegacyRelay,
+    "Server": l10n.uiLegacyServer,
+    "start": l10n.uiLegacyStart,
+    "stop": l10n.uiLegacyStop,
+    "activate": l10n.uiLegacyActivate,
+    "deactivate": l10n.uiLegacyDeactivate,
+    "bring down": l10n.uiLegacyBringDowna8faac,
+    "bring up": l10n.uiLegacyBringUp85d958,
+    "Pausing": l10n.uiLegacyPausing,
+    "Resuming": l10n.uiLegacyResuming,
+    "Blocking": l10n.uiLegacyBlocking,
+    "Restoring": l10n.uiLegacyRestoring,
+    "Pause": l10n.uiLegacyPause,
+    "update": l10n.uiLegacyUpdate,
+    "create": l10n.uiLegacyCreate,
+    "minute": l10n.uiLegacyMinute,
+    "hour": l10n.uiLegacyHour,
+    "day-of-month": l10n.uiLegacyDayOfMonth55f582,
+    "month": l10n.uiLegacyMonth,
+    "day-of-week": l10n.uiLegacyDayOfWeek681b12,
+    "minutes": l10n.uiLegacyMinutes,
+    "hours": l10n.uiLegacyHours,
+    "days": l10n.uiLegacyDays,
+    "UP": l10n.uiLegacyUp,
+    "DOWN": l10n.uiLegacyDown,
+    "N/A": l10n.uiLegacyNA,
+    "Open": l10n.uiLegacyOpen,
+    "Not configured": l10n.uiLegacyNotConfigureddd1841,
+    "1-255 beacons": l10n.uiLegacyBeacons,
+    "Guest": l10n.uiLegacyGuest,
+    "Primary": l10n.uiLegacyPrimary,
+    "Auto": l10n.uiLegacyAuto,
+    "ECN": l10n.uiLegacyEcn,
+    "NOECN": l10n.uiLegacyNoecn,
+    "PMF Disabled": l10n.uiLegacyPmfDisabled,
+    "PMF Optional": l10n.uiLegacyPmfOptional,
+    "PMF Required": l10n.uiLegacyPmfRequired,
+    "WPA3-SAE (SAE-Only)": l10n.uiLegacyWpaSaeSaeOnly,
+    "WPA2/WPA3 Mixed": l10n.uiLegacyWpaWpaMixed,
+    "Enhanced Open (OWE)": l10n.uiLegacyEnhancedOpenOwe,
+    "Open (None)": l10n.uiLegacyOpenNone,
+    "Custom/Unknown": l10n.uiLegacyCustomUnknown,
+    "OPEN": l10n.uiLegacyOpen6e1095,
+    "UNKNOWN": l10n.uiLegacyUnknown,
     "Yet Another LuCI App": l10n.appTitle,
     "OpenWrt Router Management App": l10n.appDescription,
     "Dashboard": l10n.navDashboard,
@@ -1985,686 +2663,581 @@ _UiCopyCatalog _buildUiCopyCatalog(AppLocalizations l10n) => _UiCopyCatalog(
     "Return to Dashboard": l10n.sysUpgradeReturnDashboard,
     "Router connection is not active.": l10n.sysUpgradeRouterNotActive,
     "Download URL not found for this upgrade.": l10n.sysUpgradeUrlNotFound,
-    "Got it": l10n.uiLegacyGotIt,
-    "Network Access Blocked": l10n.uiLegacyNetworkAccessBlocked,
-    "Network Access Restored": l10n.uiLegacyNetworkAccessRestored,
-    "Failed to update network access policy": l10n.uiLegacyFailedToUpdateNetworkAccessPolicy,
-    "Invalid Expiry Time": l10n.uiLegacyInvalidExpiryTime,
-    "Please choose a future date and time.": l10n.uiLegacyPleaseChooseAFutureDateAndTime,
-    "Block Internet Access": l10n.uiLegacyBlockInternetAccess,
-    "Block IPv4 Internet": l10n.uiLegacyBlockIpvInternet,
-    "Block IPv6 Internet": l10n.uiLegacyBlockIpvInternet601099,
-    "Restore Full Access": l10n.uiLegacyRestoreFullAccess,
-    "Follow system settings": l10n.uiLegacyFollowSystemSettings,
-    "Staged Changes Pending": l10n.uiLegacyStagedChangesPending,
-    "Revert Changes": l10n.uiLegacyRevertChanges,
-    "This action": l10n.uiLegacyThisAction,
-    "Access Restricted": l10n.uiLegacyAccessRestricted,
-    "Access Denied": l10n.uiLegacyAccessDenied,
-    "Self-Device Safety Warning": l10n.uiLegacySelfDeviceSafetyWarning,
-    "Proceed with Caution": l10n.uiLegacyProceedWithCaution,
-    "Unsaved Changes": l10n.uiLegacyUnsavedChanges,
-    "Refresh Failed": l10n.uiLegacyRefreshFailed,
-    "Unable to refresh router data. Please check connection.": l10n.uiLegacyUnableToRefreshRouterDataPleaseCheck,
-    "No items to display": l10n.uiLegacyNoItemsToDisplay,
-    "Pull down to refresh": l10n.uiLegacyPullDownToRefresh,
-    "Error saving hostname from dialog": l10n.uiLegacyErrorSavingHostnameFromDialog,
-    "Invalid duration": l10n.uiLegacyInvalidDuration,
-    "Select Ban End Date": l10n.uiLegacySelectBanEndDate,
-    "Select Ban End Time": l10n.uiLegacySelectBanEndTime,
-    "Ban end time must be at least 30 seconds in the future.": l10n.uiLegacyBanEndTimeMustBeAtLeast,
-    "Anonymous Device": l10n.uiLegacyAnonymousDevice,
-    "Anonymous IPv6 Host": l10n.uiLegacyAnonymousIpvHost,
-    "Clipboard does not contain a valid MAC address.": l10n.uiLegacyClipboardDoesNotContainAValidMac,
-    "Unable to read clipboard.": l10n.uiLegacyUnableToReadClipboard,
-    "Provide a MAC address or DUID identifier": l10n.uiLegacyProvideAMacAddressOrDuidIdentifier,
-    "DUID:": l10n.uiLegacyDuid,
-    "Enter a valid MAC address (e.g. AA:BB:CC:DD:EE:FF)": l10n.uiLegacyEnterAValidMacAddressEG,
-    "Enter a valid DUID hex string": l10n.uiLegacyEnterAValidDuidHexString,
-    "Provide at least an IPv4 or IPv6 address reservation": l10n.uiLegacyProvideAtLeastAnIpvOrIpv,
-    "Enter a valid IPv4 address (e.g. 192.168.1.150)": l10n.uiLegacyEnterAValidIpvAddressEG,
-    "Enter a valid IPv6 address or Host ID (e.g. 2405:201::100 or ::100)": l10n.uiLegacyEnterAValidIpvAddressOrHost,
-    "Specify custom lease duration (e.g. 2h, 30m, 3d)": l10n.uiLegacySpecifyCustomLeaseDurationEGH,
-    "Save in progress. Please wait a moment...": l10n.uiLegacySaveInProgressPleaseWaitAMoment,
-    "Please fix highlighted form errors.": l10n.uiLegacyPleaseFixHighlightedFormErrors,
-    "Please check your router connection and try again.": l10n.uiLegacyPleaseCheckYourRouterConnectionAndTry,
-    "Client deauthenticated. Toggle Wi-Fi on the device if it does not acquire its new IP in 10s.": l10n.uiLegacyClientDeauthenticatedToggleWiFiOnThe,
-    "Select Static Lease Expiration Date": l10n.uiLegacySelectStaticLeaseExpirationDate,
-    "Select Static Lease Expiration Time": l10n.uiLegacySelectStaticLeaseExpirationTime,
-    "Lease expiry must be at least 2 minutes in the future.": l10n.uiLegacyLeaseExpiryMustBeAtLeastMinutes,
-    "e.g. 2405:201::100 or ::100 (Host ID)": l10n.uiLegacyEGOrHostId,
-    "Pick Date & Time": l10n.uiLegacyPickDateTime,
-    "DSA bridge": l10n.uiLegacyDsaBridge,
-    "DSA Engine": l10n.uiLegacyDsaEngine,
-    "swconfig Engine": l10n.uiLegacySwconfigEngine,
-    "Internal CPU / SoC Interconnect": l10n.uiLegacyInternalCpuSocInterconnect,
-    "Switch Port": l10n.uiLegacySwitchPort,
-    "Terminates active sessions across all devices": l10n.uiLegacyTerminatesActiveSessionsAcrossAllDevices,
-    "Cannot be undone without physical access if forgotten": l10n.uiLegacyCannotBeUndoneWithoutPhysicalAccessIf,
-    "Proceed with Change": l10n.uiLegacyProceedWithChange,
-    "Saving to secure storage failed again. Please note your password.": l10n.uiLegacySavingToSecureStorageFailedAgainPlease,
-    "Processing password change...": l10n.uiLegacyProcessingPasswordChange,
-    "• To protect your access, your saved credentials have NOT been altered.\n• Do NOT repeatedly retry changing the password.\n• Please verify your router connection via the LuCI web interface or SSH before attempting again.": l10n.uiLegacyToProtectYourAccessYourSavedCredentials,
-    "Change Password": l10n.uiLegacyChangePassword,
-    "System Notice": l10n.uiLegacySystemNotice,
-    "operation not permitted": l10n.uiLegacyOperationNotPermitted,
-    "Local network permission required. Please allow access in iOS Settings > Yet Another LuCI App.": l10n.uiLegacyLocalNetworkPermissionRequiredPleaseAllowAccess,
-    "connection refused": l10n.uiLegacyConnectionRefused,
-    "timed out": l10n.uiLegacyTimedOut,
-    "host lookup": l10n.uiLegacyHostLookup,
-    "Unable to complete request. Please verify network connection and try again.": l10n.uiLegacyUnableToCompleteRequestPleaseVerifyNetwork,
-    "Unable to process selected file. Please verify file format and storage permissions.": l10n.uiLegacyUnableToProcessSelectedFilePleaseVerify,
-    "An unexpected error occurred. Please try again.": l10n.uiLegacyAnUnexpectedErrorOccurredPleaseTryAgain,
-    "Operation Timed Out": l10n.uiLegacyOperationTimedOut,
-    "The request took too long to complete. Please check network connection.": l10n.uiLegacyTheRequestTookTooLongToComplete,
-    "Action Cooldown Active": l10n.uiLegacyActionCooldownActive,
-    "Local Network Access permission is required to connect to your router.": l10n.uiLegacyLocalNetworkAccessPermissionIsRequiredTo,
-    "Unable to load dashboard data. Please check your connection.": l10n.uiLegacyUnableToLoadDashboardDataPleaseCheck,
-    "Dashboard section": l10n.uiLegacyDashboardSection,
-    "Client icon": l10n.uiLegacyClientIcon,
-    "Collapse details": l10n.uiLegacyCollapseDetails,
-    "Expand details": l10n.uiLegacyExpandDetails,
-    "Manage Access": l10n.uiLegacyManageAccess,
-    "Removal in progress. Please wait a moment...": l10n.uiLegacyRemovalInProgressPleaseWaitAMoment,
-    "Unnamed Host": l10n.uiLegacyUnnamedHost,
-    "Requires router RPC permissions": l10n.uiLegacyRequiresRouterRpcPermissions,
-    "Update locally saved credentials and settings for this profile.": l10n.uiLegacyUpdateLocallySavedCredentialsAndSettingsFor,
-    "Please enter the router address": l10n.uiLegacyPleaseEnterTheRouterAddress,
-    "A profile with this address and username already exists.": l10n.uiLegacyAProfileWithThisAddressAndUsername,
-    "Locally saved profile credentials updated.": l10n.uiLegacyLocallySavedProfileCredentialsUpdated,
-    "Export is disabled in Reviewer Mode.": l10n.uiLegacyExportIsDisabledInReviewerMode,
-    "Import is disabled in Reviewer Mode.": l10n.uiLegacyImportIsDisabledInReviewerMode,
-    "No file selected.": l10n.uiLegacyNoFileSelected,
-    "Profiles processed successfully": l10n.uiLegacyProfilesProcessedSuccessfully,
-    "Unexpected error during profile import": l10n.uiLegacyUnexpectedErrorDuringProfileImport,
-    "Router already exists.": l10n.uiLegacyRouterAlreadyExists,
-    "Reviewer Mode Active: Profiles displayed here are in demo mode. Any added or modified profiles will not be saved permanently or exported.": l10n.uiLegacyReviewerModeActiveProfilesDisplayedHereAre,
-    "Restarting Interface": l10n.uiLegacyRestartingInterface,
-    "Interface Restarted": l10n.uiLegacyInterfaceRestarted,
-    "Restart Failed": l10n.uiLegacyRestartFailed,
-    "Restarting Wireless": l10n.uiLegacyRestartingWireless,
-    "Wireless Restarted": l10n.uiLegacyWirelessRestarted,
-    "Apply Failed": l10n.uiLegacyApplyFailed,
-    "Changes Applied": l10n.uiLegacyChangesApplied,
-    "Conservative fallback active — network model could not be verified automatically.": l10n.uiLegacyConservativeFallbackActiveNetworkModelCouldNot,
-    "No IPv4": l10n.uiLegacyNoIpv,
-    "No IPv6": l10n.uiLegacyNoIpva6785b,
-    "Interface icon": l10n.uiLegacyInterfaceIcon,
-    "Reboot Timeout": l10n.uiLegacyRebootTimeout,
-    "Router did not respond in time. Please check your connection.": l10n.uiLegacyRouterDidNotRespondInTimePlease,
-    "Simulated Router Session": l10n.uiLegacySimulatedRouterSession,
-    "You are exploring Yet Another LuCI App in Reviewer Mode.": l10n.uiLegacyYouAreExploringYetAnotherLuciApp,
-    "This session provides pre-loaded mock datasets, simulating live OpenWrt router interfaces, connected clients, and performance metrics without needing an active router connection.": l10n.uiLegacyThisSessionProvidesPreLoadedMockDatasets,
-    "To manage a physical OpenWrt router, toggle off Reviewer Mode in More > Connection Settings.": l10n.uiLegacyToManageAPhysicalOpenwrtRouterToggle,
-    "GOT IT": l10n.uiLegacyGotItadceab,
-    "Reconnecting to router...": l10n.uiLegacyReconnectingToRouter,
-    "Router disconnected": l10n.uiLegacyRouterDisconnected,
-    "RPC Status": l10n.uiLegacyRpcStatus,
-    "SETUP REQUIRED": l10n.uiLegacySetupRequired,
-    "Copyleft & Freedom Notice:": l10n.uiLegacyCopyleftFreedomNotice,
-    "Bypasses live router connection and populates mock metrics for testing and review.": l10n.uiLegacyBypassesLiveRouterConnectionAndPopulatesMock,
-    "Are you sure you want to exit Reviewer Mode and return to the login screen?": l10n.uiLegacyAreYouSureYouWantToExit,
-    "Yet Another LuCI App Support Request": l10n.uiLegacyYetAnotherLuciAppSupportRequest,
-    "Permissions Required": l10n.uiLegacyPermissionsRequired,
-    "End demo session and return to login": l10n.uiLegacyEndDemoSessionAndReturnToLogin,
-    "Router Connected": l10n.uiLegacyRouterConnected,
-    "Reconnecting to Router...": l10n.uiLegacyReconnectingToRouter0ffbd0,
-    "Router Disconnected": l10n.uiLegacyRouterDisconnected1344ba,
-    "Switching router...": l10n.uiLegacySwitchingRouter,
-    "Collecting throughput data...": l10n.uiLegacyCollectingThroughputData,
-    "Temp Script Missing": l10n.uiLegacyTempScriptMissing,
-    "Permanently dismiss temperature prompt": l10n.uiLegacyPermanentlyDismissTemperaturePrompt,
-    "No network interfaces active": l10n.uiLegacyNoNetworkInterfacesActive,
-    "REVIEWER MODE ACTIVE": l10n.uiLegacyReviewerModeActive,
-    "Using simulated router environment with full mock data": l10n.uiLegacyUsingSimulatedRouterEnvironmentWithFullMock,
-    "Exit Mode": l10n.uiLegacyExitMode,
-    "This will disable reviewer mode and redirect to the login screen so you can connect to a live router.": l10n.uiLegacyThisWillDisableReviewerModeAndRedirect,
-    "Unable to connect to the router. Please check your network connection and router settings.": l10n.uiLegacyUnableToConnectToTheRouterPlease,
-    "Retry Connection": l10n.uiLegacyRetryConnection,
-    "Unable to fetch dashboard data. Pull down to refresh or tap the button below.": l10n.uiLegacyUnableToFetchDashboardDataPullDown,
-    "Show public WAN IP address": l10n.uiLegacyShowPublicWanIpAddress,
-    "Mask public WAN IP address for privacy": l10n.uiLegacyMaskPublicWanIpAddressForPrivacy,
-    "Flushing DNS cache...": l10n.uiLegacyFlushingDnsCache,
-    "Refreshing Dashboard...": l10n.uiLegacyRefreshingDashboard,
-    "Dashboard Updated": l10n.uiLegacyDashboardUpdated,
-    "LuCI RPC Package Required": l10n.uiLegacyLuciRpcPackageRequired,
-    "Your router is missing `luci-mod-rpc` or backend execution permissions. Some real-time wireless, package, and system control features require RPC support.": l10n.uiLegacyYourRouterIsMissingLuciModRpc,
-    "Installing RPC packages...": l10n.uiLegacyInstallingRpcPackages,
-    "RPC Installed": l10n.uiLegacyRpcInstalled,
-    "RPC packages and permissions installed successfully!": l10n.uiLegacyRpcPackagesAndPermissionsInstalledSuccessfully,
-    "Auto-Install Failed": l10n.uiLegacyAutoInstallFailed,
-    "Connect to your router via SSH and run the following command to enable full RPC functionality:\n": l10n.uiLegacyConnectToYourRouterViaSshAnd,
-    "permission denied": l10n.uiLegacyPermissionDenied,
-    "read-only file system": l10n.uiLegacyReadOnlyFileSystem,
-    "The router's root filesystem is mounted read-only because there is no space left in the flash overlay partition (/overlay).\n\nTo resolve this:\n• Free up flash space or remove unused packages\n• Run \"firstboot\" via SSH to reset the overlay\n• Use Extroot (USB drive) for expanded storage": l10n.uiLegacyTheRouterSRootFilesystemIsMounted,
-    "No output returned.": l10n.uiLegacyNoOutputReturned,
-    "Uninstall Failed": l10n.uiLegacyUninstallFailed,
-    "Upgrade Failed": l10n.uiLegacyUpgradeFailed,
-    "Package updates, installations, and removals are restricted until RPC permissions are granted.": l10n.uiLegacyPackageUpdatesInstallationsAndRemovalsAreRestricted,
-    "Capabilities Probe": l10n.uiLegacyCapabilitiesProbe,
-    "No repository packages available. Tap \"Update lists...\" to refresh feeds.": l10n.uiLegacyNoRepositoryPackagesAvailableTapUpdateLists,
-    "All packages are up to date.": l10n.uiLegacyAllPackagesAreUpToDate,
-    "Ready • 0 devices assigned": l10n.uiLegacyReadyDevicesAssigned,
-    "Bypass Restrictions": l10n.uiLegacyBypassRestrictions,
-    "Enable Guardrails": l10n.uiLegacyEnableGuardrails,
-    "Schedule requires file.exec access": l10n.uiLegacyScheduleRequiresFileExecAccess,
-    "Requires firewall write access": l10n.uiLegacyRequiresFirewallWriteAccess,
-    "Add devices to this profile first": l10n.uiLegacyAddDevicesToThisProfileFirst,
-    "Profile is in Bypass mode (Unrestricted)": l10n.uiLegacyProfileIsInBypassModeUnrestricted,
-    "Pause internet for how long?": l10n.uiLegacyPauseInternetForHowLong,
-    "Please select or enter a valid IPv4 address.": l10n.uiLegacyPleaseSelectOrEnterAValidIpv,
-    "Failed to apply port forwarding rule.": l10n.uiLegacyFailedToApplyPortForwardingRule,
-    "Please enter a service name": l10n.uiLegacyPleaseEnterAServiceName,
-    "Enter port": l10n.uiLegacyEnterPort,
-    "Invalid port": l10n.uiLegacyInvalidPort,
-    "Same as external": l10n.uiLegacySameAsExternal,
-    "No connected devices with active IPv4 addresses found. Please enter IP manually.": l10n.uiLegacyNoConnectedDevicesWithActiveIpvAddresses,
-    "Please enter IP address": l10n.uiLegacyPleaseEnterIpAddress,
-    "Invalid IPv4 address": l10n.uiLegacyInvalidIpvAddress,
-    "Telnet (Insecure Shell)": l10n.uiLegacyTelnetInsecureShell,
-    "SMB / Windows Sharing": l10n.uiLegacySmbWindowsSharing,
-    "RDP (Remote Desktop)": l10n.uiLegacyRdpRemoteDesktop,
-    "Please enter a valid IP address or CIDR.": l10n.uiLegacyPleaseEnterAValidIpAddressOr,
-    "Block Incoming Connection": l10n.uiLegacyBlockIncomingConnection,
-    "Please enter a port or port range.": l10n.uiLegacyPleaseEnterAPortOrPortRange,
-    "Failed to create firewall block rule.": l10n.uiLegacyFailedToCreateFirewallBlockRule,
-    "Please enter an external IP or CIDR": l10n.uiLegacyPleaseEnterAnExternalIpOrCidr,
-    "Invalid IP address or CIDR range": l10n.uiLegacyInvalidIpAddressOrCidrRange,
-    "SYN Flood": l10n.uiLegacySynFlood,
-    "Select Connected Client": l10n.uiLegacySelectConnectedClient,
-    "Failed to save port forwarding configuration.": l10n.uiLegacyFailedToSavePortForwardingConfiguration,
-    "Edit Port Forward": l10n.uiLegacyEditPortForward,
-    "Add Port Forward": l10n.uiLegacyAddPortForward,
-    "e.g. Web Server, Plex": l10n.uiLegacyEGWebServerPlex,
-    "Please enter a rule name.": l10n.uiLegacyPleaseEnterARuleName,
-    "External Port *": l10n.uiLegacyExternalPort,
-    "Enter port or range.": l10n.uiLegacyEnterPortOrRange,
-    "Invalid port format.": l10n.uiLegacyInvalidPortFormat,
-    "Dest Zone": l10n.uiLegacyDestZone,
-    "Defaults to external port": l10n.uiLegacyDefaultsToExternalPort,
-    "Internal Destination IP *": l10n.uiLegacyInternalDestinationIp,
-    "Please enter destination IP.": l10n.uiLegacyPleaseEnterDestinationIp,
-    "Please enter a valid IPv4 or IPv6 address.": l10n.uiLegacyPleaseEnterAValidIpvOrIpv,
-    "Destination IP must be IPv4 for IPv4 family.": l10n.uiLegacyDestinationIpMustBeIpvForIpv,
-    "Destination IP must be IPv6 for IPv6 family.": l10n.uiLegacyDestinationIpMustBeIpvForIpv63d2ab,
-    "Select connected client": l10n.uiLegacySelectConnectedClientc6ff6e,
-    "Source IP Filter (Optional)": l10n.uiLegacySourceIpFilterOptional,
-    "Leave empty to allow from any external IP.": l10n.uiLegacyLeaveEmptyToAllowFromAnyExternal,
-    "Must be a valid IP or CIDR.": l10n.uiLegacyMustBeAValidIpOrCidr,
-    "NAT Loopback / Reflection": l10n.uiLegacyNatLoopbackReflection,
-    "Allows LAN devices to connect using the external WAN address.": l10n.uiLegacyAllowsLanDevicesToConnectUsingThe,
-    "Activate this port forward rule immediately": l10n.uiLegacyActivateThisPortForwardRuleImmediately,
-    "Safety guard blocked rule: This DROP/REJECT rule affects the managing device or router management path and would cause network lockout.": l10n.uiLegacySafetyGuardBlockedRuleThisDropReject,
-    "Failed to save security rule configuration.": l10n.uiLegacyFailedToSaveSecurityRuleConfiguration,
-    "Invalid IP or CIDR.": l10n.uiLegacyInvalidIpOrCidr,
-    "e.g. AA:BB:CC:DD:EE:FF": l10n.uiLegacyEGAaBbCcDdEe,
-    "Changes Discarded": l10n.uiLegacyChangesDiscarded,
-    "firewall setting(s)": l10n.uiLegacyFirewallSettingS,
-    "Saving Changes": l10n.uiLegacySavingChanges,
-    "Saving firewall changes and reloading service...": l10n.uiLegacySavingFirewallChangesAndReloadingService,
-    "Firewall Save Error": l10n.uiLegacyFirewallSaveError,
-    "Firewall Saved": l10n.uiLegacyFirewallSaved,
-    "Firewall settings and rules saved successfully.": l10n.uiLegacyFirewallSettingsAndRulesSavedSuccessfully,
-    "Failed to update Flow Offloading settings.": l10n.uiLegacyFailedToUpdateFlowOffloadingSettings,
-    "firewall setting/rule change(s)": l10n.uiLegacyFirewallSettingRuleChangeS,
-    "Firewall Configuration Unavailable": l10n.uiLegacyFirewallConfigurationUnavailable,
-    "Edit port forward": l10n.uiLegacyEditPortForwardec8d86,
-    "Delete port forward": l10n.uiLegacyDeletePortForward,
-    "Delete Port Forward?": l10n.uiLegacyDeletePortForward497bba,
-    "No custom security rules defined (default zone policies active).": l10n.uiLegacyNoCustomSecurityRulesDefinedDefaultZone,
-    "Please save or discard unsaved changes before reordering rules.": l10n.uiLegacyPleaseSaveOrDiscardUnsavedChangesBefore,
-    "Reordering Rules": l10n.uiLegacyReorderingRules,
-    "Updating firewall rule priority...": l10n.uiLegacyUpdatingFirewallRulePriority,
-    "Rules Reordered": l10n.uiLegacyRulesReordered,
-    "Firewall rule order updated successfully.": l10n.uiLegacyFirewallRuleOrderUpdatedSuccessfully,
-    "Reorder Failed": l10n.uiLegacyReorderFailed,
-    "Unable to update rule order in firewall configuration.": l10n.uiLegacyUnableToUpdateRuleOrderInFirewall,
-    "Delete Security Rule?": l10n.uiLegacyDeleteSecurityRule,
-    "Username cannot be empty": l10n.uiLegacyUsernameCannotBeEmpty,
-    "Authentication failed. Invalid username or password.": l10n.uiLegacyAuthenticationFailedInvalidUsernameOrPassword,
-    "External Host": l10n.uiLegacyExternalHost,
-    "Local Router": l10n.uiLegacyLocalRouter,
-    "Forwarding Strategy:": l10n.uiLegacyForwardingStrategy,
-    "AdGuard DNS Port": l10n.uiLegacyAdguardDnsPort,
-    "Router Dnsmasq Port": l10n.uiLegacyRouterDnsmasqPort,
-    "Dnsmasq Port": l10n.uiLegacyDnsmasqPort,
-    "Configured Forwarders": l10n.uiLegacyConfiguredForwarders,
-    "Firewall Redirect": l10n.uiLegacyFirewallRedirect,
-    "AdGuard DNS filter": l10n.uiLegacyAdguardDnsFilter,
-    "Connection successful!": l10n.uiLegacyConnectionSuccessful,
-    "Authentication required. Enter username & password.": l10n.uiLegacyAuthenticationRequiredEnterUsernamePassword,
-    "Unreachable. Check host, port, and network.": l10n.uiLegacyUnreachableCheckHostPortAndNetwork,
-    "Endpoint responded, but is not AdGuard Home.": l10n.uiLegacyEndpointRespondedButIsNotAdguardHome,
-    "Connection test failed.": l10n.uiLegacyConnectionTestFailed,
-    "Edit AdGuard Profile": l10n.uiLegacyEditAdguardProfile,
-    "Add External AdGuard Home": l10n.uiLegacyAddExternalAdguardHome,
-    "Instance Name *": l10n.uiLegacyInstanceName,
-    "e.g. Raspberry Pi, Mini-PC": l10n.uiLegacyEGRaspberryPiMiniPc,
-    "Please enter a name": l10n.uiLegacyPleaseEnterAName,
-    "Host is required": l10n.uiLegacyHostIsRequired,
-    "Enter a valid IP address or hostname": l10n.uiLegacyEnterAValidIpAddressOrHostname,
-    "Testing Connection...": l10n.uiLegacyTestingConnection,
-    "Test Connection": l10n.uiLegacyTestConnection,
-    "dnsmasq server": l10n.uiLegacyDnsmasqServer,
-    "None (ISP/WAN Default)": l10n.uiLegacyNoneIspWanDefault,
-    "Instance Profiles": l10n.uiLegacyInstanceProfiles,
-    "Delete Current Profile": l10n.uiLegacyDeleteCurrentProfile,
-    "External AdGuard Home instance: Router DNS forwarding is unverified. Ensure your router or network clients point to this instance for filtering.": l10n.uiLegacyExternalAdguardHomeInstanceRouterDnsForwarding,
-    "Network connection failure": l10n.uiLegacyNetworkConnectionFailure,
-    "failure communicating": l10n.uiLegacyFailureCommunicating,
-    "Error saving init scripts": l10n.uiLegacyErrorSavingInitScripts,
-    "Are you sure you want to delete this scheduled cron job?\n\n": l10n.uiLegacyAreYouSureYouWantToDeleteab7c9f,
-    "No system cron jobs scheduled": l10n.uiLegacyNoSystemCronJobsScheduled,
-    "Add scheduled background maintenance tasks or system scripts.": l10n.uiLegacyAddScheduledBackgroundMaintenanceTasksOrSystem,
-    "No Dynamic DNS configurations found": l10n.uiLegacyNoDynamicDnsConfigurationsFound,
-    "Add a DDNS provider to keep your domain pointing to your router automatically.": l10n.uiLegacyAddADdnsProviderToKeepYour,
-    "This will install the official OpenWrt ddns-scripts core package and dynamic DNS provider scripts.\n\nDo you want to proceed?": l10n.uiLegacyThisWillInstallTheOfficialOpenwrtDdns,
-    "Installing ddns-scripts package...": l10n.uiLegacyInstallingDdnsScriptsPackage,
-    "ddns-scripts package installed successfully!": l10n.uiLegacyDdnsScriptsPackageInstalledSuccessfully,
-    "Insufficient storage space on router (No space left on device).": l10n.uiLegacyInsufficientStorageSpaceOnRouterNoSpace,
-    "Failed to install ddns-scripts package.": l10n.uiLegacyFailedToInstallDdnsScriptsPackage,
-    "Validation Test Passed": l10n.uiLegacyValidationTestPassed,
-    "Validation Test Failed": l10n.uiLegacyValidationTestFailed,
-    "Cron expression cannot be empty": l10n.uiLegacyCronExpressionCannotBeEmpty,
-    "Must contain 5 fields: minute hour day-of-month month day-of-week": l10n.uiLegacyMustContainFieldsMinuteHourDayOf,
-    "Day of Month": l10n.uiLegacyDayOfMonth,
-    "Day of Week": l10n.uiLegacyDayOfWeek,
-    "Command cannot be empty": l10n.uiLegacyCommandCannotBeEmpty,
-    "Command cannot contain newlines": l10n.uiLegacyCommandCannotContainNewlines,
-    "Command is too long (max 500 characters)": l10n.uiLegacyCommandIsTooLongMaxCharacters,
-    "CAUTION: This command contains potentially destructive removal operations!": l10n.uiLegacyCautionThisCommandContainsPotentiallyDestructiveRemoval,
-    "CAUTION: Direct raw disk writes detected!": l10n.uiLegacyCautionDirectRawDiskWritesDetected,
-    "min hour dom month dow (e.g. 0 4 * * *)": l10n.uiLegacyMinHourDomMonthDowEG,
-    "Instance Section Name": l10n.uiLegacyInstanceSectionName,
-    "Enter section name": l10n.uiLegacyEnterSectionName,
-    "Lookup Hostname": l10n.uiLegacyLookupHostname,
-    "Enter lookup hostname": l10n.uiLegacyEnterLookupHostname,
-    "Registered Domain": l10n.uiLegacyRegisteredDomain,
-    "Username / Auth ID": l10n.uiLegacyUsernameAuthId,
-    "Password / API Token": l10n.uiLegacyPasswordApiToken,
-    "Custom Update URL": l10n.uiLegacyCustomUpdateUrl,
-    "IP address source": l10n.uiLegacyIpAddressSource,
-    "Performing DNS resolution test on router...": l10n.uiLegacyPerformingDnsResolutionTestOnRouter,
-    "Test Passed": l10n.uiLegacyTestPassed,
-    "Test Failed": l10n.uiLegacyTestFailed,
-    "Save Instance": l10n.uiLegacySaveInstance,
-    "Add Instance": l10n.uiLegacyAddInstance,
-    "Collecting metric samples...": l10n.uiLegacyCollectingMetricSamples,
-    "Package Engine: APK": l10n.uiLegacyPackageEngineApk,
-    "Package Engine: OPKG": l10n.uiLegacyPackageEngineOpkg,
-    "Bufferbloat Mitigation": l10n.uiLegacyBufferbloatMitigation,
-    "Package installation is restricted because router RPC permissions are missing.": l10n.uiLegacyPackageInstallationIsRestrictedBecauseRouterRpc,
-    "Package to Install:": l10n.uiLegacyPackageToInstall,
-    "SQM Installation": l10n.uiLegacySqmInstallation,
-    "Fix Permissions": l10n.uiLegacyFixPermissions,
-    "Router RPC permissions missing. Installing packages requires RPC execution permissions.": l10n.uiLegacyRouterRpcPermissionsMissingInstallingPackagesRequires,
-    "Fix Permissions to Install": l10n.uiLegacyFixPermissionsToInstall,
-    "Disable in Firewall": l10n.uiLegacyDisableInFirewall,
-    "Disabling Flow Offloading": l10n.uiLegacyDisablingFlowOffloading,
-    "Disabling firewall flow offloading and reloading...": l10n.uiLegacyDisablingFirewallFlowOffloadingAndReloading,
-    "Flow Offloading Disabled": l10n.uiLegacyFlowOffloadingDisabled,
-    "Firewall flow offloading disabled. SQM shaping active.": l10n.uiLegacyFirewallFlowOffloadingDisabledSqmShapingActive,
-    "Failed to Disable Offloading": l10n.uiLegacyFailedToDisableOffloading,
-    "Please check your firewall settings.": l10n.uiLegacyPleaseCheckYourFirewallSettings,
-    "Zero Bandwidth Configured": l10n.uiLegacyZeroBandwidthConfigured,
-    "Both download and upload speeds are set to 0 Mbps. With zero bandwidth, SQM will not perform any traffic shaping or bufferbloat mitigation.\n\nDo you want to save anyway?": l10n.uiLegacyBothDownloadAndUploadSpeedsAreSet,
-    "Save Anyway": l10n.uiLegacySaveAnyway,
-    "Router Template": l10n.uiLegacyRouterTemplate,
-    "Connection Profile & Template": l10n.uiLegacyConnectionProfileTemplate,
-    "Select an OpenWrt template optimized for your internet connection type:": l10n.uiLegacySelectAnOpenwrtTemplateOptimizedForYour,
-    "Quick Sweet-Spot:": l10n.uiLegacyQuickSweetSpot,
-    "90% (Sweet Spot)": l10n.uiLegacySweetSpot,
-    "VDSL PPPoE (44B)": l10n.uiLegacyVdslPppoeB,
-    "Cable DOCSIS (34B)": l10n.uiLegacyCableDocsisB,
-    "ADSL ATM (40B)": l10n.uiLegacyAdslAtmB,
-    "Verbosity Level (0-10)": l10n.uiLegacyVerbosityLevel,
-    "Saving...": l10n.uiLegacySaving,
-    "Cumulative total": l10n.uiLegacyCumulativeTotal,
-    "Filesystem is Read-Only": l10n.uiLegacyFilesystemIsReadOnly,
-    "Insufficient Storage Space": l10n.uiLegacyInsufficientStorageSpace,
-    "Memory Exhaustion (OOM)": l10n.uiLegacyMemoryExhaustionOom,
-    "The router ran out of RAM while resolving package dependencies and terminated the package manager.\n\nTo resolve this:\n• Enable zram-swap or configure external swap space\n• Stop memory-intensive background services temporarily\n• Install packages individually or use an image with pre-baked packages": l10n.uiLegacyTheRouterRanOutOfRamWhile,
-    "The router does not have enough storage space on the flash partition to install this package.\n\nTo resolve this:\n• Free up flash space or remove unused packages\n• Use Extroot (USB drive) for expanded storage": l10n.uiLegacyTheRouterDoesNotHaveEnoughStorage,
-    "Existing Template Present": l10n.uiLegacyExistingTemplatePresent,
-    "Create New Anyway": l10n.uiLegacyCreateNewAnyway,
-    "Use Existing Template": l10n.uiLegacyUseExistingTemplate,
-    "completed successfully": l10n.uiLegacyCompletedSuccessfully,
-    "cancelled by user": l10n.uiLegacyCancelledByUser,
-    "All probes passed": l10n.uiLegacyAllProbesPassed,
-    "Gateway ICMP unprompted": l10n.uiLegacyGatewayIcmpUnprompted,
-    "WAN OK": l10n.uiLegacyWanOk,
-    "DNS operational": l10n.uiLegacyDnsOperational,
-    "ICMP ping blocked": l10n.uiLegacyIcmpPingBlocked,
-    "DNS resolution failed": l10n.uiLegacyDnsResolutionFailed,
-    "Check router DNS settings": l10n.uiLegacyCheckRouterDnsSettings,
-    "Local Gateway reachable": l10n.uiLegacyLocalGatewayReachable,
-    "No active WAN gateway": l10n.uiLegacyNoActiveWanGateway,
-    "Security Downgrade Warning": l10n.uiLegacySecurityDowngradeWarning,
-    "Proceed with Downgrade": l10n.uiLegacyProceedWithDowngrade,
-    "Self-Disconnection Warning": l10n.uiLegacySelfDisconnectionWarning,
-    "SSID updated, but subnet DHCP configuration could not be applied.": l10n.uiLegacySsidUpdatedButSubnetDhcpConfigurationCould,
-    "You can review or reapply DHCP settings via Edit SSID or Network settings.": l10n.uiLegacyYouCanReviewOrReapplyDhcpSettings,
-    "Failed to update wireless SSID": l10n.uiLegacyFailedToUpdateWirelessSsid,
-    "Home Network (lan)": l10n.uiLegacyHomeNetworkLan,
-    "Guest Network (guest)": l10n.uiLegacyGuestNetworkGuest,
-    "One MAC per line or separated by space/comma": l10n.uiLegacyOneMacPerLineOrSeparatedBy,
-    "GTK Rekey (s)": l10n.uiLegacyGtkRekeyS,
-    "Rekey interval": l10n.uiLegacyRekeyInterval,
-    "Inactivity Limit (s)": l10n.uiLegacyInactivityLimitS,
-    "Idle disconnect": l10n.uiLegacyIdleDisconnect,
-    "Max Listen Int.": l10n.uiLegacyMaxListenInt,
-    "Power-save limit": l10n.uiLegacyPowerSaveLimit,
-    "e.g. 12h or 86400": l10n.uiLegacyEGHOr,
-    "US — United States": l10n.uiLegacyUsUnitedStates,
-    "DE — Germany": l10n.uiLegacyDeGermany,
-    "GB — United Kingdom": l10n.uiLegacyGbUnitedKingdom,
-    "IN — India": l10n.uiLegacyInIndia,
-    "JP — Japan": l10n.uiLegacyJpJapan,
-    "CA — Canada": l10n.uiLegacyCaCanada,
-    "AU — Australia": l10n.uiLegacyAuAustralia,
-    "BR — Brazil": l10n.uiLegacyBrBrazil,
-    "CN — China": l10n.uiLegacyCnChina,
-    "FR — France": l10n.uiLegacyFrFrance,
-    "IT — Italy": l10n.uiLegacyItItaly,
-    "ES — Spain": l10n.uiLegacyEsSpain,
-    "KR — South Korea": l10n.uiLegacyKrSouthKorea,
-    "NL — Netherlands": l10n.uiLegacyNlNetherlands,
-    "PL — Poland": l10n.uiLegacyPlPoland,
-    "SE — Sweden": l10n.uiLegacySeSweden,
-    "TW — Taiwan": l10n.uiLegacyTwTaiwan,
-    "NZ — New Zealand": l10n.uiLegacyNzNewZealand,
-    "SG — Singapore": l10n.uiLegacySgSingapore,
-    "HK — Hong Kong": l10n.uiLegacyHkHongKong,
-    "MX — Mexico": l10n.uiLegacyMxMexico,
-    "AR — Argentina": l10n.uiLegacyArArgentina,
-    "CL — Chile": l10n.uiLegacyClChile,
-    "ZA — South Africa": l10n.uiLegacyZaSouthAfrica,
-    "TH — Thailand": l10n.uiLegacyThThailand,
-    "VN — Vietnam": l10n.uiLegacyVnVietnam,
-    "ID — Indonesia": l10n.uiLegacyIdIndonesia,
-    "MY — Malaysia": l10n.uiLegacyMyMalaysia,
-    "PH — Philippines": l10n.uiLegacyPhPhilippines,
-    "AE — United Arab Emirates": l10n.uiLegacyAeUnitedArabEmirates,
-    "SA — Saudi Arabia": l10n.uiLegacySaSaudiArabia,
-    "IL — Israel": l10n.uiLegacyIlIsrael,
-    "TR — Turkey": l10n.uiLegacyTrTurkey,
-    "CH — Switzerland": l10n.uiLegacyChSwitzerland,
-    "AT — Austria": l10n.uiLegacyAtAustria,
-    "BE — Belgium": l10n.uiLegacyBeBelgium,
-    "DK — Denmark": l10n.uiLegacyDkDenmark,
-    "FI — Finland": l10n.uiLegacyFiFinland,
-    "NO — Norway": l10n.uiLegacyNoNorway,
-    "IE — Ireland": l10n.uiLegacyIeIreland,
-    "PT — Portugal": l10n.uiLegacyPtPortugal,
-    "CZ — Czech Republic": l10n.uiLegacyCzCzechRepublic,
-    "HU — Hungary": l10n.uiLegacyHuHungary,
-    "RO — Romania": l10n.uiLegacyRoRomania,
-    "GR — Greece": l10n.uiLegacyGrGreece,
-    "Channel Regulatory Warning": l10n.uiLegacyChannelRegulatoryWarning,
-    "Passphrase is required": l10n.uiLegacyPassphraseIsRequired,
-    "Passphrase must be at least 8 characters": l10n.uiLegacyPassphraseMustBeAtLeastCharacters,
-    "Passphrase must not exceed 63 characters": l10n.uiLegacyPassphraseMustNotExceedCharacters,
-    "Failed to create wireless interface on router": l10n.uiLegacyFailedToCreateWirelessInterfaceOnRouter,
-    "Failed to create wireless interface": l10n.uiLegacyFailedToCreateWirelessInterface,
-    "New wireless network will be committed directly to router configuration.": l10n.uiLegacyNewWirelessNetworkWillBeCommittedDirectly,
-    "Target Physical Radio": l10n.uiLegacyTargetPhysicalRadio,
-    "e.g. MyHome_WiFi or Guest_Network": l10n.uiLegacyEGMyhomeWifiOrGuestNetwork,
-    "Loading hardware capabilities…": l10n.uiLegacyLoadingHardwareCapabilities,
-    "Showing hardware-verified options": l10n.uiLegacyShowingHardwareVerifiedOptions,
-    "Standard compatibility defaults": l10n.uiLegacyStandardCompatibilityDefaults,
-    "Hide passphrase": l10n.uiLegacyHidePassphrase,
-    "Show passphrase": l10n.uiLegacyShowPassphrase,
-    "Enhanced Open (OWE) encrypts wireless frames without a shared password. Supported client devices connect securely automatically.": l10n.uiLegacyEnhancedOpenOweEncryptsWirelessFramesWithout,
-    "Confirm to save permanently, or revert to undo changes.": l10n.uiLegacyConfirmToSavePermanentlyOrRevertTo,
-    "Revert Changes Now": l10n.uiLegacyRevertChangesNow,
-    "Wireless changes confirmed & saved permanently.": l10n.uiLegacyWirelessChangesConfirmedSavedPermanently,
-    "Failed to send confirmation to router.": l10n.uiLegacyFailedToSendConfirmationToRouter,
-    "Reverting staged wireless changes...": l10n.uiLegacyRevertingStagedWirelessChanges,
-    "Wireless changes reverted & verified on router.": l10n.uiLegacyWirelessChangesRevertedVerifiedOnRouter,
-    "Revert signal sent. Verifying router UCI status...": l10n.uiLegacyRevertSignalSentVerifyingRouterUciStatus,
-    "Edit Security & Parameters": l10n.uiLegacyEditSecurityParameters,
-    "Edit Restricted (Read-Only)": l10n.uiLegacyEditRestrictedReadOnly,
-    "Show Wi-Fi QR Code": l10n.uiLegacyShowWiFiQrCode,
-    "Delete Restricted (Read-Only)": l10n.uiLegacyDeleteRestrictedReadOnly,
-    "More Options": l10n.uiLegacyMoreOptions,
-    "Move to Primary Networks": l10n.uiLegacyMoveToPrimaryNetworks,
-    "Move to Guest Networks": l10n.uiLegacyMoveToGuestNetworks,
-    "Reset to Auto-Detection": l10n.uiLegacyResetToAutoDetection,
-    "Collapse Details": l10n.uiLegacyCollapseDetails227901,
-    "Expand Details": l10n.uiLegacyExpandDetails918a9e,
-    "Read-only session: UCI write permission required to create Guest Wi-Fi.": l10n.uiLegacyReadOnlySessionUciWritePermissionRequired,
-    "Failed to provision guest network on router.": l10n.uiLegacyFailedToProvisionGuestNetworkOnRouter,
-    "Failed to provision guest network": l10n.uiLegacyFailedToProvisionGuestNetwork,
-    "Guest SSID Name": l10n.uiLegacyGuestSsidName,
-    "Guest SSID name cannot be empty": l10n.uiLegacyGuestSsidNameCannotBeEmpty,
-    "Network Attachment": l10n.uiLegacyNetworkAttachment,
-    "Logical network bridge interface": l10n.uiLegacyLogicalNetworkBridgeInterface,
-    "Guest Gateway IP Address": l10n.uiLegacyGuestGatewayIpAddress,
-    "Guest IP address is required": l10n.uiLegacyGuestIpAddressIsRequired,
-    "Enter a valid IPv4 address (e.g. 192.168.2.1)": l10n.uiLegacyEnterAValidIpvAddressEGf872a1,
-    "Wi-Fi Passphrase": l10n.uiLegacyWiFiPassphrase,
-    "Passphrase is required for encrypted networks": l10n.uiLegacyPassphraseIsRequiredForEncryptedNetworks,
-    "Passphrase cannot exceed 63 characters": l10n.uiLegacyPassphraseCannotExceedCharacters,
-    "Prevents connected guest devices from talking to each other": l10n.uiLegacyPreventsConnectedGuestDevicesFromTalkingTo,
-    "Advanced Options": l10n.uiLegacyAdvancedOptions,
-    "Protected Management Frames (PMF / 802.11w)": l10n.uiLegacyProtectedManagementFramesPmfW,
-    "Hidden SSID": l10n.uiLegacyHiddenSsid,
-    "Do not broadcast SSID in beacon frames": l10n.uiLegacyDoNotBroadcastSsidInBeaconFrames,
-    "Fast Roaming (802.11r/k/v)": l10n.uiLegacyFastRoamingRKV,
-    "Enable 802.11r Fast BSS Transition": l10n.uiLegacyEnableRFastBssTransition,
-    "Seamless roaming between access points": l10n.uiLegacySeamlessRoamingBetweenAccessPoints,
-    "FT over DS": l10n.uiLegacyFtOverDs,
-    "Fast transition over Distribution System": l10n.uiLegacyFastTransitionOverDistributionSystem,
-    "FT PSK Generate Local": l10n.uiLegacyFtPskGenerateLocal,
-    "Generate PSK locally per AP": l10n.uiLegacyGeneratePskLocallyPerAp,
-    "4 hex chars (e.g., a1b2)": l10n.uiLegacyHexCharsEGAB,
-    "QoS & Wireless Controls": l10n.uiLegacyQosWirelessControls,
-    "Enable Wi-Fi Multimedia quality-of-service": l10n.uiLegacyEnableWiFiMultimediaQualityOfService,
-    "Kick weak clients with excessive packet loss": l10n.uiLegacyKickWeakClientsWithExcessivePacketLoss,
-    "Multicast to Unicast Conversion": l10n.uiLegacyMulticastToUnicastConversion,
-    "Improves multicast video/audio streaming reliability": l10n.uiLegacyImprovesMulticastVideoAudioStreamingReliability,
-    "Transparent bridge mode for multi-AP meshing": l10n.uiLegacyTransparentBridgeModeForMultiApMeshing,
-    "MAC Address Access Control": l10n.uiLegacyMacAddressAccessControl,
-    "MAC Filter Mode": l10n.uiLegacyMacFilterMode,
-    "MAC Addresses List": l10n.uiLegacyMacAddressesList,
-    "One MAC address per line or separated by spaces/commas": l10n.uiLegacyOneMacAddressPerLineOrSeparated,
-    "1. Select Target Device": l10n.uiLegacySelectTargetDevice,
-    "OR Manual Entry": l10n.uiLegacyOrManualEntry,
-    "MAC Address (XX:XX:XX:XX:XX:XX)": l10n.uiLegacyMacAddressXxXxXxXxXx,
-    "Enter valid MAC address format (e.g. AA:BB:CC:11:22:33)": l10n.uiLegacyEnterValidMacAddressFormatEG,
-    "Static Lease Active": l10n.uiLegacyStaticLeaseActive,
-    "Edit Lease": l10n.uiLegacyEditLease,
-    "No Static DHCP Reservation": l10n.uiLegacyNoStaticDhcpReservation,
-    "Check SSIDs where this device should be explicitly allowed to connect.": l10n.uiLegacyCheckSsidsWhereThisDeviceShouldBe,
-    "Current: Allowed": l10n.uiLegacyCurrentAllowed,
-    "Current: Blocked": l10n.uiLegacyCurrentBlocked,
-    "Current: Restricted (Not in allow list)": l10n.uiLegacyCurrentRestrictedNotInAllowList,
-    "Current: Permitted (Not in deny list)": l10n.uiLegacyCurrentPermittedNotInDenyList,
-    "Current: Open (Filter disabled)": l10n.uiLegacyCurrentOpenFilterDisabled,
-    "STAGED: Will Allow": l10n.uiLegacyStagedWillAllow,
-    "STAGED: Will Remove": l10n.uiLegacyStagedWillRemove,
-    "Select SSIDs to Add Access Rules": l10n.uiLegacySelectSsidsToAddAccessRules,
-    "Apply Access Control Rules": l10n.uiLegacyApplyAccessControlRules,
-    "Applying Wi-Fi Access Control changes...": l10n.uiLegacyApplyingWiFiAccessControlChanges,
-    "Access Control applied.": l10n.uiLegacyAccessControlApplied,
-    "Failed to apply Wi-Fi Access Control rules.": l10n.uiLegacyFailedToApplyWiFiAccessControl,
-    "Failed to enable guest networks": l10n.uiLegacyFailedToEnableGuestNetworks,
-    "Failed to disable guest networks": l10n.uiLegacyFailedToDisableGuestNetworks,
-    "ISP Default": l10n.uiLegacyIspDefault,
-    "isp default": l10n.uiLegacyIspDefault881a83,
-    "dynamic dns": l10n.uiLegacyDynamicDns,
-    "Rebind Protection": l10n.uiLegacyRebindProtection,
-    "Domain Needed (Strict Order)": l10n.uiLegacyDomainNeededStrictOrder,
-    "Authoritative Mode": l10n.uiLegacyAuthoritativeMode,
-    "1s Interval": l10n.uiLegacySInterval,
-    "2s Interval": l10n.uiLegacySIntervalcdeddc,
-    "3s Interval": l10n.uiLegacySInterval5fdae1,
-    "5s Interval": l10n.uiLegacySInterval18ac97,
-    "STREAMING LIVE": l10n.uiLegacyStreamingLive,
-    "STREAM PAUSED": l10n.uiLegacyStreamPaused,
-    "Sort by": l10n.uiLegacySortBy,
-    "No active client devices are currently reporting traffic.": l10n.uiLegacyNoActiveClientDevicesAreCurrentlyReporting,
-    "Try searching with a different device name, IP, or MAC.": l10n.uiLegacyTrySearchingWithADifferentDeviceName,
-    "Peak Speed": l10n.uiLegacyPeakSpeed,
-    "Connection Duration": l10n.uiLegacyConnectionDuration,
-    "Active Connections": l10n.uiLegacyActiveConnections,
-    "Primary Layer 7 Protocol": l10n.uiLegacyPrimaryLayerProtocol,
-    "Session Bandwidth Usage": l10n.uiLegacySessionBandwidthUsage,
-    "Period: ": l10n.uiLegacyPeriod,
-    "Current Period": l10n.uiLegacyCurrentPeriod,
-    "Device Bandwidth Usage": l10n.uiLegacyDeviceBandwidthUsage,
-    "No disconnected/offline devices found with recorded usage.": l10n.uiLegacyNoDisconnectedOfflineDevicesFoundWithRecorded,
-    "No connected devices currently found.": l10n.uiLegacyNoConnectedDevicesCurrentlyFound,
-    "No usage records found for this period.": l10n.uiLegacyNoUsageRecordsFoundForThisPeriod,
-    "Demo Router (Reviewer Mode)": l10n.uiLegacyDemoRouterReviewerMode,
-    "Unknown IP": l10n.uiLegacyUnknownIp,
-    "Skipped: ": l10n.uiLegacySkipped,
-    "is down": l10n.uiLegacyIsDown,
-    "PPPoE point-to-point link": l10n.uiLegacyPppoePointToPointLink,
-    "No upstream gateway IP could be verified": l10n.uiLegacyNoUpstreamGatewayIpCouldBeVerified,
-    "No gateway IP was identified": l10n.uiLegacyNoGatewayIpWasIdentified,
-    "IPv4-only network": l10n.uiLegacyIpvOnlyNetwork,
-    "IPv6 is not configured": l10n.uiLegacyIpvIsNotConfigured,
-    "You have unsaved edits to /etc/sysupgrade.conf. Are you sure you want to exit without saving?": l10n.uiLegacyYouHaveUnsavedEditsToEtcSysupgrade,
-    "Refreshed preserved backup files from router.": l10n.uiLegacyRefreshedPreservedBackupFilesFromRouter,
-    "Failed to refresh backup file list.": l10n.uiLegacyFailedToRefreshBackupFileList,
-    "## Keep custom files across sysupgrade updates": l10n.uiLegacyKeepCustomFilesAcrossSysupgradeUpdates,
-    "Saved /etc/sysupgrade.conf to router!": l10n.uiLegacySavedEtcSysupgradeConfToRouter,
-    "Failed to save /etc/sysupgrade.conf to router.": l10n.uiLegacyFailedToSaveEtcSysupgradeConfTo,
-    "Error saving configuration": l10n.uiLegacyErrorSavingConfiguration,
-    "File path must start with \"/\" (e.g. /etc/cloudflared/config.yml)": l10n.uiLegacyFilePathMustStartWithEG,
-    "Path is already included in /etc/sysupgrade.conf": l10n.uiLegacyPathIsAlreadyIncludedInEtcSysupgrade,
-    "Added path to list. Remember to tap \"Save to Router\".": l10n.uiLegacyAddedPathToListRememberToTap,
-    "Search preserved files...": l10n.uiLegacySearchPreservedFiles,
-    "No preserved backup files returned from router.": l10n.uiLegacyNoPreservedBackupFilesReturnedFromRouter,
-    "Copy Path": l10n.uiLegacyCopyPath,
-    "Add path (e.g. /etc/cloudflared/config.yml)": l10n.uiLegacyAddPathEGEtcCloudflaredConfig,
-    "Switch to List": l10n.uiLegacySwitchToList,
-    "Switch to Code Editor": l10n.uiLegacySwitchToCodeEditor,
-    "# Add files or directories to preserve across sysupgrade\n/etc/config/custom_app\n/etc/ssl/certs": l10n.uiLegacyAddFilesOrDirectoriesToPreserveAcross,
-    "No custom entries in /etc/sysupgrade.conf": l10n.uiLegacyNoCustomEntriesInEtcSysupgradeConf,
-    "Add file/directory paths above to preserve them across updates.": l10n.uiLegacyAddFileDirectoryPathsAboveToPreserve,
-    "Saving & Applying to Router...": l10n.uiLegacySavingApplyingToRouter,
-    "No Unsaved Changes (Saved)": l10n.uiLegacyNoUnsavedChangesSaved,
-    "Detecting hardware...": l10n.uiLegacyDetectingHardware,
-    "Generic Architecture": l10n.uiLegacyGenericArchitecture,
-    "OpenWrt / Compatible Router": l10n.uiLegacyOpenwrtCompatibleRouter,
-    "Router scan is still in progress. Please wait and try again.": l10n.uiLegacyRouterScanIsStillInProgressPlease,
-    "Failed to read generated backup file from router using all available strategies.": l10n.uiLegacyFailedToReadGeneratedBackupFileFrom,
-    "Could not read chosen archive file.": l10n.uiLegacyCouldNotReadChosenArchiveFile,
-    "Rebooting router...": l10n.uiLegacyRebootingRouter,
-    "Could not read chosen firmware image file.": l10n.uiLegacyCouldNotReadChosenFirmwareImageFile,
-    "Router connection unavailable": l10n.uiLegacyRouterConnectionUnavailable,
-    "Downloaded firmware image is empty.": l10n.uiLegacyDownloadedFirmwareImageIsEmpty,
-    "Target Model": l10n.uiLegacyTargetModel,
-    "Sysupgrade File": l10n.uiLegacySysupgradeFile,
-    "Image Size": l10n.uiLegacyImageSize,
-    "No Active Connections": l10n.uiLegacyNoActiveConnections,
-    "NextDNS Resolver": l10n.uiLegacyNextdnsResolver,
-    "No NextDNS profile ID or resolver configuration found on this router.": l10n.uiLegacyNoNextdnsProfileIdOrResolverConfiguration,
-    "Cloudflare Tunnel (cloudflared)": l10n.uiLegacyCloudflareTunnelCloudflared,
-    "No Cloudflare Tunnel ID or token configuration found on this router.": l10n.uiLegacyNoCloudflareTunnelIdOrTokenConfiguration,
-    "Bring Down": l10n.uiLegacyBringDown,
-    "Bring Up": l10n.uiLegacyBringUp,
-    "Public Key": l10n.uiLegacyPublicKey,
-    "Listen Port": l10n.uiLegacyListenPort,
-    "No active peers configured or connected.": l10n.uiLegacyNoActivePeersConfiguredOrConnected,
-    "Allowed IPs": l10n.uiLegacyAllowedIps,
-    "Traffic Transferred": l10n.uiLegacyTrafficTransferred,
-    "Tailscale IP": l10n.uiLegacyTailscaleIp,
-    "Tailnet Account": l10n.uiLegacyTailnetAccount,
-    "MagicDNS Domain": l10n.uiLegacyMagicdnsDomain,
-    "Mesh Peers": l10n.uiLegacyMeshPeers,
-    "Exit Node Capability": l10n.uiLegacyExitNodeCapability,
-    "ENABLED (Offers Exit Node)": l10n.uiLegacyEnabledOffersExitNode,
-    "Backend Daemon State": l10n.uiLegacyBackendDaemonState,
-    "Restarting Tailscale will temporarily drop active mesh connections.": l10n.uiLegacyRestartingTailscaleWillTemporarilyDropActiveMesh,
-    "Encrypted DNS Profile ID": l10n.uiLegacyEncryptedDnsProfileId,
-    "NextDNS Daemon Status": l10n.uiLegacyNextdnsDaemonStatus,
-    "Report Client Info": l10n.uiLegacyReportClientInfo,
-    "Restarting NextDNS will reload DNS filtering configurations.": l10n.uiLegacyRestartingNextdnsWillReloadDnsFilteringConfigurations,
-    "Cloudflare Tunnel": l10n.uiLegacyCloudflareTunnel,
-    "Tunnel ID": l10n.uiLegacyTunnelId,
-    "Edge Connections": l10n.uiLegacyEdgeConnections,
-    "Tunnel Status": l10n.uiLegacyTunnelStatus,
-    "CONNECTED TO CLOUDFLARE EDGE": l10n.uiLegacyConnectedToCloudflareEdge,
-    "Restarting Cloudflared will re-establish edge connection tunnels to Cloudflare Zero Trust.": l10n.uiLegacyRestartingCloudflaredWillReEstablishEdgeConnection,
-    "Applying configuration change...": l10n.uiLegacyApplyingConfigurationChange,
-    "Configuration Update Failed": l10n.uiLegacyConfigurationUpdateFailed,
-    "The router was unable to apply the VPN configuration change.": l10n.uiLegacyTheRouterWasUnableToApplyThe,
-    "Tunnel Configuration Updated": l10n.uiLegacyTunnelConfigurationUpdated,
-    "NOT CONFIGURED": l10n.uiLegacyNotConfigured,
-    "MASTER": l10n.uiLegacyMaster,
-    "Master": l10n.uiLegacyMastera2bb34,
-    "AP": l10n.uiLegacyAp,
-    "Managed": l10n.uiLegacyManaged,
-    "managed": l10n.uiLegacyManaged7fdfda,
-    "STA": l10n.uiLegacySta,
-    "Mesh": l10n.uiLegacyMesh,
-    "MESH": l10n.uiLegacyMesh3debcd,
-    "Monitor": l10n.uiLegacyMonitor,
-    "Ad-Hoc": l10n.uiLegacyAdHoc,
-    "Required": l10n.uiLegacyRequired,
-    "Optional": l10n.uiLegacyOptional,
-    "ACCEPT": l10n.uiLegacyAccept,
-    "DROP": l10n.uiLegacyDrop,
-    "REJECT": l10n.uiLegacyReject,
-    "Any": l10n.uiLegacyAny,
-    "BETA": l10n.uiLegacyBeta,
-    "Both": l10n.uiLegacyBoth,
-    "Bypassed": l10n.uiLegacyBypassed,
-    "CORE": l10n.uiLegacyCore,
-    "CUSTOM": l10n.uiLegacyCustom,
-    "Description": l10n.uiLegacyDescription,
-    "Ethernet": l10n.uiLegacyEthernet,
-    "IPv6 Handling": l10n.uiLegacyIpvHandling,
-    "Ready": l10n.uiLegacyReady,
-    "Relay": l10n.uiLegacyRelay,
-    "Server": l10n.uiLegacyServer,
-    "start": l10n.uiLegacyStart,
-    "stop": l10n.uiLegacyStop,
-    "activate": l10n.uiLegacyActivate,
-    "deactivate": l10n.uiLegacyDeactivate,
-    "bring down": l10n.uiLegacyBringDowna8faac,
-    "bring up": l10n.uiLegacyBringUp85d958,
-    "Pausing": l10n.uiLegacyPausing,
-    "Resuming": l10n.uiLegacyResuming,
-    "Blocking": l10n.uiLegacyBlocking,
-    "Restoring": l10n.uiLegacyRestoring,
-    "Pause": l10n.uiLegacyPause,
-    "update": l10n.uiLegacyUpdate,
-    "create": l10n.uiLegacyCreate,
-    "minute": l10n.uiLegacyMinute,
-    "hour": l10n.uiLegacyHour,
-    "day-of-month": l10n.uiLegacyDayOfMonth55f582,
-    "month": l10n.uiLegacyMonth,
-    "day-of-week": l10n.uiLegacyDayOfWeek681b12,
-    "minutes": l10n.uiLegacyMinutes,
-    "hours": l10n.uiLegacyHours,
-    "days": l10n.uiLegacyDays,
-    "UP": l10n.uiLegacyUp,
-    "DOWN": l10n.uiLegacyDown,
-    "N/A": l10n.uiLegacyNA,
-    "Open": l10n.uiLegacyOpen,
-    "Not configured": l10n.uiLegacyNotConfigureddd1841,
-    "1-255 beacons": l10n.uiLegacyBeacons,
-    "Guest": l10n.uiLegacyGuest,
-    "Primary": l10n.uiLegacyPrimary,
-    "Auto": l10n.uiLegacyAuto,
-    "ECN": l10n.uiLegacyEcn,
-    "NOECN": l10n.uiLegacyNoecn,
-    "PMF Disabled": l10n.uiLegacyPmfDisabled,
-    "PMF Optional": l10n.uiLegacyPmfOptional,
-    "PMF Required": l10n.uiLegacyPmfRequired,
-    "WPA3-SAE (SAE-Only)": l10n.uiLegacyWpaSaeSaeOnly,
-    "WPA2/WPA3 Mixed": l10n.uiLegacyWpaWpaMixed,
-    "Enhanced Open (OWE)": l10n.uiLegacyEnhancedOpenOwe,
-    "Open (None)": l10n.uiLegacyOpenNone,
-    "Custom/Unknown": l10n.uiLegacyCustomUnknown,
-    "OPEN": l10n.uiLegacyOpen6e1095,
-    "UNKNOWN": l10n.uiLegacyUnknown,
+    "00 — World / Global (Universal)": l10n.uiWorldRegulatoryDomain,
+    "Selector": l10n.uiProxyGroupSelector,
+    "URLTest": l10n.uiProxyGroupUrlTest,
+    "Fallback": l10n.uiProxyGroupFallback,
+    "LoadBalance": l10n.uiProxyGroupLoadBalance,
+    "Excellent": l10n.uiSignalExcellent,
+    "Good": l10n.uiSignalGood,
+    "Fair": l10n.uiSignalFair,
+    "Weak": l10n.uiSignalWeak,
   },
   [
+    _UiCopyRule("{arg0} Network Access", (args) {
+      return l10n.uiLegacyNetworkAccess(args[0]);
+    }, priority: 1),
+    _UiCopyRule("{arg0} (Enforced at Main Router)", (args) {
+      return l10n.uiLegacyEnforcedAtMainRouter(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Connected via {arg0}. Internet firewall rules are enforced at the Main Router gateway.", (args) {
+      return l10n.uiLegacyConnectedViaInternetFirewallRulesAreEnforced(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Account '{arg0}' lacks UCI write access authorization required for {arg1}.", (args) {
+      return l10n.uiLegacyAccountLacksUciWriteAccessAuthorizationRequired(args[0], _localizeUiKeyword(l10n, args[1]));
+    }, priority: 2),
+    _UiCopyRule("\n\nActive device MAC: {arg0}", (args) {
+      return l10n.uiLegacyActiveDeviceMac(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Changing {arg0} may disconnect your current mobile device from the router Wi-Fi network.{arg1}\n\nChanges will be applied directly to the router.", (args) {
+      return l10n.uiLegacyChangingMayDisconnectYourCurrentMobileDevice(_localizeUiKeyword(l10n, args[0]), args[1]);
+    }, priority: 2),
+    _UiCopyRule("MAC: {arg0}{arg1}", (args) {
+      return l10n.uiLegacyMac(args[0], args[1]);
+    }, priority: 1),
+    _UiCopyRule("Target SSID: {arg0}{arg1}", (args) {
+      return l10n.uiLegacyTargetSsid(args[0], args[1]);
+    }, priority: 1),
+    _UiCopyRule("Pasted MAC: {arg0}", (args) {
+      return l10n.uiLegacyPastedMac(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Conflict: {arg0} is the router's gateway address", (args) {
+      return l10n.uiLegacyConflictIsTheRouterSGatewayAddress(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Conflict: {arg0} is used by \"{arg1}\" ({arg2})", (args) {
+      return l10n.uiLegacyConflictIsUsedBy(args[0], args[1], args[2]);
+    }, priority: 1),
+    _UiCopyRule("Conflict: {arg0} is reserved for static lease \"{arg1}\" ({arg2})", (args) {
+      return l10n.uiLegacyConflictIsReservedForStaticLease(args[0], args[1], args[2]);
+    }, priority: 1),
+    _UiCopyRule("Updating static lease for {arg0}...", (args) {
+      return l10n.uiLegacyUpdatingStaticLeaseFor(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Creating static lease for {arg0}...", (args) {
+      return l10n.uiLegacyCreatingStaticLeaseFor(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Updated static lease: {arg0} ({arg1})", (args) {
+      return l10n.uiLegacyUpdatedStaticLease(args[0], args[1]);
+    }, priority: 1),
+    _UiCopyRule("Static lease reserved: {arg0} ({arg1})", (args) {
+      return l10n.uiLegacyStaticLeaseReserved(args[0], args[1]);
+    }, priority: 1),
+    _UiCopyRule("Failed to {arg0} static lease for {arg1}.", (args) {
+      return l10n.uiLegacyFailedToStaticLeaseFor(_localizeUiKeyword(l10n, args[0]), args[1]);
+    }, priority: 2),
+    _UiCopyRule("Removing static lease for {arg0}...", (args) {
+      return l10n.uiLegacyRemovingStaticLeaseFor(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Static lease removed for {arg0}.", (args) {
+      return l10n.uiLegacyStaticLeaseRemovedFor(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Failed to remove static lease for {arg0}.", (args) {
+      return l10n.uiLegacyFailedToRemoveStaticLeaseFor(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Connection refresh signal sent for {arg0}.", (args) {
+      return l10n.uiLegacyConnectionRefreshSignalSentFor(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Failed to trigger connection refresh for {arg0}.", (args) {
+      return l10n.uiLegacyFailedToTriggerConnectionRefreshFor(args[0]);
+    }, priority: 1),
+    _UiCopyRule("e.g. {arg0} (Available in LAN)", (args) {
+      return l10n.uiLegacyEGAvailableInLan(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Matches Subnet: {arg0}/{arg1} ({arg2})", (args) {
+      return l10n.uiLegacyMatchesSubnet(args[0], args[1], args[2]);
+    }, priority: 1),
+    _UiCopyRule("Valid Private IPv4 Address ({arg0}.x)", (args) {
+      return l10n.uiLegacyValidPrivateIpvAddressX(args[0]);
+    }, priority: 1),
+    _UiCopyRule(" ({arg0} taps blocked)", (args) {
+      return l10n.uiLegacyTapsBlocked(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Please wait {arg0}s before triggering \"{arg1}\" again{arg2}.", (args) {
+      return l10n.uiLegacyPleaseWaitSBeforeTriggeringAgain(args[0], args[1], args[2]);
+    }, priority: 1),
+    _UiCopyRule("{arg0} alert: {arg1}. {arg2}", (args) {
+      return l10n.uiLegacyAlert(_localizeUiKeyword(l10n, args[0]), args[1], args[2]);
+    }, priority: 2),
+    _UiCopyRule("Failed to load settings: {arg0}", (args) {
+      return l10n.uiLegacyFailedToLoadSettings(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Client name: {arg0}", (args) {
+      return l10n.uiLegacyClientName(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Client details: {arg0}", (args) {
+      return l10n.uiLegacyClientDetails(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Vendor: {arg0}", (args) {
+      return l10n.uiLegacyVendor(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Ban Client ({arg0})", (args) {
+      return l10n.uiLegacyBanClient(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Setting hostapd ban for {arg0} mins", (args) {
+      return l10n.uiLegacySettingHostapdBanForMins(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Failed to ban {arg0}", (args) {
+      return l10n.uiLegacyFailedToBan(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Unban Client ({arg0})", (args) {
+      return l10n.uiLegacyUnbanClient(args[0]);
+    }, priority: 1),
+    _UiCopyRule("{arg0} unbanned successfully.", (args) {
+      return l10n.uiLegacyUnbannedSuccessfully(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Failed to unban {arg0}.", (args) {
+      return l10n.uiLegacyFailedToUnban(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Failed to save changes: {arg0}", (args) {
+      return l10n.uiLegacyFailedToSaveChanges(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Imported {arg0} new profile(s)", (args) {
+      return l10n.uiLegacyImportedNewProfileS(args[0]);
+    }, priority: 1),
+    _UiCopyRule("updated {arg0} existing profile(s)", (args) {
+      return l10n.uiLegacyUpdatedExistingProfileS(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Failed to connect: {arg0}", (args) {
+      return l10n.uiLegacyFailedToConnect(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Are you sure you want to remove {arg0}?", (args) {
+      return l10n.uiLegacyAreYouSureYouWantToRemove(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Unrecognized proto ({arg0}) — showing raw fields", (args) {
+      return l10n.uiLegacyUnrecognizedProtoShowingRawFields(args[0]);
+    }, priority: 1),
+    _UiCopyRule("{arg0}d ago", (args) {
+      return l10n.uiLegacyDAgo(args[0]);
+    }, priority: 1),
+    _UiCopyRule("{arg0}h ago", (args) {
+      return l10n.uiLegacyHAgo(args[0]);
+    }, priority: 1),
+    _UiCopyRule("{arg0}m ago", (args) {
+      return l10n.uiLegacyMAgo(args[0]);
+    }, priority: 1),
+    _UiCopyRule("{arg0}s ago", (args) {
+      return l10n.uiLegacySAgo(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Interface name: {arg0}", (args) {
+      return l10n.uiLegacyInterfaceName(args[0]);
+    }, priority: 1),
+    _UiCopyRule("{arg0} • Original: {arg1}", (args) {
+      return l10n.uiLegacyOriginal(args[0], _localizeUiKeyword(l10n, args[1]));
+    }, priority: 2),
+    _UiCopyRule("Interface details: {arg0}", (args) {
+      return l10n.uiLegacyInterfaceDetails(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Repository: {arg0}", (args) {
+      return l10n.uiLegacyRepository(args[0]);
+    }, priority: 1),
+    _UiCopyRule("{arg0} (RPC permissions required)", (args) {
+      return l10n.uiLegacyRpcPermissionsRequired(args[0]);
+    }, priority: 1),
+    _UiCopyRule("No clients currently associated with {arg0} ({arg1}).", (args) {
+      return l10n.uiLegacyNoClientsCurrentlyAssociatedWith(args[0], args[1]);
+    }, priority: 1),
+    _UiCopyRule("IP: {arg0}\nMAC: {arg1}", (args) {
+      return l10n.uiLegacyIpMac(args[0], args[1]);
+    }, priority: 1),
+    _UiCopyRule("{arg0} internet access...", (args) {
+      return l10n.uiLegacyInternetAccess(_localizeUiKeyword(l10n, args[0]));
+    }, priority: 2),
+    _UiCopyRule("Failed to update internet access for {arg0}.", (args) {
+      return l10n.uiLegacyFailedToUpdateInternetAccessFor(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Radio: {arg0} ({arg1}) • Ch {arg2} • {arg3}", (args) {
+      return l10n.uiLegacyRadioCh(args[0], args[1], args[2], args[3]);
+    }, priority: 1),
+    _UiCopyRule("Dev: {arg0}", (args) {
+      return l10n.uiLegacyDev(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Exit code: {arg0}", (args) {
+      return l10n.uiLegacyExitCode(args[0]);
+    }, priority: 1),
+    _UiCopyRule("No available packages matching \"{arg0}\".", (args) {
+      return l10n.uiLegacyNoAvailablePackagesMatching(args[0]);
+    }, priority: 1),
+    _UiCopyRule("No updates matching \"{arg0}\".", (args) {
+      return l10n.uiLegacyNoUpdatesMatching(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Schedule: block at {arg0}", (args) {
+      return l10n.uiLegacyScheduleBlockAt(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Daily time limit: {arg0} minutes", (args) {
+      return l10n.uiLegacyDailyTimeLimitMinutes(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Error: {arg0}", (args) {
+      return l10n.uiLegacyError(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Incoming connection block rule created for \"{arg0}\".", (args) {
+      return l10n.uiLegacyIncomingConnectionBlockRuleCreatedFor(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Port forward \"{arg0}\" updated successfully.", (args) {
+      return l10n.uiLegacyPortForwardUpdatedSuccessfully(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Port forward \"{arg0}\" created successfully.", (args) {
+      return l10n.uiLegacyPortForwardCreatedSuccessfully(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Security rule \"{arg0}\" updated successfully.", (args) {
+      return l10n.uiLegacySecurityRuleUpdatedSuccessfully(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Security rule \"{arg0}\" created successfully.", (args) {
+      return l10n.uiLegacySecurityRuleCreatedSuccessfully(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Invalid MAC: {arg0}", (args) {
+      return l10n.uiLegacyInvalidMac(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Failed to update {arg0} custom rule(s).", (args) {
+      return l10n.uiLegacyFailedToUpdateCustomRuleS(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Zone: {arg0}", (args) {
+      return l10n.uiLegacyZone(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Are you sure you want to delete \"{arg0}\"?", (args) {
+      return l10n.uiLegacyAreYouSureYouWantToDelete(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Port forward \"{arg0}\" deleted successfully.", (args) {
+      return l10n.uiLegacyPortForwardDeletedSuccessfully(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Security rule \"{arg0}\" deleted successfully.", (args) {
+      return l10n.uiLegacySecurityRuleDeletedSuccessfully(args[0]);
+    }, priority: 1),
+    _UiCopyRule("{arg0} items modified", (args) {
+      return l10n.uiLegacyItemsModified(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Copied \"{arg0}\" to clipboard", (args) {
+      return l10n.uiLegacyCopiedToClipboard(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Error testing connection: {arg0}", (args) {
+      return l10n.uiLegacyErrorTestingConnection(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Failed to save profile: {arg0}", (args) {
+      return l10n.uiLegacyFailedToSaveProfile(args[0]);
+    }, priority: 1),
+    _UiCopyRule("{arg0} (External Standalone)", (args) {
+      return l10n.uiLegacyExternalStandalone(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Are you sure you want to delete profile \"{arg0}\"? Stored credentials for this instance will be permanently removed.", (args) {
+      return l10n.uiLegacyAreYouSureYouWantToDeleteace6cc(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Failed to delete profile: {arg0}", (args) {
+      return l10n.uiLegacyFailedToDeleteProfile(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Successfully updated {arg0} script(s).", (args) {
+      return l10n.uiLegacySuccessfullyUpdatedScriptS(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Updated {arg0} script(s), but failed to update {arg1} script(s):\n\n{arg2}", (args) {
+      return l10n.uiLegacyUpdatedScriptSButFailedToUpdate(args[0], args[1], args[2]);
+    }, priority: 1),
+    _UiCopyRule("You have {arg0} unsaved change(s) to startup init scripts. Would you like to save them before leaving?", (args) {
+      return l10n.uiLegacyYouHaveUnsavedChangeSToStartup(args[0]);
+    }, priority: 1),
+    _UiCopyRule("\nSchedule: {arg0}", (args) {
+      return l10n.uiLegacySchedule(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Successfully restarted {arg0}", (args) {
+      return l10n.uiLegacySuccessfullyRestarted(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Failed to restart {arg0}", (args) {
+      return l10n.uiLegacyFailedToRestart(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Successfully performed {arg0} for {arg1}", (args) {
+      return l10n.uiLegacySuccessfullyPerformedFor(_localizeUiKeyword(l10n, args[0]), args[1]);
+    }, priority: 2),
+    _UiCopyRule("Failed to {arg0} {arg1}", (args) {
+      return l10n.uiLegacyFailedTo(_localizeUiKeyword(l10n, args[0]), args[1]);
+    }, priority: 2),
+    _UiCopyRule("Priority: {arg0} • Original: {arg1}", (args) {
+      return l10n.uiLegacyPriorityOriginal(args[0], _localizeUiKeyword(l10n, args[1]));
+    }, priority: 2),
+    _UiCopyRule("Startup Order Priority: {arg0}", (args) {
+      return l10n.uiLegacyStartupOrderPriority(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Lookup: {arg0}", (args) {
+      return l10n.uiLegacyLookup(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Interface: {arg0} • Interval: {arg1} {arg2}", (args) {
+      return l10n.uiLegacyInterfaceInterval(args[0], args[1], _localizeUiKeyword(l10n, args[2]));
+    }, priority: 2),
+    _UiCopyRule("Low Storage Warning: Only {arg0} KB available on router overlay storage. ddns-scripts requires ~350 KB. Installation may fail due to insufficient space.", (args) {
+      return l10n.uiLegacyLowStorageWarningOnlyKbAvailableOn(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Invalid step format in {arg0}", (args) {
+      return l10n.uiLegacyInvalidStepFormatIn(_localizeUiKeyword(l10n, args[0]));
+    }, priority: 2),
+    _UiCopyRule("Invalid step number in {arg0}", (args) {
+      return l10n.uiLegacyInvalidStepNumberIn(_localizeUiKeyword(l10n, args[0]));
+    }, priority: 2),
+    _UiCopyRule("Invalid range in {arg0}", (args) {
+      return l10n.uiLegacyInvalidRangeIn(_localizeUiKeyword(l10n, args[0]));
+    }, priority: 2),
+    _UiCopyRule("Invalid range numbers in {arg0}", (args) {
+      return l10n.uiLegacyInvalidRangeNumbersIn(_localizeUiKeyword(l10n, args[0]));
+    }, priority: 2),
+    _UiCopyRule("{arg0} range must be between {arg1} and {arg2}", (args) {
+      return l10n.uiLegacyRangeMustBeBetweenAnd(_localizeUiKeyword(l10n, args[0]), args[1], args[2]);
+    }, priority: 2),
+    _UiCopyRule("{arg0} start cannot exceed end", (args) {
+      return l10n.uiLegacyStartCannotExceedEnd(_localizeUiKeyword(l10n, args[0]));
+    }, priority: 2),
+    _UiCopyRule("Invalid character in {arg0}", (args) {
+      return l10n.uiLegacyInvalidCharacterIn(_localizeUiKeyword(l10n, args[0]));
+    }, priority: 2),
+    _UiCopyRule("{arg0} must be between {arg1} and {arg2}", (args) {
+      return l10n.uiLegacyMustBeBetweenAnd(_localizeUiKeyword(l10n, args[0]), args[1], args[2]);
+    }, priority: 2),
+    _UiCopyRule("{arg0} Setup Hint", (args) {
+      return l10n.uiLegacySetupHint(args[0]);
+    }, priority: 1),
+    _UiCopyRule("• Username: {arg0}", (args) {
+      return l10n.uiLegacyUsername(args[0]);
+    }, priority: 1),
+    _UiCopyRule("• Password/Token: {arg0}", (args) {
+      return l10n.uiLegacyPasswordToken(args[0]);
+    }, priority: 1),
+    _UiCopyRule("• Domain: {arg0}", (args) {
+      return l10n.uiLegacyDomain(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Checking storage in {arg0}...", (args) {
+      return l10n.uiLegacyCheckingStorageIn(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Free space in {arg0}: {arg1}", (args) {
+      return l10n.uiLegacyFreeSpaceIn(args[0], args[1]);
+    }, priority: 1),
+    _UiCopyRule("Free space in {arg0}: Unavailable", (args) {
+      return l10n.uiLegacyFreeSpaceInUnavailable(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Storage is limited ({arg0} free). Package installation requires sufficient flash space for scripts and kernel dependencies.", (args) {
+      return l10n.uiLegacyStorageIsLimitedFreePackageInstallationRequires(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Your router already has an existing queue template ({arg0}).\n\nTo keep your configuration robust, we recommend configuring and utilizing this existing template directly.", (args) {
+      return l10n.uiLegacyYourRouterAlreadyHasAnExistingQueue(args[0]);
+    }, priority: 1),
+    _UiCopyRule("gw:{arg0}", (args) {
+      return l10n.uiLegacyGw(args[0]);
+    }, priority: 1),
+    _UiCopyRule("DNS: {arg0}", (args) {
+      return l10n.uiLegacyDns(args[0]);
+    }, priority: 1),
+    _UiCopyRule("You are lowering the Wi-Fi security standard from {arg0} to {arg1}. This weakens encryption protection for connecting clients.", (args) {
+      return l10n.uiLegacyYouAreLoweringTheWiFiSecurity(args[0], args[1]);
+    }, priority: 1),
+    _UiCopyRule("You are currently connected via Wi-Fi network \"{arg0}\". Modifying its name, security mode, or passphrase will sever your active session.", (args) {
+      return l10n.uiLegacyYouAreCurrentlyConnectedViaWiFi(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Access Denied: Account '{arg0}' lacks UCI write authorization.", (args) {
+      return l10n.uiLegacyAccessDeniedAccountLacksUciWriteAuthorization(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Bridges this Wi-Fi network to the '{arg0}' logical interface", (args) {
+      return l10n.uiLegacyBridgesThisWiFiNetworkToThe(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Logged in as non-root user '{arg0}'. Saving requires root/UCI write privileges.", (args) {
+      return l10n.uiLegacyLoggedInAsNonRootUserSaving(args[0]);
+    }, priority: 1),
+    _UiCopyRule("{arg0} — Router Active Domain", (args) {
+      return l10n.uiLegacyRouterActiveDomain(args[0]);
+    }, priority: 1),
+    _UiCopyRule("New SSID \"{arg0}\" created successfully.", (args) {
+      return l10n.uiLegacyNewSsidCreatedSuccessfully(args[0]);
+    }, priority: 1),
+    _UiCopyRule("New SSID \"{arg0}\" created, but subnet DHCP configuration could not be applied.", (args) {
+      return l10n.uiLegacyNewSsidCreatedButSubnetDhcpConfiguration(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Non-root account '{arg0}'. Saving requires root/UCI write privileges.", (args) {
+      return l10n.uiLegacyNonRootAccountSavingRequiresRootUci(args[0]);
+    }, priority: 1),
+    _UiCopyRule("An SSID with this name already exists on {arg0}", (args) {
+      return l10n.uiLegacyAnSsidWithThisNameAlreadyExists(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Staged Changes Pending ({arg0})", (args) {
+      return l10n.uiLegacyStagedChangesPending54a3b8(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Failed to delete wireless interface \"{arg0}\".", (args) {
+      return l10n.uiLegacyFailedToDeleteWirelessInterface(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Section: {arg0} ({arg1})", (args) {
+      return l10n.uiLegacySection(args[0], args[1]);
+    }, priority: 1),
+    _UiCopyRule("Marked \"{arg0}\" as Guest Network", (args) {
+      return l10n.uiLegacyMarkedAsGuestNetwork(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Moved \"{arg0}\" to Primary Networks", (args) {
+      return l10n.uiLegacyMovedToPrimaryNetworks(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Reset detection override for \"{arg0}\"", (args) {
+      return l10n.uiLegacyResetDetectionOverrideFor(args[0]);
+    }, priority: 1),
+    _UiCopyRule("New Guest Wi-Fi \"{arg0}\" created successfully!", (args) {
+      return l10n.uiLegacyNewGuestWiFiCreatedSuccessfully(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Logged in as non-root / read-only session ('{arg0}'). UCI write privileges required.", (args) {
+      return l10n.uiLegacyLoggedInAsNonRootReadOnly(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Radio settings (Channel {arg0}, Band {arg1}) are inherited from physical radio {arg2}.", (args) {
+      return l10n.uiLegacyRadioSettingsChannelBandAreInheritedFrom(args[0], args[1], args[2]);
+    }, priority: 1),
+    _UiCopyRule("UTF-8 Bytes: {arg0} / 32 max", (args) {
+      return l10n.uiLegacyUtfBytesMax(args[0]);
+    }, priority: 1),
+    _UiCopyRule("SSID length exceeds 32 UTF-8 bytes ({arg0} bytes)", (args) {
+      return l10n.uiLegacySsidLengthExceedsUtfBytesBytes(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Invalid octet: {arg0}", (args) {
+      return l10n.uiLegacyInvalidOctet(args[0]);
+    }, priority: 1),
+    _UiCopyRule("MAC: {arg0} • SSID: {arg1} ({arg2})", (args) {
+      return l10n.uiLegacyMacSsid(args[0], args[1], args[2]);
+    }, priority: 1),
+    _UiCopyRule("SSID: {arg0} ({arg1})", (args) {
+      return l10n.uiLegacySsid(args[0], args[1]);
+    }, priority: 1),
+    _UiCopyRule("Rx: {arg0}", (args) {
+      return l10n.uiLegacyRx(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Tx: {arg0}", (args) {
+      return l10n.uiLegacyTx(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Custom DHCP Lease Name: {arg0}", (args) {
+      return l10n.uiLegacyCustomDhcpLeaseName(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Optionally assign a custom DHCP lease name & fixed IP for {arg0}.", (args) {
+      return l10n.uiLegacyOptionallyAssignACustomDhcpLeaseName(args[0]);
+    }, priority: 1),
+    _UiCopyRule("2. Wi-Fi Allow Mode Rules for {arg0}", (args) {
+      return l10n.uiLegacyWiFiAllowModeRulesFor(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Interface: {arg0} ({arg1})", (args) {
+      return l10n.uiLegacyInterface(args[0], args[1]);
+    }, priority: 1),
+    _UiCopyRule("Add Client Access Rules ({arg0} SSIDs)", (args) {
+      return l10n.uiLegacyAddClientAccessRulesSsids(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Apply Access Control Rules ({arg0} changes)", (args) {
+      return l10n.uiLegacyApplyAccessControlRulesChanges(args[0]);
+    }, priority: 1),
+    _UiCopyRule("You have not added this device ({arg0}) to the allow-list for affected SSIDs. Enabling this filter may disconnect you from this network.", (args) {
+      return l10n.uiLegacyYouHaveNotAddedThisDeviceTo(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Updating Wi-Fi Access Control for {arg0} on SSIDs:\n\n{arg1}\n\nNote: This affects {arg2} specifically.", (args) {
+      return l10n.uiLegacyUpdatingWiFiAccessControlForOn(args[0], args[1], args[2]);
+    }, priority: 1),
+    _UiCopyRule("IP: {arg0}  •  MAC: {arg1}  •  SSID: {arg2}", (args) {
+      return l10n.uiLegacyIpMacSsid(args[0], args[1], args[2]);
+    }, priority: 1),
+    _UiCopyRule("Signal: {arg0} ({arg1})  •  Noise: {arg2}", (args) {
+      return l10n.uiLegacySignalNoise(args[0], args[1], args[2]);
+    }, priority: 1),
+    _UiCopyRule("{arg0} internet access for {arg1}...", (args) {
+      return l10n.uiLegacyInternetAccessFor(_localizeUiKeyword(l10n, args[0]), args[1]);
+    }, priority: 2),
+    _UiCopyRule("{arg0} internet for {arg1}", (args) {
+      return l10n.uiLegacyInternetFor(_localizeUiKeyword(l10n, args[0]), args[1]);
+    }, priority: 2),
+    _UiCopyRule("Failed to update internet status for {arg0}.", (args) {
+      return l10n.uiLegacyFailedToUpdateInternetStatusFor(args[0]);
+    }, priority: 1),
+    _UiCopyRule("IP: {arg0} • MAC: {arg1}", (args) {
+      return l10n.uiLegacyIpMac2b53e0(args[0], args[1]);
+    }, priority: 1),
+    _UiCopyRule("Reserved IP: {arg0} • MAC: {arg1}", (args) {
+      return l10n.uiLegacyReservedIpMac(args[0], args[1]);
+    }, priority: 1),
+    _UiCopyRule("{arg0}s interval • {arg1} devices", (args) {
+      return l10n.uiLegacySIntervalDevices(args[0], args[1]);
+    }, priority: 1),
+    _UiCopyRule("Peak: {arg0}", (args) {
+      return l10n.uiLegacyPeak(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Not Connected ({arg0})", (args) {
+      return l10n.uiLegacyNotConnected(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Removed \"{arg0}\". Tap \"Save to Router\" to apply.", (args) {
+      return l10n.uiLegacyRemovedTapSaveToRouterToApply(args[0]);
+    }, priority: 1),
+    _UiCopyRule("No preserved files matching \"{arg0}\"", (args) {
+      return l10n.uiLegacyNoPreservedFilesMatching(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Mode: {arg0} ({arg1} custom paths)", (args) {
+      return l10n.uiLegacyModeCustomPaths(args[0], args[1]);
+    }, priority: 1),
+    _UiCopyRule("Backup Generation Failed: {arg0}", (args) {
+      return l10n.uiLegacyBackupGenerationFailed(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Archive Upload Failed: {arg0}", (args) {
+      return l10n.uiLegacyArchiveUploadFailed(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Failed to dump and read {arg0} partition from router.", (args) {
+      return l10n.uiLegacyFailedToDumpAndReadPartitionFrom(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Failed to save mtdblock: {arg0}", (args) {
+      return l10n.uiLegacyFailedToSaveMtdblock(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Insufficient /tmp space for upload ({arg0} MB required, {arg1} MB available).", (args) {
+      return l10n.uiLegacyInsufficientTmpSpaceForUploadMbRequired(args[0], args[1]);
+    }, priority: 1),
+    _UiCopyRule("File: {arg0}", (args) {
+      return l10n.uiLegacyFile(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Size: {arg0} MB", (args) {
+      return l10n.uiLegacySizeMb(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Target ROM: {arg0}", (args) {
+      return l10n.uiLegacyTargetRom(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Upgrade failed: {arg0}", (args) {
+      return l10n.uiLegacyUpgradeFailed46ad80(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Pkg: {arg0}", (args) {
+      return l10n.uiLegacyPkg(args[0]);
+    }, priority: 1),
+    _UiCopyRule("{arg0} inactive tunnel profiles • Tap to view", (args) {
+      return l10n.uiLegacyInactiveTunnelProfilesTapToView(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Interface: {arg0}", (args) {
+      return l10n.uiLegacyInterfaceecbdd1(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Are you sure you want to {arg0} the WireGuard interface \"{arg1}\" on the router?", (args) {
+      return l10n.uiLegacyAreYouSureYouWantToThe(_localizeUiKeyword(l10n, args[0]), args[1]);
+    }, priority: 2),
+    _UiCopyRule("Connected WireGuard Peers ({arg0})", (args) {
+      return l10n.uiLegacyConnectedWireguardPeers(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Peer: {arg0}", (args) {
+      return l10n.uiLegacyPeer(args[0]);
+    }, priority: 1),
+    _UiCopyRule("RX: {arg0} / TX: {arg1}", (args) {
+      return l10n.uiLegacyRxTx(args[0], args[1]);
+    }, priority: 1),
+    _UiCopyRule("Device: {arg0} • Proto: {arg1}:{arg2}", (args) {
+      return l10n.uiLegacyDeviceProto(args[0], args[1], args[2]);
+    }, priority: 1),
+    _UiCopyRule("Are you sure you want to {arg0} the OpenVPN instance \"{arg1}\" on the router?", (args) {
+      return l10n.uiLegacyAreYouSureYouWantToThe035c62(_localizeUiKeyword(l10n, args[0]), args[1]);
+    }, priority: 2),
+    _UiCopyRule("Are you sure you want to {arg0} the Tailscale mesh daemon on the router?", (args) {
+      return l10n.uiLegacyAreYouSureYouWantToThe7e0a32(_localizeUiKeyword(l10n, args[0]));
+    }, priority: 2),
+    _UiCopyRule("{arg0} Connected Peers", (args) {
+      return l10n.uiLegacyConnectedPeers(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Profile: {arg0}", (args) {
+      return l10n.uiLegacyProfile(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Are you sure you want to {arg0} encrypted NextDNS resolving on the router?", (args) {
+      return l10n.uiLegacyAreYouSureYouWantToEncrypted(_localizeUiKeyword(l10n, args[0]));
+    }, priority: 2),
+    _UiCopyRule("{arg0} Cloudflare Tunnel?", (args) {
+      return l10n.uiLegacyCloudflareTunnel1c60c6(_localizeUiKeyword(l10n, args[0]));
+    }, priority: 2),
+    _UiCopyRule("Are you sure you want to {arg0} the cloudflared zero-trust tunnel daemon on the router?", (args) {
+      return l10n.uiLegacyAreYouSureYouWantToThef1fa7d(_localizeUiKeyword(l10n, args[0]));
+    }, priority: 2),
+    _UiCopyRule("{arg0} Active Edge Hops", (args) {
+      return l10n.uiLegacyActiveEdgeHops(args[0]);
+    }, priority: 1),
+    _UiCopyRule("Radio {arg0}", (args) {
+      return l10n.uiLegacyRadio(args[0]);
+    }, priority: 1),
     _UiCopyRule("Failed to establish session with {target}.", (args) {
       return l10n.loginFailedSession(args[0]);
     }),
@@ -3421,570 +3994,6 @@ _UiCopyCatalog _buildUiCopyCatalog(AppLocalizations l10n) => _UiCopyCatalog(
     }),
     _UiCopyRule("Router pre-flash validation check failed: {reason}. Upgrade cancelled.", (args) {
       return l10n.sysUpgradeValidationFailed(args[0]);
-    }),
-    _UiCopyRule("{arg0} Network Access", (args) {
-      return l10n.uiLegacyNetworkAccess(args[0]);
-    }),
-    _UiCopyRule("{arg0} (Enforced at Main Router)", (args) {
-      return l10n.uiLegacyEnforcedAtMainRouter(args[0]);
-    }),
-    _UiCopyRule("Connected via {arg0}. Internet firewall rules are enforced at the Main Router gateway.", (args) {
-      return l10n.uiLegacyConnectedViaInternetFirewallRulesAreEnforced(args[0]);
-    }),
-    _UiCopyRule("Account '{arg0}' lacks UCI write access authorization required for {arg1}.", (args) {
-      return l10n.uiLegacyAccountLacksUciWriteAccessAuthorizationRequired(args[0], _localizeUiKeyword(l10n, args[1]));
-    }),
-    _UiCopyRule("\n\nActive device MAC: {arg0}", (args) {
-      return l10n.uiLegacyActiveDeviceMac(args[0]);
-    }),
-    _UiCopyRule("Changing {arg0} may disconnect your current mobile device from the router Wi-Fi network.{arg1}\n\nChanges will be applied directly to the router.", (args) {
-      return l10n.uiLegacyChangingMayDisconnectYourCurrentMobileDevice(_localizeUiKeyword(l10n, args[0]), args[1]);
-    }),
-    _UiCopyRule("MAC: {arg0}{arg1}", (args) {
-      return l10n.uiLegacyMac(args[0], args[1]);
-    }),
-    _UiCopyRule("Target SSID: {arg0}{arg1}", (args) {
-      return l10n.uiLegacyTargetSsid(args[0], args[1]);
-    }),
-    _UiCopyRule("Pasted MAC: {arg0}", (args) {
-      return l10n.uiLegacyPastedMac(args[0]);
-    }),
-    _UiCopyRule("Conflict: {arg0} is the router's gateway address", (args) {
-      return l10n.uiLegacyConflictIsTheRouterSGatewayAddress(args[0]);
-    }),
-    _UiCopyRule("Conflict: {arg0} is used by \"{arg1}\" ({arg2})", (args) {
-      return l10n.uiLegacyConflictIsUsedBy(args[0], args[1], args[2]);
-    }),
-    _UiCopyRule("Conflict: {arg0} is reserved for static lease \"{arg1}\" ({arg2})", (args) {
-      return l10n.uiLegacyConflictIsReservedForStaticLease(args[0], args[1], args[2]);
-    }),
-    _UiCopyRule("Updating static lease for {arg0}...", (args) {
-      return l10n.uiLegacyUpdatingStaticLeaseFor(args[0]);
-    }),
-    _UiCopyRule("Creating static lease for {arg0}...", (args) {
-      return l10n.uiLegacyCreatingStaticLeaseFor(args[0]);
-    }),
-    _UiCopyRule("Updated static lease: {arg0} ({arg1})", (args) {
-      return l10n.uiLegacyUpdatedStaticLease(args[0], args[1]);
-    }),
-    _UiCopyRule("Static lease reserved: {arg0} ({arg1})", (args) {
-      return l10n.uiLegacyStaticLeaseReserved(args[0], args[1]);
-    }),
-    _UiCopyRule("Failed to {arg0} static lease for {arg1}.", (args) {
-      return l10n.uiLegacyFailedToStaticLeaseFor(_localizeUiKeyword(l10n, args[0]), args[1]);
-    }),
-    _UiCopyRule("Removing static lease for {arg0}...", (args) {
-      return l10n.uiLegacyRemovingStaticLeaseFor(args[0]);
-    }),
-    _UiCopyRule("Static lease removed for {arg0}.", (args) {
-      return l10n.uiLegacyStaticLeaseRemovedFor(args[0]);
-    }),
-    _UiCopyRule("Failed to remove static lease for {arg0}.", (args) {
-      return l10n.uiLegacyFailedToRemoveStaticLeaseFor(args[0]);
-    }),
-    _UiCopyRule("Connection refresh signal sent for {arg0}.", (args) {
-      return l10n.uiLegacyConnectionRefreshSignalSentFor(args[0]);
-    }),
-    _UiCopyRule("Failed to trigger connection refresh for {arg0}.", (args) {
-      return l10n.uiLegacyFailedToTriggerConnectionRefreshFor(args[0]);
-    }),
-    _UiCopyRule("e.g. {arg0} (Available in LAN)", (args) {
-      return l10n.uiLegacyEGAvailableInLan(args[0]);
-    }),
-    _UiCopyRule("Matches Subnet: {arg0}/{arg1} ({arg2})", (args) {
-      return l10n.uiLegacyMatchesSubnet(args[0], args[1], args[2]);
-    }),
-    _UiCopyRule("Valid Private IPv4 Address ({arg0}.x)", (args) {
-      return l10n.uiLegacyValidPrivateIpvAddressX(args[0]);
-    }),
-    _UiCopyRule(" ({arg0} taps blocked)", (args) {
-      return l10n.uiLegacyTapsBlocked(args[0]);
-    }),
-    _UiCopyRule("Please wait {arg0}s before triggering \"{arg1}\" again{arg2}.", (args) {
-      return l10n.uiLegacyPleaseWaitSBeforeTriggeringAgain(args[0], args[1], args[2]);
-    }),
-    _UiCopyRule("{arg0} alert: {arg1}. {arg2}", (args) {
-      return l10n.uiLegacyAlert(_localizeUiKeyword(l10n, args[0]), args[1], args[2]);
-    }),
-    _UiCopyRule("Failed to load settings: {arg0}", (args) {
-      return l10n.uiLegacyFailedToLoadSettings(args[0]);
-    }),
-    _UiCopyRule("Client name: {arg0}", (args) {
-      return l10n.uiLegacyClientName(args[0]);
-    }),
-    _UiCopyRule("Client details: {arg0}", (args) {
-      return l10n.uiLegacyClientDetails(args[0]);
-    }),
-    _UiCopyRule("Vendor: {arg0}", (args) {
-      return l10n.uiLegacyVendor(args[0]);
-    }),
-    _UiCopyRule("Ban Client ({arg0})", (args) {
-      return l10n.uiLegacyBanClient(args[0]);
-    }),
-    _UiCopyRule("Setting hostapd ban for {arg0} mins", (args) {
-      return l10n.uiLegacySettingHostapdBanForMins(args[0]);
-    }),
-    _UiCopyRule("Failed to ban {arg0}", (args) {
-      return l10n.uiLegacyFailedToBan(args[0]);
-    }),
-    _UiCopyRule("Unban Client ({arg0})", (args) {
-      return l10n.uiLegacyUnbanClient(args[0]);
-    }),
-    _UiCopyRule("{arg0} unbanned successfully.", (args) {
-      return l10n.uiLegacyUnbannedSuccessfully(args[0]);
-    }),
-    _UiCopyRule("Failed to unban {arg0}.", (args) {
-      return l10n.uiLegacyFailedToUnban(args[0]);
-    }),
-    _UiCopyRule("Failed to save changes: {arg0}", (args) {
-      return l10n.uiLegacyFailedToSaveChanges(args[0]);
-    }),
-    _UiCopyRule("Imported {arg0} new profile(s)", (args) {
-      return l10n.uiLegacyImportedNewProfileS(args[0]);
-    }),
-    _UiCopyRule("updated {arg0} existing profile(s)", (args) {
-      return l10n.uiLegacyUpdatedExistingProfileS(args[0]);
-    }),
-    _UiCopyRule("Failed to connect: {arg0}", (args) {
-      return l10n.uiLegacyFailedToConnect(args[0]);
-    }),
-    _UiCopyRule("Are you sure you want to remove {arg0}?", (args) {
-      return l10n.uiLegacyAreYouSureYouWantToRemove(args[0]);
-    }),
-    _UiCopyRule("Unrecognized proto ({arg0}) — showing raw fields", (args) {
-      return l10n.uiLegacyUnrecognizedProtoShowingRawFields(args[0]);
-    }),
-    _UiCopyRule("{arg0}d ago", (args) {
-      return l10n.uiLegacyDAgo(args[0]);
-    }),
-    _UiCopyRule("{arg0}h ago", (args) {
-      return l10n.uiLegacyHAgo(args[0]);
-    }),
-    _UiCopyRule("{arg0}m ago", (args) {
-      return l10n.uiLegacyMAgo(args[0]);
-    }),
-    _UiCopyRule("{arg0}s ago", (args) {
-      return l10n.uiLegacySAgo(args[0]);
-    }),
-    _UiCopyRule("Interface name: {arg0}", (args) {
-      return l10n.uiLegacyInterfaceName(args[0]);
-    }),
-    _UiCopyRule("{arg0} • Original: {arg1}", (args) {
-      return l10n.uiLegacyOriginal(args[0], _localizeUiKeyword(l10n, args[1]));
-    }),
-    _UiCopyRule("Interface details: {arg0}", (args) {
-      return l10n.uiLegacyInterfaceDetails(args[0]);
-    }),
-    _UiCopyRule("Repository: {arg0}", (args) {
-      return l10n.uiLegacyRepository(args[0]);
-    }),
-    _UiCopyRule("{arg0} (RPC permissions required)", (args) {
-      return l10n.uiLegacyRpcPermissionsRequired(args[0]);
-    }),
-    _UiCopyRule("No clients currently associated with {arg0} ({arg1}).", (args) {
-      return l10n.uiLegacyNoClientsCurrentlyAssociatedWith(args[0], args[1]);
-    }),
-    _UiCopyRule("IP: {arg0}\nMAC: {arg1}", (args) {
-      return l10n.uiLegacyIpMac(args[0], args[1]);
-    }),
-    _UiCopyRule("{arg0} internet access...", (args) {
-      return l10n.uiLegacyInternetAccess(_localizeUiKeyword(l10n, args[0]));
-    }),
-    _UiCopyRule("Failed to update internet access for {arg0}.", (args) {
-      return l10n.uiLegacyFailedToUpdateInternetAccessFor(args[0]);
-    }),
-    _UiCopyRule("Radio: {arg0} ({arg1}) • Ch {arg2} • {arg3}", (args) {
-      return l10n.uiLegacyRadioCh(args[0], args[1], args[2], args[3]);
-    }),
-    _UiCopyRule("Dev: {arg0}", (args) {
-      return l10n.uiLegacyDev(args[0]);
-    }),
-    _UiCopyRule("Exit code: {arg0}", (args) {
-      return l10n.uiLegacyExitCode(args[0]);
-    }),
-    _UiCopyRule("No available packages matching \"{arg0}\".", (args) {
-      return l10n.uiLegacyNoAvailablePackagesMatching(args[0]);
-    }),
-    _UiCopyRule("No updates matching \"{arg0}\".", (args) {
-      return l10n.uiLegacyNoUpdatesMatching(args[0]);
-    }),
-    _UiCopyRule("Schedule: block at {arg0}", (args) {
-      return l10n.uiLegacyScheduleBlockAt(args[0]);
-    }),
-    _UiCopyRule("Daily time limit: {arg0} minutes", (args) {
-      return l10n.uiLegacyDailyTimeLimitMinutes(args[0]);
-    }),
-    _UiCopyRule("Error: {arg0}", (args) {
-      return l10n.uiLegacyError(args[0]);
-    }),
-    _UiCopyRule("Incoming connection block rule created for \"{arg0}\".", (args) {
-      return l10n.uiLegacyIncomingConnectionBlockRuleCreatedFor(args[0]);
-    }),
-    _UiCopyRule("Port forward \"{arg0}\" updated successfully.", (args) {
-      return l10n.uiLegacyPortForwardUpdatedSuccessfully(args[0]);
-    }),
-    _UiCopyRule("Port forward \"{arg0}\" created successfully.", (args) {
-      return l10n.uiLegacyPortForwardCreatedSuccessfully(args[0]);
-    }),
-    _UiCopyRule("Security rule \"{arg0}\" updated successfully.", (args) {
-      return l10n.uiLegacySecurityRuleUpdatedSuccessfully(args[0]);
-    }),
-    _UiCopyRule("Security rule \"{arg0}\" created successfully.", (args) {
-      return l10n.uiLegacySecurityRuleCreatedSuccessfully(args[0]);
-    }),
-    _UiCopyRule("Invalid MAC: {arg0}", (args) {
-      return l10n.uiLegacyInvalidMac(args[0]);
-    }),
-    _UiCopyRule("Failed to update {arg0} custom rule(s).", (args) {
-      return l10n.uiLegacyFailedToUpdateCustomRuleS(args[0]);
-    }),
-    _UiCopyRule("Zone: {arg0}", (args) {
-      return l10n.uiLegacyZone(args[0]);
-    }),
-    _UiCopyRule("Are you sure you want to delete \"{arg0}\"?", (args) {
-      return l10n.uiLegacyAreYouSureYouWantToDelete(args[0]);
-    }),
-    _UiCopyRule("Port forward \"{arg0}\" deleted successfully.", (args) {
-      return l10n.uiLegacyPortForwardDeletedSuccessfully(args[0]);
-    }),
-    _UiCopyRule("Security rule \"{arg0}\" deleted successfully.", (args) {
-      return l10n.uiLegacySecurityRuleDeletedSuccessfully(args[0]);
-    }),
-    _UiCopyRule("{arg0} items modified", (args) {
-      return l10n.uiLegacyItemsModified(args[0]);
-    }),
-    _UiCopyRule("Copied \"{arg0}\" to clipboard", (args) {
-      return l10n.uiLegacyCopiedToClipboard(args[0]);
-    }),
-    _UiCopyRule("Error testing connection: {arg0}", (args) {
-      return l10n.uiLegacyErrorTestingConnection(args[0]);
-    }),
-    _UiCopyRule("Failed to save profile: {arg0}", (args) {
-      return l10n.uiLegacyFailedToSaveProfile(args[0]);
-    }),
-    _UiCopyRule("{arg0} (External Standalone)", (args) {
-      return l10n.uiLegacyExternalStandalone(args[0]);
-    }),
-    _UiCopyRule("Are you sure you want to delete profile \"{arg0}\"? Stored credentials for this instance will be permanently removed.", (args) {
-      return l10n.uiLegacyAreYouSureYouWantToDeleteace6cc(args[0]);
-    }),
-    _UiCopyRule("Failed to delete profile: {arg0}", (args) {
-      return l10n.uiLegacyFailedToDeleteProfile(args[0]);
-    }),
-    _UiCopyRule("Successfully updated {arg0} script(s).", (args) {
-      return l10n.uiLegacySuccessfullyUpdatedScriptS(args[0]);
-    }),
-    _UiCopyRule("Updated {arg0} script(s), but failed to update {arg1} script(s):\n\n{arg2}", (args) {
-      return l10n.uiLegacyUpdatedScriptSButFailedToUpdate(args[0], args[1], args[2]);
-    }),
-    _UiCopyRule("You have {arg0} unsaved change(s) to startup init scripts. Would you like to save them before leaving?", (args) {
-      return l10n.uiLegacyYouHaveUnsavedChangeSToStartup(args[0]);
-    }),
-    _UiCopyRule("\nSchedule: {arg0}", (args) {
-      return l10n.uiLegacySchedule(args[0]);
-    }),
-    _UiCopyRule("Successfully restarted {arg0}", (args) {
-      return l10n.uiLegacySuccessfullyRestarted(args[0]);
-    }),
-    _UiCopyRule("Failed to restart {arg0}", (args) {
-      return l10n.uiLegacyFailedToRestart(args[0]);
-    }),
-    _UiCopyRule("Successfully performed {arg0} for {arg1}", (args) {
-      return l10n.uiLegacySuccessfullyPerformedFor(_localizeUiKeyword(l10n, args[0]), args[1]);
-    }),
-    _UiCopyRule("Failed to {arg0} {arg1}", (args) {
-      return l10n.uiLegacyFailedTo(_localizeUiKeyword(l10n, args[0]), args[1]);
-    }),
-    _UiCopyRule("Priority: {arg0} • Original: {arg1}", (args) {
-      return l10n.uiLegacyPriorityOriginal(args[0], _localizeUiKeyword(l10n, args[1]));
-    }),
-    _UiCopyRule("Startup Order Priority: {arg0}", (args) {
-      return l10n.uiLegacyStartupOrderPriority(args[0]);
-    }),
-    _UiCopyRule("Lookup: {arg0}", (args) {
-      return l10n.uiLegacyLookup(args[0]);
-    }),
-    _UiCopyRule("Interface: {arg0} • Interval: {arg1} {arg2}", (args) {
-      return l10n.uiLegacyInterfaceInterval(args[0], args[1], _localizeUiKeyword(l10n, args[2]));
-    }),
-    _UiCopyRule("Low Storage Warning: Only {arg0} KB available on router overlay storage. ddns-scripts requires ~350 KB. Installation may fail due to insufficient space.", (args) {
-      return l10n.uiLegacyLowStorageWarningOnlyKbAvailableOn(args[0]);
-    }),
-    _UiCopyRule("Invalid step format in {arg0}", (args) {
-      return l10n.uiLegacyInvalidStepFormatIn(_localizeUiKeyword(l10n, args[0]));
-    }),
-    _UiCopyRule("Invalid step number in {arg0}", (args) {
-      return l10n.uiLegacyInvalidStepNumberIn(_localizeUiKeyword(l10n, args[0]));
-    }),
-    _UiCopyRule("Invalid range in {arg0}", (args) {
-      return l10n.uiLegacyInvalidRangeIn(_localizeUiKeyword(l10n, args[0]));
-    }),
-    _UiCopyRule("Invalid range numbers in {arg0}", (args) {
-      return l10n.uiLegacyInvalidRangeNumbersIn(_localizeUiKeyword(l10n, args[0]));
-    }),
-    _UiCopyRule("{arg0} range must be between {arg1} and {arg2}", (args) {
-      return l10n.uiLegacyRangeMustBeBetweenAnd(_localizeUiKeyword(l10n, args[0]), args[1], args[2]);
-    }),
-    _UiCopyRule("{arg0} start cannot exceed end", (args) {
-      return l10n.uiLegacyStartCannotExceedEnd(_localizeUiKeyword(l10n, args[0]));
-    }),
-    _UiCopyRule("Invalid character in {arg0}", (args) {
-      return l10n.uiLegacyInvalidCharacterIn(_localizeUiKeyword(l10n, args[0]));
-    }),
-    _UiCopyRule("{arg0} must be between {arg1} and {arg2}", (args) {
-      return l10n.uiLegacyMustBeBetweenAnd(_localizeUiKeyword(l10n, args[0]), args[1], args[2]);
-    }),
-    _UiCopyRule("{arg0} Setup Hint", (args) {
-      return l10n.uiLegacySetupHint(args[0]);
-    }),
-    _UiCopyRule("• Username: {arg0}", (args) {
-      return l10n.uiLegacyUsername(args[0]);
-    }),
-    _UiCopyRule("• Password/Token: {arg0}", (args) {
-      return l10n.uiLegacyPasswordToken(args[0]);
-    }),
-    _UiCopyRule("• Domain: {arg0}", (args) {
-      return l10n.uiLegacyDomain(args[0]);
-    }),
-    _UiCopyRule("Checking storage in {arg0}...", (args) {
-      return l10n.uiLegacyCheckingStorageIn(args[0]);
-    }),
-    _UiCopyRule("Free space in {arg0}: {arg1}", (args) {
-      return l10n.uiLegacyFreeSpaceIn(args[0], args[1]);
-    }),
-    _UiCopyRule("Free space in {arg0}: Unavailable", (args) {
-      return l10n.uiLegacyFreeSpaceInUnavailable(args[0]);
-    }),
-    _UiCopyRule("Storage is limited ({arg0} free). Package installation requires sufficient flash space for scripts and kernel dependencies.", (args) {
-      return l10n.uiLegacyStorageIsLimitedFreePackageInstallationRequires(args[0]);
-    }),
-    _UiCopyRule("Your router already has an existing queue template ({arg0}).\n\nTo keep your configuration robust, we recommend configuring and utilizing this existing template directly.", (args) {
-      return l10n.uiLegacyYourRouterAlreadyHasAnExistingQueue(args[0]);
-    }),
-    _UiCopyRule("gw:{arg0}", (args) {
-      return l10n.uiLegacyGw(args[0]);
-    }),
-    _UiCopyRule("DNS: {arg0}", (args) {
-      return l10n.uiLegacyDns(args[0]);
-    }),
-    _UiCopyRule("You are lowering the Wi-Fi security standard from {arg0} to {arg1}. This weakens encryption protection for connecting clients.", (args) {
-      return l10n.uiLegacyYouAreLoweringTheWiFiSecurity(args[0], args[1]);
-    }),
-    _UiCopyRule("You are currently connected via Wi-Fi network \"{arg0}\". Modifying its name, security mode, or passphrase will sever your active session.", (args) {
-      return l10n.uiLegacyYouAreCurrentlyConnectedViaWiFi(args[0]);
-    }),
-    _UiCopyRule("Access Denied: Account '{arg0}' lacks UCI write authorization.", (args) {
-      return l10n.uiLegacyAccessDeniedAccountLacksUciWriteAuthorization(args[0]);
-    }),
-    _UiCopyRule("Bridges this Wi-Fi network to the '{arg0}' logical interface", (args) {
-      return l10n.uiLegacyBridgesThisWiFiNetworkToThe(args[0]);
-    }),
-    _UiCopyRule("Logged in as non-root user '{arg0}'. Saving requires root/UCI write privileges.", (args) {
-      return l10n.uiLegacyLoggedInAsNonRootUserSaving(args[0]);
-    }),
-    _UiCopyRule("{arg0} — Router Active Domain", (args) {
-      return l10n.uiLegacyRouterActiveDomain(args[0]);
-    }),
-    _UiCopyRule("New SSID \"{arg0}\" created successfully.", (args) {
-      return l10n.uiLegacyNewSsidCreatedSuccessfully(args[0]);
-    }),
-    _UiCopyRule("New SSID \"{arg0}\" created, but subnet DHCP configuration could not be applied.", (args) {
-      return l10n.uiLegacyNewSsidCreatedButSubnetDhcpConfiguration(args[0]);
-    }),
-    _UiCopyRule("Non-root account '{arg0}'. Saving requires root/UCI write privileges.", (args) {
-      return l10n.uiLegacyNonRootAccountSavingRequiresRootUci(args[0]);
-    }),
-    _UiCopyRule("An SSID with this name already exists on {arg0}", (args) {
-      return l10n.uiLegacyAnSsidWithThisNameAlreadyExists(args[0]);
-    }),
-    _UiCopyRule("Staged Changes Pending ({arg0})", (args) {
-      return l10n.uiLegacyStagedChangesPending54a3b8(args[0]);
-    }),
-    _UiCopyRule("Failed to delete wireless interface \"{arg0}\".", (args) {
-      return l10n.uiLegacyFailedToDeleteWirelessInterface(args[0]);
-    }),
-    _UiCopyRule("Section: {arg0} ({arg1})", (args) {
-      return l10n.uiLegacySection(args[0], args[1]);
-    }),
-    _UiCopyRule("Marked \"{arg0}\" as Guest Network", (args) {
-      return l10n.uiLegacyMarkedAsGuestNetwork(args[0]);
-    }),
-    _UiCopyRule("Moved \"{arg0}\" to Primary Networks", (args) {
-      return l10n.uiLegacyMovedToPrimaryNetworks(args[0]);
-    }),
-    _UiCopyRule("Reset detection override for \"{arg0}\"", (args) {
-      return l10n.uiLegacyResetDetectionOverrideFor(args[0]);
-    }),
-    _UiCopyRule("New Guest Wi-Fi \"{arg0}\" created successfully!", (args) {
-      return l10n.uiLegacyNewGuestWiFiCreatedSuccessfully(args[0]);
-    }),
-    _UiCopyRule("Logged in as non-root / read-only session ('{arg0}'). UCI write privileges required.", (args) {
-      return l10n.uiLegacyLoggedInAsNonRootReadOnly(args[0]);
-    }),
-    _UiCopyRule("Radio settings (Channel {arg0}, Band {arg1}) are inherited from physical radio {arg2}.", (args) {
-      return l10n.uiLegacyRadioSettingsChannelBandAreInheritedFrom(args[0], args[1], args[2]);
-    }),
-    _UiCopyRule("UTF-8 Bytes: {arg0} / 32 max", (args) {
-      return l10n.uiLegacyUtfBytesMax(args[0]);
-    }),
-    _UiCopyRule("SSID length exceeds 32 UTF-8 bytes ({arg0} bytes)", (args) {
-      return l10n.uiLegacySsidLengthExceedsUtfBytesBytes(args[0]);
-    }),
-    _UiCopyRule("Invalid octet: {arg0}", (args) {
-      return l10n.uiLegacyInvalidOctet(args[0]);
-    }),
-    _UiCopyRule("MAC: {arg0} • SSID: {arg1} ({arg2})", (args) {
-      return l10n.uiLegacyMacSsid(args[0], args[1], args[2]);
-    }),
-    _UiCopyRule("SSID: {arg0} ({arg1})", (args) {
-      return l10n.uiLegacySsid(args[0], args[1]);
-    }),
-    _UiCopyRule("Rx: {arg0}", (args) {
-      return l10n.uiLegacyRx(args[0]);
-    }),
-    _UiCopyRule("Tx: {arg0}", (args) {
-      return l10n.uiLegacyTx(args[0]);
-    }),
-    _UiCopyRule("Custom DHCP Lease Name: {arg0}", (args) {
-      return l10n.uiLegacyCustomDhcpLeaseName(args[0]);
-    }),
-    _UiCopyRule("Optionally assign a custom DHCP lease name & fixed IP for {arg0}.", (args) {
-      return l10n.uiLegacyOptionallyAssignACustomDhcpLeaseName(args[0]);
-    }),
-    _UiCopyRule("2. Wi-Fi Allow Mode Rules for {arg0}", (args) {
-      return l10n.uiLegacyWiFiAllowModeRulesFor(args[0]);
-    }),
-    _UiCopyRule("Interface: {arg0} ({arg1})", (args) {
-      return l10n.uiLegacyInterface(args[0], args[1]);
-    }),
-    _UiCopyRule("Add Client Access Rules ({arg0} SSIDs)", (args) {
-      return l10n.uiLegacyAddClientAccessRulesSsids(args[0]);
-    }),
-    _UiCopyRule("Apply Access Control Rules ({arg0} changes)", (args) {
-      return l10n.uiLegacyApplyAccessControlRulesChanges(args[0]);
-    }),
-    _UiCopyRule("You have not added this device ({arg0}) to the allow-list for affected SSIDs. Enabling this filter may disconnect you from this network.", (args) {
-      return l10n.uiLegacyYouHaveNotAddedThisDeviceTo(args[0]);
-    }),
-    _UiCopyRule("Updating Wi-Fi Access Control for {arg0} on SSIDs:\n\n{arg1}\n\nNote: This affects {arg2} specifically.", (args) {
-      return l10n.uiLegacyUpdatingWiFiAccessControlForOn(args[0], args[1], args[2]);
-    }),
-    _UiCopyRule("IP: {arg0}  •  MAC: {arg1}  •  SSID: {arg2}", (args) {
-      return l10n.uiLegacyIpMacSsid(args[0], args[1], args[2]);
-    }),
-    _UiCopyRule("Signal: {arg0} ({arg1})  •  Noise: {arg2}", (args) {
-      return l10n.uiLegacySignalNoise(args[0], args[1], args[2]);
-    }),
-    _UiCopyRule("{arg0} internet access for {arg1}...", (args) {
-      return l10n.uiLegacyInternetAccessFor(_localizeUiKeyword(l10n, args[0]), args[1]);
-    }),
-    _UiCopyRule("{arg0} internet for {arg1}", (args) {
-      return l10n.uiLegacyInternetFor(_localizeUiKeyword(l10n, args[0]), args[1]);
-    }),
-    _UiCopyRule("Failed to update internet status for {arg0}.", (args) {
-      return l10n.uiLegacyFailedToUpdateInternetStatusFor(args[0]);
-    }),
-    _UiCopyRule("IP: {arg0} • MAC: {arg1}", (args) {
-      return l10n.uiLegacyIpMac2b53e0(args[0], args[1]);
-    }),
-    _UiCopyRule("Reserved IP: {arg0} • MAC: {arg1}", (args) {
-      return l10n.uiLegacyReservedIpMac(args[0], args[1]);
-    }),
-    _UiCopyRule("{arg0}s interval • {arg1} devices", (args) {
-      return l10n.uiLegacySIntervalDevices(args[0], args[1]);
-    }),
-    _UiCopyRule("Peak: {arg0}", (args) {
-      return l10n.uiLegacyPeak(args[0]);
-    }),
-    _UiCopyRule("Not Connected ({arg0})", (args) {
-      return l10n.uiLegacyNotConnected(args[0]);
-    }),
-    _UiCopyRule("Removed \"{arg0}\". Tap \"Save to Router\" to apply.", (args) {
-      return l10n.uiLegacyRemovedTapSaveToRouterToApply(args[0]);
-    }),
-    _UiCopyRule("No preserved files matching \"{arg0}\"", (args) {
-      return l10n.uiLegacyNoPreservedFilesMatching(args[0]);
-    }),
-    _UiCopyRule("Mode: {arg0} ({arg1} custom paths)", (args) {
-      return l10n.uiLegacyModeCustomPaths(args[0], args[1]);
-    }),
-    _UiCopyRule("Backup Generation Failed: {arg0}", (args) {
-      return l10n.uiLegacyBackupGenerationFailed(args[0]);
-    }),
-    _UiCopyRule("Archive Upload Failed: {arg0}", (args) {
-      return l10n.uiLegacyArchiveUploadFailed(args[0]);
-    }),
-    _UiCopyRule("Failed to dump and read {arg0} partition from router.", (args) {
-      return l10n.uiLegacyFailedToDumpAndReadPartitionFrom(args[0]);
-    }),
-    _UiCopyRule("Failed to save mtdblock: {arg0}", (args) {
-      return l10n.uiLegacyFailedToSaveMtdblock(args[0]);
-    }),
-    _UiCopyRule("Insufficient /tmp space for upload ({arg0} MB required, {arg1} MB available).", (args) {
-      return l10n.uiLegacyInsufficientTmpSpaceForUploadMbRequired(args[0], args[1]);
-    }),
-    _UiCopyRule("File: {arg0}", (args) {
-      return l10n.uiLegacyFile(args[0]);
-    }),
-    _UiCopyRule("Size: {arg0} MB", (args) {
-      return l10n.uiLegacySizeMb(args[0]);
-    }),
-    _UiCopyRule("Target ROM: {arg0}", (args) {
-      return l10n.uiLegacyTargetRom(args[0]);
-    }),
-    _UiCopyRule("Upgrade failed: {arg0}", (args) {
-      return l10n.uiLegacyUpgradeFailed46ad80(args[0]);
-    }),
-    _UiCopyRule("Pkg: {arg0}", (args) {
-      return l10n.uiLegacyPkg(args[0]);
-    }),
-    _UiCopyRule("{arg0} inactive tunnel profiles • Tap to view", (args) {
-      return l10n.uiLegacyInactiveTunnelProfilesTapToView(args[0]);
-    }),
-    _UiCopyRule("Interface: {arg0}", (args) {
-      return l10n.uiLegacyInterfaceecbdd1(args[0]);
-    }),
-    _UiCopyRule("Are you sure you want to {arg0} the WireGuard interface \"{arg1}\" on the router?", (args) {
-      return l10n.uiLegacyAreYouSureYouWantToThe(_localizeUiKeyword(l10n, args[0]), args[1]);
-    }),
-    _UiCopyRule("Connected WireGuard Peers ({arg0})", (args) {
-      return l10n.uiLegacyConnectedWireguardPeers(args[0]);
-    }),
-    _UiCopyRule("Peer: {arg0}", (args) {
-      return l10n.uiLegacyPeer(args[0]);
-    }),
-    _UiCopyRule("RX: {arg0} / TX: {arg1}", (args) {
-      return l10n.uiLegacyRxTx(args[0], args[1]);
-    }),
-    _UiCopyRule("Device: {arg0} • Proto: {arg1}:{arg2}", (args) {
-      return l10n.uiLegacyDeviceProto(args[0], args[1], args[2]);
-    }),
-    _UiCopyRule("Are you sure you want to {arg0} the OpenVPN instance \"{arg1}\" on the router?", (args) {
-      return l10n.uiLegacyAreYouSureYouWantToThe035c62(_localizeUiKeyword(l10n, args[0]), args[1]);
-    }),
-    _UiCopyRule("Are you sure you want to {arg0} the Tailscale mesh daemon on the router?", (args) {
-      return l10n.uiLegacyAreYouSureYouWantToThe7e0a32(_localizeUiKeyword(l10n, args[0]));
-    }),
-    _UiCopyRule("{arg0} Connected Peers", (args) {
-      return l10n.uiLegacyConnectedPeers(args[0]);
-    }),
-    _UiCopyRule("Profile: {arg0}", (args) {
-      return l10n.uiLegacyProfile(args[0]);
-    }),
-    _UiCopyRule("Are you sure you want to {arg0} encrypted NextDNS resolving on the router?", (args) {
-      return l10n.uiLegacyAreYouSureYouWantToEncrypted(_localizeUiKeyword(l10n, args[0]));
-    }),
-    _UiCopyRule("{arg0} Cloudflare Tunnel?", (args) {
-      return l10n.uiLegacyCloudflareTunnel1c60c6(_localizeUiKeyword(l10n, args[0]));
-    }),
-    _UiCopyRule("Are you sure you want to {arg0} the cloudflared zero-trust tunnel daemon on the router?", (args) {
-      return l10n.uiLegacyAreYouSureYouWantToThef1fa7d(_localizeUiKeyword(l10n, args[0]));
-    }),
-    _UiCopyRule("{arg0} Active Edge Hops", (args) {
-      return l10n.uiLegacyActiveEdgeHops(args[0]);
-    }),
-    _UiCopyRule("Radio {arg0}", (args) {
-      return l10n.uiLegacyRadio(args[0]);
     }),
   ],
 );

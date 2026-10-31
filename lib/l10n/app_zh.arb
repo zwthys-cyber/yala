@@ -3219,5 +3219,14 @@
   "uiLegacyOpenNone": "开放网络（无加密）",
   "uiLegacyCustomUnknown": "自定义 / 未知",
   "uiLegacyOpen6e1095": "开放",
-  "uiLegacyUnknown": "未知"
+  "uiLegacyUnknown": "未知",
+  "uiWorldRegulatoryDomain": "00 — 全球（通用）",
+  "uiProxyGroupSelector": "手动选择",
+  "uiProxyGroupUrlTest": "自动测速",
+  "uiProxyGroupFallback": "故障切换",
+  "uiProxyGroupLoadBalance": "负载均衡",
+  "uiSignalExcellent": "极佳",
+  "uiSignalGood": "良好",
+  "uiSignalFair": "一般",
+  "uiSignalWeak": "较弱"
 }

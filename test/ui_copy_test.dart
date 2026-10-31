@@ -27,6 +27,10 @@ Widget app(Widget child, {Locale locale = const Locale('zh')}) => ProviderScope(
 
 void main() {
   testWidgets('Chinese wireless card translates copy and preserves SSID and IDs', (tester) async {
+    tester.view.physicalSize = const Size(390, 844);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
     const iface = WirelessInterface(
       ifName: 'phy1-ap0',
       sectionName: 'default_radio1',

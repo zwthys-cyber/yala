@@ -443,7 +443,7 @@ class _OpenClashScreenState extends ConsumerState<OpenClashScreen> {
                       child: ListTile(
                         title: Text(group.name),
                         subtitle: Text(
-                          '${group.selected ?? "—"}\n${group.type}',
+                          '${group.selected ?? "—"}\n${localizeUiCopy(context, group.type)}',
                         ),
                         isThreeLine: true,
                         trailing: group.canSelect
