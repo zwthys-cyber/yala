@@ -1922,11 +1922,11 @@ class _DiagnosticsScreenState extends ConsumerState<DiagnosticsScreen>
                           visualDensity: VisualDensity.compact,
                           padding: const EdgeInsets.all(4),
                           constraints: const BoxConstraints(),
-                          tooltip: _isReportSelectable
+                          tooltip: localizeUiCopy(context, _isReportSelectable
                               ? (l10n?.diagSwitchSmoothScrolling ??
                                     'Switch to smooth scrolling')
                               : (l10n?.diagEnableTextSelection ??
-                                    'Enable text selection'),
+                                    'Enable text selection')),
                           icon: Icon(
                             _isReportSelectable
                                 ? Icons.pan_tool_alt

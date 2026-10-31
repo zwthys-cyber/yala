@@ -281,7 +281,9 @@ class DhcpDnsScreen extends ConsumerWidget {
               lease.hostname,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
-            subtitle: LocalizedUiText('IP: ${lease.ipAddress} • MAC: ${lease.macAddress}'),
+            subtitle: LocalizedUiText(
+              'IP: ${lease.ipAddress} • MAC: ${lease.macAddress}',
+            ),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [

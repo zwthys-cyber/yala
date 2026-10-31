@@ -1,6 +1,6 @@
 {
   "@@locale": "zh",
-  "appTitle": "YALA 路由器管理",
+  "appTitle": "Yet Another LuCI App",
   "appDescription": "OpenWrt 路由器管理应用",
   "navDashboard": "概览",
   "navInterfaces": "接口",

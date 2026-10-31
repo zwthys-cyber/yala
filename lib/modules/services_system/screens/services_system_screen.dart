@@ -2689,8 +2689,10 @@ class _CronJobEditDialogState extends State<_CronJobEditDialog> {
                   prefixIcon: const Icon(Icons.timelapse),
                 ).localized(context),
                 style: GoogleFonts.geistMono(fontSize: 13),
-                validator: localizeUiValidator(context, (value) =>
-                    CronValidator.validateExpression(value ?? '')),
+                validator: localizeUiValidator(
+                  context,
+                  (value) => CronValidator.validateExpression(value ?? ''),
+                ),
                 onChanged: (val) {
                   setState(() {
                     _matchPreset(val);
@@ -2758,8 +2760,10 @@ class _CronJobEditDialogState extends State<_CronJobEditDialog> {
                   prefixIcon: const Icon(Icons.terminal),
                 ).localized(context),
                 style: GoogleFonts.geistMono(fontSize: 13),
-                validator: localizeUiValidator(context, (value) =>
-                    CronValidator.validateCommand(value ?? '')),
+                validator: localizeUiValidator(
+                  context,
+                  (value) => CronValidator.validateCommand(value ?? ''),
+                ),
                 onChanged: (_) => setState(() {}),
               ),
               const SizedBox(height: 8),
@@ -3177,9 +3181,12 @@ class _DdnsEditDialogState extends State<_DdnsEditDialog> {
                           labelText: 'Instance Section Name',
                           hintText: 'e.g. myddns_ipv4',
                         )).localized(context),
-                        validator: localizeUiValidator(context, (val) => (val == null || val.trim().isEmpty)
-                            ? 'Enter section name'
-                            : null),
+                        validator: localizeUiValidator(
+                          context,
+                          (val) => (val == null || val.trim().isEmpty)
+                              ? 'Enter section name'
+                              : null,
+                        ),
                         onChanged: (_) => setState(() {}),
                       ),
                     ),
@@ -3208,9 +3215,12 @@ class _DdnsEditDialogState extends State<_DdnsEditDialog> {
                     hintText: preset.lookupHostHint,
                     prefixIcon: const Icon(Icons.language),
                   ).localized(context),
-                  validator: localizeUiValidator(context, (val) => (val == null || val.trim().isEmpty)
-                      ? 'Enter lookup hostname'
-                      : null),
+                  validator: localizeUiValidator(
+                    context,
+                    (val) => (val == null || val.trim().isEmpty)
+                        ? 'Enter lookup hostname'
+                        : null,
+                  ),
                   onChanged: (_) => setState(() {}),
                 ),
                 const SizedBox(height: 12),
@@ -3356,12 +3366,15 @@ class _DdnsEditDialogState extends State<_DdnsEditDialog> {
                       hintText: 'https://ipv4.icanhazip.com',
                       prefixIcon: const Icon(Icons.travel_explore),
                     ).localized(context),
-                    validator: localizeUiValidator(context, (val) =>
-                        (_ipSource == 'web' &&
-                            (val == null || val.trim().isEmpty))
-                        ? (l10n?.servicesSysEnterUrlToDetect ??
-                              'Enter URL to detect system IP')
-                        : null),
+                    validator: localizeUiValidator(
+                      context,
+                      (val) =>
+                          (_ipSource == 'web' &&
+                              (val == null || val.trim().isEmpty))
+                          ? (l10n?.servicesSysEnterUrlToDetect ??
+                                'Enter URL to detect system IP')
+                          : null,
+                    ),
                     onChanged: (_) => setState(() {}),
                   ),
                   const SizedBox(height: 4),

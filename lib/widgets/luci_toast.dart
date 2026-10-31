@@ -1267,7 +1267,10 @@ class _LuciToastWidgetState extends State<_LuciToastWidget>
                                             minHeight: 24,
                                           ),
                                           onPressed: _dismissToast,
-                                          tooltip: localizeUiCopy(context, 'Dismiss'),
+                                          tooltip: localizeUiCopy(
+                                            context,
+                                            'Dismiss',
+                                          ),
                                         ),
                                       ],
                                     ),

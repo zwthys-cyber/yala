@@ -1197,7 +1197,10 @@ class _FirewallSecurityScreenState
                         children: [
                           IconButton(
                             icon: const Icon(Icons.edit_outlined, size: 20),
-                            tooltip: localizeUiCopy(context, 'Edit port forward'),
+                            tooltip: localizeUiCopy(
+                              context,
+                              'Edit port forward',
+                            ),
                             onPressed: () => AdvancedPortForwardDialog.show(
                               context,
                               initialPortForward: pf,
@@ -1206,7 +1209,10 @@ class _FirewallSecurityScreenState
                           ),
                           IconButton(
                             icon: const Icon(Icons.delete_outline, size: 20),
-                            tooltip: localizeUiCopy(context, 'Delete port forward'),
+                            tooltip: localizeUiCopy(
+                              context,
+                              'Delete port forward',
+                            ),
                             onPressed: () => _confirmDeletePortForward(pf),
                           ),
                         ],
@@ -1231,7 +1237,9 @@ class _FirewallSecurityScreenState
       context: context,
       builder: (ctx) => AlertDialog(
         title: const LocalizedUiText('Delete Port Forward?'),
-        content: LocalizedUiText('Are you sure you want to delete "${pf.name}"?'),
+        content: LocalizedUiText(
+          'Are you sure you want to delete "${pf.name}"?',
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(false),
@@ -1738,7 +1746,9 @@ class _FirewallSecurityScreenState
       context: context,
       builder: (ctx) => AlertDialog(
         title: const LocalizedUiText('Delete Security Rule?'),
-        content: LocalizedUiText('Are you sure you want to delete "${r.name}"?'),
+        content: LocalizedUiText(
+          'Are you sure you want to delete "${r.name}"?',
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(false),

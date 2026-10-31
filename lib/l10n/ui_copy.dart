@@ -29,7 +29,10 @@ String _localizeUiKeyword(AppLocalizations l10n, String keyword) =>
 
 /// Formats the label of a physical radio without changing its UCI identifier.
 String localizeRadioName(BuildContext context, String identifier) {
-  final match = RegExp(r'^radio(\d+)$', caseSensitive: false).firstMatch(identifier);
+  final match = RegExp(
+    r'^radio(\d+)$',
+    caseSensitive: false,
+  ).firstMatch(identifier);
   if (match == null) return identifier;
   final l10n = AppLocalizations.of(context);
   if (l10n == null || l10n.localeName.startsWith('en')) {
@@ -81,7 +84,9 @@ class _UiCopyRule {
   final String? Function(List<String>) resolve;
   final int priority;
   RegExp? _pattern;
-  late final int literalLength = template.replaceAll(RegExp(r'\{\w+\}'), '').length;
+  late final int literalLength = template
+      .replaceAll(RegExp(r'\{\w+\}'), '')
+      .length;
 
   _UiCopyRule(this.template, this.resolve, {this.priority = 0});
 
@@ -160,7 +165,9 @@ extension LocalizedUiDecoration on InputDecoration {
   InputDecoration localized(BuildContext context) => copyWith(
     labelText: labelText == null ? null : localizeUiCopy(context, labelText!),
     hintText: hintText == null ? null : localizeUiCopy(context, hintText!),
-    helperText: helperText == null ? null : localizeUiCopy(context, helperText!),
+    helperText: helperText == null
+        ? null
+        : localizeUiCopy(context, helperText!),
     errorText: errorText == null ? null : localizeUiCopy(context, errorText!),
   );
 }

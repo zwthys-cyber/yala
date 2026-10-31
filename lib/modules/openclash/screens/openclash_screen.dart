@@ -350,7 +350,8 @@ class _OpenClashScreenState extends ConsumerState<OpenClashScreen> {
                                 : _text('已停止', 'Stopped'),
                             style: Theme.of(context).textTheme.titleLarge,
                           ),
-                          if (_version != null) LocalizedUiText('Mihomo $_version'),
+                          if (_version != null)
+                            LocalizedUiText('Mihomo $_version'),
                           if (_service.usingSshFallback)
                             Text(_text('连接方式：SSH', 'Connection: SSH')),
                           if (_status?.installed == true)

@@ -284,9 +284,9 @@ class _AdGuardProfileDialogState extends State<AdGuardProfileDialog> {
         setState(() {
           _isSaving = false;
         });
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: LocalizedUiText('Failed to save profile: $e')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: LocalizedUiText('Failed to save profile: $e')),
+        );
       }
     }
   }

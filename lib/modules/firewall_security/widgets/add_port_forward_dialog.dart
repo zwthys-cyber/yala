@@ -475,8 +475,14 @@ class _AddPortForwardDialogState extends ConsumerState<AddPortForwardDialog> {
                       border: const OutlineInputBorder(),
                     ),
                     items: const [
-                      DropdownMenuItem(value: 'tcp', child: LocalizedUiText('TCP')),
-                      DropdownMenuItem(value: 'udp', child: LocalizedUiText('UDP')),
+                      DropdownMenuItem(
+                        value: 'tcp',
+                        child: LocalizedUiText('TCP'),
+                      ),
+                      DropdownMenuItem(
+                        value: 'udp',
+                        child: LocalizedUiText('UDP'),
+                      ),
                       DropdownMenuItem(
                         value: 'tcp udp',
                         child: LocalizedUiText('TCP + UDP'),

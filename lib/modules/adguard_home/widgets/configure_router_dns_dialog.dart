@@ -661,7 +661,10 @@ class _ConfigureRouterDnsDialogState extends State<ConfigureRouterDnsDialog> {
     if (_result != null) {
       return [
         if (!_result!.isSuccess)
-          TextButton(onPressed: _loadPreflight, child: const LocalizedUiText('Retry')),
+          TextButton(
+            onPressed: _loadPreflight,
+            child: const LocalizedUiText('Retry'),
+          ),
         FilledButton(
           key: const Key('agh_dns_config_done_btn'),
           onPressed: () => Navigator.of(context).pop(_result!.isSuccess),

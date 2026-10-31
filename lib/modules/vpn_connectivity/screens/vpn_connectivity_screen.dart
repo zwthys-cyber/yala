@@ -335,7 +335,7 @@ class VpnConnectivityScreen extends ConsumerWidget {
                         wg.isUp ? Icons.power_settings_new : Icons.play_arrow,
                         size: 20,
                       ),
-                      tooltip: wg.isUp ? 'Bring Down' : 'Bring Up',
+                      tooltip: localizeUiCopy(context, wg.isUp ? 'Bring Down' : 'Bring Up'),
                       onPressed: () => _confirmToggleProvider(
                         context,
                         ref,
@@ -357,8 +357,14 @@ class VpnConnectivityScreen extends ConsumerWidget {
               ],
             ),
             const SizedBox(height: 8),
-            _buildDetailRow(localizeUiCopy(context, 'Public Key'), wg.publicKey),
-            _buildDetailRow(localizeUiCopy(context, 'Listen Port'), '${wg.listenPort}'),
+            _buildDetailRow(
+              localizeUiCopy(context, 'Public Key'),
+              wg.publicKey,
+            ),
+            _buildDetailRow(
+              localizeUiCopy(context, 'Listen Port'),
+              '${wg.listenPort}',
+            ),
             const Divider(height: 20),
             LocalizedUiText(
               'Connected WireGuard Peers (${wg.peers.length})',
@@ -418,8 +424,14 @@ class VpnConnectivityScreen extends ConsumerWidget {
             ],
           ),
           const SizedBox(height: 4),
-          _buildDetailRow(localizeUiCopy(context, 'Endpoint'), peer.endpoint ?? 'N/A'),
-          _buildDetailRow(localizeUiCopy(context, 'Allowed IPs'), peer.allowedIps.join(', ')),
+          _buildDetailRow(
+            localizeUiCopy(context, 'Endpoint'),
+            peer.endpoint ?? 'N/A',
+          ),
+          _buildDetailRow(
+            localizeUiCopy(context, 'Allowed IPs'),
+            peer.allowedIps.join(', '),
+          ),
           _buildDetailRow(
             localizeUiCopy(context, 'Traffic Transferred'),
             'RX: ${_formatBytes(peer.rxBytes)} / TX: ${_formatBytes(peer.txBytes)}',
@@ -603,17 +615,29 @@ class VpnConnectivityScreen extends ConsumerWidget {
               ts.tailscaleIp.isNotEmpty ? ts.tailscaleIp : 'N/A',
             ),
             if (ts.tailnet.isNotEmpty)
-              _buildDetailRow(localizeUiCopy(context, 'Tailnet Account'), ts.tailnet),
+              _buildDetailRow(
+                localizeUiCopy(context, 'Tailnet Account'),
+                ts.tailnet,
+              ),
             if (ts.magicDns.isNotEmpty)
-              _buildDetailRow(localizeUiCopy(context, 'MagicDNS Domain'), ts.magicDns),
+              _buildDetailRow(
+                localizeUiCopy(context, 'MagicDNS Domain'),
+                ts.magicDns,
+              ),
             if (ts.peersCount > 0)
-              _buildDetailRow(localizeUiCopy(context, 'Mesh Peers'), '${ts.peersCount} Connected Peers'),
+              _buildDetailRow(
+                localizeUiCopy(context, 'Mesh Peers'),
+                '${ts.peersCount} Connected Peers',
+              ),
             if (ts.isExitNode)
               _buildDetailRow(
                 localizeUiCopy(context, 'Exit Node Capability'),
                 'ENABLED (Offers Exit Node)',
               ),
-            _buildDetailRow(localizeUiCopy(context, 'Backend Daemon State'), ts.backendState),
+            _buildDetailRow(
+              localizeUiCopy(context, 'Backend Daemon State'),
+              ts.backendState,
+            ),
             const SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,

@@ -2787,9 +2787,9 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                     size: 18,
                     color: Theme.of(context).colorScheme.primary,
                   ),
-                  tooltip: prefs.maskPublicIp
+                  tooltip: localizeUiCopy(context, prefs.maskPublicIp
                       ? 'Show public WAN IP address'
-                      : 'Mask public WAN IP address for privacy',
+                      : 'Mask public WAN IP address for privacy'),
                   visualDensity: VisualDensity.compact,
                   padding: EdgeInsets.zero,
                   constraints: const BoxConstraints(),

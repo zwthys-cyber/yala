@@ -408,7 +408,10 @@ class _WirelessInterfaceCardState extends ConsumerState<WirelessInterfaceCard> {
                               ),
                             ),
                             child: Text(
-                              localizeUiCopy(context, iface.securityMode.shortBadgeLabel),
+                              localizeUiCopy(
+                                context,
+                                iface.securityMode.shortBadgeLabel,
+                              ),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
@@ -484,9 +487,9 @@ class _WirelessInterfaceCardState extends ConsumerState<WirelessInterfaceCard> {
                                     alpha: 0.4,
                                   ),
                           ),
-                          tooltip: hasWriteAccess
+                          tooltip: localizeUiCopy(context, hasWriteAccess
                               ? 'Edit Security & Parameters'
-                              : 'Edit Restricted (Read-Only)',
+                              : 'Edit Restricted (Read-Only)'),
                           visualDensity: VisualDensity.compact,
                           padding: const EdgeInsets.all(3),
                           constraints: const BoxConstraints(),
@@ -508,7 +511,10 @@ class _WirelessInterfaceCardState extends ConsumerState<WirelessInterfaceCard> {
                         // Quick QR Code Button
                         IconButton(
                           icon: const Icon(Icons.qr_code_rounded, size: 17),
-                          tooltip: localizeUiCopy(context, 'Show Wi-Fi QR Code'),
+                          tooltip: localizeUiCopy(
+                            context,
+                            'Show Wi-Fi QR Code',
+                          ),
                           visualDensity: VisualDensity.compact,
                           padding: const EdgeInsets.all(3),
                           constraints: const BoxConstraints(),
@@ -527,9 +533,9 @@ class _WirelessInterfaceCardState extends ConsumerState<WirelessInterfaceCard> {
                                 ? Colors.redAccent
                                 : Colors.grey,
                           ),
-                          tooltip: hasWriteAccess
+                          tooltip: localizeUiCopy(context, hasWriteAccess
                               ? 'Delete Virtual Interface'
-                              : 'Delete Restricted (Read-Only)',
+                              : 'Delete Restricted (Read-Only)'),
                           visualDensity: VisualDensity.compact,
                           padding: const EdgeInsets.all(3),
                           constraints: const BoxConstraints(),
@@ -647,9 +653,9 @@ class _WirelessInterfaceCardState extends ConsumerState<WirelessInterfaceCard> {
                                 : Icons.keyboard_arrow_down_rounded,
                             size: 19,
                           ),
-                          tooltip: _isExpanded
+                          tooltip: localizeUiCopy(context, _isExpanded
                               ? 'Collapse Details'
-                              : 'Expand Details',
+                              : 'Expand Details'),
                           visualDensity: VisualDensity.compact,
                           padding: const EdgeInsets.all(3),
                           constraints: const BoxConstraints(),

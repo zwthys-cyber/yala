@@ -147,9 +147,12 @@ class _ManageRoutersScreenState extends ConsumerState<ManageRoutersScreen> {
                                 prefixIcon: const Icon(Icons.person_outline),
                                 helperText: 'Default is usually root',
                               ).localized(context),
-                              validator: localizeUiValidator(context, (v) => v == null || v.trim().isEmpty
-                                  ? 'Required'
-                                  : null),
+                              validator: localizeUiValidator(
+                                context,
+                                (v) => v == null || v.trim().isEmpty
+                                    ? 'Required'
+                                    : null,
+                              ),
                               autofillHints: const [AutofillHints.username],
                             ),
                             const SizedBox(height: 16),
@@ -169,9 +172,9 @@ class _ManageRoutersScreenState extends ConsumerState<ManageRoutersScreen> {
                                   onPressed: () => setDialogState(
                                     () => obscureText = !obscureText,
                                   ),
-                                  tooltip: obscureText
+                                  tooltip: localizeUiCopy(context, obscureText
                                       ? 'Hide password'
-                                      : 'Show password',
+                                      : 'Show password'),
                                 ),
                               ).localized(context),
                               obscureText: obscureText,
@@ -508,7 +511,9 @@ class _ManageRoutersScreenState extends ConsumerState<ManageRoutersScreen> {
                                   helperText:
                                       'e.g. 192.168.1.1, router.local:8080, https://192.168.1.1',
                                 ).localized(context),
-                                validator: localizeUiValidator(context, (value) {
+                                validator: localizeUiValidator(context, (
+                                  value,
+                                ) {
                                   if (value == null || value.isEmpty) {
                                     return 'Please enter the router address';
                                   }
@@ -530,8 +535,12 @@ class _ManageRoutersScreenState extends ConsumerState<ManageRoutersScreen> {
                                   prefixIcon: const Icon(Icons.person_outline),
                                   helperText: 'Default is usually root',
                                 ).localized(context),
-                                validator: localizeUiValidator(context, (v) =>
-                                    v == null || v.isEmpty ? 'Required' : null),
+                                validator: localizeUiValidator(
+                                  context,
+                                  (v) => v == null || v.isEmpty
+                                      ? 'Required'
+                                      : null,
+                                ),
                                 autofillHints: const [AutofillHints.username],
                               ),
                               const SizedBox(height: 20),
@@ -551,9 +560,9 @@ class _ManageRoutersScreenState extends ConsumerState<ManageRoutersScreen> {
                                     onPressed: () => setState(
                                       () => obscureText = !obscureText,
                                     ),
-                                    tooltip: obscureText
+                                    tooltip: localizeUiCopy(context, obscureText
                                         ? 'Hide password'
-                                        : 'Show password',
+                                        : 'Show password'),
                                   ),
                                 ).localized(context),
                                 obscureText: obscureText,

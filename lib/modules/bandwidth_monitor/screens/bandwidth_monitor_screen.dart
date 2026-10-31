@@ -64,9 +64,9 @@ class _BandwidthMonitorScreenState extends ConsumerState<BandwidthMonitorScreen>
                   : Icons.play_circle_outline_rounded,
               color: state.isStreaming ? colorScheme.primary : Colors.grey,
             ),
-            tooltip: state.isStreaming
+            tooltip: localizeUiCopy(context, state.isStreaming
                 ? (l10n?.bandwidthPauseStream ?? 'Pause Live Stream')
-                : (l10n?.bandwidthResumeStream ?? 'Resume Live Stream'),
+                : (l10n?.bandwidthResumeStream ?? 'Resume Live Stream')),
             onPressed: () => controller.toggleStreaming(),
           ),
           PopupMenuButton<int>(
@@ -75,10 +75,22 @@ class _BandwidthMonitorScreenState extends ConsumerState<BandwidthMonitorScreen>
             initialValue: state.pollingIntervalSeconds,
             onSelected: (val) => controller.setPollingInterval(val),
             itemBuilder: (ctx) => [
-              const PopupMenuItem(value: 1, child: LocalizedUiText('1s Interval')),
-              const PopupMenuItem(value: 2, child: LocalizedUiText('2s Interval')),
-              const PopupMenuItem(value: 3, child: LocalizedUiText('3s Interval')),
-              const PopupMenuItem(value: 5, child: LocalizedUiText('5s Interval')),
+              const PopupMenuItem(
+                value: 1,
+                child: LocalizedUiText('1s Interval'),
+              ),
+              const PopupMenuItem(
+                value: 2,
+                child: LocalizedUiText('2s Interval'),
+              ),
+              const PopupMenuItem(
+                value: 3,
+                child: LocalizedUiText('3s Interval'),
+              ),
+              const PopupMenuItem(
+                value: 5,
+                child: LocalizedUiText('5s Interval'),
+              ),
             ],
           ),
         ],
@@ -661,7 +673,10 @@ class _BandwidthMonitorScreenState extends ConsumerState<BandwidthMonitorScreen>
                 Row(
                   children: [
                     Expanded(
-                      child: _buildDetailRow(localizeUiCopy(context, 'MAC Address'), item.macAddress),
+                      child: _buildDetailRow(
+                        localizeUiCopy(context, 'MAC Address'),
+                        item.macAddress,
+                      ),
                     ),
                     if (item.formattedPhyRate != null)
                       Expanded(

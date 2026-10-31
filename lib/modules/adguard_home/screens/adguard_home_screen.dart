@@ -209,7 +209,9 @@ class _AdGuardHomeScreenState extends ConsumerState<AdGuardHomeScreen> {
                     if (context.mounted) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: LocalizedUiText('Failed to delete profile: $e'),
+                          content: LocalizedUiText(
+                            'Failed to delete profile: $e',
+                          ),
                           backgroundColor: Theme.of(context).colorScheme.error,
                         ),
                       );

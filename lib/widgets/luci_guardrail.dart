@@ -44,7 +44,10 @@ class LuciGuardrail {
           color: Colors.amber,
           size: 36,
         ),
-        title: LocalizedUiText(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+        title: LocalizedUiText(
+          title,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
         content: SingleChildScrollView(child: LocalizedUiText(message)),
         actionsOverflowButtonSpacing: 8,
         actionsOverflowDirection: VerticalDirection.down,
@@ -247,7 +250,10 @@ class LuciGuardrail {
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
         ),
         content: SingleChildScrollView(
-          child: LocalizedUiText(message, style: const TextStyle(fontSize: 13.5)),
+          child: LocalizedUiText(
+            message,
+            style: const TextStyle(fontSize: 13.5),
+          ),
         ),
         actionsOverflowButtonSpacing: 8,
         actionsOverflowDirection: VerticalDirection.down,
@@ -261,7 +267,9 @@ class LuciGuardrail {
               foregroundColor: theme.colorScheme.error,
             ),
             onPressed: () => Navigator.pop(ctx, 'discard'),
-            child: LocalizedUiText(l10n?.guardrailDiscardLeave ?? 'Discard & Leave'),
+            child: LocalizedUiText(
+              l10n?.guardrailDiscardLeave ?? 'Discard & Leave',
+            ),
           ),
           FilledButton(
             onPressed: () => Navigator.pop(ctx, 'save'),
@@ -318,7 +326,10 @@ class LuciGuardrail {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                LocalizedUiText(description, style: const TextStyle(fontSize: 13.5)),
+                LocalizedUiText(
+                  description,
+                  style: const TextStyle(fontSize: 13.5),
+                ),
                 if (hazardDetails != null && hazardDetails.isNotEmpty) ...[
                   const SizedBox(height: 12),
                   ...hazardDetails.map(

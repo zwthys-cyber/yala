@@ -442,10 +442,13 @@ class _AddEditProfileDialogState extends ConsumerState<AddEditProfileDialog> {
                             border: const OutlineInputBorder(),
                           ),
                           onChanged: (_) => setState(() {}),
-                          validator: localizeUiValidator(context, (v) => v == null || v.trim().isEmpty
-                              ? (l10n?.parentalProfileNameRequired ??
-                                    'Name is required')
-                              : null),
+                          validator: localizeUiValidator(
+                            context,
+                            (v) => v == null || v.trim().isEmpty
+                                ? (l10n?.parentalProfileNameRequired ??
+                                      'Name is required')
+                                : null,
+                          ),
                         ),
                         const SizedBox(height: 16),
 

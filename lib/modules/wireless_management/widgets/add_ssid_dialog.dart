@@ -713,13 +713,16 @@ class _AddSsidDialogState extends ConsumerState<AddSsidDialog> {
                           onPressed: () => setState(
                             () => _showPassphrase = !_showPassphrase,
                           ),
-                          tooltip: _showPassphrase
+                          tooltip: localizeUiCopy(context, _showPassphrase
                               ? 'Hide passphrase'
-                              : 'Show passphrase',
+                              : 'Show passphrase'),
                         ),
                       ).localized(context),
                       onChanged: (_) => setState(() {}),
-                      validator: localizeUiValidator(context, _validatePassphrase),
+                      validator: localizeUiValidator(
+                        context,
+                        _validatePassphrase,
+                      ),
                     ),
                     PasswordStrengthMeter(password: _passphraseController.text),
                     const SizedBox(height: 14),

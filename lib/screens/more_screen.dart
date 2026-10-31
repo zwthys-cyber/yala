@@ -87,7 +87,9 @@ class _MoreScreenState extends ConsumerState<MoreScreen> {
               },
             ),
             TextButton(
-              child: LocalizedUiText(isReviewer ? 'Exit' : (l10n?.tileLogout ?? 'Logout')),
+              child: LocalizedUiText(
+                isReviewer ? 'Exit' : (l10n?.tileLogout ?? 'Logout'),
+              ),
               onPressed: () async {
                 await appState.logout();
                 // Clear all accepted certificates on logout

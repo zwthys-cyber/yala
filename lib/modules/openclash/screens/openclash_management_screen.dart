@@ -167,13 +167,16 @@ class _OpenClashManagementScreenState extends State<OpenClashManagementScreen> {
                         decoration: InputDecoration(
                           labelText: _text('配置名称', 'Configuration name'),
                         ),
-                        validator: localizeUiValidator(context, (value) =>
-                            OpenClashManagementService.validName(value ?? '')
-                            ? null
-                            : _text(
-                                '名称包含不支持的字符',
-                                'Name contains unsupported characters',
-                              )),
+                        validator: localizeUiValidator(
+                          context,
+                          (value) =>
+                              OpenClashManagementService.validName(value ?? '')
+                              ? null
+                              : _text(
+                                  '名称包含不支持的字符',
+                                  'Name contains unsupported characters',
+                                ),
+                        ),
                       ),
                       TextFormField(
                         controller: address,

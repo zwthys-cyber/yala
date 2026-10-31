@@ -593,14 +593,26 @@ class _AdvancedCustomRuleDialogState
                           border: const OutlineInputBorder(),
                         ),
                         items: const [
-                          DropdownMenuItem(value: 'any', child: LocalizedUiText('Any')),
-                          DropdownMenuItem(value: 'tcp', child: LocalizedUiText('TCP')),
-                          DropdownMenuItem(value: 'udp', child: LocalizedUiText('UDP')),
+                          DropdownMenuItem(
+                            value: 'any',
+                            child: LocalizedUiText('Any'),
+                          ),
+                          DropdownMenuItem(
+                            value: 'tcp',
+                            child: LocalizedUiText('TCP'),
+                          ),
+                          DropdownMenuItem(
+                            value: 'udp',
+                            child: LocalizedUiText('UDP'),
+                          ),
                           DropdownMenuItem(
                             value: 'tcp udp',
                             child: LocalizedUiText('TCP + UDP'),
                           ),
-                          DropdownMenuItem(value: 'icmp', child: LocalizedUiText('ICMP')),
+                          DropdownMenuItem(
+                            value: 'icmp',
+                            child: LocalizedUiText('ICMP'),
+                          ),
                         ],
                         onChanged: (val) {
                           if (val != null) setState(() => _proto = val);

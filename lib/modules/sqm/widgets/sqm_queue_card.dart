@@ -953,7 +953,10 @@ class _SqmQueueCardState extends ConsumerState<SqmQueueCard> {
                         value: 'ethernet',
                         child: LocalizedUiText('Ethernet'),
                       ),
-                      DropdownMenuItem(value: 'atm', child: LocalizedUiText('ATM (ADSL)')),
+                      DropdownMenuItem(
+                        value: 'atm',
+                        child: LocalizedUiText('ATM (ADSL)'),
+                      ),
                     ],
                     onChanged: (val) {
                       if (val != null) setState(() => _selectedLinklayer = val);
@@ -1111,7 +1114,10 @@ class _SqmQueueCardState extends ConsumerState<SqmQueueCard> {
                           isDense: true,
                         ),
                         items: const [
-                          DropdownMenuItem(value: 'ECN', child: LocalizedUiText('ECN')),
+                          DropdownMenuItem(
+                            value: 'ECN',
+                            child: LocalizedUiText('ECN'),
+                          ),
                           DropdownMenuItem(
                             value: 'NOECN',
                             child: LocalizedUiText('NOECN'),
@@ -1139,7 +1145,10 @@ class _SqmQueueCardState extends ConsumerState<SqmQueueCard> {
                             value: 'NOECN',
                             child: LocalizedUiText('NOECN'),
                           ),
-                          DropdownMenuItem(value: 'ECN', child: LocalizedUiText('ECN')),
+                          DropdownMenuItem(
+                            value: 'ECN',
+                            child: LocalizedUiText('ECN'),
+                          ),
                         ],
                         onChanged: (val) {
                           if (val != null) setState(() => _egressEcn = val);

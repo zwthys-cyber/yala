@@ -66,9 +66,11 @@ jobs:
         run: flutter analyze --fatal-infos
 
       - name: Build router management test interpreter
+        if: steps.formatting.outcome == 'success'
         run: bash scripts/build_ucode_fixture.sh
 
       - name: Run Tests
+        if: steps.formatting.outcome == 'success'
         shell: bash
         run: |
           set -euo pipefail

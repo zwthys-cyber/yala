@@ -175,17 +175,19 @@ class ParentalProfileCard extends StatelessWidget {
                       icon: Icons.schedule_rounded,
                       label: profile.schedule!.blockTimeFormatted,
                       color: hasFileExec ? Colors.blue : Colors.grey,
-                      tooltip: hasFileExec
+                      tooltip: localizeUiCopy(context, hasFileExec
                           ? 'Schedule: block at ${profile.schedule!.blockTimeFormatted}'
-                          : 'Schedule requires file.exec access',
+                          : 'Schedule requires file.exec access'),
                     ),
                   if (profile.hasTimeLimit)
                     _FeatureChip(
                       icon: Icons.timer_outlined,
                       label: '${profile.dailyTimeLimitMinutes}m/day',
                       color: Colors.purple,
-                      tooltip:
-                          localizeUiCopy(context, 'Daily time limit: ${profile.dailyTimeLimitMinutes} minutes'),
+                      tooltip: localizeUiCopy(
+                        context,
+                        'Daily time limit: ${profile.dailyTimeLimitMinutes} minutes',
+                      ),
                     ),
                   if (profile.hasContentFilter)
                     _FeatureChip(
@@ -223,13 +225,13 @@ class ParentalProfileCard extends StatelessWidget {
                     child: _PauseButton(
                       enabled:
                           hasFirewall && profile.hasMacs && profile.isEnabled,
-                      tooltip: !hasFirewall
+                      tooltip: localizeUiCopy(context, !hasFirewall
                           ? 'Requires firewall write access'
                           : !profile.hasMacs
                           ? 'Add devices to this profile first'
                           : !profile.isEnabled
                           ? 'Profile is in Bypass mode (Unrestricted)'
-                          : null,
+                          : null),
                       onPause: onPause,
                     ),
                   ),

@@ -578,7 +578,10 @@ class _AdvancedPortForwardDialogState
                     if (appState.clients.isNotEmpty) ...[
                       const SizedBox(width: 8),
                       IconButton.outlined(
-                        tooltip: localizeUiCopy(context, 'Select connected client'),
+                        tooltip: localizeUiCopy(
+                          context,
+                          'Select connected client',
+                        ),
                         icon: const Icon(Icons.devices),
                         onPressed: () => _pickClientIp(appState.clients),
                       ),
@@ -599,13 +602,22 @@ class _AdvancedPortForwardDialogState
                           border: OutlineInputBorder(),
                         )).localized(context),
                         items: const [
-                          DropdownMenuItem(value: 'tcp', child: LocalizedUiText('TCP')),
-                          DropdownMenuItem(value: 'udp', child: LocalizedUiText('UDP')),
+                          DropdownMenuItem(
+                            value: 'tcp',
+                            child: LocalizedUiText('TCP'),
+                          ),
+                          DropdownMenuItem(
+                            value: 'udp',
+                            child: LocalizedUiText('UDP'),
+                          ),
                           DropdownMenuItem(
                             value: 'tcp udp',
                             child: LocalizedUiText('TCP + UDP'),
                           ),
-                          DropdownMenuItem(value: 'any', child: LocalizedUiText('Any')),
+                          DropdownMenuItem(
+                            value: 'any',
+                            child: LocalizedUiText('Any'),
+                          ),
                         ],
                         onChanged: (val) {
                           if (val != null) setState(() => _proto = val);
@@ -745,7 +757,9 @@ class _AdvancedPortForwardDialogState
                   child: CircularProgressIndicator(strokeWidth: 2),
                 )
               : Icon(_isEditing ? Icons.save : Icons.add),
-          label: LocalizedUiText(_isEditing ? 'Save Changes' : 'Add Port Forward'),
+          label: LocalizedUiText(
+            _isEditing ? 'Save Changes' : 'Add Port Forward',
+          ),
         ),
       ],
     );

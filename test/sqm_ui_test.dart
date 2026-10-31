@@ -204,7 +204,7 @@ void main() {
         isInstalled: true,
         isServiceRunning: true,
         operatingState: SqmOperatingState.active,
-        queues: [baseQueue],
+        queues: const [baseQueue],
         telemetryByInterface: {'eth0': telemetry},
       );
 
@@ -261,7 +261,7 @@ void main() {
           isInstalled: true,
           isServiceRunning: true,
           operatingState: SqmOperatingState.active,
-          queues: [baseQueue],
+          queues: const [baseQueue],
           telemetryByInterface: {'eth0': telemetry},
         );
 
@@ -319,7 +319,7 @@ void main() {
           isInstalled: true,
           isServiceRunning: true,
           operatingState: SqmOperatingState.active,
-          queues: [baseQueue],
+          queues: const [baseQueue],
           telemetryByInterface: {'eth0': currentTelemetry},
           previousTelemetryByInterface: {'eth0': prevTelemetry},
         );
@@ -382,7 +382,7 @@ void main() {
         isInstalled: true,
         isServiceRunning: true,
         operatingState: SqmOperatingState.active,
-        queues: [baseQueue],
+        queues: const [baseQueue],
         telemetryByInterface: {'eth0': telemetry},
       );
 

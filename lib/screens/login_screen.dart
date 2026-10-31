@@ -1765,9 +1765,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
                       ),
                       onPressed: () =>
                           setState(() => _passwordVisible = !_passwordVisible),
-                      tooltip: _passwordVisible
+                      tooltip: localizeUiCopy(context, _passwordVisible
                           ? (l10n?.loginHidePassword ?? 'Hide password')
-                          : (l10n?.loginShowPassword ?? 'Show password'),
+                          : (l10n?.loginShowPassword ?? 'Show password')),
                     ),
                   ),
                   textInputAction: TextInputAction.done,
