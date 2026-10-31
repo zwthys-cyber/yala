@@ -1,6 +1,7 @@
 // Copyright (C) 2026 @nightcodex7
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yet_another_luci_app/design/luci_design_system.dart';
@@ -153,7 +154,7 @@ class _SqmScreenState extends ConsumerState<SqmScreen> {
                 ),
                 const SizedBox(width: 8),
                 Expanded(
-                  child: Text(
+                  child: LocalizedUiText(
                     isStorageError
                         ? (isReadOnlyError
                               ? 'Filesystem is Read-Only'
@@ -192,7 +193,7 @@ class _SqmScreenState extends ConsumerState<SqmScreen> {
                           ),
                           const SizedBox(width: 10),
                           Expanded(
-                            child: Text(
+                            child: LocalizedUiText(
                               'The router ran out of RAM while resolving package dependencies and terminated the package manager.\n\nTo resolve this:\n• Enable zram-swap or configure external swap space\n• Stop memory-intensive background services temporarily\n• Install packages individually or use an image with pre-baked packages',
                               style: TextStyle(
                                 fontSize: 12,
@@ -226,7 +227,7 @@ class _SqmScreenState extends ConsumerState<SqmScreen> {
                           ),
                           const SizedBox(width: 10),
                           Expanded(
-                            child: Text(
+                            child: LocalizedUiText(
                               isReadOnlyError
                                   ? 'The router\'s root filesystem is mounted read-only because there is no space left in the flash overlay partition (/overlay).\n\nTo resolve this:\n• Free up flash space or remove unused packages\n• Run "firstboot" via SSH to reset the overlay\n• Use Extroot (USB drive) for expanded storage'
                                   : 'The router does not have enough storage space on the flash partition to install this package.\n\nTo resolve this:\n• Free up flash space or remove unused packages\n• Use Extroot (USB drive) for expanded storage',
@@ -368,25 +369,25 @@ class _SqmScreenState extends ConsumerState<SqmScreen> {
                 Icon(Icons.tune_rounded, color: LuciColors.primary),
                 SizedBox(width: 8),
                 Expanded(
-                  child: Text(
+                  child: LocalizedUiText(
                     'Existing Template Present',
                     style: TextStyle(fontSize: 16),
                   ),
                 ),
               ],
             ),
-            content: Text(
+            content: LocalizedUiText(
               'Your router already has an existing queue template (${existingTemplate.displayName(primaryWanInterface: overview.primaryWanInterface)}).\n\n'
               'To keep your configuration robust, we recommend configuring and utilizing this existing template directly.',
             ),
             actions: [
               TextButton(
                 onPressed: () => Navigator.of(ctx).pop(false),
-                child: const Text('Create New Anyway'),
+                child: const LocalizedUiText('Create New Anyway'),
               ),
               FilledButton(
                 onPressed: () => Navigator.of(ctx).pop(true),
-                child: const Text('Use Existing Template'),
+                child: const LocalizedUiText('Use Existing Template'),
               ),
             ],
           ),

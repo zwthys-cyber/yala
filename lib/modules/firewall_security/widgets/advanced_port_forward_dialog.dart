@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yet_another_luci_app/l10n/app_localizations.dart';
@@ -192,7 +193,7 @@ class _AdvancedPortForwardDialogState
       context: context,
       builder: (ctx) {
         return AlertDialog(
-          title: const Text('Select Connected Client'),
+          title: const LocalizedUiText('Select Connected Client'),
           content: SizedBox(
             width: double.maxFinite,
             child: ListView.builder(
@@ -212,7 +213,7 @@ class _AdvancedPortForwardDialogState
           actions: [
             TextButton(
               onPressed: () => Navigator.of(ctx).pop(),
-              child: const Text('Cancel'),
+              child: const LocalizedUiText('Cancel'),
             ),
           ],
         );
@@ -379,7 +380,7 @@ class _AdvancedPortForwardDialogState
           ),
           const SizedBox(width: 8),
           Expanded(
-            child: Text(
+            child: LocalizedUiText(
               _isEditing ? 'Edit Port Forward' : 'Add Port Forward',
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
@@ -430,18 +431,18 @@ class _AdvancedPortForwardDialogState
                 // Name field
                 TextFormField(
                   controller: _nameController,
-                  decoration: const InputDecoration(
+                  decoration: (const InputDecoration(
                     labelText: 'Rule Name *',
                     hintText: 'e.g. Web Server, Plex',
                     prefixIcon: Icon(Icons.label_outline),
                     border: OutlineInputBorder(),
-                  ),
-                  validator: (v) {
+                  )).localized(context),
+                  validator: localizeUiValidator(context, (v) {
                     if (v == null || v.trim().isEmpty) {
                       return 'Please enter a rule name.';
                     }
                     return null;
-                  },
+                  }),
                 ),
                 const SizedBox(height: 12),
 
@@ -453,10 +454,10 @@ class _AdvancedPortForwardDialogState
                       flex: 4,
                       child: DropdownButtonFormField<String>(
                         initialValue: _srcZone,
-                        decoration: const InputDecoration(
+                        decoration: (const InputDecoration(
                           labelText: 'Source Zone',
                           border: OutlineInputBorder(),
-                        ),
+                        )).localized(context),
                         items: availableZones.map((z) {
                           return DropdownMenuItem(
                             value: z,
@@ -473,12 +474,12 @@ class _AdvancedPortForwardDialogState
                       flex: 5,
                       child: TextFormField(
                         controller: _srcPortController,
-                        decoration: const InputDecoration(
+                        decoration: (const InputDecoration(
                           labelText: 'External Port *',
                           hintText: 'e.g. 80, 80,443',
                           border: OutlineInputBorder(),
-                        ),
-                        validator: (v) {
+                        )).localized(context),
+                        validator: localizeUiValidator(context, (v) {
                           if (v == null || v.trim().isEmpty) {
                             return 'Enter port or range.';
                           }
@@ -486,7 +487,7 @@ class _AdvancedPortForwardDialogState
                             return 'Invalid port format.';
                           }
                           return null;
-                        },
+                        }),
                       ),
                     ),
                   ],
@@ -501,10 +502,10 @@ class _AdvancedPortForwardDialogState
                       flex: 4,
                       child: DropdownButtonFormField<String>(
                         initialValue: _destZone,
-                        decoration: const InputDecoration(
+                        decoration: (const InputDecoration(
                           labelText: 'Dest Zone',
                           border: OutlineInputBorder(),
-                        ),
+                        )).localized(context),
                         items: availableZones.map((z) {
                           return DropdownMenuItem(
                             value: z,
@@ -521,19 +522,19 @@ class _AdvancedPortForwardDialogState
                       flex: 5,
                       child: TextFormField(
                         controller: _destPortController,
-                        decoration: const InputDecoration(
+                        decoration: (const InputDecoration(
                           labelText: 'Internal Port',
                           hintText: 'Defaults to external port',
                           border: OutlineInputBorder(),
-                        ),
-                        validator: (v) {
+                        )).localized(context),
+                        validator: localizeUiValidator(context, (v) {
                           if (v != null &&
                               v.trim().isNotEmpty &&
                               !_isValidPortSpec(v)) {
                             return 'Invalid port format.';
                           }
                           return null;
-                        },
+                        }),
                       ),
                     ),
                   ],
@@ -547,14 +548,14 @@ class _AdvancedPortForwardDialogState
                     Expanded(
                       child: TextFormField(
                         controller: _destIpController,
-                        decoration: const InputDecoration(
+                        decoration: (const InputDecoration(
                           labelText: 'Internal Destination IP *',
                           hintText: 'e.g. 192.168.1.100',
                           prefixIcon: Icon(Icons.computer_outlined),
                           border: OutlineInputBorder(),
-                        ),
+                        )).localized(context),
                         onChanged: (_) => setState(() {}),
-                        validator: (v) {
+                        validator: localizeUiValidator(context, (v) {
                           if (v == null || v.trim().isEmpty) {
                             return 'Please enter destination IP.';
                           }
@@ -571,13 +572,16 @@ class _AdvancedPortForwardDialogState
                             return 'Destination IP must be IPv6 for IPv6 family.';
                           }
                           return null;
-                        },
+                        }),
                       ),
                     ),
                     if (appState.clients.isNotEmpty) ...[
                       const SizedBox(width: 8),
                       IconButton.outlined(
-                        tooltip: 'Select connected client',
+                        tooltip: localizeUiCopy(
+                          context,
+                          'Select connected client',
+                        ),
                         icon: const Icon(Icons.devices),
                         onPressed: () => _pickClientIp(appState.clients),
                       ),
@@ -593,18 +597,27 @@ class _AdvancedPortForwardDialogState
                     Expanded(
                       child: DropdownButtonFormField<String>(
                         initialValue: _proto,
-                        decoration: const InputDecoration(
+                        decoration: (const InputDecoration(
                           labelText: 'Protocol',
                           border: OutlineInputBorder(),
-                        ),
+                        )).localized(context),
                         items: const [
-                          DropdownMenuItem(value: 'tcp', child: Text('TCP')),
-                          DropdownMenuItem(value: 'udp', child: Text('UDP')),
+                          DropdownMenuItem(
+                            value: 'tcp',
+                            child: LocalizedUiText('TCP'),
+                          ),
+                          DropdownMenuItem(
+                            value: 'udp',
+                            child: LocalizedUiText('UDP'),
+                          ),
                           DropdownMenuItem(
                             value: 'tcp udp',
-                            child: Text('TCP + UDP'),
+                            child: LocalizedUiText('TCP + UDP'),
                           ),
-                          DropdownMenuItem(value: 'any', child: Text('Any')),
+                          DropdownMenuItem(
+                            value: 'any',
+                            child: LocalizedUiText('Any'),
+                          ),
                         ],
                         onChanged: (val) {
                           if (val != null) setState(() => _proto = val);
@@ -621,20 +634,20 @@ class _AdvancedPortForwardDialogState
                           helperText: !supportsIpv6
                               ? 'IPv6 not supported'
                               : null,
-                        ),
+                        ).localized(context),
                         items: [
                           const DropdownMenuItem(
                             value: 'any',
-                            child: Text('Any (IPv4+IPv6)'),
+                            child: LocalizedUiText('Any (IPv4+IPv6)'),
                           ),
                           const DropdownMenuItem(
                             value: 'ipv4',
-                            child: Text('IPv4 only'),
+                            child: LocalizedUiText('IPv4 only'),
                           ),
                           DropdownMenuItem(
                             value: 'ipv6',
                             enabled: supportsIpv6,
-                            child: Text(
+                            child: LocalizedUiText(
                               'IPv6 only',
                               style: TextStyle(
                                 color: !supportsIpv6 ? Colors.grey : null,
@@ -654,21 +667,21 @@ class _AdvancedPortForwardDialogState
                 // Source IP Filter
                 TextFormField(
                   controller: _srcIpController,
-                  decoration: const InputDecoration(
+                  decoration: (const InputDecoration(
                     labelText: 'Source IP Filter (Optional)',
                     hintText: 'e.g. 203.0.113.50 or 203.0.113.0/24',
                     prefixIcon: Icon(Icons.filter_alt_outlined),
                     border: OutlineInputBorder(),
                     helperText: 'Leave empty to allow from any external IP.',
-                  ),
-                  validator: (v) {
+                  )).localized(context),
+                  validator: localizeUiValidator(context, (v) {
                     if (v != null &&
                         v.trim().isNotEmpty &&
                         !FirewallValidator.isValidIpOrCidr(v)) {
                       return 'Must be a valid IP or CIDR.';
                     }
                     return null;
-                  },
+                  }),
                 ),
                 const SizedBox(height: 12),
 
@@ -690,11 +703,11 @@ class _AdvancedPortForwardDialogState
                   child: Column(
                     children: [
                       SwitchListTile.adaptive(
-                        title: const Text(
+                        title: const LocalizedUiText(
                           'NAT Loopback / Reflection',
                           style: TextStyle(fontWeight: FontWeight.w600),
                         ),
-                        subtitle: Text(
+                        subtitle: LocalizedUiText(
                           canUseReflection
                               ? 'Allows LAN devices to connect using the external WAN address.'
                               : reflectionEval.userFacingReason,
@@ -717,8 +730,8 @@ class _AdvancedPortForwardDialogState
 
                 // Enabled Toggle
                 SwitchListTile.adaptive(
-                  title: const Text('Rule Enabled'),
-                  subtitle: const Text(
+                  title: const LocalizedUiText('Rule Enabled'),
+                  subtitle: const LocalizedUiText(
                     'Activate this port forward rule immediately',
                   ),
                   value: _enabled,
@@ -733,7 +746,7 @@ class _AdvancedPortForwardDialogState
       actions: [
         TextButton(
           onPressed: _isSubmitting ? null : () => Navigator.of(context).pop(),
-          child: const Text('Cancel'),
+          child: const LocalizedUiText('Cancel'),
         ),
         FilledButton.icon(
           onPressed: _isSubmitting ? null : _handleSubmit,
@@ -744,7 +757,9 @@ class _AdvancedPortForwardDialogState
                   child: CircularProgressIndicator(strokeWidth: 2),
                 )
               : Icon(_isEditing ? Icons.save : Icons.add),
-          label: Text(_isEditing ? 'Save Changes' : 'Add Port Forward'),
+          label: LocalizedUiText(
+            _isEditing ? 'Save Changes' : 'Add Port Forward',
+          ),
         ),
       ],
     );

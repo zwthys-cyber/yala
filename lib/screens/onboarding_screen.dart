@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:yet_another_luci_app/l10n/app_localizations.dart';
 import 'package:yet_another_luci_app/widgets/theme_router_logo.dart';
@@ -178,7 +179,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       borderRadius: BorderRadius.circular(16),
                     ),
                   ),
-                  child: Text(
+                  child: LocalizedUiText(
                     _currentPage == pages.length - 1
                         ? (l10n?.onboardingGetStarted ?? 'Get Started')
                         : (l10n?.onboardingContinue ?? 'Continue'),

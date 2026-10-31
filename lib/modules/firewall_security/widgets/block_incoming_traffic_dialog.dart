@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yet_another_luci_app/l10n/app_localizations.dart';
@@ -334,10 +335,10 @@ class _BlockIncomingTrafficDialogState
                       hintText: '198.51.100.25 or 198.51.100.0/24',
                       border: const OutlineInputBorder(),
                       prefixIcon: const Icon(Icons.public),
-                    ),
+                    ).localized(context),
                     keyboardType: TextInputType.datetime,
                     onChanged: (_) => _evaluatePreflight(),
-                    validator: (val) {
+                    validator: localizeUiValidator(context, (val) {
                       if (_targetType == BlockTargetType.externalIp) {
                         if (val == null || val.trim().isEmpty) {
                           return 'Please enter an external IP or CIDR';
@@ -347,7 +348,7 @@ class _BlockIncomingTrafficDialogState
                         }
                       }
                       return null;
-                    },
+                    }),
                   ),
                 ] else if (_targetType == BlockTargetType.portOrService) ...[
                   Row(
@@ -362,9 +363,9 @@ class _BlockIncomingTrafficDialogState
                                 'Port or Service',
                             hintText: '8080 or 8000-8080',
                             border: const OutlineInputBorder(),
-                          ),
+                          ).localized(context),
                           onChanged: (_) => _evaluatePreflight(),
-                          validator: (val) {
+                          validator: localizeUiValidator(context, (val) {
                             if (_targetType == BlockTargetType.portOrService) {
                               if (val == null || val.trim().isEmpty) {
                                 return 'Enter port';
@@ -377,7 +378,7 @@ class _BlockIncomingTrafficDialogState
                               }
                             }
                             return null;
-                          },
+                          }),
                         ),
                       ),
                       const SizedBox(width: 8),
@@ -395,11 +396,17 @@ class _BlockIncomingTrafficDialogState
                             ),
                           ),
                           items: const [
-                            DropdownMenuItem(value: 'tcp', child: Text('TCP')),
-                            DropdownMenuItem(value: 'udp', child: Text('UDP')),
+                            DropdownMenuItem(
+                              value: 'tcp',
+                              child: LocalizedUiText('TCP'),
+                            ),
+                            DropdownMenuItem(
+                              value: 'udp',
+                              child: LocalizedUiText('UDP'),
+                            ),
                             DropdownMenuItem(
                               value: 'tcp udp',
-                              child: Text('Both'),
+                              child: LocalizedUiText('Both'),
                             ),
                           ],
                           onChanged: (val) {
@@ -618,7 +625,7 @@ class _BlockIncomingTrafficDialogState
           onPressed: _isSubmitting
               ? null
               : () => Navigator.of(context).pop(false),
-          child: Text(
+          child: LocalizedUiText(
             _preflightResult?.isAlreadyBlocked == true
                 ? (loc?.btnOk ?? 'OK')
                 : (loc?.btnCancel ?? 'Cancel'),

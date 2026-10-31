@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -150,7 +151,7 @@ class _LuciContextualHintBannerState extends State<LuciContextualHintBanner>
                         foregroundColor: color,
                       ),
                       onPressed: _dismiss,
-                      child: const Text(
+                      child: const LocalizedUiText(
                         'Got it',
                         style: TextStyle(
                           fontSize: 12,
@@ -209,7 +210,7 @@ class _LuciContextualHintBannerState extends State<LuciContextualHintBanner>
                     foregroundColor: color,
                   ),
                   onPressed: _dismiss,
-                  child: const Text(
+                  child: const LocalizedUiText(
                     'Got it',
                     style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                   ),

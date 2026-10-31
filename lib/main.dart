@@ -74,9 +74,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.''',
   PaintingBinding.instance.imageCache.maximumSizeBytes = 30 * 1024 * 1024;
   PaintingBinding.instance.imageCache.maximumSize = 100;
 
-  // Enable semantics early so AccessibilityNodeInfo reports scrollable to OEM screenshot engines immediately
-  SemanticsBinding.instance.ensureSemantics();
-
   // Pre-hydrate app preferences and Monet dynamic colors before building Frame 1 to eliminate theme flicker
   try {
     final prefs = await SharedPreferences.getInstance();
@@ -85,7 +82,37 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.''',
     Logger.exception('Pre-hydration failed in main()', e, stack);
   }
 
-  runApp(const ProviderScope(child: LuCIApp()));
+  runApp(const ProviderScope(child: _AppSemantics(child: LuCIApp())));
+}
+
+/// Keep accessibility semantics active for the app's mounted lifetime.
+class _AppSemantics extends StatefulWidget {
+  const _AppSemantics({required this.child});
+
+  final Widget child;
+
+  @override
+  State<_AppSemantics> createState() => _AppSemanticsState();
+}
+
+class _AppSemanticsState extends State<_AppSemantics> {
+  late final SemanticsHandle _handle;
+
+  @override
+  void initState() {
+    super.initState();
+    // Enable semantics before the first frame for accessibility and screenshots.
+    _handle = SemanticsBinding.instance.ensureSemantics();
+  }
+
+  @override
+  void dispose() {
+    _handle.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => widget.child;
 }
 
 /// Standardized scroll behavior ensuring native long/autoscroll screenshot engine compatibility

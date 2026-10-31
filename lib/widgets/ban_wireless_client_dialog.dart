@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:yet_another_luci_app/utils/self_device_guard.dart';
@@ -142,7 +143,7 @@ class _BanWirelessClientDialogState extends State<BanWirelessClientDialog> {
       initialDate: initialDate,
       firstDate: now,
       lastDate: now.add(const Duration(days: 365)),
-      helpText: 'Select Ban End Date',
+      helpText: localizeUiCopy(context, 'Select Ban End Date'),
     );
 
     if (pickedDate == null || !mounted) return;
@@ -151,7 +152,7 @@ class _BanWirelessClientDialogState extends State<BanWirelessClientDialog> {
     final pickedTime = await showTimePicker(
       context: context,
       initialTime: initialTime,
-      helpText: 'Select Ban End Time',
+      helpText: localizeUiCopy(context, 'Select Ban End Time'),
     );
 
     if (pickedTime == null || !mounted) return;
@@ -168,7 +169,7 @@ class _BanWirelessClientDialogState extends State<BanWirelessClientDialog> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content: Text(
+            content: LocalizedUiText(
               'Ban end time must be at least 30 seconds in the future.',
             ),
             backgroundColor: Colors.redAccent,
@@ -232,7 +233,7 @@ class _BanWirelessClientDialogState extends State<BanWirelessClientDialog> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                LocalizedUiText(
                   widget.isAlreadyBanned
                       ? (l10n?.editBanDuration ?? 'Edit Ban Duration')
                       : (l10n?.banClientFromWifi ?? 'Ban Client from Wi-Fi'),
@@ -332,7 +333,7 @@ class _BanWirelessClientDialogState extends State<BanWirelessClientDialog> {
                       ],
                     ),
                     const SizedBox(height: 6),
-                    Text(
+                    LocalizedUiText(
                       'MAC: ${widget.macAddress.toUpperCase()}${widget.ipAddress != null ? " • IP: ${widget.ipAddress}" : ""}',
                       style: GoogleFonts.geistMono(
                         fontSize: 11,
@@ -341,7 +342,7 @@ class _BanWirelessClientDialogState extends State<BanWirelessClientDialog> {
                     ),
                     if (widget.ssid != null && widget.ssid!.isNotEmpty) ...[
                       const SizedBox(height: 2),
-                      Text(
+                      LocalizedUiText(
                         'Target SSID: ${widget.ssid}${widget.iface != null ? " (${widget.iface})" : ""}',
                         style: TextStyle(
                           fontSize: 11,
@@ -452,7 +453,7 @@ class _BanWirelessClientDialogState extends State<BanWirelessClientDialog> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            LocalizedUiText(
                               _selectedPresetSeconds == -1
                                   ? (l10n?.customBanExpiry ??
                                         'Custom Ban Expiry')
@@ -518,7 +519,7 @@ class _BanWirelessClientDialogState extends State<BanWirelessClientDialog> {
                     ),
                     const SizedBox(width: 10),
                     Expanded(
-                      child: Text(
+                      child: LocalizedUiText(
                         _isValidDuration
                             ? (l10n?.bannedForDuration(
                                     _formatDurationString(effectiveSeconds),
@@ -596,7 +597,7 @@ class _BanWirelessClientDialogState extends State<BanWirelessClientDialog> {
                   ),
                 )
               : const Icon(Icons.block_rounded, size: 16),
-          label: Text(
+          label: LocalizedUiText(
             widget.isAlreadyBanned
                 ? (l10n?.btnUpdateBan ?? 'Update Ban')
                 : (l10n?.btnBanClient ?? 'Ban Client'),

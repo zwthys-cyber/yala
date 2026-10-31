@@ -279,7 +279,7 @@ void main() {
     );
 
     test('applies safe defaults on empty or partial status JSON', () {
-      final status = AdGuardStatus.fromJson({});
+      final status = AdGuardStatus.fromJson(const {});
       expect(status.version, equals('Unknown'));
       expect(status.running, isFalse);
       expect(status.protectionState, equals(AdGuardProtectionState.disabled));
@@ -555,7 +555,7 @@ void main() {
     );
 
     test('evaluates fully operational installation', () {
-      final status = AdGuardStatus.fromJson({
+      final status = AdGuardStatus.fromJson(const {
         'version': 'v0.107.50',
         'running': true,
         'protection_enabled': true,
@@ -586,7 +586,7 @@ void main() {
     });
 
     test('distinguishes running manual binary without OpenWrt init script', () {
-      final status = AdGuardStatus.fromJson({
+      final status = AdGuardStatus.fromJson(const {
         'version': 'v0.107.50',
         'running': true,
         'protection_enabled': true,

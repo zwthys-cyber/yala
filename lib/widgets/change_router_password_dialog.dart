@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:yet_another_luci_app/l10n/app_localizations.dart';
@@ -253,7 +254,7 @@ class _ChangeRouterPasswordDialogState
                 style: const TextStyle(fontSize: 13.5),
               ),
               const SizedBox(height: 12),
-              const Text(
+              const LocalizedUiText(
                 '• To protect your access, your saved credentials have NOT been altered.\n'
                 '• Do NOT repeatedly retry changing the password.\n'
                 '• Please verify your router connection via the LuCI web interface or SSH before attempting again.',
@@ -265,7 +266,7 @@ class _ChangeRouterPasswordDialogState
         actions: [
           FilledButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('Dismiss'),
+            child: const LocalizedUiText('Dismiss'),
           ),
         ],
       );
@@ -318,7 +319,7 @@ class _ChangeRouterPasswordDialogState
         actions: [
           OutlinedButton(
             onPressed: () => Navigator.of(context).pop(true),
-            child: const Text('Close'),
+            child: const LocalizedUiText('Close'),
           ),
           FilledButton.icon(
             onPressed: _isRetryingStorage ? null : _handleRetryStorage,
@@ -577,11 +578,11 @@ class _ChangeRouterPasswordDialogState
           onPressed: _isProcessing
               ? null
               : () => Navigator.of(context).pop(false),
-          child: const Text('Cancel'),
+          child: const LocalizedUiText('Cancel'),
         ),
         FilledButton(
           onPressed: _canSubmit ? _handleSubmit : null,
-          child: const Text('Change Password'),
+          child: const LocalizedUiText('Change Password'),
         ),
       ],
     );

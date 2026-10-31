@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../design/luci_design_system.dart';
@@ -225,7 +226,7 @@ class SpeedTestView extends ConsumerWidget {
             FilledButton.icon(
               onPressed: () => controller.startTest(),
               icon: const Icon(Icons.speed_rounded),
-              label: Text(
+              label: LocalizedUiText(
                 state.result != null
                     ? (l10n?.speedTestBtnRerun ?? 'Run Router Speed Test Again')
                     : (l10n?.speedTestBtnStart ?? 'Start Router Speed Test'),

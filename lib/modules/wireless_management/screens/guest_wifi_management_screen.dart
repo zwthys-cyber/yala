@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yet_another_luci_app/main.dart';
@@ -286,7 +287,7 @@ class GuestWifiManagementScreen extends ConsumerWidget {
                         ),
                       ),
                       const SizedBox(height: 4),
-                      Text(
+                      LocalizedUiText(
                         guestIfaces.isEmpty
                             ? (l10n?.noActiveGuestSsidsConfigured ??
                                   'No active guest SSIDs configured')
@@ -613,7 +614,7 @@ class GuestWifiManagementScreen extends ConsumerWidget {
                                           ),
                                         ),
                                       ),
-                                      child: const Text(
+                                      child: const LocalizedUiText(
                                         'PAUSED',
                                         style: TextStyle(
                                           fontSize: 10,
@@ -626,7 +627,7 @@ class GuestWifiManagementScreen extends ConsumerWidget {
                                 ],
                               ),
                               const SizedBox(height: 3),
-                              Text(
+                              LocalizedUiText(
                                 'IP: $ipAddress  •  MAC: $macNorm  •  SSID: ${iface.ssid}',
                                 style: TextStyle(
                                   fontSize: 11,
@@ -634,8 +635,8 @@ class GuestWifiManagementScreen extends ConsumerWidget {
                                 ),
                               ),
                               const SizedBox(height: 2),
-                              Text(
-                                'Signal: ${st.formattedSignal} (${st.signalQualityLabel})  •  Noise: ${st.noiseDbm != null ? "${st.noiseDbm} dBm" : "N/A"}',
+                              LocalizedUiText(
+                                'Signal: ${st.formattedSignal} (${localizeUiCopy(context, st.signalQualityLabel)})  •  Noise: ${st.noiseDbm != null ? "${st.noiseDbm} dBm" : "N/A"}',
                                 style: TextStyle(
                                   fontSize: 11,
                                   color: theme.colorScheme.onSurfaceVariant,
@@ -691,7 +692,7 @@ class GuestWifiManagementScreen extends ConsumerWidget {
                                 ? Colors.green.shade700
                                 : Colors.red.shade700,
                           ),
-                          label: Text(
+                          label: LocalizedUiText(
                             isPaused
                                 ? (l10n?.btnResumeAccess ?? 'Resume Access')
                                 : (l10n?.btnPauseAccess ?? 'Pause Access'),

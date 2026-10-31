@@ -405,7 +405,7 @@ void main() {
               home: Scaffold(
                 body: AddEditProfileDialog(
                   existing: existing,
-                  allProfiles: [existing],
+                  allProfiles: const [existing],
                   onSave: (_) {},
                 ),
               ),

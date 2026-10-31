@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -697,7 +698,7 @@ class _DiagnosticsScreenState extends ConsumerState<DiagnosticsScreen>
                   padding: const EdgeInsets.symmetric(vertical: 3.0),
                   child: Row(
                     children: [
-                      Text(
+                      LocalizedUiText(
                         'icmp_seq=${r.seq}',
                         style: GoogleFonts.geistMono(
                           fontSize: 12,
@@ -706,7 +707,7 @@ class _DiagnosticsScreenState extends ConsumerState<DiagnosticsScreen>
                       ),
                       const SizedBox(width: 12),
                       if (r.ttl != null)
-                        Text(
+                        LocalizedUiText(
                           'ttl=${r.ttl}',
                           style: GoogleFonts.geistMono(
                             fontSize: 12,
@@ -714,7 +715,7 @@ class _DiagnosticsScreenState extends ConsumerState<DiagnosticsScreen>
                           ),
                         ),
                       const Spacer(),
-                      Text(
+                      LocalizedUiText(
                         '${r.timeMs.toStringAsFixed(2)} ms',
                         style: GoogleFonts.geistMono(
                           fontSize: 12,
@@ -946,7 +947,7 @@ class _DiagnosticsScreenState extends ConsumerState<DiagnosticsScreen>
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            LocalizedUiText(
                               isTimeout
                                   ? (l10n?.diagRequestTimedOut ??
                                         '* * * Request Timed Out')
@@ -973,7 +974,7 @@ class _DiagnosticsScreenState extends ConsumerState<DiagnosticsScreen>
                         ),
                       ),
                       if (!isTimeout && avg != null)
-                        Text(
+                        LocalizedUiText(
                           '${avg.toStringAsFixed(1)} ms',
                           style: GoogleFonts.geistMono(
                             fontSize: 12,
@@ -1138,7 +1139,7 @@ class _DiagnosticsScreenState extends ConsumerState<DiagnosticsScreen>
                           child: CircularProgressIndicator(strokeWidth: 2),
                         )
                       : const Icon(Icons.refresh_rounded, size: 18),
-                  label: Text(
+                  label: LocalizedUiText(
                     state.isFlushingDns
                         ? (l10n?.diagBtnFlushingDns ?? 'Flushing...')
                         : (l10n?.diagBtnFlushDns ?? 'Flush Cache'),
@@ -1234,7 +1235,7 @@ class _DiagnosticsScreenState extends ConsumerState<DiagnosticsScreen>
                 ),
                 const SizedBox(width: 8),
                 Expanded(
-                  child: Text(
+                  child: LocalizedUiText(
                     'DNS: ${dns.query}',
                     style: theme.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
@@ -1829,7 +1830,7 @@ class _DiagnosticsScreenState extends ConsumerState<DiagnosticsScreen>
                               ),
                             )
                           : const Icon(Icons.auto_awesome),
-                      label: Text(
+                      label: LocalizedUiText(
                         isGenerating
                             ? (l10n?.diagGeneratingBundle ??
                                   'Generating Bundle...')
@@ -1921,11 +1922,14 @@ class _DiagnosticsScreenState extends ConsumerState<DiagnosticsScreen>
                           visualDensity: VisualDensity.compact,
                           padding: const EdgeInsets.all(4),
                           constraints: const BoxConstraints(),
-                          tooltip: _isReportSelectable
-                              ? (l10n?.diagSwitchSmoothScrolling ??
-                                    'Switch to smooth scrolling')
-                              : (l10n?.diagEnableTextSelection ??
-                                    'Enable text selection'),
+                          tooltip: localizeUiCopy(
+                            context,
+                            _isReportSelectable
+                                ? (l10n?.diagSwitchSmoothScrolling ??
+                                      'Switch to smooth scrolling')
+                                : (l10n?.diagEnableTextSelection ??
+                                      'Enable text selection'),
+                          ),
                           icon: Icon(
                             _isReportSelectable
                                 ? Icons.pan_tool_alt
@@ -2082,7 +2086,7 @@ class _DiagnosticsScreenState extends ConsumerState<DiagnosticsScreen>
                         ),
                       )
                     : Icon(actionIcon),
-                label: Text(
+                label: LocalizedUiText(
                   isLoading ? (l10n?.diagRunning ?? 'Running...') : actionLabel,
                 ),
               ),

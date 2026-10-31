@@ -1,6 +1,7 @@
 // Copyright (C) 2026 @nightcodex7
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -72,7 +73,7 @@ class RpcPermissionsDialog extends StatelessWidget {
           ),
           const SizedBox(width: 10),
           Expanded(
-            child: Text(
+            child: LocalizedUiText(
               isComplete
                   ? (l10n?.tileRpcPermissions ?? 'RPC & Permissions')
                   : (l10n?.rpcdPermissionDenied ?? 'Permission Required'),
@@ -88,7 +89,7 @@ class RpcPermissionsDialog extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            LocalizedUiText(
               isComplete
                   ? (l10n?.rpcDialogVerifiedSubtitle ??
                         'Router RPC modules and backend execution permissions are verified and functioning properly.')
@@ -151,7 +152,7 @@ class RpcPermissionsDialog extends StatelessWidget {
                         color: theme.colorScheme.primary,
                       ),
                       const SizedBox(width: 6),
-                      Text(
+                      LocalizedUiText(
                         isComplete
                             ? (l10n?.rpcManualSetupScript ??
                                   'Manual Setup / Verification Script')
@@ -210,7 +211,7 @@ class RpcPermissionsDialog extends StatelessWidget {
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: Text(
+          child: LocalizedUiText(
             isComplete
                 ? (l10n?.btnCancelClose ?? 'Close')
                 : (l10n?.btnCancelClose ?? 'Cancel'),
@@ -346,7 +347,7 @@ class RpcPermissionsDialog extends StatelessWidget {
             ),
             borderRadius: BorderRadius.circular(6),
           ),
-          child: Text(
+          child: LocalizedUiText(
             isOk ? 'OK' : 'MISSING',
             style: TextStyle(
               fontSize: 10,

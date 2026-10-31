@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:yet_another_luci_app/l10n/app_localizations.dart';
@@ -100,7 +101,7 @@ class ParentalProfileCard extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 2),
-                      Text(
+                      LocalizedUiText(
                         profile.macAddresses.isEmpty
                             ? 'Ready • 0 devices assigned'
                             : (l10n?.parentalProfileDevicesCount(
@@ -140,7 +141,7 @@ class ParentalProfileCard extends StatelessWidget {
                     if (onToggleEnabled != null)
                       PopupMenuItem(
                         value: 'toggle_enabled',
-                        child: Text(
+                        child: LocalizedUiText(
                           profile.isEnabled
                               ? 'Bypass Restrictions'
                               : 'Enable Guardrails',
@@ -174,17 +175,22 @@ class ParentalProfileCard extends StatelessWidget {
                       icon: Icons.schedule_rounded,
                       label: profile.schedule!.blockTimeFormatted,
                       color: hasFileExec ? Colors.blue : Colors.grey,
-                      tooltip: hasFileExec
-                          ? 'Schedule: block at ${profile.schedule!.blockTimeFormatted}'
-                          : 'Schedule requires file.exec access',
+                      tooltip: localizeUiCopy(
+                        context,
+                        hasFileExec
+                            ? 'Schedule: block at ${profile.schedule!.blockTimeFormatted}'
+                            : 'Schedule requires file.exec access',
+                      ),
                     ),
                   if (profile.hasTimeLimit)
                     _FeatureChip(
                       icon: Icons.timer_outlined,
                       label: '${profile.dailyTimeLimitMinutes}m/day',
                       color: Colors.purple,
-                      tooltip:
-                          'Daily time limit: ${profile.dailyTimeLimitMinutes} minutes',
+                      tooltip: localizeUiCopy(
+                        context,
+                        'Daily time limit: ${profile.dailyTimeLimitMinutes} minutes',
+                      ),
                     ),
                   if (profile.hasContentFilter)
                     _FeatureChip(
@@ -222,13 +228,16 @@ class ParentalProfileCard extends StatelessWidget {
                     child: _PauseButton(
                       enabled:
                           hasFirewall && profile.hasMacs && profile.isEnabled,
-                      tooltip: !hasFirewall
-                          ? 'Requires firewall write access'
-                          : !profile.hasMacs
-                          ? 'Add devices to this profile first'
-                          : !profile.isEnabled
-                          ? 'Profile is in Bypass mode (Unrestricted)'
-                          : null,
+                      tooltip: localizeOptionalUiCopy(
+                        context,
+                        !hasFirewall
+                            ? 'Requires firewall write access'
+                            : !profile.hasMacs
+                            ? 'Add devices to this profile first'
+                            : !profile.isEnabled
+                            ? 'Profile is in Bypass mode (Unrestricted)'
+                            : null,
+                      ),
                       onPause: onPause,
                     ),
                   ),
@@ -260,7 +269,7 @@ class _BypassedStatusChip extends StatelessWidget {
         children: [
           Icon(Icons.lock_open_rounded, size: 12, color: Colors.amber),
           SizedBox(width: 4),
-          Text(
+          LocalizedUiText(
             'Bypassed',
             style: TextStyle(
               fontSize: 11,
@@ -291,7 +300,7 @@ class _ReadyStatusChip extends StatelessWidget {
         children: [
           Icon(Icons.access_time_rounded, size: 12, color: Colors.blue),
           SizedBox(width: 4),
-          Text(
+          LocalizedUiText(
             'Ready',
             style: TextStyle(
               fontSize: 11,
@@ -439,7 +448,7 @@ class _PauseButton extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
-                  child: Text(
+                  child: LocalizedUiText(
                     'Pause internet for how long?',
                     style: theme.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,

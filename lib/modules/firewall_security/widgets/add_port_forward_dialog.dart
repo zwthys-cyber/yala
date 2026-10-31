@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yet_another_luci_app/l10n/app_localizations.dart';
@@ -416,12 +417,12 @@ class _AddPortForwardDialogState extends ConsumerState<AddPortForwardDialog> {
                           loc?.firewallWizardServiceName ?? 'Service Name',
                       border: const OutlineInputBorder(),
                     ),
-                    validator: (val) {
+                    validator: localizeUiValidator(context, (val) {
                       if (val == null || val.trim().isEmpty) {
                         return 'Please enter a service name';
                       }
                       return null;
-                    },
+                    }),
                   ),
                   const SizedBox(height: 12),
                   Row(
@@ -436,7 +437,7 @@ class _AddPortForwardDialogState extends ConsumerState<AddPortForwardDialog> {
                             border: const OutlineInputBorder(),
                           ),
                           keyboardType: TextInputType.text,
-                          validator: (val) {
+                          validator: localizeUiValidator(context, (val) {
                             if (val == null || val.trim().isEmpty) {
                               return 'Enter port';
                             }
@@ -447,7 +448,7 @@ class _AddPortForwardDialogState extends ConsumerState<AddPortForwardDialog> {
                               return 'Invalid port';
                             }
                             return null;
-                          },
+                          }),
                         ),
                       ),
                       const SizedBox(width: 8),
@@ -460,7 +461,7 @@ class _AddPortForwardDialogState extends ConsumerState<AddPortForwardDialog> {
                                 'Internal Port',
                             hintText: 'Same as external',
                             border: const OutlineInputBorder(),
-                          ),
+                          ).localized(context),
                           keyboardType: TextInputType.text,
                         ),
                       ),
@@ -474,11 +475,17 @@ class _AddPortForwardDialogState extends ConsumerState<AddPortForwardDialog> {
                       border: const OutlineInputBorder(),
                     ),
                     items: const [
-                      DropdownMenuItem(value: 'tcp', child: Text('TCP')),
-                      DropdownMenuItem(value: 'udp', child: Text('UDP')),
+                      DropdownMenuItem(
+                        value: 'tcp',
+                        child: LocalizedUiText('TCP'),
+                      ),
+                      DropdownMenuItem(
+                        value: 'udp',
+                        child: LocalizedUiText('UDP'),
+                      ),
                       DropdownMenuItem(
                         value: 'tcp udp',
-                        child: Text('TCP + UDP'),
+                        child: LocalizedUiText('TCP + UDP'),
                       ),
                     ],
                     onChanged: (val) {
@@ -538,7 +545,7 @@ class _AddPortForwardDialogState extends ConsumerState<AddPortForwardDialog> {
                 // Connected Devices Dropdown
                 if (!_useManualIp) ...[
                   if (validClients.isEmpty)
-                    Text(
+                    LocalizedUiText(
                       'No connected devices with active IPv4 addresses found. Please enter IP manually.',
                       style: theme.textTheme.bodySmall?.copyWith(
                         color: theme.colorScheme.error,
@@ -584,7 +591,7 @@ class _AddPortForwardDialogState extends ConsumerState<AddPortForwardDialog> {
                       border: const OutlineInputBorder(),
                     ),
                     keyboardType: TextInputType.datetime,
-                    validator: (val) {
+                    validator: localizeUiValidator(context, (val) {
                       if (_useManualIp) {
                         if (val == null || val.trim().isEmpty) {
                           return 'Please enter IP address';
@@ -594,7 +601,7 @@ class _AddPortForwardDialogState extends ConsumerState<AddPortForwardDialog> {
                         }
                       }
                       return null;
-                    },
+                    }),
                   ),
                 ],
 

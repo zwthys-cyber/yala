@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -297,7 +298,7 @@ class VpnConnectivityScreen extends ConsumerWidget {
                       child: Icon(Icons.vpn_key, color: Colors.white, size: 18),
                     ),
                     const SizedBox(width: 10),
-                    Text(
+                    LocalizedUiText(
                       'Interface: ${wg.name.toUpperCase()}',
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
@@ -319,7 +320,7 @@ class VpnConnectivityScreen extends ConsumerWidget {
                             : Colors.red.withValues(alpha: 0.15),
                         borderRadius: BorderRadius.circular(6),
                       ),
-                      child: Text(
+                      child: LocalizedUiText(
                         wg.isUp ? 'UP' : 'DOWN',
                         style: TextStyle(
                           color: wg.isUp ? Colors.green : Colors.red,
@@ -334,7 +335,10 @@ class VpnConnectivityScreen extends ConsumerWidget {
                         wg.isUp ? Icons.power_settings_new : Icons.play_arrow,
                         size: 20,
                       ),
-                      tooltip: wg.isUp ? 'Bring Down' : 'Bring Up',
+                      tooltip: localizeUiCopy(
+                        context,
+                        wg.isUp ? 'Bring Down' : 'Bring Up',
+                      ),
                       onPressed: () => _confirmToggleProvider(
                         context,
                         ref,
@@ -356,10 +360,16 @@ class VpnConnectivityScreen extends ConsumerWidget {
               ],
             ),
             const SizedBox(height: 8),
-            _buildDetailRow('Public Key', wg.publicKey),
-            _buildDetailRow('Listen Port', '${wg.listenPort}'),
+            _buildDetailRow(
+              localizeUiCopy(context, 'Public Key'),
+              wg.publicKey,
+            ),
+            _buildDetailRow(
+              localizeUiCopy(context, 'Listen Port'),
+              '${wg.listenPort}',
+            ),
             const Divider(height: 20),
-            Text(
+            LocalizedUiText(
               'Connected WireGuard Peers (${wg.peers.length})',
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
@@ -367,7 +377,7 @@ class VpnConnectivityScreen extends ConsumerWidget {
             if (wg.peers.isEmpty)
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: 8.0),
-                child: Text(
+                child: LocalizedUiText(
                   'No active peers configured or connected.',
                   style: TextStyle(color: Colors.grey, fontSize: 12),
                 ),
@@ -397,7 +407,7 @@ class VpnConnectivityScreen extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
-                child: Text(
+                child: LocalizedUiText(
                   'Peer: ${peer.publicKey}',
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
@@ -417,10 +427,16 @@ class VpnConnectivityScreen extends ConsumerWidget {
             ],
           ),
           const SizedBox(height: 4),
-          _buildDetailRow('Endpoint', peer.endpoint ?? 'N/A'),
-          _buildDetailRow('Allowed IPs', peer.allowedIps.join(', ')),
           _buildDetailRow(
-            'Traffic Transferred',
+            localizeUiCopy(context, 'Endpoint'),
+            peer.endpoint ?? 'N/A',
+          ),
+          _buildDetailRow(
+            localizeUiCopy(context, 'Allowed IPs'),
+            peer.allowedIps.join(', '),
+          ),
+          _buildDetailRow(
+            localizeUiCopy(context, 'Traffic Transferred'),
             'RX: ${_formatBytes(peer.rxBytes)} / TX: ${_formatBytes(peer.txBytes)}',
           ),
         ],
@@ -464,7 +480,7 @@ class VpnConnectivityScreen extends ConsumerWidget {
               ovpn.name,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
-            subtitle: Text(
+            subtitle: LocalizedUiText(
               'Device: ${ovpn.dev} • Proto: ${ovpn.proto.toUpperCase()}:${ovpn.port}',
             ),
             trailing: Row(
@@ -481,7 +497,7 @@ class VpnConnectivityScreen extends ConsumerWidget {
                         : Colors.grey.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(6),
                   ),
-                  child: Text(
+                  child: LocalizedUiText(
                     ovpn.isRunning ? 'RUNNING' : 'STOPPED',
                     style: TextStyle(
                       color: ovpn.isRunning ? Colors.green : Colors.grey,
@@ -598,21 +614,33 @@ class VpnConnectivityScreen extends ConsumerWidget {
             ),
             const Divider(height: 20),
             _buildDetailRow(
-              'Tailscale IP',
+              localizeUiCopy(context, 'Tailscale IP'),
               ts.tailscaleIp.isNotEmpty ? ts.tailscaleIp : 'N/A',
             ),
             if (ts.tailnet.isNotEmpty)
-              _buildDetailRow('Tailnet Account', ts.tailnet),
+              _buildDetailRow(
+                localizeUiCopy(context, 'Tailnet Account'),
+                ts.tailnet,
+              ),
             if (ts.magicDns.isNotEmpty)
-              _buildDetailRow('MagicDNS Domain', ts.magicDns),
+              _buildDetailRow(
+                localizeUiCopy(context, 'MagicDNS Domain'),
+                ts.magicDns,
+              ),
             if (ts.peersCount > 0)
-              _buildDetailRow('Mesh Peers', '${ts.peersCount} Connected Peers'),
+              _buildDetailRow(
+                localizeUiCopy(context, 'Mesh Peers'),
+                '${ts.peersCount} Connected Peers',
+              ),
             if (ts.isExitNode)
               _buildDetailRow(
-                'Exit Node Capability',
+                localizeUiCopy(context, 'Exit Node Capability'),
                 'ENABLED (Offers Exit Node)',
               ),
-            _buildDetailRow('Backend Daemon State', ts.backendState),
+            _buildDetailRow(
+              localizeUiCopy(context, 'Backend Daemon State'),
+              ts.backendState,
+            ),
             const SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -676,7 +704,7 @@ class VpnConnectivityScreen extends ConsumerWidget {
                       ),
                       const SizedBox(width: 10),
                       Expanded(
-                        child: Text(
+                        child: LocalizedUiText(
                           ndns.profileId.isNotEmpty
                               ? 'Profile: ${ndns.profileId}'
                               : 'NextDNS',
@@ -709,11 +737,11 @@ class VpnConnectivityScreen extends ConsumerWidget {
             ),
             const Divider(height: 16),
             _buildDetailRow(
-              'Encrypted DNS Profile ID',
+              localizeUiCopy(context, 'Encrypted DNS Profile ID'),
               ndns.profileId.isNotEmpty ? ndns.profileId : 'N/A',
             ),
             _buildDetailRow(
-              'NextDNS Daemon Status',
+              localizeUiCopy(context, 'NextDNS Daemon Status'),
               ndns.isEnabled
                   ? (ndns.isRunning
                         ? 'ACTIVE & ENCRYPTED'
@@ -721,7 +749,7 @@ class VpnConnectivityScreen extends ConsumerWidget {
                   : 'DISABLED',
             ),
             _buildDetailRow(
-              'Report Client Info',
+              localizeUiCopy(context, 'Report Client Info'),
               ndns.reportClientInfo ? 'ENABLED' : 'DISABLED',
             ),
             const SizedBox(height: 8),
@@ -784,7 +812,7 @@ class VpnConnectivityScreen extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(width: 10),
-                    Text(
+                    LocalizedUiText(
                       cf.tunnelName.isNotEmpty
                           ? cf.tunnelName
                           : 'Cloudflare Tunnel',
@@ -808,7 +836,7 @@ class VpnConnectivityScreen extends ConsumerWidget {
                             : Colors.grey.withValues(alpha: 0.2),
                         borderRadius: BorderRadius.circular(6),
                       ),
-                      child: Text(
+                      child: LocalizedUiText(
                         cf.isRunning ? 'ACTIVE' : 'DISABLED',
                         style: TextStyle(
                           color: cf.isRunning
@@ -840,13 +868,13 @@ class VpnConnectivityScreen extends ConsumerWidget {
               ],
             ),
             const Divider(height: 20),
-            _buildDetailRow('Tunnel ID', cf.tunnelId),
+            _buildDetailRow(localizeUiCopy(context, 'Tunnel ID'), cf.tunnelId),
             _buildDetailRow(
-              'Edge Connections',
+              localizeUiCopy(context, 'Edge Connections'),
               '${cf.connectionsCount} Active Edge Hops',
             ),
             _buildDetailRow(
-              'Tunnel Status',
+              localizeUiCopy(context, 'Tunnel Status'),
               cf.isRunning ? 'CONNECTED TO CLOUDFLARE EDGE' : 'INACTIVE',
             ),
             const SizedBox(height: 8),
@@ -896,8 +924,8 @@ class VpnConnectivityScreen extends ConsumerWidget {
       builder: (ctx) => AlertDialog(
         actionsOverflowButtonSpacing: 8,
         actionsOverflowDirection: VerticalDirection.down,
-        title: Text(title),
-        content: SingleChildScrollView(child: Text(message)),
+        title: LocalizedUiText(title),
+        content: SingleChildScrollView(child: LocalizedUiText(message)),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(false),
@@ -1033,7 +1061,7 @@ class VpnConnectivityScreen extends ConsumerWidget {
                 color: theme.colorScheme.onSurface.withValues(alpha: 0.08),
                 borderRadius: BorderRadius.circular(6),
               ),
-              child: Text(
+              child: LocalizedUiText(
                 'NOT CONFIGURED',
                 style: TextStyle(
                   color: theme.colorScheme.onSurface.withValues(alpha: 0.5),

@@ -3390,7 +3390,7 @@ class AdGuardController extends StateNotifier<AdGuardState>
         canProceed: true,
         targetRule: targetForwarder,
         currentServers: [targetForwarder, '1.1.1.1'],
-        remainingServers: ['1.1.1.1'],
+        remainingServers: const ['1.1.1.1'],
       );
     }
 

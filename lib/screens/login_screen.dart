@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
@@ -1551,7 +1552,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
                     errorMaxLines: 2,
                   ),
                   textInputAction: TextInputAction.next,
-                  validator: (value) {
+                  validator: localizeUiValidator(context, (value) {
                     if (value == null || value.isEmpty) {
                       return l10n?.loginRequiredField ??
                           'This field is required';
@@ -1563,7 +1564,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
                           'Invalid address format';
                     }
                     return null;
-                  },
+                  }),
                 ),
               ),
 
@@ -1693,13 +1694,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
                     errorMaxLines: 2,
                   ),
                   textInputAction: TextInputAction.next,
-                  validator: (value) {
+                  validator: localizeUiValidator(context, (value) {
                     if (value == null || value.isEmpty) {
                       return l10n?.loginRequiredField ??
                           'This field is required';
                     }
                     return null;
-                  },
+                  }),
                 ),
               ),
 
@@ -1764,9 +1765,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
                       ),
                       onPressed: () =>
                           setState(() => _passwordVisible = !_passwordVisible),
-                      tooltip: _passwordVisible
-                          ? (l10n?.loginHidePassword ?? 'Hide password')
-                          : (l10n?.loginShowPassword ?? 'Show password'),
+                      tooltip: localizeUiCopy(
+                        context,
+                        _passwordVisible
+                            ? (l10n?.loginHidePassword ?? 'Hide password')
+                            : (l10n?.loginShowPassword ?? 'Show password'),
+                      ),
                     ),
                   ),
                   textInputAction: TextInputAction.done,
@@ -1916,7 +1920,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen>
                   Icon(Icons.router_outlined, size: 15, color: primaryColor),
                   const SizedBox(width: 6),
                   Expanded(
-                    child: Text(
+                    child: LocalizedUiText(
                       routers.isEmpty
                           ? (l10n?.loginRouterProfilesHeader ??
                                 'ROUTER PROFILES')

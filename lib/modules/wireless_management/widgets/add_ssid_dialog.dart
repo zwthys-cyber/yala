@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -546,11 +547,11 @@ class _AddSsidDialogState extends ConsumerState<AddSsidDialog> {
                     DropdownButtonFormField<WirelessRadio>(
                       initialValue: _selectedRadio,
                       isExpanded: true,
-                      decoration: const InputDecoration(
+                      decoration: (const InputDecoration(
                         labelText: 'Target Physical Radio',
                         prefixIcon: Icon(Icons.cell_tower_rounded, size: 20),
                         border: OutlineInputBorder(),
-                      ),
+                      )).localized(context),
                       items: widget.radios
                           .map(
                             (r) => DropdownMenuItem(
@@ -587,9 +588,9 @@ class _AddSsidDialogState extends ConsumerState<AddSsidDialog> {
                       ),
                       prefixIcon: const Icon(Icons.wifi_rounded, size: 20),
                       border: const OutlineInputBorder(),
-                    ),
+                    ).localized(context),
                     onChanged: (_) => setState(() {}),
-                    validator: (val) {
+                    validator: localizeUiValidator(context, (val) {
                       if (val == null || val.trim().isEmpty) {
                         return l10n?.ssidErrorEmpty ??
                             'SSID name cannot be empty';
@@ -611,7 +612,7 @@ class _AddSsidDialogState extends ConsumerState<AddSsidDialog> {
                         return 'An SSID with this name already exists on ${_selectedRadio.name}';
                       }
                       return null;
-                    },
+                    }),
                   ),
                   const SizedBox(height: 14),
 
@@ -712,13 +713,19 @@ class _AddSsidDialogState extends ConsumerState<AddSsidDialog> {
                           onPressed: () => setState(
                             () => _showPassphrase = !_showPassphrase,
                           ),
-                          tooltip: _showPassphrase
-                              ? 'Hide passphrase'
-                              : 'Show passphrase',
+                          tooltip: localizeUiCopy(
+                            context,
+                            _showPassphrase
+                                ? 'Hide passphrase'
+                                : 'Show passphrase',
+                          ),
                         ),
-                      ),
+                      ).localized(context),
                       onChanged: (_) => setState(() {}),
-                      validator: _validatePassphrase,
+                      validator: localizeUiValidator(
+                        context,
+                        _validatePassphrase,
+                      ),
                     ),
                     PasswordStrengthMeter(password: _passphraseController.text),
                     const SizedBox(height: 14),
@@ -964,7 +971,7 @@ class _AddSsidDialogState extends ConsumerState<AddSsidDialog> {
                               helperText:
                                   l10n?.macListHelperText ??
                                   'One MAC per line or separated by comma/space',
-                            ),
+                            ).localized(context),
                           ),
                         ],
                         const SizedBox(height: 16),
@@ -1101,11 +1108,11 @@ class _AddSsidDialogState extends ConsumerState<AddSsidDialog> {
                               child: TextFormField(
                                 controller: _dtimPeriodController,
                                 onChanged: (_) => setState(() {}),
-                                decoration: const InputDecoration(
+                                decoration: (const InputDecoration(
                                   labelText: 'DTIM Period',
                                   border: OutlineInputBorder(),
                                   helperText: '1-255 beacons',
-                                ),
+                                )).localized(context),
                                 keyboardType: TextInputType.number,
                               ),
                             ),
@@ -1114,11 +1121,11 @@ class _AddSsidDialogState extends ConsumerState<AddSsidDialog> {
                               child: TextFormField(
                                 controller: _gtkRekeyController,
                                 onChanged: (_) => setState(() {}),
-                                decoration: const InputDecoration(
+                                decoration: (const InputDecoration(
                                   labelText: 'GTK Rekey (s)',
                                   border: OutlineInputBorder(),
                                   helperText: 'Rekey interval',
-                                ),
+                                )).localized(context),
                                 keyboardType: TextInputType.number,
                               ),
                             ),
@@ -1131,11 +1138,11 @@ class _AddSsidDialogState extends ConsumerState<AddSsidDialog> {
                               child: TextFormField(
                                 controller: _inactivityLimitController,
                                 onChanged: (_) => setState(() {}),
-                                decoration: const InputDecoration(
+                                decoration: (const InputDecoration(
                                   labelText: 'Inactivity Limit (s)',
                                   border: OutlineInputBorder(),
                                   helperText: 'Idle disconnect',
-                                ),
+                                )).localized(context),
                                 keyboardType: TextInputType.number,
                               ),
                             ),
@@ -1144,11 +1151,11 @@ class _AddSsidDialogState extends ConsumerState<AddSsidDialog> {
                               child: TextFormField(
                                 controller: _maxListenIntervalController,
                                 onChanged: (_) => setState(() {}),
-                                decoration: const InputDecoration(
+                                decoration: (const InputDecoration(
                                   labelText: 'Max Listen Int.',
                                   border: OutlineInputBorder(),
                                   helperText: 'Power-save limit',
-                                ),
+                                )).localized(context),
                                 keyboardType: TextInputType.number,
                               ),
                             ),
@@ -1225,7 +1232,7 @@ class _AddSsidDialogState extends ConsumerState<AddSsidDialog> {
                                       'DHCP Lease Duration',
                                   border: const OutlineInputBorder(),
                                   helperText: 'e.g. 12h or 86400',
-                                ),
+                                ).localized(context),
                               ),
                             ),
                             const SizedBox(width: 10),
@@ -1259,15 +1266,15 @@ class _AddSsidDialogState extends ConsumerState<AddSsidDialog> {
                                 items: const [
                                   DropdownMenuItem(
                                     value: 'server',
-                                    child: Text('Server'),
+                                    child: LocalizedUiText('Server'),
                                   ),
                                   DropdownMenuItem(
                                     value: 'relay',
-                                    child: Text('Relay'),
+                                    child: LocalizedUiText('Relay'),
                                   ),
                                   DropdownMenuItem(
                                     value: 'disabled',
-                                    child: Text('Disabled'),
+                                    child: LocalizedUiText('Disabled'),
                                   ),
                                 ],
                                 onChanged: (v) {
@@ -1291,15 +1298,15 @@ class _AddSsidDialogState extends ConsumerState<AddSsidDialog> {
                                 items: const [
                                   DropdownMenuItem(
                                     value: 'server',
-                                    child: Text('Server'),
+                                    child: LocalizedUiText('Server'),
                                   ),
                                   DropdownMenuItem(
                                     value: 'relay',
-                                    child: Text('Relay'),
+                                    child: LocalizedUiText('Relay'),
                                   ),
                                   DropdownMenuItem(
                                     value: 'disabled',
-                                    child: Text('Disabled'),
+                                    child: LocalizedUiText('Disabled'),
                                   ),
                                 ],
                                 onChanged: (v) {
@@ -1339,7 +1346,7 @@ class _AddSsidDialogState extends ConsumerState<AddSsidDialog> {
                     child: CircularProgressIndicator(strokeWidth: 2),
                   )
                 : const Icon(Icons.add_rounded, size: 18),
-            label: Text(
+            label: LocalizedUiText(
               hasUciWrite
                   ? (l10n?.createWifiNetwork ?? 'Create Wi-Fi Network')
                   : (l10n?.createWifiNetworkNonRoot ??

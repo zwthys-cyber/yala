@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -178,7 +179,7 @@ class _ServicesSystemScreenState extends ConsumerState<ServicesSystemScreen> {
             l10n?.servicesSysInitSaveWarningTitle ?? 'Init Script Save Warning',
           ),
           content: SingleChildScrollView(
-            child: Text(
+            child: LocalizedUiText(
               'Updated ${succeededScripts.length} script(s), but failed to update ${failedScripts.length} script(s):\n\n'
               '${failedScripts.join(", ")}',
             ),
@@ -207,7 +208,7 @@ class _ServicesSystemScreenState extends ConsumerState<ServicesSystemScreen> {
           l10n?.servicesSysDiscardDialogTitle ?? 'Unsaved Init Script Changes',
         ),
         content: SingleChildScrollView(
-          child: Text(
+          child: LocalizedUiText(
             'You have ${_stagedInitScriptStates.length} unsaved change(s) to startup init scripts. Would you like to save them before leaving?',
           ),
         ),
@@ -538,12 +539,12 @@ class _ServicesSystemScreenState extends ConsumerState<ServicesSystemScreen> {
             children: [
               const Icon(Icons.schedule, size: 36, color: Colors.grey),
               const SizedBox(height: 8),
-              const Text(
+              const LocalizedUiText(
                 'No system cron jobs scheduled',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 4),
-              const Text(
+              const LocalizedUiText(
                 'Add scheduled background maintenance tasks or system scripts.',
                 style: TextStyle(color: Colors.grey, fontSize: 12),
                 textAlign: TextAlign.center,
@@ -659,7 +660,7 @@ class _ServicesSystemScreenState extends ConsumerState<ServicesSystemScreen> {
                                   : Colors.grey.withValues(alpha: 0.2),
                               borderRadius: BorderRadius.circular(6),
                             ),
-                            child: Text(
+                            child: LocalizedUiText(
                               isEnabled
                                   ? (l10n?.statusActive ?? 'ACTIVE')
                                   : (l10n?.statusDisabled ?? 'DISABLED'),
@@ -952,7 +953,7 @@ class _ServicesSystemScreenState extends ConsumerState<ServicesSystemScreen> {
                   ),
                   child: AnimatedSwitcher(
                     duration: const Duration(milliseconds: 200),
-                    child: Text(
+                    child: LocalizedUiText(
                       svc.isRunning
                           ? (svc.pid != null
                                 ? 'RUNNING (PID ${svc.pid})'
@@ -1053,7 +1054,7 @@ class _ServicesSystemScreenState extends ConsumerState<ServicesSystemScreen> {
                     svc.isRunning ? Icons.stop : Icons.play_arrow,
                     size: 16,
                   ),
-                  label: Text(
+                  label: LocalizedUiText(
                     svc.isRunning ? 'Stop' : 'Start',
                     style: const TextStyle(fontSize: 11),
                   ),
@@ -1154,7 +1155,7 @@ class _ServicesSystemScreenState extends ConsumerState<ServicesSystemScreen> {
                           width: 0.8,
                         ),
                       ),
-                      child: Text(
+                      child: LocalizedUiText(
                         'STAGED',
                         style: TextStyle(
                           color: Colors.amber.shade900,
@@ -1166,7 +1167,7 @@ class _ServicesSystemScreenState extends ConsumerState<ServicesSystemScreen> {
                   ],
                 ],
               ),
-              subtitle: Text(
+              subtitle: LocalizedUiText(
                 isStaged
                     ? 'Priority: ${init.startPriority} • Original: ${init.isEnabled ? "ENABLED" : "DISABLED"}'
                     : 'Startup Order Priority: ${init.startPriority}',
@@ -1185,7 +1186,7 @@ class _ServicesSystemScreenState extends ConsumerState<ServicesSystemScreen> {
                           : Colors.grey.withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(6),
                     ),
-                    child: Text(
+                    child: LocalizedUiText(
                       currentEnabled ? 'ENABLED' : 'DISABLED',
                       style: TextStyle(
                         color: currentEnabled
@@ -1464,7 +1465,7 @@ class _ServicesSystemScreenState extends ConsumerState<ServicesSystemScreen> {
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(
+                        LocalizedUiText(
                           effectiveGlobalValue
                               ? (l10n?.statusActive ?? 'ACTIVE')
                               : (l10n?.statusDisabled ?? 'DISABLED'),
@@ -1601,12 +1602,12 @@ class _ServicesSystemScreenState extends ConsumerState<ServicesSystemScreen> {
             children: [
               const Icon(Icons.dns_outlined, size: 40, color: Colors.grey),
               const SizedBox(height: 8),
-              const Text(
+              const LocalizedUiText(
                 'No Dynamic DNS configurations found',
                 style: TextStyle(fontWeight: FontWeight.w600),
               ),
               const SizedBox(height: 4),
-              const Text(
+              const LocalizedUiText(
                 'Add a DDNS provider to keep your domain pointing to your router automatically.',
                 style: TextStyle(fontSize: 12, color: Colors.grey),
                 textAlign: TextAlign.center,
@@ -1851,7 +1852,7 @@ class _ServicesSystemScreenState extends ConsumerState<ServicesSystemScreen> {
                   const Icon(Icons.language, size: 14, color: Colors.grey),
                   const SizedBox(width: 4),
                   Expanded(
-                    child: Text(
+                    child: LocalizedUiText(
                       'Lookup: ${instance.lookupHost.isNotEmpty ? instance.lookupHost : (instance.domain.isNotEmpty ? instance.domain : "N/A")}',
                       style: const TextStyle(fontSize: 12),
                       overflow: TextOverflow.ellipsis,
@@ -1865,7 +1866,7 @@ class _ServicesSystemScreenState extends ConsumerState<ServicesSystemScreen> {
                   const Icon(Icons.swap_horiz, size: 14, color: Colors.grey),
                   const SizedBox(width: 4),
                   Expanded(
-                    child: Text(
+                    child: LocalizedUiText(
                       'Interface: ${instance.interface.toUpperCase()} • Interval: ${instance.checkInterval} ${instance.checkUnit}',
                       style: const TextStyle(fontSize: 11, color: Colors.grey),
                       maxLines: 1,
@@ -1896,7 +1897,7 @@ class _ServicesSystemScreenState extends ConsumerState<ServicesSystemScreen> {
                                     : LuciStatusColors.warningBorder(context)),
                         ),
                       ),
-                      child: Text(
+                      child: LocalizedUiText(
                         !isGlobalEnabled
                             ? (l10n?.statusDisabled ?? 'Inactive')
                             : instance.statusStr!,
@@ -1987,7 +1988,7 @@ class _ServicesSystemScreenState extends ConsumerState<ServicesSystemScreen> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              const LocalizedUiText(
                 'This will install the official OpenWrt ddns-scripts core package and dynamic DNS provider scripts.\n\nDo you want to proceed?',
               ),
               if (isLowStorage) ...[
@@ -2011,7 +2012,7 @@ class _ServicesSystemScreenState extends ConsumerState<ServicesSystemScreen> {
                       ),
                       const SizedBox(width: 8),
                       Expanded(
-                        child: Text(
+                        child: LocalizedUiText(
                           'Low Storage Warning: Only ${(freeBytes / 1024).toStringAsFixed(0)} KB available on router overlay storage. ddns-scripts requires ~350 KB. Installation may fail due to insufficient space.',
                           style: const TextStyle(
                             fontSize: 12,
@@ -2235,7 +2236,7 @@ class _ServicesSystemScreenState extends ConsumerState<ServicesSystemScreen> {
               ),
               const SizedBox(width: 8),
               Expanded(
-                child: Text(
+                child: LocalizedUiText(
                   res.isValid
                       ? 'Validation Test Passed'
                       : 'Validation Test Failed',
@@ -2631,7 +2632,7 @@ class _CronJobEditDialogState extends State<_CronJobEditDialog> {
           ),
           const SizedBox(width: 10),
           Expanded(
-            child: Text(
+            child: LocalizedUiText(
               isEditing
                   ? (l10n?.servicesSysEditCronTitle ?? 'Edit Scheduled Task')
                   : (l10n?.servicesSysAddCronTitle ?? 'Add New Scheduled Task'),
@@ -2686,10 +2687,12 @@ class _CronJobEditDialogState extends State<_CronJobEditDialog> {
                   hintText: 'min hour dom month dow (e.g. 0 4 * * *)',
                   border: const OutlineInputBorder(),
                   prefixIcon: const Icon(Icons.timelapse),
-                ),
+                ).localized(context),
                 style: GoogleFonts.geistMono(fontSize: 13),
-                validator: (value) =>
-                    CronValidator.validateExpression(value ?? ''),
+                validator: localizeUiValidator(
+                  context,
+                  (value) => CronValidator.validateExpression(value ?? ''),
+                ),
                 onChanged: (val) {
                   setState(() {
                     _matchPreset(val);
@@ -2755,10 +2758,12 @@ class _CronJobEditDialogState extends State<_CronJobEditDialog> {
                   hintText: '/sbin/reboot or /usr/bin/ping-check.sh',
                   border: const OutlineInputBorder(),
                   prefixIcon: const Icon(Icons.terminal),
-                ),
+                ).localized(context),
                 style: GoogleFonts.geistMono(fontSize: 13),
-                validator: (value) =>
-                    CronValidator.validateCommand(value ?? ''),
+                validator: localizeUiValidator(
+                  context,
+                  (value) => CronValidator.validateCommand(value ?? ''),
+                ),
                 onChanged: (_) => setState(() {}),
               ),
               const SizedBox(height: 8),
@@ -2829,7 +2834,7 @@ class _CronJobEditDialogState extends State<_CronJobEditDialog> {
                     fontSize: 13,
                   ),
                 ),
-                subtitle: Text(
+                subtitle: LocalizedUiText(
                   _isEnabled
                       ? (l10n?.cronTaskEnabledDesc ??
                             'Task is enabled and will run on schedule')
@@ -2863,7 +2868,7 @@ class _CronJobEditDialogState extends State<_CronJobEditDialog> {
                 }
               : null,
           icon: const Icon(Icons.check, size: 16),
-          label: Text(
+          label: LocalizedUiText(
             isEditing
                 ? (l10n?.servicesSysBtnSaveCron ?? 'Save Task')
                 : (l10n?.servicesSysBtnAddTask ?? 'Add Task'),
@@ -2875,7 +2880,7 @@ class _CronJobEditDialogState extends State<_CronJobEditDialog> {
 
   Widget _buildCommandChip(String cmd, String label) {
     return ActionChip(
-      label: Text(label, style: const TextStyle(fontSize: 10)),
+      label: LocalizedUiText(label, style: const TextStyle(fontSize: 10)),
       avatar: const Icon(Icons.add, size: 12),
       padding: EdgeInsets.zero,
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -3047,7 +3052,7 @@ class _DdnsEditDialogState extends State<_DdnsEditDialog> {
 
   Widget _buildUrlChip(String url, String label) {
     return ActionChip(
-      label: Text(label, style: const TextStyle(fontSize: 10)),
+      label: LocalizedUiText(label, style: const TextStyle(fontSize: 10)),
       avatar: const Icon(Icons.add_link, size: 12),
       padding: EdgeInsets.zero,
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -3072,7 +3077,7 @@ class _DdnsEditDialogState extends State<_DdnsEditDialog> {
           const Icon(Icons.dns_outlined, color: LuciColors.primary),
           const SizedBox(width: 8),
           Expanded(
-            child: Text(
+            child: LocalizedUiText(
               isEditing
                   ? (l10n?.servicesSysEditDdnsTitle ??
                         'Edit DDNS Configuration')
@@ -3102,7 +3107,7 @@ class _DdnsEditDialogState extends State<_DdnsEditDialog> {
                       .map(
                         (p) => DropdownMenuItem(
                           value: p.serviceName,
-                          child: Text(p.label),
+                          child: LocalizedUiText(p.label),
                         ),
                       )
                       .toList(),
@@ -3137,7 +3142,7 @@ class _DdnsEditDialogState extends State<_DdnsEditDialog> {
                             color: LuciStatusColors.infoText(context),
                           ),
                           const SizedBox(width: 6),
-                          Text(
+                          LocalizedUiText(
                             '${preset.label} Setup Hint',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -3148,15 +3153,15 @@ class _DdnsEditDialogState extends State<_DdnsEditDialog> {
                         ],
                       ),
                       const SizedBox(height: 4),
-                      Text(
+                      LocalizedUiText(
                         '• Username: ${preset.usernameHint}',
                         style: const TextStyle(fontSize: 11),
                       ),
-                      Text(
+                      LocalizedUiText(
                         '• Password/Token: ${preset.passwordHint}',
                         style: const TextStyle(fontSize: 11),
                       ),
-                      Text(
+                      LocalizedUiText(
                         '• Domain: ${preset.domainHint}',
                         style: const TextStyle(fontSize: 11),
                       ),
@@ -3172,13 +3177,16 @@ class _DdnsEditDialogState extends State<_DdnsEditDialog> {
                       child: TextFormField(
                         controller: _nameController,
                         enabled: !isEditing,
-                        decoration: const InputDecoration(
+                        decoration: (const InputDecoration(
                           labelText: 'Instance Section Name',
                           hintText: 'e.g. myddns_ipv4',
+                        )).localized(context),
+                        validator: localizeUiValidator(
+                          context,
+                          (val) => (val == null || val.trim().isEmpty)
+                              ? 'Enter section name'
+                              : null,
                         ),
-                        validator: (val) => (val == null || val.trim().isEmpty)
-                            ? 'Enter section name'
-                            : null,
                         onChanged: (_) => setState(() {}),
                       ),
                     ),
@@ -3206,10 +3214,13 @@ class _DdnsEditDialogState extends State<_DdnsEditDialog> {
                     labelText: 'Lookup Hostname',
                     hintText: preset.lookupHostHint,
                     prefixIcon: const Icon(Icons.language),
+                  ).localized(context),
+                  validator: localizeUiValidator(
+                    context,
+                    (val) => (val == null || val.trim().isEmpty)
+                        ? 'Enter lookup hostname'
+                        : null,
                   ),
-                  validator: (val) => (val == null || val.trim().isEmpty)
-                      ? 'Enter lookup hostname'
-                      : null,
                   onChanged: (_) => setState(() {}),
                 ),
                 const SizedBox(height: 12),
@@ -3219,7 +3230,7 @@ class _DdnsEditDialogState extends State<_DdnsEditDialog> {
                     labelText: 'Registered Domain',
                     hintText: preset.domainHint,
                     prefixIcon: const Icon(Icons.domain),
-                  ),
+                  ).localized(context),
                   onChanged: (_) => setState(() {}),
                 ),
                 const SizedBox(height: 12),
@@ -3231,7 +3242,7 @@ class _DdnsEditDialogState extends State<_DdnsEditDialog> {
                     labelText: 'Username / Auth ID',
                     hintText: preset.usernameHint,
                     prefixIcon: const Icon(Icons.person_outline),
-                  ),
+                  ).localized(context),
                   onChanged: (_) => setState(() {}),
                 ),
                 const SizedBox(height: 12),
@@ -3251,7 +3262,7 @@ class _DdnsEditDialogState extends State<_DdnsEditDialog> {
                       onPressed: () =>
                           setState(() => _obscurePassword = !_obscurePassword),
                     ),
-                  ),
+                  ).localized(context),
                   onChanged: (_) => setState(() {}),
                 ),
                 const SizedBox(height: 12),
@@ -3259,12 +3270,12 @@ class _DdnsEditDialogState extends State<_DdnsEditDialog> {
                 if (preset.requiresCustomUrl) ...[
                   TextFormField(
                     controller: _updateUrlController,
-                    decoration: const InputDecoration(
+                    decoration: (const InputDecoration(
                       labelText: 'Custom Update URL',
                       hintText:
                           'https://[USERNAME]:[PASSWORD]@customddns.com/update?host=[DOMAIN]&ip=[IP]',
                       prefixIcon: Icon(Icons.link),
-                    ),
+                    )).localized(context),
                     onChanged: (_) => setState(() {}),
                   ),
                   const SizedBox(height: 12),
@@ -3283,7 +3294,7 @@ class _DdnsEditDialogState extends State<_DdnsEditDialog> {
                               l10n?.servicesIpMethodHelper ??
                               'Method used to determine system IP',
                           helperMaxLines: 2,
-                        ),
+                        ).localized(context),
                         items: [
                           DropdownMenuItem(
                             value: 'web',
@@ -3354,19 +3365,22 @@ class _DdnsEditDialogState extends State<_DdnsEditDialog> {
                       labelText: l10n?.servicesUrlToDetect ?? 'URL to detect',
                       hintText: 'https://ipv4.icanhazip.com',
                       prefixIcon: const Icon(Icons.travel_explore),
+                    ).localized(context),
+                    validator: localizeUiValidator(
+                      context,
+                      (val) =>
+                          (_ipSource == 'web' &&
+                              (val == null || val.trim().isEmpty))
+                          ? (l10n?.servicesSysEnterUrlToDetect ??
+                                'Enter URL to detect system IP')
+                          : null,
                     ),
-                    validator: (val) =>
-                        (_ipSource == 'web' &&
-                            (val == null || val.trim().isEmpty))
-                        ? (l10n?.servicesSysEnterUrlToDetect ??
-                              'Enter URL to detect system IP')
-                        : null,
                     onChanged: (_) => setState(() {}),
                   ),
                   const SizedBox(height: 4),
                   Padding(
                     padding: const EdgeInsets.only(left: 4.0),
-                    child: Text(
+                    child: LocalizedUiText(
                       'Defines the Web page to read systems IP-Address from.\nExample for IPv4 : http://checkip.dyndns.com\nExample for IPv6 : http://checkipv6.dyndns.com',
                       style: TextStyle(
                         fontSize: 11,
@@ -3472,7 +3486,7 @@ class _DdnsEditDialogState extends State<_DdnsEditDialog> {
                         ),
                         SizedBox(width: 8),
                         Expanded(
-                          child: Text(
+                          child: LocalizedUiText(
                             'Performing DNS resolution test on router...',
                             style: TextStyle(fontSize: 12),
                           ),
@@ -3512,7 +3526,7 @@ class _DdnsEditDialogState extends State<_DdnsEditDialog> {
                             ),
                             const SizedBox(width: 6),
                             Expanded(
-                              child: Text(
+                              child: LocalizedUiText(
                                 _testResult!.isValid
                                     ? 'Test Passed'
                                     : 'Test Failed',
@@ -3591,7 +3605,7 @@ class _DdnsEditDialogState extends State<_DdnsEditDialog> {
                     color: Colors.white,
                   ),
                 )
-              : Text(isEditing ? 'Save Instance' : 'Add Instance'),
+              : LocalizedUiText(isEditing ? 'Save Instance' : 'Add Instance'),
         ),
       ],
     );

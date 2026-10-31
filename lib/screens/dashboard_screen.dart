@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -259,7 +260,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Tooltip(
-          message: tooltipMsg,
+          message: localizeUiCopy(context, tooltipMsg),
           child: Container(
             width: 10,
             height: 10,
@@ -426,7 +427,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                                       color: colorScheme.onPrimaryContainer,
                                     ),
                                     const SizedBox(width: 4),
-                                    Text(
+                                    LocalizedUiText(
                                       'Active',
                                       style: TextStyle(
                                         fontSize: 12,
@@ -548,7 +549,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
             Padding(
               padding: const EdgeInsets.only(top: 8.0),
               child: Center(
-                child: Text(
+                child: LocalizedUiText(
                   'Throughput$throughputLabel',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: Theme.of(
@@ -769,7 +770,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                                 ).colorScheme.onSurface.withValues(alpha: 0.7),
                               ),
                               const SizedBox(height: 8),
-                              Text(
+                              LocalizedUiText(
                                 isSwitchingRouter
                                     ? 'Switching router...'
                                     : 'Collecting throughput data...',
@@ -1199,7 +1200,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                   children: [
                     Icon(Icons.thermostat_outlined, size: 14, color: iconColor),
                     const SizedBox(width: 4),
-                    Text(
+                    LocalizedUiText(
                       'Temp Script Missing',
                       style: TextStyle(
                         fontSize: 11,
@@ -1622,7 +1623,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                             style: Theme.of(context).textTheme.titleMedium
                                 ?.copyWith(fontWeight: FontWeight.bold),
                           ),
-                          Text(
+                          LocalizedUiText(
                             '$radioName • $bandLabel • Channel $channel',
                             style: Theme.of(context).textTheme.bodySmall
                                 ?.copyWith(
@@ -1665,7 +1666,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                                 color: Colors.grey.shade500,
                               ),
                               const SizedBox(height: 8),
-                              Text(
+                              LocalizedUiText(
                                 'No clients currently associated with $radioName ($ssid).',
                                 style: TextStyle(color: Colors.grey.shade600),
                                 textAlign: TextAlign.center,
@@ -1715,7 +1716,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                               fontSize: 14,
                             ),
                           ),
-                          subtitle: Text(
+                          subtitle: LocalizedUiText(
                             'IP: $ip\nMAC: ${st.macAddress}',
                             style: const TextStyle(fontSize: 11),
                           ),
@@ -1739,7 +1740,10 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                                     ),
                                   ),
                                   Text(
-                                    st.signalQualityLabel,
+                                    localizeUiCopy(
+                                      context,
+                                      st.signalQualityLabel,
+                                    ),
                                     style: const TextStyle(
                                       fontSize: 10,
                                       color: Colors.grey,
@@ -1803,7 +1807,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                                             size: 18,
                                           ),
                                           const SizedBox(width: 8),
-                                          Text(
+                                          LocalizedUiText(
                                             isPaused
                                                 ? 'Resume Internet'
                                                 : 'Pause Internet',
@@ -1937,7 +1941,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                                       : Colors.red.withValues(alpha: 0.15),
                                   borderRadius: BorderRadius.circular(4),
                                 ),
-                                child: Text(
+                                child: LocalizedUiText(
                                   isEnabled ? 'ENABLED' : 'DISABLED',
                                   style: TextStyle(
                                     color: isEnabled
@@ -1951,7 +1955,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                             ],
                           ),
                           const SizedBox(height: 4),
-                          Text(
+                          LocalizedUiText(
                             'Radio: ${radio.name} (${radio.bandLabel}) • Ch ${iface.channel} • ${iface.encryption}',
                             style: TextStyle(
                               fontSize: 11,
@@ -2098,7 +2102,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               ),
               const SizedBox(width: 10),
               Expanded(
-                child: Text(
+                child: LocalizedUiText(
                   'No network interfaces active',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                     color: Theme.of(context).colorScheme.onSurfaceVariant,
@@ -2268,7 +2272,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                               ),
                             ),
                             const SizedBox(width: 4),
-                            Text(
+                            LocalizedUiText(
                               isUp ? 'UP' : 'DOWN',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -2331,7 +2335,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                           ),
                         ),
                       if (l3Dev.isNotEmpty)
-                        Text(
+                        LocalizedUiText(
                           'Dev: $l3Dev',
                           style: Theme.of(context).textTheme.bodySmall
                               ?.copyWith(
@@ -2383,7 +2387,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
+                LocalizedUiText(
                   'REVIEWER MODE ACTIVE',
                   style: TextStyle(
                     color: Colors.white,
@@ -2392,7 +2396,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                     letterSpacing: 0.5,
                   ),
                 ),
-                Text(
+                LocalizedUiText(
                   'Using simulated router environment with full mock data',
                   style: TextStyle(color: Colors.white70, fontSize: 11),
                 ),
@@ -2413,7 +2417,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
             ),
             onPressed: () => _showExitReviewerModeDialog(context, ref),
             icon: const Icon(Icons.exit_to_app_rounded, size: 14),
-            label: const Text(
+            label: const LocalizedUiText(
               'Exit Mode',
               style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
             ),
@@ -2432,7 +2436,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
         actionsOverflowDirection: VerticalDirection.down,
         title: Text(l10n?.exitReviewerModeTitle ?? 'Exit Reviewer Mode?'),
         content: const SingleChildScrollView(
-          child: Text(
+          child: LocalizedUiText(
             'This will disable reviewer mode and redirect to the login screen so you can connect to a live router.',
           ),
         ),
@@ -2786,9 +2790,12 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                     size: 18,
                     color: Theme.of(context).colorScheme.primary,
                   ),
-                  tooltip: prefs.maskPublicIp
-                      ? 'Show public WAN IP address'
-                      : 'Mask public WAN IP address for privacy',
+                  tooltip: localizeUiCopy(
+                    context,
+                    prefs.maskPublicIp
+                        ? 'Show public WAN IP address'
+                        : 'Mask public WAN IP address for privacy',
+                  ),
                   visualDensity: VisualDensity.compact,
                   padding: EdgeInsets.zero,
                   constraints: const BoxConstraints(),
@@ -3158,7 +3165,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 ),
                 const SizedBox(width: 8),
                 Expanded(
-                  child: Text(
+                  child: LocalizedUiText(
                     'LuCI RPC Package Required',
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: Theme.of(context).colorScheme.onErrorContainer,
@@ -3173,14 +3180,14 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                     size: 18,
                   ),
                   onPressed: _dismissRpcWarning,
-                  tooltip: 'Dismiss',
+                  tooltip: localizeUiCopy(context, 'Dismiss'),
                   padding: EdgeInsets.zero,
                   constraints: const BoxConstraints(),
                 ),
               ],
             ),
             const SizedBox(height: 6),
-            Text(
+            LocalizedUiText(
               'Your router is missing `luci-mod-rpc` or backend execution permissions. Some real-time wireless, package, and system control features require RPC support.',
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
                 color: Theme.of(
@@ -3280,7 +3287,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              const LocalizedUiText(
                 'Connect to your router via SSH and run the following command to enable full RPC functionality:\n',
               ),
               SelectableText(
@@ -3359,7 +3366,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                           color: Colors.white,
                         ),
                         SizedBox(width: 4),
-                        Text(
+                        LocalizedUiText(
                           'Permissions Required',
                           style: TextStyle(
                             fontSize: 10,

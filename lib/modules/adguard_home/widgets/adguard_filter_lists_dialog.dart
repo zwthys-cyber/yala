@@ -1,6 +1,7 @@
 // Copyright (C) 2026 @nightcodex7
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:yet_another_luci_app/l10n/app_localizations.dart';
@@ -495,7 +496,7 @@ class _AdGuardFilterListsDialogState extends State<AdGuardFilterListsDialog>
                 color: colorScheme.outline,
               ),
               const SizedBox(height: 12),
-              Text(
+              LocalizedUiText(
                 _searchQuery.isNotEmpty
                     ? (l10n?.aghNoData ?? 'No data available')
                     : (l10n?.aghFilterListsEmpty ??
@@ -919,13 +920,13 @@ class _AddFilterListDialogState extends State<_AddFilterListDialog> {
                     border: const OutlineInputBorder(),
                     isDense: true,
                   ),
-                  validator: (value) {
+                  validator: localizeUiValidator(context, (value) {
                     if (value == null || value.trim().isEmpty) {
                       return l10n?.aghFilterListNameRequired ??
                           'Please enter a list name';
                     }
                     return null;
-                  },
+                  }),
                 ),
                 const SizedBox(height: 14),
 
@@ -940,8 +941,8 @@ class _AddFilterListDialogState extends State<_AddFilterListDialog> {
                     hintText: 'https://...',
                     border: const OutlineInputBorder(),
                     isDense: true,
-                  ),
-                  validator: (value) {
+                  ).localized(context),
+                  validator: localizeUiValidator(context, (value) {
                     if (value == null || value.trim().isEmpty) {
                       return l10n?.aghFilterListUrlRequired ??
                           'Please enter a list URL';
@@ -954,7 +955,7 @@ class _AddFilterListDialogState extends State<_AddFilterListDialog> {
                           'Please enter a valid HTTP or HTTPS URL';
                     }
                     return null;
-                  },
+                  }),
                 ),
               ],
             ),
@@ -1120,13 +1121,13 @@ class _EditFilterListDialogState extends State<_EditFilterListDialog> {
                     border: const OutlineInputBorder(),
                     isDense: true,
                   ),
-                  validator: (value) {
+                  validator: localizeUiValidator(context, (value) {
                     if (value == null || value.trim().isEmpty) {
                       return l10n?.aghFilterListNameRequired ??
                           'Please enter a list name';
                     }
                     return null;
-                  },
+                  }),
                 ),
                 const SizedBox(height: 14),
 
@@ -1141,7 +1142,7 @@ class _EditFilterListDialogState extends State<_EditFilterListDialog> {
                     border: const OutlineInputBorder(),
                     isDense: true,
                   ),
-                  validator: (value) {
+                  validator: localizeUiValidator(context, (value) {
                     if (value == null || value.trim().isEmpty) {
                       return l10n?.aghFilterListUrlRequired ??
                           'Please enter a list URL';
@@ -1154,14 +1155,14 @@ class _EditFilterListDialogState extends State<_EditFilterListDialog> {
                           'Please enter a valid HTTP or HTTPS URL';
                     }
                     return null;
-                  },
+                  }),
                 ),
                 const SizedBox(height: 14),
 
                 // Enabled switch
                 SwitchListTile(
                   contentPadding: EdgeInsets.zero,
-                  title: Text(
+                  title: LocalizedUiText(
                     _enabled
                         ? (l10n?.aghActionEnable ?? 'Enabled')
                         : (l10n?.aghActionDisable ?? 'Disabled'),

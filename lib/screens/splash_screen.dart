@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:yet_another_luci_app/state/app_state.dart';
@@ -244,7 +245,7 @@ class _SplashScreenState extends State<SplashScreen>
                               opacity: _logoFade,
                               child: Column(
                                 children: [
-                                  Text(
+                                  LocalizedUiText(
                                     'Yet Another LuCI App',
                                     style: theme.textTheme.headlineMedium
                                         ?.copyWith(
@@ -394,7 +395,7 @@ class _SplashScreenState extends State<SplashScreen>
                               ),
                               const SizedBox(width: 8),
                               Flexible(
-                                child: Text(
+                                child: LocalizedUiText(
                                   '@nightcodex7',
                                   style: theme.textTheme.bodySmall?.copyWith(
                                     color: colorScheme.onSurfaceVariant

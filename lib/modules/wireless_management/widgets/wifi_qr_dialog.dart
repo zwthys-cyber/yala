@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/services.dart';
@@ -271,11 +272,14 @@ class _WifiQrDialogState extends ConsumerState<WifiQrDialog> {
                                 onPressed: () => setState(
                                   () => _showPassword = !_showPassword,
                                 ),
-                                tooltip: _showPassword
-                                    ? (l10n?.btnHidePassphrase ??
-                                          'Hide Passphrase')
-                                    : (l10n?.btnShowPassphrase ??
-                                          'Show Passphrase'),
+                                tooltip: localizeUiCopy(
+                                  context,
+                                  _showPassword
+                                      ? (l10n?.btnHidePassphrase ??
+                                            'Hide Passphrase')
+                                      : (l10n?.btnShowPassphrase ??
+                                            'Show Passphrase'),
+                                ),
                               ),
                             ],
                           ),

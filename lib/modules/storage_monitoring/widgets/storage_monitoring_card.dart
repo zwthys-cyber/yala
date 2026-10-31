@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:yet_another_luci_app/l10n/app_localizations.dart';
@@ -99,7 +100,7 @@ class StorageMonitoringCard extends ConsumerWidget {
                       ),
                       const SizedBox(width: 6),
                     ],
-                    Text(
+                    LocalizedUiText(
                       l10n != null
                           ? l10n.storageMountsCount(
                               storage.mountedDevices.length,

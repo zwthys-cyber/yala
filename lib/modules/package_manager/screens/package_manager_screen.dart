@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -215,7 +216,7 @@ class _PackageManagerScreenState extends ConsumerState<PackageManagerScreen>
                         ),
                         const SizedBox(width: 10),
                         Expanded(
-                          child: Text(
+                          child: LocalizedUiText(
                             'The router\'s root filesystem is mounted read-only because there is no space left in the flash overlay partition (/overlay).\n\nTo resolve this:\n• Free up flash space or remove unused packages\n• Run "firstboot" via SSH to reset the overlay\n• Use Extroot (USB drive) for expanded storage',
                             style: TextStyle(
                               fontSize: 12,
@@ -229,7 +230,7 @@ class _PackageManagerScreenState extends ConsumerState<PackageManagerScreen>
                   ),
                 ],
                 if (exitCode != null) ...[
-                  Text(
+                  LocalizedUiText(
                     'Exit code: $exitCode',
                     style: TextStyle(
                       color: isError
@@ -826,7 +827,7 @@ class _PackageManagerScreenState extends ConsumerState<PackageManagerScreen>
                                       color: Colors.red.withValues(alpha: 0.1),
                                       borderRadius: BorderRadius.circular(4),
                                     ),
-                                    child: const Text(
+                                    child: const LocalizedUiText(
                                       'CORE',
                                       style: TextStyle(
                                         fontSize: 10,
@@ -876,7 +877,7 @@ class _PackageManagerScreenState extends ConsumerState<PackageManagerScreen>
                         : (l10n?.pkgDetailsNoDeps ?? 'None'),
                   ),
                   const SizedBox(height: 12),
-                  Text(
+                  LocalizedUiText(
                     'Description',
                     style: TextStyle(
                       fontSize: 12,
@@ -1075,7 +1076,7 @@ class _PackageManagerScreenState extends ConsumerState<PackageManagerScreen>
                   ),
                 ),
                 const SizedBox(height: 2),
-                Text(
+                LocalizedUiText(
                   l10n != null
                       ? l10n.rpcdPermissionDeniedMessage(
                           l10n.pkgCardPackageManager,
@@ -1382,11 +1383,14 @@ class _PackageManagerScreenState extends ConsumerState<PackageManagerScreen>
                           ),
                           const SizedBox(width: 8),
                           IconButton.outlined(
-                            tooltip: isRpcMissing
-                                ? (l10n?.rpcdPermissionDenied ??
-                                      'Permissions Required')
-                                : (l10n?.pkgBtnInstallCustom ??
-                                      'Install custom package'),
+                            tooltip: localizeUiCopy(
+                              context,
+                              isRpcMissing
+                                  ? (l10n?.rpcdPermissionDenied ??
+                                        'Permissions Required')
+                                  : (l10n?.pkgBtnInstallCustom ??
+                                        'Install custom package'),
+                            ),
                             style: IconButton.styleFrom(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
@@ -1484,7 +1488,7 @@ class _PackageManagerScreenState extends ConsumerState<PackageManagerScreen>
                                   : Colors.grey.shade400,
                             ),
                             const SizedBox(height: 12),
-                            Text(
+                            LocalizedUiText(
                               _isPermissionDenied
                                   ? (l10n?.pkgMgrPermDeniedTitle ??
                                         'Router Permission Denied (ubus code 6)')
@@ -1500,7 +1504,7 @@ class _PackageManagerScreenState extends ConsumerState<PackageManagerScreen>
                                   ),
                             ),
                             const SizedBox(height: 8),
-                            Text(
+                            LocalizedUiText(
                               _isPermissionDenied
                                   ? (l10n?.pkgMgrPermDeniedDesc ??
                                         'Stock LuCI images require /usr/libexec/package-manager-call.')
@@ -1861,7 +1865,7 @@ class _PackageManagerScreenState extends ConsumerState<PackageManagerScreen>
                               color: Colors.red.withValues(alpha: 0.1),
                               borderRadius: BorderRadius.circular(4),
                             ),
-                            child: const Text(
+                            child: const LocalizedUiText(
                               'CORE',
                               style: TextStyle(
                                 fontSize: 9,

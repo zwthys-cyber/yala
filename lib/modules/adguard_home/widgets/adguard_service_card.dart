@@ -1,6 +1,7 @@
 // Copyright (C) 2026 @nightcodex7
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:yet_another_luci_app/l10n/app_localizations.dart';
 
@@ -110,7 +111,7 @@ class AdGuardServiceCard extends StatelessWidget {
                       width: 0.8,
                     ),
                   ),
-                  child: Text(
+                  child: LocalizedUiText(
                     isRunning
                         ? (l10n?.aghStatusRunning ?? 'Running')
                         : (l10n?.aghStatusStopped ?? 'Stopped'),

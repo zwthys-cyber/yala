@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../design/luci_design_system.dart';
@@ -324,7 +325,7 @@ class NetworkDiagnosticScreen extends ConsumerWidget {
                           : Icons.refresh_rounded,
                       size: 20,
                     ),
-                    label: Text(
+                    label: LocalizedUiText(
                       report == null
                           ? (l10n?.netDiagBtnRun ?? 'Run Diagnostics')
                           : (l10n?.netDiagBtnRerun ?? 'Rerun Diagnostics'),

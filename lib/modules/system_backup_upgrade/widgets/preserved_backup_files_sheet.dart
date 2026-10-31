@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -167,7 +168,7 @@ class _PreservedBackupFilesSheetState extends State<PreservedBackupFilesSheet>
           ],
         ),
         content: const SingleChildScrollView(
-          child: Text(
+          child: LocalizedUiText(
             'You have unsaved edits to /etc/sysupgrade.conf. Are you sure you want to exit without saving?',
             style: TextStyle(fontSize: 13),
           ),
@@ -570,7 +571,7 @@ class _PreservedBackupFilesSheetState extends State<PreservedBackupFilesSheet>
                     fillColor: colorScheme.surfaceContainerHighest.withValues(
                       alpha: 0.4,
                     ),
-                  ),
+                  ).localized(context),
                 ),
               ),
               const SizedBox(width: 8),
@@ -619,7 +620,7 @@ class _PreservedBackupFilesSheetState extends State<PreservedBackupFilesSheet>
                         color: colorScheme.onSurfaceVariant,
                       ),
                       const SizedBox(height: 8),
-                      Text(
+                      LocalizedUiText(
                         _searchQuery.isNotEmpty
                             ? 'No preserved files matching "$_searchQuery"'
                             : 'No preserved backup files returned from router.',
@@ -693,7 +694,7 @@ class _PreservedBackupFilesSheetState extends State<PreservedBackupFilesSheet>
                                   color: Colors.teal.withValues(alpha: 0.3),
                                 ),
                               ),
-                              child: const Text(
+                              child: const LocalizedUiText(
                                 'Custom',
                                 style: TextStyle(
                                   fontSize: 10,
@@ -706,7 +707,7 @@ class _PreservedBackupFilesSheetState extends State<PreservedBackupFilesSheet>
                             icon: const Icon(Icons.copy_rounded, size: 16),
                             padding: EdgeInsets.zero,
                             constraints: const BoxConstraints(),
-                            tooltip: 'Copy Path',
+                            tooltip: localizeUiCopy(context, 'Copy Path'),
                             onPressed: () {
                               unawaited(
                                 OsPlatformIntegration.copyToClipboard(
@@ -764,7 +765,7 @@ class _PreservedBackupFilesSheetState extends State<PreservedBackupFilesSheet>
                         filled: true,
                         fillColor: colorScheme.surfaceContainerHighest
                             .withValues(alpha: 0.4),
-                      ),
+                      ).localized(context),
                       onSubmitted: (_) => _addCustomPath(),
                     ),
                   ),
@@ -791,7 +792,7 @@ class _PreservedBackupFilesSheetState extends State<PreservedBackupFilesSheet>
                 children: [
                   Row(
                     children: [
-                      Text(
+                      LocalizedUiText(
                         'Mode: ${_isRawMode ? "Raw Editor" : "Path List"} (${_customConfPaths.length} custom paths)',
                         style: theme.textTheme.labelSmall?.copyWith(
                           color: colorScheme.onSurfaceVariant,
@@ -811,7 +812,7 @@ class _PreservedBackupFilesSheetState extends State<PreservedBackupFilesSheet>
                               color: Colors.orange.withValues(alpha: 0.4),
                             ),
                           ),
-                          child: const Text(
+                          child: const LocalizedUiText(
                             'Unsaved Changes',
                             style: TextStyle(
                               fontSize: 10,
@@ -833,7 +834,7 @@ class _PreservedBackupFilesSheetState extends State<PreservedBackupFilesSheet>
                       _isRawMode ? Icons.list_rounded : Icons.code_rounded,
                       size: 16,
                     ),
-                    label: Text(
+                    label: LocalizedUiText(
                       _isRawMode ? 'Switch to List' : 'Switch to Code Editor',
                       style: const TextStyle(fontSize: 11),
                     ),
@@ -862,11 +863,11 @@ class _PreservedBackupFilesSheetState extends State<PreservedBackupFilesSheet>
                     maxLines: null,
                     expands: true,
                     style: GoogleFonts.geistMono(fontSize: 12),
-                    decoration: const InputDecoration(
+                    decoration: (const InputDecoration(
                       hintText:
                           '# Add files or directories to preserve across sysupgrade\n/etc/config/custom_app\n/etc/ssl/certs',
                       border: InputBorder.none,
-                    ),
+                    )).localized(context),
                   ),
                 )
               : _customConfPaths.isEmpty
@@ -880,14 +881,14 @@ class _PreservedBackupFilesSheetState extends State<PreservedBackupFilesSheet>
                         color: colorScheme.onSurfaceVariant,
                       ),
                       const SizedBox(height: 8),
-                      Text(
+                      LocalizedUiText(
                         'No custom entries in /etc/sysupgrade.conf',
                         style: theme.textTheme.bodyMedium?.copyWith(
                           color: colorScheme.onSurfaceVariant,
                         ),
                       ),
                       const SizedBox(height: 4),
-                      Text(
+                      LocalizedUiText(
                         'Add file/directory paths above to preserve them across updates.',
                         style: theme.textTheme.bodySmall?.copyWith(
                           fontSize: 11,
@@ -992,7 +993,7 @@ class _PreservedBackupFilesSheetState extends State<PreservedBackupFilesSheet>
                           : Icons.check_circle_outline_rounded,
                       size: 18,
                     ),
-              label: Text(
+              label: LocalizedUiText(
                 _isSaving
                     ? 'Saving & Applying to Router...'
                     : hasUnsaved

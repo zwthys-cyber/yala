@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -101,7 +102,7 @@ class DeviceNetworkAccessCard extends ConsumerStatefulWidget {
                         IconButton(
                           icon: const Icon(Icons.close_rounded),
                           onPressed: () => Navigator.of(ctx).pop(),
-                          tooltip: 'Close',
+                          tooltip: localizeUiCopy(context, 'Close'),
                         ),
                       ],
                     ),
@@ -397,7 +398,7 @@ class _DeviceNetworkAccessCardState
                   ),
                   const SizedBox(width: 8),
                   Expanded(
-                    child: Text(
+                    child: LocalizedUiText(
                       'Connected via ${widget.client.apName ?? "Dumb AP"}. Internet firewall rules are enforced at the Main Router gateway.',
                       style: theme.textTheme.bodySmall?.copyWith(
                         fontSize: 10,
@@ -435,7 +436,7 @@ class _DeviceNetworkAccessCardState
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    Text(
+                    LocalizedUiText(
                       policy.effectiveInternetAccess ? 'Allowed' : 'Blocked',
                       style: theme.textTheme.bodySmall?.copyWith(
                         color: policy.effectiveInternetAccess
@@ -632,7 +633,7 @@ class _DeviceNetworkAccessCardState
                 Icon(Icons.info_outline, size: 14, color: colorScheme.primary),
                 const SizedBox(width: 8),
                 Expanded(
-                  child: Text(
+                  child: LocalizedUiText(
                     !policy.effectiveInternetAccess
                         ? (l10n?.clientGlobalBlockedDesc ??
                               'Global internet access is blocked. IPv4 and IPv6 traffic are both blocked.')
@@ -666,7 +667,7 @@ class _DeviceNetworkAccessCardState
                   ),
                 ),
                 const Spacer(),
-                Text(
+                LocalizedUiText(
                   policy.scheduleExpiry != null
                       ? (policy.isExpired
                             ? (l10n?.clientScheduleExpired ??
@@ -793,7 +794,7 @@ class _DeviceNetworkAccessCardState
                               Icons.check_circle_outline,
                               size: 18,
                             ),
-                            label: const Text(
+                            label: const LocalizedUiText(
                               'Restore Full Access',
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),

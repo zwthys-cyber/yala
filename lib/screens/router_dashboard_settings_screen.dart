@@ -2,6 +2,7 @@
 // Copyright (C) 2025-2026 cogwheel0
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+import 'package:yet_another_luci_app/l10n/ui_copy.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -617,7 +618,7 @@ class _RouterDashboardSettingsScreenState
           dense: true,
         ),
         SwitchListTile.adaptive(
-          title: Text(
+          title: LocalizedUiText(
             l10n?.rdSettingsTemperatureWithUnit(
                   _preferences.temperatureUnit == 'fahrenheit' ? '°F' : '°C',
                 ) ??
