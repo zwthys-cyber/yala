@@ -30,6 +30,10 @@ String _localizeUiKeyword(AppLocalizations l10n, String keyword) =>
 String localizeRadioName(BuildContext context, String identifier) {
   final match = RegExp(r'^radio(\d+)$', caseSensitive: false).firstMatch(identifier);
   if (match == null) return identifier;
+  final l10n = AppLocalizations.of(context);
+  if (l10n == null || l10n.localeName.startsWith('en')) {
+    return identifier.toUpperCase();
+  }
   return localizeUiCopy(context, 'Radio ${match.group(1)}');
 }
 
